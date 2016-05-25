@@ -1,0 +1,240 @@
+/* Main */
+#mainHeader {
+	background-color : white;
+	height : 80px;
+}
+
+#mainHeader a {
+	margin : 20px 0 0 20px;
+	font-size : 20px;
+}
+
+#mainPictureDiv a {
+	text-align : center;
+}
+
+.mainPicture img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.loginSelectDiv {
+	text-align : center;
+}
+
+.loginSelectDiv li {
+	margin-top : 10px;
+	margin-right : 10px;
+}
+
+#liStudent {
+	background-color : #43a4d8;
+}
+#liTeacher {
+	background-color: #eb7a38;
+}
+#liParent {
+	background-color: #ffbc47;
+}
+#liManager {
+	background-color: #1dafa2;
+}
+
+.loginSelectA {
+	display : block;
+	height : 225px;
+	width : 245px;
+	text-align : center;
+}
+
+.loginSelectDiv img {
+	margin-top : 40px;
+	border : 0 none;
+}
+
+#sysLoginA {
+	margin-right : 50px;
+}
+
+/* Main - footer */
+.footerNav{
+	padding: 0px;
+	float: none;
+	margin-left: 18%;
+	width: 60%;
+}
+.footerNav li{
+	display: inline;
+	padding: 0px 8px 0px 0px;
+}
+
+.footerImg{
+	padding: 0px;
+	width: 250px;
+	margin-left: 10%;
+}
+
+.footerImg img{
+	padding-left: 15px;
+}
+
+#mainFooter{
+	padding-top:20px;
+	border-top: 1px solid #e5e5e5;
+}
+
+#syslogin{
+	float: right;
+}
+
+.app-container{
+	padding: 0px;
+}
+
+.footerNav ul{
+	list-style: outside none none;
+}
+
+.footerNav li{
+	list-style-type: none;
+}
+
+
+
+/* studentTotalExamSimulation */
+/* studentMockTestSimulation */
+#hopeUniversityTable {
+	background-color : white;
+}
+
+
+#recommendUniversityDiv {
+	margin : 0px 10px;
+	text-align : center;
+	background-color : white;
+	border-radius : 10px;
+}
+
+#recommendUniversityDiv li {
+	margin : 10px 10px;
+	background-color : white;
+	padding : 5px;
+}
+
+.recommendUniversityName {
+	font-size : 15px;
+	font-weight : bold;
+	margin-left : 5px;
+}
+
+
+#searchUniversity {
+	margin-bottom : 10px;
+}
+
+#searchUniversityForm input {
+	margin-left : 15px;
+	margin-right : 5px;
+}
+
+#searchUniversityForm #la{
+	font-weight : normal;
+}
+#searchUniversityForm #searchKey {
+	margin-left : 5px;
+}
+#searchUniversityForm #submitButton {
+	margin-left : 0px;
+}
+
+
+#searchUniversity {
+	text-align : right;
+}
+
+.tableUniversityMark {
+	width : 20px;
+	height : 20px;
+	margin-right : 10px;
+}
+
+
+/* UniversityEntranceInfo */
+#entranceUniversityDiv p {
+	display : inline;
+}
+
+#universityMark {
+	float:left;
+	border : 2px solid darkgray;
+}
+
+#entranceUniversityInfo {
+	padding-top : 10px;
+	line-height : 60px;
+}
+
+#entranceUniversityInfo ul {
+	margin-bottom : 50px;
+}
+
+.entranceInfoUniversityName {
+	margin-left : 10px;
+	font-size : 50px;
+	font-weight : bold;
+}
+.entranceInfoUniversityMajor {
+	margin-left : 10px;
+	font-size : 28px;
+}
+#entrancInfoDetail {
+	float : right;
+}
+
+#entranceInfoDiv2 {
+	margin-top : 40px;
+}
+
+.entranceInfo {
+	/* border : 2px solid darkgray;
+	padding : 10px 20px; */
+}
+
+.entranceInfoPanelHead h3{
+	text-align : center;
+}
+
+.entranceInfo ul {
+	margin-bottom : 20px;
+	line-height : 40px;
+	font-size : 20px;
+}
+
+.entranceInfo span {
+	margin-left : 10px;
+	margin-right : 20px;
+}
+
+#entranceInfoBlank {
+	height : 300px;
+	border-right : 2px dotted darkgray;
+}
+
+
+#entranceInfoChangeDiv {
+	margin : 40px 0px;
+}
+
+#entranceInfoChangeDiv h3 {
+	margin-bottom : 30px;
+}
+
+#entranceChangeName {
+	font-weight : bold;
+}
+
+
+
+
+

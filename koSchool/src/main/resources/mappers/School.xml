@@ -1,0 +1,745 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.mapper.Mapper">
+	<cache />
+	시스템관리자 ==> 학교관리자 등록
+	<insert id="insertSchoolAdmin" parameterType="SchoolAdmin">
+		insert into SchoolAdmin(
+			SchoolAdminId,SchoolAdminPassword,SchoolAdminName,SchoolAdminTel,DeleteRequest
+		)
+		values(
+			#{schoolAdminId},'1234',#{schoolAdminName},#{schoolAdminTel},'n'
+		)
+	</insert>
+	<insert id="insertSchoolAdminRegist" parameterType="SchoolAdminRegist">
+		insert into SchoolAdminRegist(
+			SystemAdminId,SchoolAdminId,SchoolRegistDate,SchoolEndDate
+		)values(
+			#{systemAdminId},#{schoolAdminId},SYSDATE,#{schoolEndDate}
+		)
+	</insert>
+	학생목록 출력
+	<select id="studentList" resultType="StudentList" parameterType="String">
+		SELECT m.memberid, m.membername, m.memberbirthday, m.schoolid, st.studentcode, st.studentgrade, st.studentclass, st.studentnum, st.studentgender, st.studentmajor 
+		FROM member m, student st
+		WHERE m.memberid = st.memberid
+		AND m.schoolid=#{schoolId}
+		AND st.studentCode IS NOT NULL
+		ORDER BY m.memberid
+	</select>
+
+	학부모 정보 입력
+	<update id="insertParent" parameterType="Parent">
+		UPDATE parent SET 
+			parentName = #{parentName}, familyRelation =  #{familyRelation}, memberId = #{memberId}
+		WHERE parentId = #{parentId}
+	</update>
+
+	액터 : 시스템관리자 ==> 학교관리자 리스트 출력 schoolAdminList.jsp
+	<select id="adminList" resultType="AdminList">
+		select a.schooladminid,a.schooladmintel,a.deleterequest,b.schoolregistdate,b.schoolenddate
+		from schooladmin a,schooladminregist b
+		where a.schooladminid=b.schooladminid
+	</select>
+
+	액터 : 교사 => 학부모리스트 출력
+	<select id="parentList" resultType="ParentList">
+		SELECT p.parentId, p.parentName, p.familyRelation, st.memberId, m.memberName
+		FROM parent p, student st, member m
+		WHERE p.memberId = st.memberId
+			AND st.memberId = m.memberId
+	</select>
+	액터 : 교내관리자 => 학교등록 
+	<insert id="insertSchool" parameterType="school">
+		INSERT INTO school(
+		schoolId , schoolName , schoolAddress , schoolTel
+		)VALUES(
+		#{schoolId}, #{schoolName} , #{schoolAddress} , #{schoolTel}
+		)
+	</insert>
+	
+	액터 : 시스템관리자 ==> 학교관리자 상세보기
+	<select id="schoolAdminDetail" resultType="SchoolAdminDetail" parameterType="String">
+		SELECT s.schoolname,sa.schooladminid,sa.schooladminname,sa.schooladmintel,
+		sa.deleterequest,sar.schoolregistdate,sar.schoolenddate
+		FROM schooladmin sa,schoolregist sr,school s,schooladminregist sar
+		WHERE sa.schooladminid=sr.schooladminid
+		AND sr.schoolid=s.schoolid
+		AND sa.schooladminid=sar.schooladminid
+		AND sa.schooladminid=#{id}
+	</select>
+	
+	액터 : 학교관리자 ==> 교사등록
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO member(
+			memberId , memberName , memberBirthday , memberTel
+			, memberEmail , memberNote , memberPassword , memberAddress , schoolId
+		)VALUES(
+			#{memberId} , #{memberName} , #{memberBirthday} , #{memberTel}
+			, #{memberEmail} , #{memberNote} ,'1234' , #{memberAddress} , #{schoolId}
+		)
+	</insert>
+	<insert id="insertTeacher" parameterType="teacher">
+		INSERT INTO teacher(
+		teacherClass , teacherPicture , teacherPosition , subjectId  , memberId
+		)VALUES(
+		${teacherClass}, #{teacherPicture} , #{teacherPosition} , #{subjectId} , #{memberId}
+		)
+	</insert>
+	
+	액터 : 학교관리자 ==> 교사리스트
+	<select id="listTeacher" resultType="TeacherDetail" parameterType="String">
+	SELECT m.memberId , m.memberBirthday , m.memberTel , m.memberEmail , m.memberName , t.teacherClass , t.subjectId
+	FROM teacher t , member m , registmanage r
+	WHERE t.memberId = m.memberId
+	AND  m.memberId=r.memberId
+	AND r.schooladminid=#{id}
+	</select>
+	
+	액터 : 학교관리자 ==> 교사리스트 ==> 상세보기 
+	<select id="detailTeacher" resultType="TeacherDetail" parameterType="String">
+	SELECT * FROM teacher t , member m
+	WHERE t.memberId = m.memberId
+	AND m.memberId = #{memberId}
+	</select>
+	
+	액터 : 모든사용자 ==> 로그인정보 확인
+	<select id="memberCheck" resultType="MemberCheck" parameterType="String">
+		SELECT m.memberid,m.memberpassword,rm.membergrade
+		FROM member m,registmanage rm
+		WHERE m.memberid=rm.memberid
+		AND m.memberid=#{id}
+	</select>
+	
+	액터 : 모든사용자 ==> 유저 정보 출력	
+	<select id="memberDetail" parameterType="String" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE memberid=#{id}
+	</select>
+	
+	액터 : 모든사용자 ==> 최초 로그인 비밀번호 1234일 경우 비밀번호 변경
+	<update id="userModPassowrd" parameterType="Member">
+		UPDATE member 
+		SET memberpassword = #{memberPassword}
+		WHERE memberid=#{memberId}
+	</update>
+	교사==>학생 입력 및 수정
+	<update id="updateMember" parameterType="Member">
+		UPDATE member SET
+		memberName = #{memberName},
+		memberBirthday = #{memberBirthday},
+		memberAddress = #{memberAddress},
+		memberTel = #{memberTel},
+		memberNote = #{memberNote},
+		memberEmail = #{memberEmail}
+		WHERE memberId = #{memberId}
+	</update>
+	
+	교사==>학생 입력 및 수정
+	<update id="updateStudent" parameterType="Student">
+		UPDATE student SET
+		StudentCode = #{studentCode},
+		StudentGrade = #{studentGrade},
+		StudentClass = #{studentClass},
+		StudentNum = #{studentNum},
+		StudentGender = #{studentGender},
+		StudentMajor = #{studentMajor},
+		StudentPicture = #{studentPicture}
+		WHERE memberId = #{memberId}
+	</update>
+	교사 ==> 학생 정보 NULL LIST
+	<select id="studentNullList" resultType="StudentNullList">
+		SELECT memberId FROM student
+		WHERE studentCode IS NULL
+	</select>
+	교사 ==> 학생 세부 열람
+	<select id="selectStudentDetail" resultType="StudentDetail" parameterType="String">
+		SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress,
+		 m.memberTel, m.memberEmail, m.memberNote, m.schoolId,
+		st.studentCode, st.studentGrade, st.studentClass, st.studentNum, st.studentGender, 
+		st.studentMajor, st.studentPicture
+		FROM member m, student st
+		WHERE m.memberId = st.memberId
+		AND m.memberId = #{m_id}
+		ORDER BY m.memberId
+	</select>
+	교사 ==> 학생 내용 삭제
+	<update id="deleteStudent" parameterType="String">
+		UPDATE member SET
+		memberName = NULL,
+		memberBirthday = NULL,
+		memberAddress = NULL,
+		memberTel = NULL,
+		memberNote = NULL,
+		memberEmail = NULL
+		WHERE memberId = #{m_id}
+	</update>
+	교사 ==> 학생 내용 삭제
+	<update id="deleteStudent2" parameterType="String">
+	UPDATE student SET
+		studentCode = NULL,
+		studentGrade = NULL,
+		studentClass = NULL,
+		studentNum = NULL,
+		studentGender = NULL,
+		studentMajor = NULL,
+		studentPicture = NULL
+		WHERE memberId = #{m_id}
+	</update>
+	
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 정보가 입력된 학생 리스트 가져오기
+	<select id="selectExistStudent" resultType="ExistStudentList" parameterType="String">
+		SELECT m.memberId, m.memberName, s.studentCode, s.studentGrade, s.studentclass, s.studentNum
+		FROM student s, member m
+		WHERE s.memberId = m.memberId
+		AND m.schoolid=#{id}
+		AND studentCode IS NOT NULL 
+	</select>
+	액터 : 교사 => 학생 모의고사 점수 입력 - 탐구 과목 리스트 가져오기(한국사 제외)
+	<select id="selectResearchSubjectList" resultType="ResearchSubject">
+		SELECT * FROM researchSubject where researchSubjectId != 'rsubA03' ORDER BY researchSubjectId
+	</select>
+	액터 : 교사 => 학생 모의고사 점수 입력 - 제2외국어 과목 리스트 가져오기
+	<select id="selectSecondLanguageSubjectList" resultType="SecondLanguage">
+		SELECT * FROM secondLanguage ORDER BY languageId
+	</select>
+	액터 : 교사 => 학생 모의고사 점수 입력 - 모의고사 아이디 가져오기
+	<select id="selectMockId" parameterType="MockType" resultType="String">
+		SELECT mockId FROM MockType WHERE mockYear = #{mockYear} AND mockMonth = #{mockMonth} AND mockGrade = #{mockGrade}
+	</select>
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 탐구과목 아이디 가져오기
+	<select id="selectResearchId" parameterType="String" resultType="String">
+		SELECT researchSubjectId FROM researchSubject WHERE researchSubjectName = #{researchName}
+	</select>
+	액터 : 교사 => 학생 모의고사 점수 입력 - 제2외국어 아이디 가져오기
+	<select id="selectSecondLanguageId" parameterType="String" resultType="String">
+		SELECT languageId FROM secondLanguage WHERE languageSubjectName = #{languageSubjectName}
+	</select>
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 모의고사 점수 넣기 - 1학년
+	<insert id="insertMockTest1Grade" parameterType="MockTest">
+		INSERT INTO mockTest(
+			mockId, memberId, languageOriginalScore, languageStandardScore, languagePercentile, languageType, mathType, mathOriginalScore, mathStandardScore, mathPercentile, englishOriginalScore, englishStandardScore, englishPercentile, languageId
+		)
+		VALUES (
+			#{mockId}, #{memberId}, #{languageOriginalScore}, #{languageStandardScore}, #{languagePercentile}, '', '', #{mathOriginalScore}, #{mathStandardScore}, #{mathPercentile}, #{englishOriginalScore}, #{englishStandardScore}, #{englishPercentile}, ''
+		)
+	</insert>
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 모의고사 점수 넣기 - 2학년
+	<insert id="insertMockTest2Grade" parameterType="MockTest">
+		INSERT INTO mockTest(
+			mockId, memberId, languageOriginalScore, languageStandardScore, languagePercentile, languageType, mathType, mathOriginalScore, mathStandardScore, mathPercentile, englishOriginalScore, englishStandardScore, englishPercentile, languageId
+		)
+		VALUES (
+			#{mockId}, #{memberId}, #{languageOriginalScore}, #{languageStandardScore}, #{languagePercentile}, '', #{mathType}, #{mathOriginalScore}, #{mathPercentile}, #{mathStandardScore}, #{englishOriginalScore}, #{englishStandardScore}, #{englishPercentile}, #{languageId}
+		)
+	</insert>
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 모의고사 점수 넣기 - 2학년
+	<insert id="insertMockTest3Grade" parameterType="MockTest">
+		INSERT INTO mockTest(
+			mockId, memberId, languageOriginalScore, languageStandardScore, languagePercentile, languageType, mathType, mathOriginalScore, mathStandardScore, mathPercentile, englishOriginalScore, englishStandardScore, englishPercentile, languageId
+		)
+		VALUES (
+			#{mockId}, #{memberId}, #{languageOriginalScore}, #{languageStandardScore}, #{languagePercentile}, #{languageType}, #{mathType}, #{mathOriginalScore}, #{mathStandardScore}, #{mathPercentile}, #{englishOriginalScore}, #{englishStandardScore}, #{englishPercentile}, #{languageId}
+		)
+	</insert>
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 탐구 점수 넣기
+	<insert id="insertResearchScore" parameterType="ResearchSubjectScore">
+		INSERT INTO researchSubjectScore (
+			mockId, memberId, researchSubjectId, researchSubjectOriginalScore, researchSubjectStandardScore, researchSubjectPercentile
+		)
+		VALUES (
+			#{mockId}, #{memberId}, #{researchSubjectId}, #{researchSubjectOriginalScore}, #{researchSubjectStandardScore}, #{researchSubjectPercentile}
+		)
+	</insert>
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 제2외국어 점수 넣기 - 2학년, 3학년만
+	<insert id="insertSecondLangScore" parameterType="SecondLanguageScore">
+		INSERT INTO secondLanguageScore (
+			mockId, memberId, secondLanguageOriginalScore, secondLanguageStandardScore, secondLanguagePercentile
+		)
+		VALUES (
+			#{mockId}, #{memberId}, #{secondLanguageOriginalScore}, #{secondLanguageStandardScore}, #{secondLanguagePercentile}
+		)
+	</insert>
+	액터 : 교사 ==> 학생 모의고사 점수 입력 - 입력된 모의고사였는지 검사
+	<select id="checkMockTestInsertedScore" parameterType="MockTest" resultType="MockTest">
+		SELECT * FROM mockTest WHERE mockId = #{mockId} AND memberId = #{memberId}
+	</select>
+	
+	진학시뮬레이션 - 학생의 아이디로 입력되어있는 희망 대학을 반환 
+	<select id="selectHopeUniversity" parameterType="String" resultType="HopeUniversity">
+		SELECT * FROM hopeUniversity where memberId = #{memberId}
+	</select>
+	진학시뮬레이션 - EntranceInfo에 있는 대학교 리스트 조회
+	<select id="selectUniversityList" resultType="University">
+		SELECT * FROM university 
+		WHERE universityId IN (SELECT DISTINCT universityId FROM entranceInfo) 
+		ORDER BY universityName
+	</select>
+	진학시뮬레이션 - EntranceInfo에 있는 해당하는 대학교의 학과 리스트 조회 
+	<select id="selectMajorList" parameterType="String" resultType="Major">
+		SELECT * FROM major
+		WHERE majorId IN (SELECT DISTINCT majorId 
+							FROM entranceInfo WHERE universityId IN (SELECT DISTINCT universityId 
+												FROM university WHERE universityName = #{universityName}))
+		ORDER BY majorName
+	</select>
+	진학시뮬레이션 - 대학교 이름으로 아이디 가져오기
+	<select id="selectUniversityId" parameterType="String" resultType="String">
+		SELECT universityId FROM university WHERE universityName = #{universityName}
+	</select>
+	진학시뮬레이션 - 대학교 이름으로 아이디 가져오기
+	<select id="selectMajorId" parameterType="String" resultType="String">
+		SELECT majorId FROM major WHERE majorName = #{majorName}
+	</select>
+	진학시뮬레이션 - 대학교 학과의 가장 최신 입시요강 가져오기
+	<select id="selectEntranceInfoYear" parameterType="EntranceInfo" resultType="Integer">
+		SELECT entranceYear FROM entranceInfo
+			WHERE majorId = #{majorId} AND universityId = #{universityId}
+			AND entranceYear = (SELECT MAX(entranceYear) FROM entranceInfo WHERE majorId = #{majorId} AND universityId = #{universityId})
+	</select>
+	진학시뮬레이션 - 희망대학 입력하기
+	<insert id="insertHopeUniversity" parameterType="HopeUniversity">
+		INSERT INTO hopeUniversity (
+			memberId, majorId, universityId, entranceYear
+		)
+		VALUES (
+			#{memberId}, #{majorId}, #{universityId}, #{entranceYear}
+		)
+	</insert>
+	진학시뮬레이션 - 대학교 아이디로 이름 가져오기
+	<select id="selctUniversityName" parameterType="String" resultType="String">
+		SELECT universityName FROM university WHERE universityId = #{universityId}
+	</select>
+	진학시뮬레이션 - 학과 아이디로 이름 가져오기
+	<select id="selectMajorName" parameterType="String" resultType="String">
+		SELECT majorName FROM major WHERE majorId = #{majorId}
+	</select>
+	진학시뮬레이션 - 모든 대학교 학과 입시정보 리스트 출력
+	<select id="selectAllEntranceInfo" resultType="AllEntranceInfo">
+		SELECT u.universityId, universityName, campusName, universityLocal, universityURL, universityMark, m.majorId, majorName, e.entranceYear, mockTestcutline, totalExamCutline, MockTestRecruitNum, TotalExamRecruitNum
+		FROM entranceInfo e JOIN major m
+		ON m.majorId = e.majorId
+		JOIN university u 
+		ON u.universityId = e.universityId
+		ORDER BY universityName, majorName
+	</select>
+	
+	
+	공지사항 글번호
+	<select id="noticeBoardNum" resultType="Integer">
+		select max(NoticeBoardNum) from noticeBoard
+	</select>
+	
+	학교관리자 ==>공지사항등록
+	<insert id="insertNoticeBoard" parameterType="NoticeBoard">
+		INSERT INTO noticeBoard(
+			noticeBoardNum,noticeBoardTitle,noticeBoardDate,noticeBoardPassword,
+			noticeBoardHitcount,noticeBoardFileName,noticeBoardContent,schoolAdminId
+		)VALUES(
+			#{noticeBoardNum}, #{noticeBoardTitle} ,SYSDATE,#{noticeBoardPassword},
+		    0 , #{noticeBoardFileName}, #{noticeBoardContent} ,#{schoolAdminId}
+		)
+	</insert>
+	
+	페이지 갯수
+	<select id="noticeCountBoard" resultType="int" parameterType="Search">
+		select count(*) from noticeBoard
+		<if test="area != null">
+			<where>
+				<foreach collection="area" item="item" separator="or" open="(" close=")">
+					${item} LIKE #{searchKey}
+				</foreach>
+			</where>
+		</if>
+	</select>
+	
+	공지사항 목록
+	<select id="noticeBoardList" resultType="NoticeBoard" parameterType="Search">
+		select * from noticeBoard 
+		<if test="area != null">
+			<where>
+				<foreach collection="area" item="item" separator="or" open="(" close=")">
+					${item} LIKE #{searchKey}
+				</foreach>
+			</where>
+		</if>
+		order by noticeBoardNum DESC
+	</select>
+	
+	 공지사항 조회수
+	 <update id="addHitcount" parameterType="int">
+		update noticeBoard set noticeBoardHitcount = noticeBoardHitcount + 1 where noticeBoardNum = #{noticeBoardNum}
+	</update>
+	
+	공지사항 상세보기
+	<select id="noticeBoardDetail" parameterType="int" resultType="NoticeBoard">
+		select * from noticeBoard where noticeBoardNum = #{noticeBoardNum}
+	</select>
+
+	학교정보조회
+	<select id="schoolDetail" resultType="School" parameterType="String">
+	SELECT * 
+	FROM SCHOOL
+	WHERE schoolId=#{id}
+	</select>
+
+	액터 : 시스템 ==> 학교관리자 테이블 정보 조회
+	<select id="schoolAdminInfoDetail" resultType="SchoolAdmin" parameterType="String">
+		SELECT * 
+		FROM schooladmin
+		WHERE schooladminid=#{id}
+	</select>
+	
+	액터 : 시스템  ==> 학부모 테이블 정보 조회
+	<select id="parentInfoDetail" resultType="Parent" parameterType="String">
+		SELECT * 
+		FROM parent
+		WHERE parentid=#{id}
+	</select>
+	
+	액터 : 시스템 ==> 시스템 테이블 관리자 정보조회
+	<select id="systemAdminInfoDetail" resultType="SystemAdmin" parameterType="String">
+		SELECT *
+		FROM systemadmin
+		WHERE systemAdminId=#{id}
+	</select>
+	
+	액터 : 학부모 ==> 최초로그인 비밀번호 변경
+	<update id="parentModPassword" parameterType="Parent">
+		UPDATE parent
+		SET parentpassword = #{parentPassword}
+		WHERE parentid=#{parentId}
+	</update>
+
+	액터 : 학교관리자 ==> 최초로그인 비밀번호 변경
+	<update id="schoolAdminModPassword" parameterType="SchoolAdmin">
+		UPDATE schooladmin
+		SET schoolAdminPassword = #{schoolAdminPassword}
+		WHERE schoolAdminId=#{schoolAdminId}
+	</update>
+	
+	<insert id="insertSchoolRegist" parameterType="SchoolRegist">
+		INSERT into schoolregist values(#{schoolId},#{schoolAdminId})
+	</insert>
+	
+	액터  : 교사 ==> 학부모 정보 NULL LIST
+	<select id="parentNullList" resultType="ParentNullList">
+		SELECT parentId FROM parent
+		WHERE memberId IS NULL
+	</select>
+	과목정보조회
+	<select id="subjectList" resultType="Subject">
+		SELECT * FROM subject
+	</select>
+	학교정보조회 
+	<select id="schoolList" resultType="School">
+		SELECT * FROM school
+	</select>
+	
+		사용자 등급 등록
+	<insert id="insertRegistManage" parameterType="RegistManage">
+		insert into RegistManage (
+			registNum, schoolAdminId, memberId, memberGrade
+		)values(
+			REGISTMANAGE_SEQ.NEXTVAL,#{schoolAdminId},#{memberId},#{memberGrade}
+		)
+	</insert>
+	
+	사용자 iD 등록
+	<insert id="insertMemberId" parameterType="member">
+		INSERT INTO member(
+			memberId , memberName , memberBirthday , memberTel
+			, memberEmail , memberNote , memberPassword , memberAddress , schoolId
+		)VALUES(
+			#{memberId} , null , null , null
+			, null ,null ,'1234' ,null ,#{schoolId}
+		)
+	</insert>
+	
+	학생 iD 등록 +나머지 null
+	<insert id="insertStudentIdManage" parameterType="Student">
+		INSERT INTO student(
+			memberId , studentCode , studentGrade , studentClass
+			, studentNum , studentGender , studentMajor , studentPicture
+		)VALUES(
+			#{memberId} , '' ,  ''  ,  '' 
+			  ,  ''  , ''  , ''  , ''  
+		)
+	</insert>
+	
+
+학부모 아이디
+<insert id="insertParentId" parameterType="String">
+		INSERT INTO parent(
+			parentId , familyRelation , parentName , parentPassword
+			, memberId
+		)VALUES(
+			#{parentId} , null , null , '1234' , null
+		)
+	</insert>
+	
+		 	사용자 ID목록 
+	<select id="userList" parameterType="String"  resultType="RegistManage">
+	SELECT *
+	FROM RegistManage
+	WHERE schooladminid=#{id}
+	</select>
+	
+ 		교사 등급 등록  
+	<insert id="insertTeacherGrade" parameterType="RegistManage">
+		insert into RegistManage (
+			registNum, schoolAdminId, memberId, memberGrade
+		)values(
+			REGISTMANAGE_SEQ.NEXTVAL,#{schoolAdminId}, #{memberId},'교사'
+		)
+	</insert>
+	
+	<select id="schoolRegistSchoolId" parameterType="String" resultType="SchoolRegist">
+		SELECT * 
+		FROM schoolregist
+		WHERE schooladminid=#{id}
+	</select>
+	
+	액터 : 교사 ==> 학교관리자 ID를 추출해서 학교ID를 추출하기 위한 용도
+	<select id="getSchoolAdminId" parameterType="String"  resultType="RegistManage">
+	SELECT *
+	FROM RegistManage
+	WHERE memberid=#{id}
+	</select>
+	
+	<select id="sameSchoolStudentNullList" parameterType="String" resultType="Member">
+		SELECT m.memberid,memberpassword,membername,memberbirthday,memberaddress,
+				membertel,membernote,memberemail,schoolid
+		FROM member m,student s
+		WHERE m.schoolid=#{id}
+		AND m.memberid=s.memberid
+		AND s.studentcode IS NULL
+	</select>
+	
+	교사 사진 추출
+	<select id="teacherImage" parameterType="String" resultType="teacher">
+		select teacherPicture
+		from teacher
+		where memberid=#{id}
+	</select>
+	
+	학생 사진 추출
+	<select id="studentImage" parameterType="String" resultType="Student">
+		select studentPicture
+		from student
+		where memberid=#{id}
+	</select>
+	
+	대학정시커트라인점수 구하기
+	<select id="mocktestCutline" parameterType="Cutline" resultType="EntranceInfo">
+	select * 
+	from entranceInfo
+	where majorId = #{majorId}
+	AND universityId = #{universityId}
+	</select>
+	
+	국영수사탐 합계  
+	<select id="mockTestSum" parameterType="String" resultType="java.util.HashMap">
+		select
+     (
+       select
+          nvl(sum(a.LANGUAGESTANDARDSCORE), 0)
+           + nvl(sum(a.MATHSTANDARDSCORE), 0)
+          + nvl(sum(a.ENGLISHSTANDARDSCORE), 0)
+       from
+         mocktest a
+       where
+         a.memberid = #{memberId} and a.mockid = (select max(mockid) from mocktest where memberId = #{memberId})
+     )
+     +
+     (
+       select sum(b.researchSubjectstandardScore) from researchsubjectscore b
+where b.memberId = #{memberId} and mockId = (select max(mockId) from mockTest where memberId = #{memberId})
+     )
+     as total
+   from
+     dual 
+		
+		select
+			(
+				a.LANGUAGESTANDARDSCORE
+				+ a.MATHSTANDARDSCORE
+				+ a.ENGLISHSTANDARDSCORE
+				+ b.SECONDLANGUAGESTANDARDSCORE
+			) total
+		from
+			mocktest a
+		left join
+			secondlanguagescore b
+			on a.memberid = b.memberid and a.mockid = b.mockid
+		where
+			a.memberid = #{memberId}
+			and a.mockid = #{mockId}
+	</select>
+	모의고사 점수
+	<select id="studentMockTestList" parameterType="String" resultType="MockType">
+	
+		SELECT mp.*
+		FROM mocktest mt ,mocktype mp
+		WHERE mt.mockid=mp.mockid
+		AND mt.memberid=#{studentId}
+	
+	</select>
+	
+	<select id="studentMockTestScoreList" resultType="MockTest">
+		select * from mocktest
+	</select>
+	
+	한국사 시험을 치룬 학생의 점수 LIST
+	<select id="koreaHistroyScoreList" parameterType="String" resultType="ResearchSubjectScore">
+		SELECT rs.*
+		FROM mocktest m , researchsubjectscore rs
+		WHERE m.mockid=rs.mockid
+		AND rs.memberid=m.memberid
+		AND rs.researchsubjectid='rsubA03'
+		AND m.memberid=#{id}
+	</select>
+	
+	학생이 치룬 모의고사의 탐구과목을 제외한 나머지 과목의 정보를 가져온다
+	<select id="studentMockScorePlusSecondLangList" parameterType="String" resultType="MockScoreDetailList">
+	SELECT DISTINCT m.mockid,m.memberid,m.languagetype,m.languageoriginalscore,m.languagestandardscore,m.languagepercentile
+	,m.mathtype,m.mathoriginalscore,m.mathstandardscore,m.mathpercentile,m.englishoriginalscore,m.englishstandardscore,m.englishpercentile
+	,sl.languagesubjectname,sl.languageId,sls.secondlanguageoriginalscore,sls.secondlanguagestandardscore,sls.secondlanguagepercentile
+	FROM mocktest m,secondlanguagescore sls,secondlanguage sl
+	WHERE m.languageid=sl.languageid(+)
+	AND sls.mockid(+)=m.mockid
+	AND sls.memberid(+)=m.memberid
+	AND m.memberid=#{id}
+	ORDER BY m.mockid DESC
+	</select>
+	
+	해당 모의고사를 치룬 학생의  탐구과목 정보(점수)를 가져온다
+	<select id="studentMockResearchSocreList" parameterType="String" resultType="MockResearchScoreDetailList">
+	SELECT a.memberId , a.MockId, a.researchsubjectid AS researchSubjectid1, a.researchsubjectoriginalscore AS researchsubjectoriginalscore1, a.researchsubjectstandardscore AS researchsubjectstandardscore1 ,a.researchsubjectpercentile AS researchsubjectpercentile1
+	 ,b.researchsubjectid AS researchSubjectid2, b.researchsubjectoriginalscore AS researchSubjectOriginalScore2, b.researchsubjectstandardscore AS researchSubjectStandardScore2,b.researchsubjectpercentile AS researchSubjectPercentile2
+   FROM researchSubjectScore a, researchSubjectScore b
+   WHERE a.memberid = b.memberid
+   AND a.mockid = b.mockid
+   AND a.mockid = #{id}
+   AND a.researchsubjectid != 'rsubA03'
+	AND b.researchsubjectid != 'rsubA03'
+   AND a.researchsubjectid <![CDATA[<]]> b.researchsubjectid
+	</select>
+	
+	<select id="selectMyKorScore" parameterType="String" resultType="MockTest">
+		SELECT mockid,languageoriginalscore
+		FROM mocktest
+		WHERE memberid=#{id}
+		ORDER BY mockid ASC
+	</select>
+	
+	<select id="selectMockKorAvgScore" resultType="MockKorAvgScore" parameterType="String">
+		SELECT mockid,ROUND(AVG(languageoriginalscore),2) AS avg
+		FROM mocktest
+		GROUP BY mockid
+		ORDER BY mockid ASC
+		SELECT mockid,ROUND(AVG(languageoriginalscore),2) AS avg
+		FROM mocktest
+		WHERE (mockid,languagetype) in (SELECT mockid, languagetype FROM mocktest WHERE memberid=#{id})
+		OR languagetype is null
+		GROUP BY mockid
+		ORDER BY mockid ASC
+		
+	</select>
+	모의고사 점수 END
+	
+	희망대학3개
+	<select id="recommendUniversity"  resultType="RecommendInfo" parameterType="int"> 
+		select  universityName,  
+	          universityURL, 
+	          universityMark,
+	          majorName, 
+	          mockTestcutline
+	          
+	   from entranceInfo e JOIN major m
+	   ON m.majorId = e.majorId
+	   JOIN university u 
+	   ON u.universityId = e.universityId
+	   where mockTestcutline <![CDATA[ > ]]>=#{total}-30  AND mockTestcutline <![CDATA[ < ]]>=#{total}+30
+	   </select>
+	   
+	과목 선택 (내신성적입력)
+	<select id="selectSubject" resultType="Subject" parameterType="String">
+		SELECT * FROM subject
+		WHERE subjectName = #{s_name}
+	</select>
+	
+	내신성적입력
+   <insert id="insertSubjectScore" parameterType="SubjectScore">
+   		INSERT INTO score (subjectId, memberId, midExam , finalExam , perfomanceEvaluation, semester
+   		)VALUES(
+         	#{subjectId},#{memberId}, #{midExam} , #{finalExam} , #{perfomanceEvaluation}, #{semester}
+   		)
+   </insert>
+   
+   내신성적 테이블 생성
+   <select id="createTableNum" resultType="Integer">
+   		SELECT MAX(num) FROM createScoreTable
+   </select>
+   내신테이블 생성하기위한 데이터
+   <insert id="createTable" parameterType="CreateTable">
+   		INSERT INTO createScoreTable 
+   		(
+   			num, subjectId, subjectGrade , subjectType , subjectName, subjectUnit
+   		)
+   		VALUES
+   		(
+         	#{num},#{subjectId}, #{subjectGrade} , #{subjectType} , #{subjectName}, #{subjectUnit}
+   		)
+   </insert>
+   내신테이블 생성 리스트
+   <select id="createTableList" resultType="CreateTable">
+   		SELECT * FROM createScoreTable
+   		ORDER BY num
+   </select>
+   
+   <select id="allSubjectScoreList" resultType="AllSubjectScoreList" parameterType="int">
+   		SELECT s.subjectId AS subjectId ,s3.subjectType AS subjectType,s3.subjectName AS subjectName,
+   		s3.subjectUnit AS subjectUnit,
+   		s.memberId AS memberId, (s.midexam*0.4)+(s.finalexam*0.4)+(s.perfomanceevaluation*0.2) AS subjectTotal,
+		s2.subjectAvg AS subjectAvg, s.semester AS semester, s3.subjectGrade AS subjectGrade
+		from score s,
+		(SELECT subjectId, AVG((midexam*0.4)+(finalexam*0.4)+(perfomanceevaluation*0.2)) AS subjectAvg from score
+		WHERE semester = #{semester}
+		GROUP BY subjectId) s2,
+		subject s3
+		WHERE s.subjectId = s2.subjectId
+		AND s.subjectId = s3.subjectId
+		AND semester = #{semester}
+   </select>
+   전체 과목별 등수
+   <select id="allRankingScoreList" resultType="AllRankingScoreList" parameterType="int">
+   		SELECT RANK() OVER (partition by s.subjectId ORDER BY s.subjectTotal DESC) AS Rank,
+   		s.subjectId AS subjectId, s.memberId AS memberId, s.subjectTotal AS subjectTotal
+		FROM	
+		(SELECT s.subjectId AS subjectId ,s3.subjectType AS subjectType,s3.subjectName AS subjectName,
+		s3.subjectUnit AS subjectUnit,
+   		s.memberId AS memberId, (s.midexam*0.4)+(s.finalexam*0.4)+(s.perfomanceevaluation*0.2) AS subjectTotal,
+		s2.subjectAvg AS subjectAvg
+		from score s,
+		(SELECT subjectId, AVG((midexam*0.4)+(finalexam*0.4)+(perfomanceevaluation*0.2)) AS subjectAvg from score
+		group by subjectId) s2,
+		subject s3
+		WHERE s.subjectId = s2.subjectId
+		AND s.subjectId = s3.subjectId
+		AND semester= #{semester}) s
+   </select>
+   전체 과목별 전체명수 
+   <select id="allStudentNum" resultType="AllStudentNum" parameterType="int">
+   		SELECT subjectId,count(*) AS allStudentNum FROM SCORE
+   		WHERE semester = #{semester}
+		GROUP BY subjectId
+   </select>
+	   
+	   
+	
+</mapper>
+ -->
