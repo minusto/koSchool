@@ -56,7 +56,8 @@
 </head>
 
 <body class="flat-blue">
-	<input type="hidden" id="loginCheck" value="${login}">
+<input type="hidden" id="result" value="${result }">
+	<%-- <input type="hidden" id="loginCheck" value="${login}"> --%>
 	<input type="hidden" id="logout" value="${logout}">
 	<div class="app-container">
 		<br><br>
@@ -127,14 +128,15 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-8 col-md-offset-2">
-						<form action="logic/memberCheck.jsp" method="post">
+						<form action="/" method="post"><!-- logic/memberCheck.jsp -->
+						<input type="hidden" name="grade" value="student">
 							<div class="control">
 								<input type="text" class="form-control" placeholder="아이디를 입력하세요"
 									size="25" style="margin-top: 10px" name="id" />
 							</div>
 							<div class="control">
 								<input type="password" class="form-control"
-									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="pass" />
+									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="password" />
 							</div>
 							<div class="lostPass">
 								<br> <a>비밀번호 찾기</a>
@@ -163,28 +165,28 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-8 col-md-offset-2">
-						<form action="logic/memberCheck.jsp" method="post">
+						<form action="/" method="post">
+						<input type="hidden" name="grade" value="teacher">
 							<div class="control">
 								<input type="text" class="form-control" placeholder="아이디를 입력하세요"
 									size="25" style="margin-top: 10px" name="id" />
 							</div>
 							<div class="control">
 								<input type="password" class="form-control"
-									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="pass" />
+									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="password" />
 							</div>
 							<div class="lostPass">
 								<br> <a>비밀번호 찾기</a>
 							</div>
 							<div class="login-button text-center">
 								<input type="submit" class="btn btn-primary" value="Login">
-							</div>
+							</div> 
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<!-- 학부모 로그인 Modal -->
 	<div class="modal fade modal-warning" id="modalWarning" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -199,15 +201,15 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-8 col-md-offset-2">
-						<form action="logic/memberCheck.jsp" method="post">
-							<input type="hidden" name="parentLogin" value="parent">
+						<form action="/" method="post">
+							<input type="hidden" name="grade" value="parent">
 							<div class="control">
 								<input type="text" class="form-control" placeholder="아이디를 입력하세요"
 									size="25" style="margin-top: 10px" name="id" />
 							</div>
 							<div class="control">
 								<input type="password" class="form-control"
-									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="pass" />
+									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="password" />
 							</div>
 							<div class="lostPass">
 								<br> <a>비밀번호 찾기</a>
@@ -236,15 +238,15 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-8 col-md-offset-2">
-						<form action="logic/memberCheck.jsp" method="post">
-							<input type="hidden" name="schoolAdminLogin" value="schoolAdmin">
+						<form action="/" method="post">
+						<input type="hidden" name="grade" value="schoolAdmin">
 							<div class="control">
 								<input type="text" class="form-control" placeholder="아이디를 입력하세요"
 									size="25" style="margin-top: 10px" name="id" />
 							</div>
 							<div class="control">
 								<input type="password" class="form-control"
-									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="pass" />
+									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="password" />
 							</div>
 							<div class="lostPass">
 								<br> <a>비밀번호 찾기</a>
@@ -275,15 +277,15 @@
 				</div>
 				<div class="modal-body row">
 					<div class="col-md-8 col-md-offset-2">
-						<form action="logic/memberCheck.jsp" method="post">
-							<input type="hidden" name="systemAdminLogin" value="systemAdmin">
+						<form action="/" method="post">
+						<input type="hidden" name="grade" value="systemAdmin">
 							<div class="control">
 								<input type="text" class="form-control" placeholder="아이디를 입력하세요"
 									size="25" style="margin-top: 10px" name="id" />
 							</div>
 							<div class="control">
 								<input type="password" class="form-control"
-									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="pass" />
+									placeholder="비밀번호를 입력하세요" style="margin-top: 10px" name="password" />
 							</div>
 
 							<div class="login-button text-center">
@@ -313,18 +315,18 @@
 	<!-- Javascript -->
 	<script type="text/javascript" src="/resources/js/app.js"></script>
 	<script type="text/javascript" src="/resources/js/index.js"></script>
-	<!-- <script type="text/javascript">
+	 <script type="text/javascript">
 		$(window.onload = function() {
-			var loginCheck = $("#loginCheck").attr('value');
+			var loginCheck = $("#result").attr('value');
 			if (loginCheck == "fail") {
 				alert("아이디 및 비밀번호를 확인하세요");
 			}
 			var logout = $("#logout").attr('value');
-			if (logout == "logout") {
+			if (logout == "success") {
 				alert("로그아웃 완료");
 			}
 		})
-	</script> -->
+	</script> 
 </body>
 
 </html>

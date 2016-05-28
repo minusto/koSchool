@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.LoginMapper">
+
+	<select id="memberCheck" resultType="MemberVO">
+		SELECT *
+		FROM member
+		WHERE memberid=#{id} AND memberpassword=#{password}
+	</select>
+	
+	<select id="parentCheck" resultType="ParentVO">
+		SELECT *
+		FROM parent
+		WHERE parentid=#{id} AND parentPassword=#{password}
+	</select>
+	
+	<select id="schoolAdminCheck" resultType="SchoolAdminVO">
+		SELECT *
+		FROM schooladmin
+		WHERE schooladminid=#{id} AND schooladminpassword=#{password}
+	</select>
+	
+	<select id="systemAdminCheck" resultType="SystemAdminVO">
+		SELECT *
+		FROM systemAdmin
+		WHERE systemadminid=#{id} AND systemadminpassword=#{password}
+	</select>
+
+</mapper>
