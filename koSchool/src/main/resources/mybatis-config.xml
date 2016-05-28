@@ -5,7 +5,7 @@
 <configuration>
 
   <typeAliases>
-    <package name="ko.school.web"/>
+    <package name="ko.school.common.domain"/>
   </typeAliases>
 
 

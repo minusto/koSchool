@@ -12,6 +12,7 @@ import ko.school.common.domain.MemberVO;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
+	//액터 ==> 모든사용자  / 작업내용 : 로그인시 세션 생성 / 작성자 : 이재승
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -31,7 +32,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 	}
-
+	//액터 ==> 모든사용자  / 작업내용 : 메인페이지 접근시 세션이 존재하면 액터에 맞는 Main페이지로 보냄 / 작성자 : 이재승
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

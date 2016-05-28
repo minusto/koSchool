@@ -14,29 +14,33 @@ import ko.school.common.persistence.LoginDao;
 @Service
 public class LoginServiceImpl implements LoginService{
 
-	
+
+
+
+
+
 	@Inject
 	private LoginDao loginDao;
 	
-	//Member테이블 사용자(학생,교사) 로그인시 ID,PASSWORD 체크
+	//액터 ==> 학생,교사  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
 	@Override
 	public MemberVO memberCheckService(LoginCommand loginCommand) {
 		return loginDao.memberCheck(loginCommand);
 	}
 
-	//parent테이블 사용자(학부모) 로그인시 ID,PASSWORD 체크
+	//액터 ==> 학부모  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
 	@Override
 	public ParentVO parentCheckService(LoginCommand loginCommand) {
 		return loginDao.parentCheck(loginCommand);
 	}
 
-	//schoolAdmin 테이블 사용자(학교관리자) 로그인시 ID,PASSWORD 체크
+	//액터 ==> 학교관리자  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
 	@Override
 	public SchoolAdminVO schoolAdminCheckService(LoginCommand loginCommand) {
 		return loginDao.schoolAdminCheck(loginCommand);
 	}
 
-	//systemAdmin 테이블 사용자(시스템관리자) 로그인시 ID,PASSWORD 체크
+	//액터 ==> 시스템관리자  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
 	@Override
 	public SystemAdminVO systemAdminCheckService(LoginCommand loginCommand) {
 		return loginDao.systemAdminCheck(loginCommand);
