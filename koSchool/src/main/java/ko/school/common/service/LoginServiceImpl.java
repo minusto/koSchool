@@ -8,16 +8,13 @@ import ko.school.common.domain.LoginCommand;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.SchoolAdminVO;
+import ko.school.common.domain.StudentVO;
 import ko.school.common.domain.SystemAdminVO;
+import ko.school.common.domain.TeacherVO;
 import ko.school.common.persistence.LoginDao;
 
 @Service
 public class LoginServiceImpl implements LoginService{
-
-
-
-
-
 
 	@Inject
 	private LoginDao loginDao;
@@ -44,6 +41,16 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public SystemAdminVO systemAdminCheckService(LoginCommand loginCommand) {
 		return loginDao.systemAdminCheck(loginCommand);
+	}
+	//액터 ==> 학생  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
+	@Override
+	public StudentVO studentCheckService(String memberId) {
+		return loginDao.studentCheck(memberId);
+	}
+	//액터 ==> 교사  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
+	@Override
+	public TeacherVO teacherCheckService(String memberId) {
+		return loginDao.teacherCheck(memberId);
 	}
 
 }

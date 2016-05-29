@@ -29,5 +29,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM systemAdmin
 		WHERE systemadminid=#{id} AND systemadminpassword=#{password}
 	</select>
-
+	<!-- 액터 ==> 교사  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승 -->
+	<select id="teacherCheck" resultType="TeacherVO">
+		SELECT *
+		FROM teacher
+		WHERE memberid=#{id}
+	</select>
+	<!-- 액터 ==> 학생  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승 -->
+	<select id="studentCheck" resultType="StudentVO">
+		SELECT *
+		FROM student
+		WHERE memberid=#{id}
+	</select>
 </mapper>

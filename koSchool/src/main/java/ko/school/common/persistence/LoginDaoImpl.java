@@ -9,7 +9,9 @@ import ko.school.common.domain.LoginCommand;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.SchoolAdminVO;
+import ko.school.common.domain.StudentVO;
 import ko.school.common.domain.SystemAdminVO;
+import ko.school.common.domain.TeacherVO;
 
 @Repository
 public class LoginDaoImpl implements LoginDao{
@@ -39,5 +41,16 @@ public class LoginDaoImpl implements LoginDao{
 	public SystemAdminVO systemAdminCheck(LoginCommand loginCommand) {
 		return session.selectOne(namespace+".systemAdminCheck", loginCommand);
 	}
+	//액터 ==> 학생  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승	
+	@Override
+	public StudentVO studentCheck(String memberId) {
+		return session.selectOne(namespace+".studentCheck", memberId);
+	}
+	//액터 ==> 교사  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
+	@Override
+	public TeacherVO teacherCheck(String memberId) {
+		return session.selectOne(namespace+".teacherCheck", memberId);
+	}
+
 
 }

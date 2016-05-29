@@ -14,7 +14,9 @@ import ko.school.common.domain.LoginCommand;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.SchoolAdminVO;
+import ko.school.common.domain.StudentVO;
 import ko.school.common.domain.SystemAdminVO;
+import ko.school.common.domain.TeacherVO;
 import ko.school.common.service.LoginService;
 
 @Controller
@@ -33,11 +35,17 @@ public class LoginController {
 			if(memberVO!=null){
 				model.addAttribute("member", memberVO);
 				if(grade.equals("student")){
-					model.addAttribute("grade", "student");
-					return "/common/studentMain";
-				}else{
-					model.addAttribute("grade", "teacher");
-					return "/common/teacherMain";
+					StudentVO studentVO=service.studentCheckService(memberVO.getMemberId());
+					if(studentVO!=null){
+						model.addAttribute("grade", "student");
+						return "/common/studentMain";
+					}
+				}else if(grade.equals("teacher")){
+					TeacherVO teacherVO=service.teacherCheckService(memberVO.getMemberId());
+					if(teacherVO!=null){
+						model.addAttribute("grade", "teacher");
+						return "/common/teacherMain";
+					}
 				}
 			}
 			redirect.addFlashAttribute("result", "fail");
