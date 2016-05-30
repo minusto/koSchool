@@ -5,8 +5,6 @@ public class LoginCommand {
 	private String password;
 	private String grade;
 	
-	
-	
 	public String getGrade() {
 		return grade;
 	}

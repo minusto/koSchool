@@ -1,8 +1,6 @@
 package ko.school.common.domain;
 
-import java.io.Serializable;
-
-public class TeacherVO implements Serializable {
+public class TeacherVO{
 
 	private String memberId;
 	private int teacherClass;

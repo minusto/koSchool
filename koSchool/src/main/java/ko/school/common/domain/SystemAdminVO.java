@@ -1,8 +1,6 @@
 package ko.school.common.domain;
 
-import java.io.Serializable;
-
-public class SystemAdminVO implements Serializable {
+public class SystemAdminVO{
 
 	private String systemAdminId;
 	private String systemAdminPassword;

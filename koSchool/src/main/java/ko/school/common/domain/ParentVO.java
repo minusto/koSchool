@@ -1,8 +1,6 @@
 package ko.school.common.domain;
 
-import java.io.Serializable;
-
-public class ParentVO implements Serializable {
+public class ParentVO{
 
 	private String parentId;
 	private String familyRelation;
