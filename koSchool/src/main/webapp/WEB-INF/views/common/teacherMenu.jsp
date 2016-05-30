@@ -55,7 +55,7 @@
 									<i class="fa fa-user"></i> Profile
 								</button>
 								<button type="button" class="btn btn-default"
-									onclick="location.href='logic/logoutOk.jsp'">
+									onclick="location.href='logout'">
 									<i class="fa fa-sign-out"></i> Logout
 								</button>
 							</div>
