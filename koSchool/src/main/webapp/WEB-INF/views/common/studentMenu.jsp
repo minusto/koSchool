@@ -22,7 +22,9 @@
 <!-- CSS App -->
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/themes/flat-blue.css">
-​	<!-- Javascript Libs -->
+
+
+	<!-- Javascript Libs -->
 	<script type="text/javascript" src="/resources/lib/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/Chart.min.js"></script>
@@ -37,9 +39,6 @@
 	<!-- Javascript -->
 	<script type="text/javascript" src="/resources/js/app.js"></script>
 	<script type="text/javascript" src="/resources/js/index.js"></script>
-
-
-
 </head>
 
 
