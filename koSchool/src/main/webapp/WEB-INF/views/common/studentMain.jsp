@@ -16,7 +16,7 @@
     		<div class = "container-fluid">
     			<div class = "side-body">
     				<div class = "page-title">
-    					<span class="title">${grade }</span>
+    					<span class="title">학생</span>
     					</div>
     					<div class="row">
     						<div class="col-sm-12">

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.MessageCountMapper">
+
+	<!-- 자신이 수신한 모든 메세지의 수를 리턴하는 쿼리문 / 작성자 박종현 -->
+	<select id="countMessage" resultType="Integer">
+		SELECT count(*) FROM message WHERE receivermemberid = #{memberId}
+	</select>
+	
+	<select id="notReadMessage" resultType="Integer">
+		SELECT count(*) FROM message WHERE messagereadcheck = '미확인' AND receivermemberid = #{memberId}
+	</select>
+</mapper>
