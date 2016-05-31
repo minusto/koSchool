@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	request.setAttribute("path", "Main");
-%>
+
 <!DOCTYPE html>
 <html>
  
@@ -60,12 +58,12 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="schoolAdminInsertSchoolForm.jsp">
+																			<a href="/schoolmanage/insertSchoolForm">
 																			<h3>학교 등록</h3>
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="schoolDetail.jsp">
+																			<a href="/schoolmanage/schoolDetail">
 																			<h3>학교 정보조회</h3>
 																			</a>
 																		</div>

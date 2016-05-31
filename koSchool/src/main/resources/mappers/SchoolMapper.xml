@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.SchoolMapper">
+	
+	<!-- 액터 ==> 학교관리자 / 작업 내용 : 학교 등록 - 학교 정보 입력 / 작성자 : 구혜인 -->
+	<insert id="insertSchool" parameterType="SchoolVO">
+		INSERT INTO school (
+			schoolId, schoolName, schoolAddress, schoolTel
+		) VALUES (
+			#{schoolId}, #{schoolName}, #{schoolAddress}, #{schoolTel}
+		)
+	</insert>
+	
+	<!-- 액터 ==> 학교관리자 / 작업 내용 : 학교 등록 / 작성자 : 구혜인 -->
+	<insert id="insertSchoolRegist" parameterType="SchoolRegistVO">
+		INSERT INTO schoolRegist (
+			schoolId, schoolAdminId
+		)
+		VALUES (
+			#{schoolId}, #{schoolAdminId}
+		)
+	</insert>
+	
+	<!-- 액터 ==> 학교관리자 / 작업 내용 : 학교 정보 조회 - 학교 관리자 id로 학교 등록 정보 조회 / 작성자 : 구혜인 -->
+	<select id="schoolRegistSchoolId" parameterType="String" resultType="SchoolRegistVO">
+		SELECT * 
+		FROM schoolRegist
+		WHERE schoolAdminId = #{id}
+	</select>
+	
+	<!-- 액터 ==> 학교관리자 / 작업 내용 : 학교 정보 조회 / 작성자 : 구혜인 -->
+ 	<select id="schoolDetail" resultType="SchoolVO" parameterType="String">
+		SELECT * 
+		FROM SCHOOL
+		WHERE schoolId=#{id}
+	</select>
+	
+	<!-- 액터 ==> 학교관리자 / 작업 내용 : 학교 정보 수정 / 작성자 : 구혜인 -->
+	<update id="schoolUpdate" parameterType="SchoolVO">
+		UPDATE school SET schoolName = #{schoolName}, schoolAddress = #{schoolAddress}, schoolTel = #{schoolTel}
+		WHERE schoolId = #{schoolId}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+

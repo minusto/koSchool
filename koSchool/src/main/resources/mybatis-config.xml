@@ -4,9 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-  <typeAliases>
-    <package name="ko.school.common.domain"/>
-  </typeAliases>
+	<typeAliases>
+		<package name="ko.school.board.domain" />
+		<package name="ko.school.common.domain" />
+		<package name="ko.school.membermanage.domain" />
+		<package name="ko.school.message.domain" />
+		<package name="ko.school.schedule.domain" />
+		<package name="ko.school.schoolmanage.domain" />
+		<package name="ko.school.score.domain" />
+		<package name="ko.school.simulation.domain" />
+	</typeAliases>
 
 
 </configuration>

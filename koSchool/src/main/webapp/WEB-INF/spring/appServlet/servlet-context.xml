@@ -33,8 +33,37 @@
 	
 	
 	<context:component-scan base-package="ko.school.web" />
+	
+	<context:component-scan base-package="ko.school.board.controller"/>
+	<context:component-scan base-package="ko.school.board.persistence"/>
+	<context:component-scan base-package="ko.school.board.service"/>
+	
 	<context:component-scan base-package="ko.school.common.controller"/>
 	<context:component-scan base-package="ko.school.common.persistence"/>
 	<context:component-scan base-package="ko.school.common.service"/>
+	
+	<context:component-scan base-package="ko.school.membermanage.controller"/>
+	<context:component-scan base-package="ko.school.membermanage.persistence"/>
+	<context:component-scan base-package="ko.school.membermanage.service"/>
+	
+	<context:component-scan base-package="ko.school.message.controller"/>
+	<context:component-scan base-package="ko.school.message.persistence"/>
+	<context:component-scan base-package="ko.school.message.service"/>
+	
+	<context:component-scan base-package="ko.school.schedule.controller"/>
+	<context:component-scan base-package="ko.school.schedule.persistence"/>
+	<context:component-scan base-package="ko.school.schedule.service"/>
+	
+	<context:component-scan base-package="ko.school.schoolmanage.controller"/>
+	<context:component-scan base-package="ko.school.schoolmanage.persistence"/>
+	<context:component-scan base-package="ko.school.schoolmanage.service"/>
+	
+	<context:component-scan base-package="ko.school.score.controller"/>
+	<context:component-scan base-package="ko.school.score.persistence"/>
+	<context:component-scan base-package="ko.school.score.service"/>
+	
+	<context:component-scan base-package="ko.school.simulation.controller"/>
+	<context:component-scan base-package="ko.school.simulation.persistence"/>
+	<context:component-scan base-package="ko.school.simulation.service"/>
 	
 </beans:beans>
