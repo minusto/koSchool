@@ -116,12 +116,12 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="schoolAdminInsertTeacherForm.jsp">
+																			<a href="/schoolmanage/schoolAdminInsertTeacherForm">
 																			<h3>교사 등록</h3>
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="schoolAdminTeacherList.jsp">
+																			<a href="/schoolmanage/schoolAdminTeacherList">
 																			<h3>교사 목록</h3>
 																			</a>
 																		</div>

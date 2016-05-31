@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
+	<%
 	request.setAttribute("path", "Main");
 %>
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,7 @@
 	<div class="app-container">
 		<div class="row content-container">
 		
-		<jsp:include page="systemAdminMenu.jsp"/>
+		<jsp:include page="./systemAdminMenu.jsp"/>
 
 			<!-- 메인 컨텐츠 -->
 			<div class="container-fluid">
@@ -26,7 +27,7 @@
 
 							<div class="col-sm-3">
 								<div class="pricing-table green">
-								<a href="systemInsertSchoolAdminForm.jsp">
+								<a href="/schoolmanage/systemInsertSchoolAdminForm">
 									<div class="pt-header">
 										<div class="plan-pricing">
 											<div class="pricing">학교관리자 등록</div>
@@ -37,7 +38,7 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="pricing-table blue">
-								<a href="schoolAdminList.jsp">
+								<a href="/schoolmanage/schoolAdminList">
 									<div class="pt-header">
 										<div class="plan-pricing">
 											<div class="pricing">학교관리자 목록</div>
@@ -61,7 +62,7 @@
 					</div>
 				</footer>
 			</div>
-
+			
 </body>
 
 </html>

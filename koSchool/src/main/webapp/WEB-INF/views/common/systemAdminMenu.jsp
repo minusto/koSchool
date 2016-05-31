@@ -1,43 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<head>
 <!-- Fonts -->
-<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400'
+	rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900'
+	rel='stylesheet' type='text/css'>
 <!-- CSS Libs -->
 <link rel="stylesheet" type="text/css" href="/resources/lib/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/resources/lib/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/lib/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/lib/css/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/resources/lib/css/bootstrap-switch.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/lib/css/bootstrap-switch.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/lib/css/checkbox3.min.css">
-<link rel="stylesheet" type="text/css" href="/resources/lib/css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="/resources/lib/css/dataTables.bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/lib/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/lib/css/dataTables.bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/resources/lib/css/select2.min.css">
 <!-- CSS App -->
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/themes/flat-blue.css">
 
-	<!-- Javascript Libs -->
-	<script type="text/javascript" src="/resources/lib/js/jquery.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/Chart.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/bootstrap-switch.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/jquery.matchHeight-min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/dataTables.bootstrap.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/select2.full.min.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/ace/ace.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/ace/mode-html.js"></script>
-	<script type="text/javascript" src="/resources/lib/js/ace/theme-github.js"></script>
-	<!-- Javascript -->
-	<script type="text/javascript" src="/resources/js/app.js"></script>
-	<script type="text/javascript" src="/resources/js/index.js"></script>
-
-</head>
-
+<!-- Javascript Libs -->
+			<script type="text/javascript" src="/resources/lib/js/jquery.min.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/bootstrap.min.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/Chart.min.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/bootstrap-switch.min.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/jquery.matchHeight-min.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/jquery.dataTables.min.js"></script>
+			<script type="text/javascript"
+				src="/resources/lib/js/dataTables.bootstrap.min.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/select2.full.min.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/ace/ace.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/ace/mode-html.js"></script>
+			<script type="text/javascript" src="/resources/lib/js/ace/theme-github.js"></script>
+			<!-- Javascript -->
+			<script type="text/javascript" src="/resources/js/app.js"></script>
+			<script type="text/javascript" src="/resources/js/index.js"></script>
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-top">
+
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-expand-toggle">
@@ -70,7 +75,7 @@
 					class="caret"></span></a>
 				<ul class="dropdown-menu animated fadeInDown">
 					<li class="profile-img"><img
-						src="img/profile/picjumbo.com_HNCK4153_resize.jpg"
+						src="/resources/img/profile/picjumbo.com_HNCK4153_resize.jpg"
 						class="profile-img"></li>
 					<li>
 						<div class="profile-info">
@@ -81,7 +86,7 @@
 									<i class="fa fa-user"></i> 프로필
 								</button>
 								<button type="button" class="btn btn-default"
-									onclick="location.href='logout'">
+									onclick="location.href='/logout'">
 									<i class="fa fa-sign-out"></i> 로그아웃
 								</button>
 							</div>
@@ -95,7 +100,7 @@
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="side-menu-container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="systemAdminMain.jsp">
+				<a class="navbar-brand" href="/systemAdminMain">
 					<div class="icon fa fa-book"></div>
 					<div class="title">학사관리</div>
 				</a>
@@ -112,8 +117,8 @@
 					<div id="dropdown-element" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="systemInsertSchoolAdminForm.jsp">학교관리자 등록</a></li>
-								<li><a href="schoolAdminList.jsp">학교관리자 목록</a></li>
+								<li><a href="/schoolmanage/systemInsertSchoolAdminForm">학교관리자 등록</a></li>
+								<li><a href="/schoolmanage/schoolAdminList">학교관리자 목록</a></li>
 							</ul>
 						</div>
 					</div></li>

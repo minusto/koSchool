@@ -71,7 +71,7 @@
 							aria-expanded="false">${schoolAdmin.schoolAdminName }<span class="caret"></span></a>
 							<ul class="dropdown-menu animated fadeInDown">
 								<li class="profile-img"><img
-									src="img/profile/picjumbo.com_HNCK4153_resize.jpg"
+									src="/resources/img/profile/picjumbo.com_HNCK4153_resize.jpg"
 									class="profile-img"></li>
 								<li>
 									<div class="profile-info">
@@ -127,8 +127,8 @@
 								<div id="dropdown-table" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul class="nav navbar-nav">
-											<li><a href="schoolAdminInsertTeacherForm.jsp">교사 등록</a></li>
-											<li><a href="schoolAdminTeacherList.jsp">교사 목록</a></li>
+											<li><a href="/schoolmanage/schoolAdminInsertTeacherForm">교사 등록</a></li>
+											<li><a href="/schoolmanage/schoolAdminTeacherList">교사 목록</a></li>
 										</ul>
 									</div>
 								</div></li>

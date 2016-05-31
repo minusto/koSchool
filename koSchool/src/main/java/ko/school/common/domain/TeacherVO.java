@@ -1,12 +1,26 @@
 package ko.school.common.domain;
 
-public class TeacherVO{
+
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class TeacherVO {
 
 	private String memberId;
 	private int teacherClass;
 	private String teacherPicture;
 	private String teacherPosition;
 	private String subjectId;
+	private MultipartFile file;
+	
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 
 	public String getMemberId() {
 		return memberId;
@@ -23,6 +37,10 @@ public class TeacherVO{
 	public void setTeacherClass(int teacherClass) {
 		this.teacherClass = teacherClass;
 	}
+
+
+
+
 
 	public String getTeacherPicture() {
 		return teacherPicture;
