@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.MemberManageMapper">
+	<!-- 교사==>학생 입력 및 수정 -->
+	<update id="updateMember">
+		UPDATE member SET
+		memberName = #{memberName},
+		memberBirthday = #{memberBirthday},
+		memberAddress = #{memberAddress},
+		memberTel = #{memberTel},
+		memberNote = #{memberNote},
+		memberEmail =
+		#{memberEmail}
+		WHERE memberId = #{memberId}
+	</update>
+
+	<!-- 교사==>학생 입력 및 수정 -->
+	<update id="updateStudent">
+		UPDATE student SET
+		StudentCode = #{studentCode},
+		StudentGrade = #{studentGrade},
+		StudentClass = #{studentClass},
+		StudentNum = #{studentNum},
+		StudentGender = #{studentGender},
+		StudentMajor = #{studentMajor},
+		StudentPicture = #{studentPicture}
+		WHERE memberId = #{memberId}
+	</update>
+	<!-- 교사==>학생 NULL List 출력 -->
+	<select id="sameSchoolStudentNullList" resultType="MemberVO">
+		SELECT
+		m.memberid,memberpassword,membername,memberbirthday,memberaddress,
+		membertel,membernote,memberemail,schoolid
+		FROM member m,student s
+		WHERE
+		m.schoolid=#{id}
+		AND m.memberid=s.memberid
+		AND s.studentcode IS NULL
+	</select>
+	
+	<!-- 학생목록 출력 -->
+	<select id="studentList" resultType="StudentList">
+		SELECT m.memberid, m.membername, m.memberbirthday, m.schoolid, st.studentcode, st.studentgrade, st.studentclass, st.studentnum, st.studentgender, st.studentmajor 
+		FROM member m, student st
+		WHERE m.memberid = st.memberid
+		AND m.schoolid=#{schoolId}
+		AND st.studentCode IS NOT NULL
+		ORDER BY m.memberid
+	</select>
+	
+	<!-- 교사 ==> 학생 세부 열람 -->
+	<select id="selectStudentDetail" resultType="StudentDetail" >
+		SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress,
+		 m.memberTel, m.memberEmail, m.memberNote, m.schoolId,
+		st.studentCode, st.studentGrade, st.studentClass, st.studentNum, st.studentGender, 
+		st.studentMajor, st.studentPicture
+		FROM member m, student st
+		WHERE m.memberId = st.memberId
+		AND m.memberId = #{m_id}
+		ORDER BY m.memberId
+	</select>
+	
+		<!-- 교사 ==> 학생 내용 삭제(member table) -->
+	<update id="deleteStudent">
+		UPDATE member SET
+		memberName = NULL,
+		memberBirthday = NULL,
+		memberAddress = NULL,
+		memberTel = NULL,
+		memberNote = NULL,
+		memberEmail = NULL
+		WHERE memberId = #{m_id}
+	</update>
+	
+	<!-- 교사 ==> 학생 내용 삭제 (student table)-->
+	<update id="deleteStudent2">
+	UPDATE student SET
+		studentCode = NULL,
+		studentGrade = NULL,
+		studentClass = NULL,
+		studentNum = NULL,
+		studentGender = NULL,
+		studentMajor = NULL,
+		studentPicture = NULL
+		WHERE memberId = #{m_id}
+	</update>
+	
+	<!-- 액터  : 교사 ==> 학부모 정보 NULL LIST -->
+	<select id="parentNullList" resultType="ParentNullList">
+		SELECT parentId FROM parent
+		WHERE memberId IS NULL
+	</select>
+	
+	<!-- 학부모 정보 입력 -->
+	<update id="insertParent">
+		UPDATE parent SET 
+			parentName = #{parentName}, familyRelation =  #{familyRelation}, memberId = #{memberId}
+		WHERE parentId = #{parentId}
+	</update>
+	
+	<!-- 액터 : 교사 => 학부모리스트 출력 -->
+	<select id="parentList" resultType="ParentList">
+		SELECT p.parentId, p.parentName, p.familyRelation, st.memberId, m.memberName
+		FROM parent p, student st, member m
+		WHERE p.memberId = st.memberId
+			AND st.memberId = m.memberId
+	</select>
+	
+</mapper>

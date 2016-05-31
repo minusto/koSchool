@@ -103,7 +103,7 @@
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="side-menu-container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="teacherMain.jsp">
+				<a class="navbar-brand" href="teacherMain">
 					<div class="icon fa fa-book"></div>
 					<div class="title">학사관리</div>
 				</a>
@@ -127,8 +127,8 @@
 					<div id="dropdown-element" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="teacherInsertStudentForm.jsp">학생 정보 입력</a></li>
-								<li><a href="teacherListStudent.jsp">학생 정보 열람</a></li>
+								<li><a href="teacherInsertStudentForm">학생 정보 입력</a></li>
+								<li><a href="teacherListStudent">학생 정보 열람</a></li>
 								<li><a href="teacherInsertScoreForm.jsp">내신 성적 입력</a></li>
 								<li><a href="teacherInsertMockScoreForm.jsp">모의고사 성적 입력</a>
 								</li>
@@ -142,8 +142,8 @@
 					<div id="dropdown-table" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="teacherInsertParentForm.jsp">학부모 정보 입력</a></li>
-								<li><a href="teacherListParent.jsp">학부모 정보 열람</a></li>
+								<li><a href="teacherInsertParentForm">학부모 정보 입력</a></li>
+								<li><a href="teacherListParent">학부모 정보 열람</a></li>
 							</ul>
 						</div>
 					</div></li>

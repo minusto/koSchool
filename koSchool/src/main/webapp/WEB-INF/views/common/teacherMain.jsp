@@ -56,12 +56,12 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="teacherInsertStudentForm.jsp">
+																			<a href="teacherInsertStudentForm">
 																			<h3>학생 정보 입력</h3>
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="teacherListStudent.jsp">
+																			<a href="teacherListStudent">
 																			<h3>학생 정보 열람</h3>
 																			</a>
 																		</div>
@@ -114,12 +114,12 @@
 																<div class="modal-body">
 																	<div class="row">
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="teacherInsertParentForm.jsp">
+																			<a href="teacherInsertParentForm">
 																			<h3>학부모 정보 입력</h3>
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="teacherListParent.jsp">
+																			<a href="teacherListParent">
 																			<h3>학부모 정보 열람</h3>
 																			</a>
 																		</div>
