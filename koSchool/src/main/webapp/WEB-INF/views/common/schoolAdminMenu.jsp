@@ -114,7 +114,7 @@
 										<ul class="nav navbar-nav">
 											<li><a href="/schoolmanage/insertSchoolForm">학교등록</a></li>
 											<li><a href="/schoolmanage/schoolDetail">학교 정보 조회</a></li>
-											<li><a href="schoolAdminInsertUserIdForm.jsp">사용자 ID 등록</a></li>
+											<li><a href="/schoolmanage/schoolAdminInsertUserIdForm">사용자 ID 등록</a></li>
 											<li><a href="userIdList.jsp">사용자 ID 목록</a></li>
 										</ul>
 									</div>
