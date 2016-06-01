@@ -73,7 +73,7 @@
 																				</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="userIdList.jsp">
+																			<a href="/schoolmanage/userIdList">
 																			<h3>사용자 ID 목록</h3>
 																				</a>
 																		</div>

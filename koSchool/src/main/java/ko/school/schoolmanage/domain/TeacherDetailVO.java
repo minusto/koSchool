@@ -1,6 +1,7 @@
 package ko.school.schoolmanage.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class TeacherDetailVO {
 	private String memberId;
@@ -47,9 +48,11 @@ public class TeacherDetailVO {
 	public String getMemberBirthday() {
 		return memberBirthday;
 	}
+
 	public void setMemberBirthday(String memberBirthday) {
 		this.memberBirthday = memberBirthday;
 	}
+
 	public String getMemberTel() {
 		return memberTel;
 	}

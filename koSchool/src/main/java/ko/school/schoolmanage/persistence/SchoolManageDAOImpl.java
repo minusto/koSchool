@@ -92,6 +92,28 @@ public class SchoolManageDAOImpl implements SchoolManageDAO{
 		
 		return session.selectList(namespace+".teacherList",id);
 	}
+
+	@Override
+	public TeacherDetailVO detailTeacher(String memberId) throws Exception {		
+		return session.selectOne(namespace + ".detailTeacher" , memberId);
+	}
+
+	@Override
+	public void updateMember(MemberVO member) throws Exception {
+		System.out.println("=== dao start");
+		System.out.println("=== memberName :: " + member.getMemberName());
+		System.out.println("=== memberBirthday :: " + member.getMemberBirthday());
+		System.out.println("=== memberTel :: " + member.getMemberTel());
+		System.out.println("=== memberEmail :: " + member.getMemberEmail());
+		System.out.println("=== memberId :: " + member.getMemberId());
+		session.update(namespace + ".updateMember" , member);
+		System.out.println("=== dao end");
+	}
+
+	@Override
+	public void updateTeacher(TeacherVO teacherVO) throws Exception {
+		session.update(namespace + ".updateTeacher" , teacherVO);
+	}
 	
 	
 	

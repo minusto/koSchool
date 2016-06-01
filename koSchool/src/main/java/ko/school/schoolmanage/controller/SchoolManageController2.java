@@ -61,7 +61,7 @@ public class SchoolManageController2 {
 		SchoolAdminVO schoolAdmin = (SchoolAdminVO)session.getAttribute("schoolAdmin");
 		String id = schoolAdmin.getSchoolAdminId();
 		model.addAttribute("list", service.userList(id));
-		return "/schoolmanage/schoolAdmin/userIdList";
+		return "/schoolmanage/userIdList";
 	}
 
 }

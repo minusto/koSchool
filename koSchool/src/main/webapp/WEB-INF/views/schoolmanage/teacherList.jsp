@@ -47,8 +47,8 @@
 											<c:forEach var="teacher" items="${list}">
 												<tr>
 													<td><a
-														href="teacherListDetail.jsp?memberId=${teacher.memberId}">${teacher.memberName}</a></td>
-													<td>${(teacher.memberBirthday).substring(0, 10)}</td>
+														href="teacherListDetail?memberId=${teacher.memberId}">${teacher.memberName}</a></td>
+													<td>${fn:substring(teacher.memberBirthday, 0, 10)}</td>
 													<td>${teacher.memberTel}</td>
 													<td>${teacher.memberEmail}</td>
 													<td>${teacher.teacherClass}</td>
