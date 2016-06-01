@@ -223,6 +223,7 @@
 															</div>
 														</div>
                                                 	</div>
+                                                	<jsp:include page="../message/message.jsp"/>
                                                 </div>
                                             </div>
                                         </div>
