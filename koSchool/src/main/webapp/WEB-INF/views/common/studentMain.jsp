@@ -197,7 +197,7 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="studentNoticeBoardList.jsp">
+																			<a href="/noticeBoardList">
 																			<h3>교내 공지사항</h3>
 																			</a>
 																		</div>

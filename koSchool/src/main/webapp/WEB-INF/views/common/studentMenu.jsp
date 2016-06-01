@@ -234,7 +234,7 @@
 					<div id="component-example" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="studentNoticeBoardList.jsp">교내 공지사항</a></li>
+								<li><a href="/noticeBoardList">교내 공지사항</a></li>
 								<li><a href="parentNoticeBoardList.jsp">가정 통신문 조회</a></li>
 								<li><a href="studentClassBoardList.jsp">학급 게시판</a></li>
 								<li><a href="scheduleList.jsp">일정</a></li>

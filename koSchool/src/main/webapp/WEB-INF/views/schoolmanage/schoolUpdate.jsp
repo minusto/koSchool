@@ -23,7 +23,7 @@
 									</div>
 								</div>
 								<div class="card-body">
-                                    <form class="form-horizontal" action="/schoolmanage/schoolUpdate" method="post">
+                                    <form class="form-horizontal" action="/schoolUpdate" method="post">
   
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-2 control-label">학교명</label>

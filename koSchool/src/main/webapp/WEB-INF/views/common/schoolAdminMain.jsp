@@ -58,12 +58,12 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="/schoolmanage/insertSchoolForm">
+																			<a href="/insertSchoolForm">
 																			<h3>학교 등록</h3>
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="/schoolmanage/schoolDetail">
+																			<a href="/schoolDetail">
 																			<h3>학교 정보조회</h3>
 																			</a>
 																		</div>
@@ -164,7 +164,7 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="schoolAdminNoticeBoardList.jsp">
+																			<a href="/noticeBoardList">
 																			<h3>공지사항</h3>
 																			</a>
 																		</div>

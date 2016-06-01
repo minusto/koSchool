@@ -8,7 +8,6 @@
 </head>
 
 <body class="flat-blue">
-<input type="hidden" id="insertOk" value="${insert }">
    <div class="app-container">
       <div class="row content-container">
 	   	  <jsp:include page="../common/schoolAdminMenu.jsp"/>
@@ -24,7 +23,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form class="form-horizontal" action="insertSchoolForm" method="post">
+                                    <form class="form-horizontal" action="/insertSchoolForm" method="post">
                                     	<input type="hidden" name="schoolAdminId" value="${schoolAdminId }"/><!--  -->
                                     	<div class="form-group">
                                             <label for="inputPassword3" class="col-sm-2 control-label">학교ID</label>

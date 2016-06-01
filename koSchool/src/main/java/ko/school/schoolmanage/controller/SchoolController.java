@@ -18,14 +18,13 @@ import ko.school.schoolmanage.domain.SchoolVO;
 import ko.school.schoolmanage.service.SchoolService;
 
 @Controller
-@RequestMapping("/schoolmanage/*")
 public class SchoolController {
 	@Inject
 	private SchoolService service;
 	
 	//액터 ==> 학교관리자 / 작업 내용 : 학교 등록 - 학교 정보 입력 폼으로 들어왔을 경우 / 작성자 : 구혜인
 	@RequestMapping(value="/insertSchoolForm", method=RequestMethod.GET)
-	public void insertForm(Model model, HttpServletRequest request) throws Exception {
+	public String insertForm(Model model, HttpServletRequest request) throws Exception {
 		boolean isSchool = false;
 		HttpSession session = request.getSession();
 		SchoolAdminVO schoolAdminVo = (SchoolAdminVO)session.getAttribute("schoolAdmin");
@@ -35,6 +34,7 @@ public class SchoolController {
 			isSchool = true;
 		}
 		model.addAttribute("isSchool", isSchool);
+		return "/schoolmanage/insertSchoolForm"; 
 	}
 
 	//액터 ==> 학교관리자 / 작업 내용 : 학교 등록, 학교 정보 입력 / 작성자 : 구혜인
@@ -84,7 +84,7 @@ public class SchoolController {
 		SchoolVO school = service.detailSchoolService(schoolAdminVo.getSchoolAdminId());
 		model.addAttribute("school", school);
 		
-		return "redirect:/schoolmanage/schoolDetail";
+		return "redirect:/schoolDetail";
 	}
 	
 	

@@ -207,7 +207,7 @@
 																<div class="modal-body">
 																	<div class="row">
 																		<div class="col-sm-4 col-xs-12" style="text-align:center;">
-																			<a href="teacherNoticeBoardList.jsp">
+																			<a href="/noticeBoardList">
 																			<h3>교내 공지사항</h3>
 																			</a>
 																		</div>

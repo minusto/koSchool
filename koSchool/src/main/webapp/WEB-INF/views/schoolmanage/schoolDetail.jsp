@@ -44,7 +44,7 @@
 											<td width="150"> ${school.schoolTel}</td>
 										</tr>
 									</table>
-									<a href="/schoolmanage/schoolUpdate"><button type="button" class="btn btn-primary">정보수정</button></a>
+									<a href="/schoolUpdate"><button type="button" class="btn btn-primary">정보수정</button></a>
 								</div>
 							</div>
 						</div>
