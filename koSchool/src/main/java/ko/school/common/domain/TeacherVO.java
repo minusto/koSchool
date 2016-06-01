@@ -11,7 +11,7 @@ public class TeacherVO {
 	private String teacherPicture;
 	private String teacherPosition;
 	private String subjectId;
-	private MultipartFile file;
+	private MultipartFile file; 
 	
 
 	public MultipartFile getFile() {

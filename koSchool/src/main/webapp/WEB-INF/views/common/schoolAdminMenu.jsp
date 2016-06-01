@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/lib/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/lib/css/dataTables.bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/resources/lib/css/select2.min.css">
-<!-- CSS App -->
+<!-- CSS App --> 
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/themes/flat-blue.css">
 

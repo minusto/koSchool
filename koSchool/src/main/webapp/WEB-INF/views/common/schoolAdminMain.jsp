@@ -15,7 +15,7 @@
 		<div class="row content-container">
 		<jsp:include page="schoolAdminMenu.jsp"/>
 		
-		<!-- 메인 컨텐츠 -->
+		<!-- 메인 컨텐츠 --> 
 			<div class = "container-fluid">
     			<div class = "side-body">
     				<div class = "page-title">

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.ShcoolmanageMapper">
+
+<!-- 시스템 관리자 ->학교관리자 등록 -->
+	<insert id="insertSchoolAdmin">
+		insert into SchoolAdmin(
+		SchoolAdminId,SchoolAdminPassword,
+		SchoolAdminName,SchoolAdminTel,DeleteRequest
+		)
+		values(
+		#{schoolAdminId},'1234',#{schoolAdminName},#{schoolAdminTel},'n'
+		)
+	</insert>
+<!-- 시스템관리자->학교관리자레지스트등록 -->
+	<insert id="insertSchoolAdminRegist">
+		insert into
+		SchoolAdminRegist(
+		SystemAdminId,SchoolAdminId,SchoolRegistDate,SchoolEndDate
+		)values(
+		#{systemAdminId},#{schoolAdminId},SYSDATE,#{schoolEndDate}
+		)
+	</insert>
+<!-- 시스템관리자->학교관리자 목록 -->
+	<select id="schoolAdminList" resultType="ko.school.schoolmanage.domain.SchoolAdminListVO">
+		select
+		a.schooladminid,a.schooladmintel,a.deleterequest,b.schoolregistdate,b.schoolenddate
+		from schooladmin a,schooladminregist b
+		where
+		a.schooladminid=b.schooladminid
+	</select>
+<!-- 시스템 관리자->학교관리자 상세정보 -->
+	<select id="schoolAdminDetail" resultType="ko.school.schoolmanage.domain.SchoolAdminDetailVO">
+		select a.schooladminname, a.schooladminid,a.schooladmintel,
+		a.deleterequest,b.schoolregistdate,b.schoolenddate
+		from schooladmin
+		a,schooladminregist b
+		where a.schooladminid=b.schooladminid
+		AND
+		a.schooladminid=#{id}
+	</select>
+<!-- 시스템관리자->학교관리자 수정 -->
+	<update id="updateSchoolAdmin">
+		update schooladmin
+		set SchoolAdminName = #{schoolAdminName},
+		SchoolAdminTel=#{schoolAdminTel},
+		DeleteRequest =#{deleteRequest}
+		where
+		SchoolAdminId = #{schoolAdminId}
+	</update>
+<!-- 시스템관리자->학교관리자 수정2 -->
+	<update id="updateSchoolAdminRegist">
+		update SchoolAdminRegist
+		set SchoolEndDate = #{schoolEndDate}
+		where SchoolAdminId = #{schoolAdminId}
+	</update>
+<!-- 학교관리자->교사등록폼 학교목록 -->
+	<select id="schoolList" resultType="SchoolVO">
+		SELECT *
+		FROM SCHOOL
+	</select>
+<!-- 학교관리자->교사등록폼 과목목록 -->
+	<select id="subjectList" resultType="SubjectVO">
+		SELECT * FROM subject
+	</select>
+<!-- 학교관리자->교사멤머등록  -->
+	<insert id="insertMemberTeacher">
+		INSERT INTO member(
+		memberId , memberName , memberBirthday , memberTel
+		, memberEmail , memberNote , memberPassword , memberAddress , schoolId
+		)VALUES(
+		#{memberId} , #{memberName} , #{memberBirthday} , #{memberTel}
+		, #{memberEmail} , #{memberNote} ,'1234' , #{memberAddress} ,
+		#{schoolId}
+		)
+	</insert>
+
+<!-- 학교관리자->교사등록  -->
+	<insert id="insertTeacher">
+		INSERT INTO teacher(
+		teacherClass ,
+		teacherPicture , teacherPosition , subjectId , memberId
+		)VALUES(
+		${teacherClass}, #{teacherPicture} , #{teacherPosition} , #{subjectId}
+		, #{memberId}
+		)
+	</insert>
+<!-- 학교관리자 -> 교사등급 등록 -->
+	<insert id="insertTeacherGrade">
+		insert into RegistManage (
+		registNum, schoolAdminId, memberId, memberGrade
+		)values(
+		REGISTMANAGE_SEQ.NEXTVAL,#{schoolAdminId}, #{memberId},'교사'
+		)
+	</insert>
+<!-- 학교관리자 ->교사목록 -->
+	<select id="teacherList" resultType="TeacherDetailVO">
+		SELECT m.memberId , m.memberBirthday , m.memberTel , m.memberEmail ,
+		m.memberName , t.teacherClass , t.subjectId
+		FROM teacher t , member m , registmanage r
+		WHERE t.memberId = m.memberId
+		AND m.memberId=r.memberId
+		AND r.schooladminid=#{id}
+	</select>
+
+
+
+
+
+</mapper>
