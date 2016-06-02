@@ -23,6 +23,15 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/themes/flat-blue.css">
 
+<!-- 제주고딕체 -->
+<link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/jejugothic.css" />
+<!-- 폰트추가 -->
+<style type="text/css">
+body {
+	font-family: 'Jeju Gothic', sans-serif;
+}
+</style>
+
 	<!-- Javascript Libs -->
 	<script type="text/javascript" src="/resources/lib/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/bootstrap.min.js"></script>
@@ -37,24 +46,11 @@
 	<script type="text/javascript" src="/resources/lib/js/ace/theme-github.js"></script>
 	<!-- Javascript -->
 	<script type="text/javascript" src="/resources/js/app.js"></script>
-	<!--  <script type="text/javascript" src="/resources/js/index.js"></script>-->
 
 <script type="text/javascript">
 
 		$(function() {
-			$.ajax({
-				url : "notReadMessage",
-				dataType : 'json',
-				success : function(data) {
-					$("#messageCount").html("&nbsp;" +data.countNotReadMessage);
-					$("#notReadMessage").html(data.countNotReadMessage);
-					if(data.countNotReadMessage == 0){
-						$("#newMessage").html("새로운 메세지가 없습니다.");
-					}else{
-						$("#newMessage").html("미확인 메세지가 존재합니다.");
-					}
-				}
-			});
+		notReadMessage();
 		
 		setInterval(function() {
 			notReadMessage()
@@ -104,10 +100,10 @@
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown" role="button" aria-expanded="false"><i
 					class="fa fa-comments-o"  id="messageCount"></i>&nbsp;</a>
-				<ul class="dropdown-menu animat    ed fadeInDown">
+				<ul class="dropdown-menu animated fadeInDown">
 					<li class="title">새 쪽지 <span class="badge pull-right" id="notReadMessage"></span>
 					</li>
-					<li class="message"><a href="/messageList"><label id="newMessage">새 메세지가 없습니다.</label></a>
+					<li class="message"><button id="newMessage" data-target="#messageModal" data-toggle="modal" class="btn-success">새 메세지가 없습니다.</button>
 					</li>
 				</ul></li>
 

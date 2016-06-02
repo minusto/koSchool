@@ -77,17 +77,21 @@ public class SchoolManageServiceImpl implements SchoolManageService{
 		
 		return dao.teacherList(id);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public TeacherDetailVO detailTeacher(String memberId) throws Exception {
+		return dao.detailTeacher(memberId);
+	}
+
+	@Override
+	public void updateMember(MemberVO member) throws Exception {
+		dao.updateMember(member);	
+	}
+
+	@Override
+	public void updateTeacher(TeacherVO teacherVO) throws Exception {
+		dao.updateTeacher(teacherVO);
+	}
+		
 
 }

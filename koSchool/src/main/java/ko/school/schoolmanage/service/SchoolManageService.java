@@ -34,5 +34,8 @@ public interface SchoolManageService {
 
 	public List<TeacherDetailVO> teacherList(String id)throws Exception;
 	
-
+	public TeacherDetailVO detailTeacher(String memberId)throws Exception;
+	
+	public void updateMember(MemberVO member)throws Exception;
+	public void updateTeacher(TeacherVO teacherVO)throws Exception;
 }

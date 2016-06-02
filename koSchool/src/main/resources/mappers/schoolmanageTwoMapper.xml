@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mappers.schoolmanageTwoMapper">
+	<cache />
+	<!-- 사용자 등급 등록 -->
+	<insert id="insertRegistManage" >
+		insert into RegistManage (
+			registNum, schoolAdminId, memberId, memberGrade
+		)values(
+			REGISTMANAGE_SEQ.NEXTVAL ,#{schoolAdminId},#{memberId},#{memberGrade}
+		)
+	</insert>
+	
+	<!-- 사용자 iD 등록 -->
+	<insert id="insertMemberId">
+		INSERT INTO member(
+			memberId , memberName , memberBirthday , memberTel
+			, memberEmail , memberNote , memberPassword , memberAddress , schoolId
+		)VALUES(
+			#{memberId} , null , null , null
+			, null ,null , '1234' , null , #{schoolId}
+		)
+	</insert>
+
+	<insert id="insertStudentIdManage" >
+		INSERT INTO student(
+			memberId , studentCode , studentGrade , studentClass
+			, studentNum , studentGender , studentMajor , studentPicture
+		)VALUES(
+			#{memberId} , null ,  null  ,  null 
+			  ,  null  , null  , null  , null  
+		)
+	</insert>
+	
+	<!-- 아이디등록시 세션처리 -->
+	<select id="schoolRegistSchoolId" resultType="SchoolRegistVO">
+		SELECT * 
+		FROM schoolregist
+		WHERE schooladminid=#{id}
+	</select>
+	
+	
+	<!-- 사용자 ID목록  -->
+	<select id="userList" resultType="RegistManageVO">
+	SELECT *
+	FROM RegistManage
+	WHERE schooladminid=#{id}
+	</select>
+</mapper>

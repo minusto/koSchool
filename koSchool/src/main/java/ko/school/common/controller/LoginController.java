@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ko.school.common.domain.LoginCommand;
@@ -36,12 +37,14 @@ public class LoginController {
 				if(grade.equals("student")){
 					StudentVO studentVO=service.studentCheckService(memberVO.getMemberId());
 					if(studentVO!=null){
+						model.addAttribute("student", studentVO);
 						model.addAttribute("grade", "student");
 						return "/common/studentMain";
 					}
 				}else if(grade.equals("teacher")){
 					TeacherVO teacherVO=service.teacherCheckService(memberVO.getMemberId());
 					if(teacherVO!=null){
+						model.addAttribute("teacher", teacherVO);
 						model.addAttribute("grade", "teacher");
 						return "/common/teacherMain";
 					}

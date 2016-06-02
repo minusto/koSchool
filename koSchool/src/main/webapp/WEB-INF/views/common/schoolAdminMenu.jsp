@@ -112,10 +112,10 @@
 								<div id="dropdown-element" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul class="nav navbar-nav">
-											<li><a href="/insertSchoolForm">학교등록</a></li>
-											<li><a href="/schoolDetail">학교 정보 조회</a></li>
-											<li><a href="schoolAdminInsertUserIdForm.jsp">사용자 ID 등록</a></li>
-											<li><a href="userIdList.jsp">사용자 ID 목록</a></li>
+											<li><a href="/schoolmanage/insertSchoolForm">학교등록</a></li>
+											<li><a href="/schoolmanage/schoolDetail">학교 정보 조회</a></li>
+											<li><a href="/schoolmanage/schoolAdminInsertUserIdForm">사용자 ID 등록</a></li>
+											<li><a href="/schoolmanage/userIdList">사용자 ID 목록</a></li>
 										</ul>
 									</div>
 								</div></li> 
@@ -140,7 +140,7 @@
 								<div id="dropdown-form" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul class="nav navbar-nav">
-											<li><a href="/noticeBoardList">공지사항</a></li>
+											<li><a href="schoolAdminNoticeBoardList.jsp">공지사항</a></li>
 											<li><a href="scheduleList.jsp">학사일정</a></li>
 											<li><a href=schoolAdminClassBoardList.jsp>학급게시판</a></li>
 										</ul>

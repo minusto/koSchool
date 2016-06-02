@@ -105,8 +105,34 @@
 		AND r.schooladminid=#{id}
 	</select>
 
+<!-- 액터 : 학교관리자 ==> 교사리스트 ==> 상세보기 --> 
+	<select id="detailTeacher" resultType="TeacherDetailVO">
+	SELECT * FROM teacher t , member m
+	WHERE t.memberId = m.memberId
+	AND m.memberId = #{memberId}
+	</select>
+	
+<!-- 학교관리자==>교사  수정 -->
+	<update id="updateMember">
+		UPDATE member SET
+		memberName = #{memberName},
+		memberBirthday = #{memberBirthday},
+		<!-- memberAddress = #{memberAddress}, -->
+		memberTel = #{memberTel},
+		<!-- memberNote = #{memberNote}, -->
+		memberEmail = #{memberEmail}
+		WHERE memberId = #{memberId}
+	</update>
 
-
+	<!-- 학교관리자==>교사 수정 -->
+	<update id="updateTeacher">
+		UPDATE teacher SET
+		teacherClass = #{teacherClass},
+		<!-- teacherPicture = #{teacherPicture},
+		teacherPosition = #{teacherPosition}, -->
+		subjectId = #{subjectId}
+		WHERE memberId = #{memberId}
+	</update>
 
 
 </mapper>

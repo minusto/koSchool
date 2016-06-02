@@ -1,8 +1,8 @@
 package ko.school.common.domain;
 
+import java.io.Serializable;
 
-
-public class RegistManageVO  {
+public class RegistManageVO implements Serializable{
 
 	private int registNum;
 	private String schoolAdminId;

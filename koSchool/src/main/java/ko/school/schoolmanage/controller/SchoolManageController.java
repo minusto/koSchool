@@ -24,6 +24,7 @@ import ko.school.common.domain.SchoolAdminVO;
 import ko.school.common.domain.TeacherVO;
 import ko.school.schoolmanage.domain.ImageUtil;
 import ko.school.schoolmanage.domain.SchoolAdminRegistVO;
+import ko.school.schoolmanage.domain.TeacherDetailVO;
 import ko.school.schoolmanage.service.SchoolManageService;
 
 @Controller
@@ -150,6 +151,29 @@ public class SchoolManageController {
 		
 	}
 	
-
+	//학교관리자 -> 교사 상세리스트
+	@RequestMapping(value = "/schoolmanage/teacherListDetail", method = RequestMethod.GET)
+	public void teacherListDetail(@RequestParam("memberId") String memberId , Model model)throws Exception{
+		model.addAttribute("teacher",service.detailTeacher(memberId));
+		
+	}
+	
+	
+	//학교 관리자 -> 교사 수정 GET
+	@RequestMapping(value = "/schoolmanage/teacherUpdate", method = RequestMethod.GET)
+	public void teacherUpdate(MemberVO memberVO, Model model)throws Exception{
+		TeacherDetailVO teacherDetailVO = service.detailTeacher(memberVO.getMemberId());
+		model.addAttribute("teacherDetailVO", teacherDetailVO);
+		
+	}
+	//학교관리자 -> 교사 수정 POST
+	@RequestMapping(value = "/schoolmanage/teacherUpdate", method = RequestMethod.POST)
+	public String teacherUpdate(MemberVO member , TeacherVO teacherVO , Model model)throws Exception{
+		service.updateMember(member);
+		service.updateTeacher(teacherVO);
+		String memberId = teacherVO.getMemberId();
+		model.addAttribute("member", member);
+		return "redirect:/schoolmanage/teacherListDetail?memberId=" + memberId;
+	}
 
 }

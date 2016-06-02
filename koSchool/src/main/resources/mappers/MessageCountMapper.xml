@@ -10,7 +10,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT count(*) FROM message WHERE receivermemberid = #{memberId}
 	</select>
 	
+	<!-- 미확인 상태인 메시지의 갯수를 리턴하는 쿼리문 / 작성자 박종현 -->
 	<select id="notReadMessage" resultType="Integer">
 		SELECT count(*) FROM message WHERE messagereadcheck = '미확인' AND receivermemberid = #{memberId}
+	</select>
+	
+	<!-- 메시지를 발송하는 쿼리문 / 작성자 박종현 -->
+	<insert id="sendMessage">
+		INSERT INTO message(messageNum, sendermemberid, receivermemberid, messagecontent, messagereadcheck, messagereceivedate)
+		VALUES(message_seq.nextval, #{senderMemberId}, #{receiverMemberId}, #{messageContent}, '미확인', SYSDATE )
+	</insert>
+	
+	<!-- 발신메시지를 출력하는 쿼리문 / 작성자 박종현 -->
+	<select id="listSendMessage" resultType="messageVO">
+		SELECT * FROM message WHERE sendermemberid = #{memberId} ORDER BY messageNum DESC
+	</select>
+	
+	<!-- 수신메시지를 출력하는 쿼리문 / 작성자 박종현 -->
+	<select id="listReceiveMessage" resultType="messageVO">
+		SELECT * FROM message WHERE receivermemberid = #{memberId} ORDER BY messageNum DESC
 	</select>
 </mapper>
