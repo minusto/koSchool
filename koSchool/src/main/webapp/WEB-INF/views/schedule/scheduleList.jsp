@@ -158,7 +158,7 @@ body {
 
           
 	<script src='/resources/full/moment.min.js'></script>
-	<!-- <script src="/resources/lib/js/jquery.min.js"></script> -->
+	<script src="/resources/lib/js/jquery.min.js"></script>
 	<script src="/resources/full/fullcalendar.min.js"></script>
 	
 </body>
