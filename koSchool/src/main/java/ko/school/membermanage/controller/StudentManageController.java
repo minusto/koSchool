@@ -42,6 +42,7 @@ public class StudentManageController {
 	public String insertStudent(MemberVO member, StudentVO student)throws Exception{
 		service.updateMember(member);
 		service.updateStudent(student);
+		
 		return "/membermanage/teacher/teacherInsertStudentForm";
 	}
 	//학생 조회
