@@ -63,12 +63,12 @@
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="teacherInsertScoreForm.jsp">
+																			<a href="teacherInsertScoreForm">
 																			<h3>내신 성적 입력</h3>
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="teacherInsertMockScoreForm.jsp">
+																			<a href="teacherInsertMockScoreForm">
 																			<h3>모의고사 성적 입력</h3>
 																			</a>
 																		</div>

@@ -71,7 +71,7 @@
 										<div class="col-sm-7"></div>
 									</div>
 									<div class="col-md-1">
-										<input type="text" name="semester">
+										<input type="hidden" name="semester">
 										<input type="hidden" name="memberId">
 										<input type="submit" class="btn btn-default" value="완료">
 									</div>
