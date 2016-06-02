@@ -186,7 +186,7 @@
 					<div id="dropdown-element" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="studentListScore.jsp">내신성적조회</a></li>
+								<li><a href="studentListScore2">내신성적조회</a></li>
 								<li><a href="studentListMockTestScore.jsp?studentId=${id}">모의고사성적조회</a></li>
 
 							</ul>

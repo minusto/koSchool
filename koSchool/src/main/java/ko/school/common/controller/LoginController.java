@@ -30,7 +30,7 @@ public class LoginController {
 	@RequestMapping(value="/",method=RequestMethod.POST)
 	public String memberCheck(LoginCommand loginCommand,Model model	,RedirectAttributes redirect)throws Exception{
 		String grade=loginCommand.getGrade();
-		if(grade.equals("student")||grade.equals("teacher")){
+		if(grade.equals("student")||grade.equals("teacher")||grade.equals("parent")){
 			MemberVO memberVO=service.memberCheckService(loginCommand);
 			if(memberVO!=null){
 				model.addAttribute("member", memberVO);
@@ -48,26 +48,18 @@ public class LoginController {
 						model.addAttribute("grade", "teacher");
 						return "/common/teacherMain";
 					}
+				}else if(grade.equals("parent")){
+					ParentVO parentVO=service.parentCheckService(memberVO.getMemberId());
+					if(parentVO!=null){
+						model.addAttribute("grade", "parent");
+						model.addAttribute("parent", parentVO);
+						return "/common/parentMain";
+					}
 				}
-				
-				
-				
-				
-			}
-			redirect.addFlashAttribute("result", "fail");
-			return "redirect:/";
-			
-		}else if(grade.equals("parent")){
-			ParentVO parentVO=service.parentCheckService(loginCommand);
-			if(parentVO!=null){
-				model.addAttribute("grade", "parent");
-				model.addAttribute("parent", parentVO);
-				return "/common/parentMain";
 			}
 			redirect.addFlashAttribute("result", "fail");
 			return "redirect:/";
 		}
-		
 		else if(grade.equals("schoolAdmin")){
 			SchoolAdminVO schoolAdminVO=service.schoolAdminCheckService(loginCommand);
 			if(schoolAdminVO!=null){

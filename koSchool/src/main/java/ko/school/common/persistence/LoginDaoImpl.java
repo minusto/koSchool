@@ -28,8 +28,8 @@ public class LoginDaoImpl implements LoginDao{
 	}
 	//액터 ==> 학부모  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
 	@Override
-	public ParentVO parentCheck(LoginCommand loginCommand) {
-		return session.selectOne(namespace+".parentCheck", loginCommand);
+	public ParentVO parentCheck(String memberId) {
+		return session.selectOne(namespace+".parentCheck", memberId);
 	}
 	//액터 ==> 학교관리자  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승
 	@Override
