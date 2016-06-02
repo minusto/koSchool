@@ -7,11 +7,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-td {
-	white-space: nowrap;
+
+#receiveMessageTable, #sendMessageTable {	
 	overflow: hidden;
-	text-overflow: ellipsis;
-}
+	text-overflow: ellipsis;	
+	white-space: nowrap;
+	table-layout: fixed;
+}	
+.contentTd {
+	overflow: hidden;
+	text-overflow: ellipsis;	
+	white-space: nowrap;
+	} 
+
 </style>
 
 <script type="text/javascript">
@@ -19,42 +27,50 @@ td {
 		listSendMessage();
 		listReceiveMessage();
 		
-		//모든 발신메세지 가져오는 ajax 함수
+		setInterval(function() {
+			listSendMessage();
+			listReceiveMessage()
+		}, 3000);
+		
+		//모든 발신메세지 가져오는 ajax 함수 / 작성자 박종현
 		function listSendMessage() {
 			$.ajax({
 				url : "listSendMessage",
 				dataType : 'json',
 				success : function(data) {
+					$('#sendMessageTbody').html("");
 					$.each(data, function(index, sendMessage){
-						$('#sendMessageTbody').append('<tr>');
-						$('#sendMessageTbody').append('<td>' + sendMessage.receiverMemberId + '</td>');
-						$('#sendMessageTbody').append('<td>' + sendMessage.messageContent + '</td>');						
+						$('#sendMessageTbody').append('<tr class="contentTd">');
+						$('#sendMessageTbody').append('<td>' + sendMessage.receiverMemberId + '</td>');			
+						$('#sendMessageTbody').append('<td class="contentTd"><a id="sendMessageRead" data-target="#sendMessageDetail"  class="contentTd" data-toggle="modal" name="' + sendMessage.messageNum+'">' + sendMessage.messageContent + '</a></td>');	
 						$('#sendMessageTbody').append('<td>' +(sendMessage.messageReceiveDate).substr(0,16) + '</td>');
 						$('#sendMessageTbody').append('<td>' + sendMessage.messageReadCheck + '</td>');
 						$('#sendMessageTbody').append('</tr>');
 					});
 				}
 			});
-		}//ajax 끝
+		}//ajax 함수 끝		
 		
-		//모든 수신메세지 가져오는 ajax 함수
+		//모든 수신메세지 가져오는 ajax 함수 / 작성자 박종현
 		function listReceiveMessage() {
 			$.ajax({
 				url : "listReceiveMessage",
 				dataType : 'json',
 				success : function(data) {
+					$('#receiveMessageTbody').html("");
 					$.each(data, function(index, sendMessage){
-						$('#receiveMessageTbody').append('<tr>');
+						$('#receiveMessageTbody').append('<tr class="contentTd">');
 						$('#receiveMessageTbody').append('<td>' + sendMessage.senderMemberId + '</td>');
-						$('#receiveMessageTbody').append('<td>' + sendMessage.messageContent + '</td>');
+						$('#receiveMessageTbody').append('<td class="contentTd"><a id="receiveMessageRead" data-target="#receiveMessageDetail" class="contentTd" data-toggle="modal" name="' + sendMessage.messageNum+'">' + sendMessage.messageContent + '</a></td>');
 						$('#receiveMessageTbody').append('<td>' + (sendMessage.messageReceiveDate).substr(0,16) + '</td>');
 						$('#receiveMessageTbody').append('<td>' + sendMessage.messageReadCheck + '</td>');
 						$('#receiveMessageTbody').append('</tr>');
 					});
 				}
-			});//ajax 끝
-		}
+			});
+		}//ajax 함수 끝	
 		
+		//메시지 발송버튼 클릭이벤트 / 작성자 박종현
 		$('#messageSend').on('click',function(){
 			var receiverMemberId = $('#receiverMemberId').val();
 			var messageContent = $('#messageContent').val();
@@ -78,9 +94,35 @@ td {
 					$('#receiverMemberId').val('');
 					$('#messageContent').val('');
 				}
-			});
-			
+			});			
 		});//발송 click이벤트 end
+		
+		//보낸 메시지 내용 클릭시 이벤트 -> 디테일보기 / 작성자 박종현
+		$(document).on('click','#sendMessageRead', function(){
+			$('#sendMessageDetailTbody').html("");
+			$.ajax({
+				url : "sendMessageRead?messageNum=" + $(this).attr("name") ,
+				dataType : 'json',
+				success : function(data) {
+						$('#sendMessageDetailTbody').append('<tr><td>받는 사람</td><td>시간</td><td>확인여부</td></tr><tr><td>' + data.receiverMemberId + '</td><td>' + (data.messageReceiveDate).substr(0,16) +'</td><td>'
+								+ data.messageReadCheck+'</td></tr><tr><td colspan="3">쪽지내용</td></tr><tr><td colspan="3">' + data.messageContent +'<td></tr>');
+				}
+			});//ajax end
+		}); //보낸 메시지 내용클릭 이벤트 end
+		
+		//받은 메시지 내용 클릭시 이벤트 -> 디테일보기(확인여부 변경 포함) / 작성자 박종현
+		$(document).on('click','#receiveMessageRead', function(){
+			$('#receiveMessageDetailTbody').html("");
+			$.ajax({
+				url : "receiveMessageRead?messageNum=" + $(this).attr("name") ,
+				dataType : 'json',
+				success : function(data) {			
+						$('#receiveMessageDetailTbody').append('<tr><td>보낸 사람</td><td>시간</td><td>확인여부</td></tr><tr><td>' + data.senderMemberId + '</td><td>' + (data.messageReceiveDate).substr(0,16) +'</td><td>'
+								+ data.messageReadCheck+'</td></tr><tr><td colspan="3">쪽지내용</td></tr><tr><td colspan="3">' + data.messageContent +'<td></tr>');
+				}
+			});//ajax end
+		}); //받은 메시지 내용클릭 이벤트 end
+		
 		
 	})
 </script>
@@ -113,10 +155,10 @@ td {
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab1">
 						<div id="receiveMessageDiv">
-								<table class="table table-striped" >
+								<table id="receiveMessageTable" class="table table-striped">
 									<tr>
 										<td>받는 사람</td>
-										<td>내용</td>
+										<td>내용</td> 
 										<td>시간</td>
 										<td>확인여부</td>
 									</tr>								
@@ -127,9 +169,9 @@ td {
 						
 						<div class="tab-pane" id="tab2">
 							<div id="sendMessageDiv">
-								<table class="table table-striped">
+								<table id="sendMessageTable" class="table table-striped">
 									<tr>
-										<td>받는 사람</td>
+										<td>보낸 사람</td>
 										<td>내용</td>
 										<td>시간</td>
 										<td>확인여부</td>
@@ -142,8 +184,7 @@ td {
 							<div class="col-md-8 col-md-offset-2" style="text-align: left">
 								<label>받는 사람</label></li>
 								<input type="text" id="receiverMemberId" name="receiverMemberId"
-										placeholder="아이디" class="form-control">								
-								
+										placeholder="아이디" class="form-control">
 								<label>내 용</label>
 								<textarea rows="8" cols="5" id="messageContent" name="messageContent" class="form-control" placeholder="메세지"></textarea>
 								<br>						
@@ -159,6 +200,50 @@ td {
 			<!-- modal-body end -->
 		</div>
 		<!-- modal-content end -->
+	</div>
+</div>
+
+<!-- 보낸쪽지 디테일보기 Modal -->
+<div id="sendMessageDetail" class="modal fade modal-success"
+	aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+	tabindex="-1" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" aria-label="Close" data-dismiss="modal"
+					type="button">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 id="myModalLabel" class="modal-title">쪽지 세부보기</h4>
+			</div><!--  model head end -->
+			<div class="modal-body">
+				<table class="table table-striped" id="sendMessageDetailTbody"> 
+					
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 받은쪽지 디테일보기 Modal -->
+<div id="receiveMessageDetail" class="modal fade modal-success"
+	aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+	tabindex="-1" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" aria-label="Close" data-dismiss="modal"
+					type="button">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 id="myModalLabel" class="modal-title">쪽지 세부보기</h4>
+			</div><!--  model head end -->
+			<div class="modal-body">
+				<table class="table table-striped" id="receiveMessageDetailTbody"> 
+					
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 

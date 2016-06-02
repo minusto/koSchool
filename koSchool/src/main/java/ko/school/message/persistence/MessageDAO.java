@@ -17,4 +17,7 @@ public interface MessageDAO {
 	
 	public List<MessageVO> listSendMessage(String memberId);
 	public List<MessageVO> listReceiveMessage(String memberId);
+	public MessageVO sendMessageRead(int messageNum);
+	public void changeReadCheck(int messageNum);
+	
 }
