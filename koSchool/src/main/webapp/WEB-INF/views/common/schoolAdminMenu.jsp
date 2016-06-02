@@ -141,7 +141,7 @@
 									<div class="panel-body">
 										<ul class="nav navbar-nav">
 											<li><a href="/noticeBoardList">공지사항</a></li>
-											<li><a href="scheduleList.jsp">학사일정</a></li>
+											<li><a href="/scheduleList">학사일정</a></li>
 											<li><a href=schoolAdminClassBoardList.jsp>학급게시판</a></li>
 										</ul>
 									</div>

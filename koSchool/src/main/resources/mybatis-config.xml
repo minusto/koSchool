@@ -13,6 +13,7 @@
 		<package name="ko.school.schoolmanage.domain" />
 		<package name="ko.school.score.domain" />
 		<package name="ko.school.simulation.domain" />
+		<package name="ko.school.schedule.domain"/>
 	</typeAliases>
 
 

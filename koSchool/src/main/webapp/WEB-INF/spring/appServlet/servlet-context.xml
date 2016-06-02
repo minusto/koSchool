@@ -78,4 +78,9 @@
 	<context:component-scan base-package="ko.school.simulation.persistence"/>
 	<context:component-scan base-package="ko.school.simulation.service"/>
 	
+	<context:component-scan base-package="ko.school.schedule.controller"/>
+	<context:component-scan base-package="ko.school.schedule.persistence"/>
+	<context:component-scan base-package="ko.school.schedule.service"/>
+	
+	
 </beans:beans>

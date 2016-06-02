@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ko.school.common.domain.MemberVO;
+import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
 import ko.school.common.domain.TeacherVO;
 
@@ -23,15 +24,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String grade = (String) modelMap.get("grade");
 		if (grade != null) {
 			session.setAttribute("grade", grade);
-			if (grade.equals("student") || grade.equals("teacher")) {
+			if (grade.equals("student") || grade.equals("teacher")||grade.equals("parent")) {
 				session.setAttribute("member", (Object) modelMap.get("member"));
 				   if((TeacherVO)modelMap.get("teacher")!=null){
 		               session.setAttribute("teacher", (TeacherVO)modelMap.get("teacher"));
 		            }else if((StudentVO)modelMap.get("student")!=null){
 		               session.setAttribute("student", (StudentVO)modelMap.get("student"));
-		            }
-			} else if (grade.equals("parent")) {
-				session.setAttribute("parent", (Object) modelMap.get("parent"));
+		            } else if (grade.equals("parent")) {
+						session.setAttribute("parent", (ParentVO) modelMap.get("parent"));
+					}
 			} else if (grade.equals("schoolAdmin")) {
 				session.setAttribute("schoolAdmin", (Object) modelMap.get("schoolAdmin"));
 			} else if (grade.equals("systemAdmin")) {

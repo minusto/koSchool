@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="ko.school.mapper.ScheduleMapper">
+
+	<insert id="insertSchedule">
+		INSERT INTO schedule(
+			scheduleTitle,scheduleStartDate,scheduleEndDate ,scheduleId,scheduleDetail,schoolAdminId
+		)VALUES(
+			#{scheduleTitle},#{scheduleStartDate},#{scheduleEndDate},#{scheduleId},'미입력',#{schoolAdminId}
+		)
+	</insert>
+
+	<select id="getSchedule" resultType="ScheduleVO">
+		<!-- SELECT scheduleid,scheduletitle,TO_CHAR(schedulestartdate,'yyyy-mm-dd'),TO_CHAR(scheduleenddate,'yyyy-mm-dd'),scheduledetail,schooladminid
+		FROM schedule
+		WHERE schooladminid=#{schoolAdminId} -->
+		SELECT scheduleid,scheduletitle,TO_CHAR(schedulestartdate,'yyyy-mm-dd') AS schedulestartdate,TO_CHAR(scheduleenddate,'yyyy-mm-dd') AS scheduleenddate,scheduledetail,schooladminid
+		FROM schedule
+		WHERE schooladminid=#{schoolAdminId}
+	</select>
+	
+	<update id="updateSchedule">
+		UPDATE schedule SET scheduleStartDate=#{scheduleStartDate},scheduleEndDate=#{scheduleEndDate} WHERE  scheduleId=#{scheduleId}
+	</update>
+	
+	<update id="detailScheduleUpdate">
+		UPDATE schedule SET scheduleDetail=#{scheduleDetail},scheduleStartDate=#{scheduleStartDate},scheduleEndDate=#{scheduleEndDate} WHERE  scheduleId=#{scheduleId}
+	</update>
+	
+	<delete id="deleteSchedule">
+		DELETE schedule WHERE scheduleTitle=#{scheduleTitle} AND scheduleId=#{scheduleId}
+	</delete>
+	
+	<select id="getSchoolAdminId" resultType="String">
+		SELECT schooladminid
+		FROM registmanage
+		WHERE memberid=#{memberId}
+	</select>
+	
+
+</mapper>

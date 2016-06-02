@@ -213,7 +213,7 @@
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="scheduleList.jsp">
+																			<a href="/scheduleList">
 																			<h3>일정</h3>
 																			</a>
 																		</div>

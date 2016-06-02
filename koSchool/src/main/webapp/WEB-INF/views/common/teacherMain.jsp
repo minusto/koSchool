@@ -217,7 +217,7 @@
 																			</a>
 																		</div>
 																		<div class="col-sm-4 col-xs-12" style="text-align:center;">
-																			<a href="scheduleList.jsp">
+																			<a href="/scheduleList">
 																			<h3>일정</h3>
 																			</a>
 																		</div>
