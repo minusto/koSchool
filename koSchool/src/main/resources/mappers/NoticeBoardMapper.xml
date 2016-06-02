@@ -36,7 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 액터 ==> 학교관리자 / 작업 내용 : 공지사항 수정 / 작성자 : 구혜인 -->
 	<update id="updateNoticBoard">
-		UPDATE noticeBoard SET noticeBoardTitle = #{noticeBoardTitle}, noticeBoardContent = #{noticeBoardContent} 
+		UPDATE noticeBoard 
+		SET noticeBoardTitle = #{noticeBoardTitle}, noticeBoardContent = #{noticeBoardContent}, noticeBoardFileName = #{noticeBoardFileName}
 		WHERE noticeBoardNum = #{noticeBoardNum}
 	</update>
 	

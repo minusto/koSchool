@@ -35,7 +35,6 @@ import ko.school.common.domain.SchoolAdminVO;
 import ko.school.common.domain.StudentVO;
 
 @Controller
-//@RequestMapping("/board/*")
 public class NoticeBoardController {
 	
 	@Inject
@@ -120,8 +119,31 @@ public class NoticeBoardController {
 	
 	//액터 ==> 학교관리자 / 작업 내용 : 공지사항 수정 / 작성자 : 구혜인
 	@RequestMapping(value="/updateNoticeBoardForm", method=RequestMethod.POST)
-	public String updateNoticBoardForm(NoticeBoardVO noticeBoardVo) throws Exception {
+	public String updateNoticBoardForm(NoticeBoardVO noticeBoardVo, HttpServletRequest request) throws Exception {
+		String preFileName = null;
+		preFileName = noticeBoardVo.getNoticeBoardFileName();
+		
+		MultipartFile file = noticeBoardVo.getFile();
+		if(!file.isEmpty()) {
+			String filename = file.getOriginalFilename();
+			File tempFile = new File(request.getRealPath("/upload"), file.getOriginalFilename());
+			if(tempFile.exists() && tempFile.isFile()) {
+				filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+				tempFile = new File(request.getRealPath("/upload"), filename);
+			}
+			file.transferTo(tempFile);
+			noticeBoardVo.setNoticeBoardFileName(filename);
+		}
+		
 		service.updateNoticBoardService(noticeBoardVo);
+		
+		if(preFileName != null) {
+			File file2 = new File(request.getRealPath("/upload") + "/" + preFileName);
+			if(file2.exists()) {
+				file2.delete();
+			}
+		}
+		
 		hitcountFlag = false;
 		return "redirect:/noticeBoardDetail?noticeBoardNum=" + noticeBoardVo.getNoticeBoardNum();
 	}
@@ -131,10 +153,13 @@ public class NoticeBoardController {
 	public String deleteNoticeBoard(@RequestParam("noticeBoardNum") int noticeBoardNum, HttpServletRequest request) throws Exception {
 		String fileName = null;
 		NoticeBoardVO noticeBoardVo = service.noticeBoardDetailService(noticeBoardNum);
-		service.deleteNoticeBoardService(noticeBoardNum);
 		if(noticeBoardVo.getNoticeBoardFileName() != null) {
-			new File(request.getRealPath("/upload") + noticeBoardVo.getNoticeBoardFileName()).delete();			
+			File file = new File(request.getRealPath("/upload") + "/" + noticeBoardVo.getNoticeBoardFileName());
+			if(file.exists()) {
+				file.delete();
+			}
 		}
+		service.deleteNoticeBoardService(noticeBoardNum);
 		return "redirect:/noticeBoardList";
 	}
 
