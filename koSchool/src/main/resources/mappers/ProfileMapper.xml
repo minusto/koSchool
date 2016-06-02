@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.ProfileMapper">
+	
+<!-- 교사사진 이름 추출 -->
+ 	<select id="getTeacherPic" resultType="String">
+	select teacherPicture
+	from teacher
+	where memberId=#{memberId}
+	</select>
+	
+	<update id="updateMemberTeacher" >
+	UPDATE member
+	SET
+	memberName =#{memberName},
+	memberBirthday=#{memberBirthday},
+	memberTel=#{memberTel},
+	memberAddress = #{memberAddress},
+	memberEmail  =#{memberEmail}
+	
+	WHERE memberId=#{memberId}
+	
+	</update>
+	
+	<update id="updateTeacher" >
+		UPDATE teacher
+		SET
+		teacherClass =#{teacherClass},
+		teacherPicture=#{teacherPicture},
+		teacherPosition=#{teacherPosition}, 
+		subjectId=#{subjectId}
+		WHERE memberId=#{memberId}
+	</update>
+
+	
+</mapper>
+
+
+
+
+
+
+

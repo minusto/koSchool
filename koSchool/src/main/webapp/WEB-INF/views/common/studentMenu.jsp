@@ -133,7 +133,8 @@
 							<h4 class="username">${member.memberName }${parent.parentName }</h4>
 							<p>${member.memberEmail }${parent.familyRelation }</p>
 							<div class="btn-group margin-bottom-2x" role="group">
-								<button type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default"
+								onclick="location.href='/studentProfile'">
 									<i class="fa fa-user"></i> Profile
 								</button>
 								<button type="button" class="btn btn-default"

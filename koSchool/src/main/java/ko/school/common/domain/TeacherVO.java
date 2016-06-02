@@ -1,17 +1,17 @@
 package ko.school.common.domain;
 
-
+import java.io.Serializable;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class TeacherVO {
+public class TeacherVO implements Serializable {
 
 	private String memberId;
 	private int teacherClass;
 	private String teacherPicture;
 	private String teacherPosition;
 	private String subjectId;
-	private MultipartFile file; 
+	private MultipartFile file;
 	
 
 	public MultipartFile getFile() {

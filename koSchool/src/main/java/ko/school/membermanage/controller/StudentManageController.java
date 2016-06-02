@@ -1,5 +1,6 @@
 package ko.school.membermanage.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
@@ -20,6 +22,7 @@ import ko.school.membermanage.domain.ParentNullList;
 import ko.school.membermanage.domain.StudentDetail;
 import ko.school.membermanage.domain.StudentList;
 import ko.school.membermanage.service.StudentManageService;
+import ko.school.schoolmanage.domain.ImageUtil;
 
 @Controller
 public class StudentManageController {
@@ -29,7 +32,6 @@ public class StudentManageController {
 	//학생 정보 입력 폼
 	@RequestMapping(value="/teacherInsertStudentForm",  method= RequestMethod.GET)
 	public String teacherInsertStudentForm(Model model, HttpSession session)throws Exception{
-		System.out.println("enter.....");
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String id = member.getSchoolId();
 		List<MemberVO> list=  service.sameSchoolStudentNullList(id);
@@ -38,12 +40,49 @@ public class StudentManageController {
 		return "/membermanage/teacher/teacherInsertStudentForm";
 	}
 	//학생 정보 입력
-	@RequestMapping(value="/insertStudent", method=RequestMethod.POST)
-	public String insertStudent(MemberVO member, StudentVO student)throws Exception{
+	@RequestMapping(value="/teacherInsertStudentForm", method=RequestMethod.POST)
+	public String insertStudent(MemberVO member, StudentVO student,HttpServletRequest request)throws Exception{
+		
+		MultipartFile file = student.getFile();// 파일 받음
+		if(!file.isEmpty()){		// 파일 존재 할 경우
+
+			String filename = file.getOriginalFilename();		//업로드 파일 이름 받음
+
+			File tempfile =new File(request.getRealPath("/upload"), file.getOriginalFilename());	//파일 생성후 
+
+			if(tempfile.exists() && tempfile.isFile()){	// 이미 존재하는 파일일경우 현재시간을 가져와서 리네임
+
+				filename =System.currentTimeMillis()  +"_"+ file.getOriginalFilename() ;
+
+				tempfile = new File(request.getRealPath("/upload"),filename);	//리네임된 파일이름으로 재생성
+
+			}
+
+			file.transferTo(tempfile);	// 업로드 디렉토리로 파일 이동
+			
+			//이미지 리사이즈
+			String imgePath = request.getRealPath("/upload")+"\\"+filename;
+			File src  = new File(imgePath);
+		    String headName = filename.substring(0, filename.lastIndexOf("."));
+			String pattern =filename.substring(filename.lastIndexOf(".")+1);
+			String reImagePath = request.getRealPath("/upload")+"\\"+headName+"_resize."+pattern;
+			File dest = new File(reImagePath);
+			
+			ImageUtil.resize(src, dest, 100, ImageUtil.RATIO);
+
+
+			student.setStudentPicture(filename);	// 업로드된 파일이름 등록
+
+		}
+		
 		service.updateMember(member);
 		service.updateStudent(student);
+		
+		
 		return "/membermanage/teacher/teacherInsertStudentForm";
 	}
+	
+	
 	//학생 조회
 	@RequestMapping(value="/teacherListStudent", method=RequestMethod.GET)
 	public String teacherListStudent(Model model,HttpSession session)throws Exception{
@@ -65,15 +104,51 @@ public class StudentManageController {
 	}
 	//학생 정보 수정
 	@RequestMapping(value="/correctionStudent", method=RequestMethod.POST)
-	public String correctionStudent(MemberVO member, StudentVO student, Model model)throws Exception{
-		System.out.println(member.toString());
-		System.out.println(student.toString());
-		service.updateMember(member);
-		service.updateStudent(student);
-		String m_id = student.getMemberId();
-		model.addAttribute("m_id", m_id);
-		return "redirect:teacherListStudentDetail";
+	public String correctionStudent(MemberVO member, StudentVO student, Model model,HttpServletRequest request)throws Exception{
+			
+			MultipartFile file = student.getFile();// 파일 받음
+			
+			if(!file.isEmpty()){		// 파일 존재 할 경우
+
+			String filename = file.getOriginalFilename();		//업로드 파일 이름 받음
+
+			File tempfile =new File(request.getRealPath("/upload"), file.getOriginalFilename());	//파일 생성후 
+
+			if(tempfile.exists() && tempfile.isFile()){	// 이미 존재하는 파일일경우 현재시간을 가져와서 리네임
+
+				filename =System.currentTimeMillis()  +"_"+ file.getOriginalFilename() ;
+
+				tempfile = new File(request.getRealPath("/upload"),filename);	//리네임된 파일이름으로 재생성
+
+			}
+
+				file.transferTo(tempfile);	// 업로드 디렉토리로 파일 이동
+			
+				//이미지 리사이즈
+				String imgePath = request.getRealPath("/upload")+"\\"+filename;
+				File src  = new File(imgePath);
+			    String headName = filename.substring(0, filename.lastIndexOf("."));
+				String pattern =filename.substring(filename.lastIndexOf(".")+1);
+				String reImagePath = request.getRealPath("/upload")+"\\"+headName+"_resize."+pattern;
+				File dest = new File(reImagePath);
+			
+				ImageUtil.resize(src, dest, 100, ImageUtil.RATIO);
+
+
+				student.setStudentPicture(filename);	// 업로드된 파일이름 등록
+
+		}else{ //파일 수정 안할경우 
+					student.setStudentPicture(service.getStudentPic(member));
+		}
+			
+			service.updateMember(member);
+			service.updateStudent(student);
+			String m_id = student.getMemberId();
+			model.addAttribute("m_id", m_id);
+			return "redirect:teacherListStudentDetail";
 	}
+	
+	
 	//학생 정보 삭제
 	@RequestMapping(value="/deleteStudent", method=RequestMethod.GET)
 	public String deleteStudent(@RequestParam String m_id)throws Exception{

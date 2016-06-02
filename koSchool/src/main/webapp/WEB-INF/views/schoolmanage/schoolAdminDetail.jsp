@@ -47,8 +47,8 @@
 														pattern="yyyy-MM-dd" />
 												</div>
 									
-													<a href="/schoolmanage/schoolAdminUpdate?id=${schoolAdminDetailVO.schoolAdminId }"><button class="btn btn-primary">수정</button></a>
-													<button  class="btn btn-default" onclick="location.href='/schoolmanage/schoolAdminList'">목록보기 </button>
+													<a href="/schoolAdminUpdate?id=${schoolAdminDetailVO.schoolAdminId }"><button class="btn btn-primary">수정</button></a>
+													<button  class="btn btn-default" onclick="location.href='/schoolAdminList'">목록보기 </button>
 											</div>
 										</div>
 									</div>

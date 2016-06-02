@@ -102,8 +102,8 @@
 											<td width="150">${teacher.subjectId}</td>
 										</tr>
 									</table>
-									<a href="/schoolmanage/teacherUpdate?memberId=${teacher.memberId}" class="pull-right" ><button type="button" class="btn btn-primary">정보수정</button></a>
-									<a href="/schoolmanage/teacherDelete?memberId=${teacher.memberId}" class="pull-right" ><button type="button" class="btn btn-primary">삭제</button></a>
+									<a href="/teacherUpdate?memberId=${teacher.memberId}" class="pull-right" ><button type="button" class="btn btn-primary">정보수정</button></a>
+									<a href="/teacherDelete?memberId=${teacher.memberId}" class="pull-right" ><button type="button" class="btn btn-primary">삭제</button></a>
 								</div>
 							</div>
 						</div>

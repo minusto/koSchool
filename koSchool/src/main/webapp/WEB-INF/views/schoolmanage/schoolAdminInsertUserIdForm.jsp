@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form class="form-horizontal" action="/schoolmanage/schoolAdminInsertUserIdForm" method="post">
+                                    <form class="form-horizontal" action="/schoolAdminInsertUserIdForm" method="post">
                                     <input type="hidden" name="schoolAdminId" value="${Id}"> <!-- 세션값으로 넣어야하나? -->
                                         <div class="form-group">
                                             <label  class="col-sm-2 control-label">사용자 ID</label>

@@ -38,64 +38,67 @@ public class SchoolManageController {
 	
 	
 	//시스템 관리자->학교관리자 등록폼 겟
-	@RequestMapping(value = "/schoolmanage/systemInsertSchoolAdminForm", method = RequestMethod.GET)
-	public void schoolAdminRegist() {
+	@RequestMapping(value = "/systemInsertSchoolAdminForm", method = RequestMethod.GET)
+	public String schoolAdminRegist() {
 		logger.info("시스템 등록폼");
-	
+		return "/schoolmanage/systemInsertSchoolAdminForm";
 	}
 	
 	//시스템 관리자->학교관리자 등록폼 포스트
-	@RequestMapping(value = "/schoolmanage/systemInsertSchoolAdminForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/systemInsertSchoolAdminForm", method = RequestMethod.POST)
 	public String schoolAdminRegist(SchoolAdminVO sVo,SchoolAdminRegistVO srVo,RedirectAttributes rttr)throws Exception {
 
 		service.insertSchoolAdmin(sVo, srVo);
 		rttr.addFlashAttribute("msg", "SUCCESS");
-		return "redirect:/schoolmanage/schoolAdminList";
+		return "redirect:/schoolAdminList";
 	}
 	
 	//시스템관리자-> 학교관리자 리스트
-	@RequestMapping(value = "/schoolmanage/schoolAdminList", method = RequestMethod.GET)
-	public void schoolAdminList(Model model)throws Exception {
+	@RequestMapping(value = "/schoolAdminList", method = RequestMethod.GET)
+	public String schoolAdminList(Model model)throws Exception {
 		
 		model.addAttribute("list", service.schoolAdminList());
-		
+		return "/schoolmanage/schoolAdminList";
 	}
 	
 	//시스템관리자->학교관리자 상세보기
-	@RequestMapping(value="/schoolmanage/schoolAdminDetail",method=RequestMethod.GET)
-	public void read(@RequestParam("id") String id,Model model)throws Exception{
-		
+	@RequestMapping(value="/schoolAdminDetail",method=RequestMethod.GET)
+	public String read(@RequestParam("id") String id,Model model)throws Exception{
 		
 		model.addAttribute(service.schoolAdminDetail(id));
-		
+		return "/schoolmanage/schoolAdminDetail";
 	}
+	
 	//시스템 관리자-> 학교관리자 수정 겟
-	@RequestMapping(value = "/schoolmanage/schoolAdminUpdate", method = RequestMethod.GET)
-	public void schoolAdminUpdate(@RequestParam("id") String id,Model model)throws Exception {
+	@RequestMapping(value = "/schoolAdminUpdate", method = RequestMethod.GET)
+	public String schoolAdminUpdate(@RequestParam("id") String id,Model model)throws Exception {
 		model.addAttribute(service.schoolAdminDetail(id));
+		
+		return "/schoolmanage/schoolAdminUpdate";
 		
 	
 	}
 	//시스템관리자 ->학교관리자 수정 포스트
-	@RequestMapping(value = "/schoolmanage/schoolAdminUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/schoolAdminUpdate", method = RequestMethod.POST)
 	public String schoolAdminUpdate(SchoolAdminVO sVo,SchoolAdminRegistVO srVo)throws Exception {
 		
 		service.updateSchoolAdmin(sVo, srVo);
-		return "redirect:/schoolmanage/schoolAdminList";
+		return "redirect:/schoolAdminList";
 		
 	
 	}
 	//학교관리자-> 교사 등록 겟
-	@RequestMapping(value = "/schoolmanage/schoolAdminInsertTeacherForm", method = RequestMethod.GET)
-	public void teacherRegist(Model model)throws Exception {
+	@RequestMapping(value = "/schoolAdminInsertTeacherForm", method = RequestMethod.GET)
+	public String teacherRegist(Model model)throws Exception {
 		
 		model.addAttribute("list", service.schoolList());
 		model.addAttribute("list2", service.subjectList());
 		logger.info("교사 등록폼 겟");
+		return "/schoolmanage/schoolAdminInsertTeacherForm";
 	
 	}
 	//학교 관리자 ->교사 등록 포스트 
-	@RequestMapping(value = "/schoolmanage/schoolAdminInsertTeacherForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/schoolAdminInsertTeacherForm", method = RequestMethod.POST)
 	public String teacherRegist(RegistManageVO rVO,MemberVO mVO, TeacherVO tVO,HttpServletRequest request) throws Exception {
 		
 		
@@ -135,53 +138,54 @@ public class SchoolManageController {
 		
 
 	
-		return "redirect:/schoolmanage/schoolAdminTeacherList";
+		return "redirect:/schoolAdminTeacherList";
 		
 		
 	}
 	
 	
 	//학교관리자-> 교사 리스트
-	@RequestMapping(value = "/schoolmanage/schoolAdminTeacherList", method = RequestMethod.GET)
-	public void teacherList(Model model, HttpServletRequest request)throws Exception {
+	@RequestMapping(value = "/schoolAdminTeacherList", method = RequestMethod.GET)
+	public String teacherList(Model model, HttpServletRequest request)throws Exception {
 		HttpSession session = request.getSession();
 		SchoolAdminVO sVO = (SchoolAdminVO)session.getAttribute("schoolAdmin");
 		String id = sVO.getSchoolAdminId();
 		model.addAttribute("list", service.teacherList(id));
-		
+		return  "/schoolmanage/schoolAdminTeacherList";
 	}
 	
 	//학교관리자 -> 교사 상세리스트
-	@RequestMapping(value = "/schoolmanage/teacherListDetail", method = RequestMethod.GET)
-	public void teacherListDetail(@RequestParam("memberId") String memberId , Model model)throws Exception{
+	@RequestMapping(value = "/teacherListDetail", method = RequestMethod.GET)
+	public String teacherListDetail(@RequestParam("memberId") String memberId , Model model)throws Exception{
 		model.addAttribute("teacher",service.detailTeacher(memberId));
-		
+		return "/schoolmanage/teacherListDetail";
 	}
 	
 	
 	//학교 관리자 -> 교사 수정 GET
-	@RequestMapping(value = "/schoolmanage/teacherUpdate", method = RequestMethod.GET)
-	public void teacherUpdate(MemberVO memberVO, Model model)throws Exception{
+	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.GET)
+	public String teacherUpdate(MemberVO memberVO, Model model)throws Exception{
 		TeacherDetailVO teacherDetailVO = service.detailTeacher(memberVO.getMemberId());
 		model.addAttribute("teacherDetailVO", teacherDetailVO);
+		return  "/schoolmanage/teacherUpdate";
 		
 	}
 	//학교관리자 -> 교사 수정 POST
-	@RequestMapping(value = "/schoolmanage/teacherUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.POST)
 	public String teacherUpdate(MemberVO member , TeacherVO teacherVO , Model model)throws Exception{
 		service.updateMember(member);
 		service.updateTeacher(teacherVO);
 		String memberId = teacherVO.getMemberId();
 		model.addAttribute("member", member);
-		return "redirect:/schoolmanage/teacherListDetail?memberId=" + memberId;
+		return "redirect:/teacherListDetail?memberId=" + memberId;
 	}
 	
 	//학교관리자 -> 교사 삭제
-		@RequestMapping(value = "schoolmanage/teacherDelete" , method=RequestMethod.GET)
+		@RequestMapping(value = "/teacherDelete" , method=RequestMethod.GET)
 		public String deleteTeacher(@RequestParam("memberId") String memberId , Model model)throws Exception{
 			service.deleteTeacher1(memberId);
 			service.deleteTeacher2(memberId);
-			return "redirect:/schoolmanage/schoolAdminTeacherList";
+			return "redirect:/schoolAdminTeacherList";
 		}
 
 }

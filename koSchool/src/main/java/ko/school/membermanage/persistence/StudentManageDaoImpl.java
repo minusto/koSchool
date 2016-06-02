@@ -76,5 +76,13 @@ public class StudentManageDaoImpl implements StudentManageDao {
 		return session.selectList(namespace+".parentList");
 	}
 
+	@Override
+	public String getStudentPic(MemberVO member) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".getStudentPic",member);
+	}
+	
+	
+
 
 }

@@ -8,21 +8,7 @@
 <head>
     <title>빈칸</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
-    <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/select2.min.css">
-    <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/themes/flat-blue.css">
+    
     <!-- jQuery-->
     <script src="/resources/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -52,7 +38,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                            <div class="card-body">
-                                    <form class="form-horizontal" action="insertStudent" method="post">
+                                    <form class="form-horizontal"  method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-2 control-label">학생ID</label>
                                             <div class="col-sm-5">
@@ -99,81 +85,81 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">이름</label>
+                                            <label  class="col-sm-2 control-label">이름</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="memberName" placeholder="memberName">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">생년월일</label>
+                                            <label class="col-sm-2 control-label">생년월일</label>
                                             <div class="col-sm-5">
                                                 <input type="date" class="form-control" name="memberBirthday" placeholder="YYYY-MM-dd">
                                             </div>
                                         </div>
                                           <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">주소</label>
+                                            <label class="col-sm-2 control-label">주소</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="memberAddress" placeholder="memberAddress">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">전화번호</label>
+                                            <label class="col-sm-2 control-label">전화번호</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" name="memberTel" placeholder="Tel">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">이메일</label>
+                                            <label class="col-sm-2 control-label">이메일</label>
                                             <div class="col-sm-5">
                                                 <input type="email" class="form-control"  name="memberEmail" placeholder="aaa@bbb.com">
                                             </div>
                                         </div>
                                        
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">학번</label>
+                                            <label class="col-sm-2 control-label">학번</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" name="studentCode" placeholder="memberAddress">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">학년</label>
+                                            <label  class="col-sm-2 control-label">학년</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentGrade" placeholder="studentGrade">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">반</label>
+                                            <label  class="col-sm-2 control-label">반</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentClass" placeholder="studentClass">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">출석번호</label>
+                                            <label  class="col-sm-2 control-label">출석번호</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentNum" placeholder="studentNum">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">성별</label>
+                                            <label class="col-sm-2 control-label">성별</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentGender" placeholder="M/W">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">학과</label>
+                                            <label  class="col-sm-2 control-label">학과</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentMajor" placeholder="문과/이과">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">사진</label>
+                                            <label  class="col-sm-2 control-label">사진</label>
                                             <div class="col-sm-5">
-                                               <input type="file"  name="studentPicture">
+                                               <input type="file"  name="file">
                                             <p class="help-block">jpg 형식의 파일만 지원합니다.</p>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputPassword3" class="col-sm-2 control-label">비고</label>
+                                            <label  class="col-sm-2 control-label">비고</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" name="memberNote" value="없음">
                                             </div>
@@ -192,20 +178,7 @@
         </div>
     </div>
      
-            <!-- Javascript Libs -->
-            <script type="text/javascript" src="lib/js/jquery.min.js"></script>
-            <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="lib/js/Chart.min.js"></script>
-            <script type="text/javascript" src="lib/js/bootstrap-switch.min.js"></script>
-            <script type="text/javascript" src="lib/js/jquery.matchHeight-min.js"></script>
-            <script type="text/javascript" src="lib/js/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="lib/js/dataTables.bootstrap.min.js"></script>
-            <script type="text/javascript" src="lib/js/select2.full.min.js"></script>
-            <script type="text/javascript" src="lib/js/ace/ace.js"></script>
-            <script type="text/javascript" src="lib/js/ace/mode-html.js"></script>
-            <script type="text/javascript" src="lib/js/ace/theme-github.js"></script>
-            <script type="text/javascript" src="js/app.js"></script>
-            <script type="text/javascript" src="js/index.js"></script>
+           
 </body>
 
 </html>

@@ -82,9 +82,6 @@
 							<h4 class="username">${systemAdmin.systemAdminId }</h4>
 							<p>system@korea.com</p>
 							<div class="btn-group margin-bottom-2x" role="group">
-								<button type="button" class="btn btn-default">
-									<i class="fa fa-user"></i> 프로필
-								</button>
 								<button type="button" class="btn btn-default"
 									onclick="location.href='/logout'">
 									<i class="fa fa-sign-out"></i> 로그아웃
@@ -117,8 +114,8 @@
 					<div id="dropdown-element" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="/schoolmanage/systemInsertSchoolAdminForm">학교관리자 등록</a></li>
-								<li><a href="/schoolmanage/schoolAdminList">학교관리자 목록</a></li>
+								<li><a href="/systemInsertSchoolAdminForm">학교관리자 등록</a></li>
+								<li><a href="/schoolAdminList">학교관리자 목록</a></li>
 							</ul>
 						</div>
 					</div></li>

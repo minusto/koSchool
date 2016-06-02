@@ -122,7 +122,8 @@
 							<h4 class="username">${member.memberName }</h4>
 							<p>${member.memberEmail }</p>
 							<div class="btn-group margin-bottom-2x" role="group">
-								<button type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default"
+								onclick="location.href='/teacherProfile'">
 									<i class="fa fa-user"></i> Profile
 								</button>
 								<button type="button" class="btn btn-default"

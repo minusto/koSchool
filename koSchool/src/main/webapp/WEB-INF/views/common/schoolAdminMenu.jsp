@@ -97,7 +97,7 @@
 						<div class="navbar-header">
 							<a class="navbar-brand" href="#">
 								<div class="icon fa fa-book"></div>
-								<div class="title" onclick="location.href='schoolAdminMain.jsp'">학사관리</div>
+								<div class="title" onclick="location.href='/schoolAdminMain'">학사관리</div>
 							</a>
 							<button type="button"
 								class="navbar-expand-toggle pull-right visible-xs">
@@ -114,8 +114,8 @@
 										<ul class="nav navbar-nav">
 											<li><a href="/insertSchoolForm">학교등록</a></li>
 											<li><a href="/schoolDetail">학교 정보 조회</a></li>
-											<li><a href="/schoolmanage/schoolAdminInsertUserIdForm">사용자 ID 등록</a></li>
-											<li><a href="/schoolmanage/userIdList">사용자 ID 목록</a></li>
+											<li><a href="/schoolAdminInsertUserIdForm">사용자 ID 등록</a></li>
+											<li><a href="/userIdList">사용자 ID 목록</a></li>
 										</ul>
 									</div>
 								</div></li> 
@@ -127,8 +127,8 @@
 								<div id="dropdown-table" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul class="nav navbar-nav">
-											<li><a href="/schoolmanage/schoolAdminInsertTeacherForm">교사 등록</a></li>
-											<li><a href="/schoolmanage/schoolAdminTeacherList">교사 목록</a></li>
+											<li><a href="/schoolAdminInsertTeacherForm">교사 등록</a></li>
+											<li><a href="/schoolAdminTeacherList">교사 목록</a></li>
 										</ul>
 									</div>
 								</div></li>
