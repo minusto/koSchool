@@ -2,11 +2,20 @@
 			//현재 날짜 구하기
 			var now = new Date();
 			var year = now.getFullYear();
-			var month = now.getMonth() + 1;
-			var day = now.getDate();
+			var getMonth = now.getMonth() + 1;
+			var getDay = now.getDate();
+			var month="";
+			var day="";
+			if(getMonth<10){
+				month+=0;
+				month+=getMonth;
+			}
+			if(getDay<10){
+				day+=0;
+				day+=getDay;
+			}
 
 			var today = year + '-' + month + '-' + day;
-
 			$('#calendar').fullCalendar(
 					{
 						header : {
@@ -25,7 +34,6 @@
 								url : "getSchedule",
 								dataType : "json",
 								success : function(data) {
-									//alert("ajax");
 									$.each(data, function(index, schedule) {
 										$("#scheduleDel").css('display','none');
 										$("#scheduleMod").css('display','none');
@@ -67,7 +75,6 @@
 				url : "getSchedule",
 				dataType : "json",
 				success : function(data) {
-					//alert("ajax");
 					$.each(data, function(index, schedule) {
 						
 						var abc = {
@@ -84,11 +91,12 @@
 		
 			if($('#modalSuccess').attr("aria-hidden")==true){
 				$(".form-control").attr("disabled", true);
+				
 			}
 			
 
 			$("#detailClose").on("click",function(){
-				$('#closeDetail').trigger('click'); 
+				$('#loginSelectStudent').trigger('click'); 
 			});
 			
 

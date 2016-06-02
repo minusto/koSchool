@@ -57,9 +57,7 @@ public class ScheduleController {
 	//캘린더에서 이벤트 이동시 자동 업데이트
 	@RequestMapping(value="/updateSchedule",method=RequestMethod.POST)
 	public ResponseEntity<String> updateSchedule(@RequestBody ScheduleVO scheduleVO){
-		System.out.println("/updateSchedule 호출합니다");
 		service.updateScheduleService(scheduleVO);
-		System.out.println("/updateScheduleService 실행 후 ");
 		
 		ResponseEntity<String> entity=null;
 		try {
@@ -76,7 +74,6 @@ public class ScheduleController {
 	@ResponseBody
 	@RequestMapping(value="/getSchedule")
 	public List<ScheduleVO> getSchedule(HttpServletRequest request){
-		System.out.println("쫌되라!!!!!!!!!!!!!!!!!!!!!!!");
 		HttpSession session=request.getSession();
 		String grade=(String)session.getAttribute("grade");
 		String schoolAdminId=null;
@@ -85,14 +82,9 @@ public class ScheduleController {
 			schoolAdminId=vo.getSchoolAdminId();
 		}else if(grade.equals("student")||grade.equals("teacher")){
 			MemberVO memberVO=(MemberVO)session.getAttribute("member");
-			System.out.println("getSchedule 호출!!!학생일 경우");
-			System.out.println(memberVO.getMemberId());
-			System.out.println("-------------------------------");
-			System.out.println(schoolAdminId);
 			schoolAdminId=service.getSchoolAdminIdService(memberVO);
 		}
 		List<ScheduleVO> list=service.getScheduleService(schoolAdminId);
-		System.out.println("되라쫌ㅉ떠ㅃ쨔떠ㅑㅂㅈ거ㅐㅑㅈ버래ㅑㅈㄷ러ㅐㅑ저랴ㅐㅂ저ㅑㅐㅂㅈㄷㄹ");
 		return list;
 	}
 	
