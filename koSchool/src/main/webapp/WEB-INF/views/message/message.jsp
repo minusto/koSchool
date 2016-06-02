@@ -41,10 +41,10 @@
 					$('#sendMessageTbody').html("");
 					$.each(data, function(index, sendMessage){
 						$('#sendMessageTbody').append('<tr class="contentTd">');
-						$('#sendMessageTbody').append('<td>' + sendMessage.receiverMemberId + '</td>');			
+						$('#sendMessageTbody').append('<td class="contentTd">' + sendMessage.receiverMemberId + '</td>');			
 						$('#sendMessageTbody').append('<td class="contentTd"><a id="sendMessageRead" data-target="#sendMessageDetail"  class="contentTd" data-toggle="modal" name="' + sendMessage.messageNum+'">' + sendMessage.messageContent + '</a></td>');	
-						$('#sendMessageTbody').append('<td>' +(sendMessage.messageReceiveDate).substr(0,16) + '</td>');
-						$('#sendMessageTbody').append('<td>' + sendMessage.messageReadCheck + '</td>');
+						$('#sendMessageTbody').append('<td class="contentTd">' +(sendMessage.messageReceiveDate).substr(0,16) + '</td>');
+						$('#sendMessageTbody').append('<td class="contentTd">' + sendMessage.messageReadCheck + '</td>');
 						$('#sendMessageTbody').append('</tr>');
 					});
 				}
@@ -60,10 +60,10 @@
 					$('#receiveMessageTbody').html("");
 					$.each(data, function(index, sendMessage){
 						$('#receiveMessageTbody').append('<tr class="contentTd">');
-						$('#receiveMessageTbody').append('<td>' + sendMessage.senderMemberId + '</td>');
+						$('#receiveMessageTbody').append('<td class="contentTd">' + sendMessage.senderMemberId + '</td>');
 						$('#receiveMessageTbody').append('<td class="contentTd"><a id="receiveMessageRead" data-target="#receiveMessageDetail" class="contentTd" data-toggle="modal" name="' + sendMessage.messageNum+'">' + sendMessage.messageContent + '</a></td>');
-						$('#receiveMessageTbody').append('<td>' + (sendMessage.messageReceiveDate).substr(0,16) + '</td>');
-						$('#receiveMessageTbody').append('<td>' + sendMessage.messageReadCheck + '</td>');
+						$('#receiveMessageTbody').append('<td class="contentTd">' + (sendMessage.messageReceiveDate).substr(0,16) + '</td>');
+						$('#receiveMessageTbody').append('<td class="contentTd">' + sendMessage.messageReadCheck + '</td>');
 						$('#receiveMessageTbody').append('</tr>');
 					});
 				}

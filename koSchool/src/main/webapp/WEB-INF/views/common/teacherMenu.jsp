@@ -103,7 +103,7 @@
 				<ul class="dropdown-menu animated fadeInDown">
 					<li class="title">새 쪽지 <span class="badge pull-right" id="notReadMessage"></span>
 					</li>
-					<li class="message"><a id="newMessage" data-target="#messageModal" data-toggle="modal">새 메세지가 없습니다.</a>
+					<li class="message"><a href="#" id="newMessage" data-target="#messageModal" data-toggle="modal">새 메세지가 없습니다.</a>
 					</li>
 				</ul></li>
 
