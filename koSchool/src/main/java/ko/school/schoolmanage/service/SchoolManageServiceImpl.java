@@ -92,6 +92,18 @@ public class SchoolManageServiceImpl implements SchoolManageService{
 	public void updateTeacher(TeacherVO teacherVO) throws Exception {
 		dao.updateTeacher(teacherVO);
 	}
+	
+	@Override
+	public void deleteTeacher1(String memberId) {
+		dao.deleteTeacher1(memberId);
+	}
+
+	@Override
+	public void deleteTeacher2(String memberId) {
+		dao.deleteTeacher2(memberId);	
+	}
+		
+
 		
 
 }

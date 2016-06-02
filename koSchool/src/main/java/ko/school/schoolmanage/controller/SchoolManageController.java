@@ -175,5 +175,13 @@ public class SchoolManageController {
 		model.addAttribute("member", member);
 		return "redirect:/schoolmanage/teacherListDetail?memberId=" + memberId;
 	}
+	
+	//학교관리자 -> 교사 삭제
+		@RequestMapping(value = "schoolmanage/teacherDelete" , method=RequestMethod.GET)
+		public String deleteTeacher(@RequestParam("memberId") String memberId , Model model)throws Exception{
+			service.deleteTeacher1(memberId);
+			service.deleteTeacher2(memberId);
+			return "redirect:/schoolmanage/schoolAdminTeacherList";
+		}
 
 }

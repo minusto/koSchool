@@ -115,15 +115,15 @@ public class SchoolManageDAOImpl implements SchoolManageDAO{
 		session.update(namespace + ".updateTeacher" , teacherVO);
 	}
 	
+	public void deleteTeacher1(String memberId) {
+		session.delete(namespace + ".deleteTeacher1" , memberId);
+	}
+
+	public void deleteTeacher2(String memberId) {
+		session.delete(namespace + ".deleteTeacher2" , memberId);
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 }
