@@ -25,11 +25,11 @@ public class SchoolManageController2 {
 	private SchoolManageService2 service;
 	
 	
-	@RequestMapping(value="/schoolmanage/schoolAdminInsertUserIdForm", method=RequestMethod.GET)
+	@RequestMapping(value="/schoolAdminInsertUserIdForm", method=RequestMethod.GET)
 	public String insertMemberIdGET()throws Exception{	
 		return "/schoolmanage/schoolAdminInsertUserIdForm";
 	}
-	@RequestMapping(value="/schoolmanage/schoolAdminInsertUserIdForm", method=RequestMethod.POST)
+	@RequestMapping(value="/schoolAdminInsertUserIdForm", method=RequestMethod.POST)
 	public String insertMemberIdPOST(MemberVO member , RegistManageVO registManage,
 			HttpSession session , StudentVO student , ParentVO parent)throws Exception{
 			
@@ -56,7 +56,7 @@ public class SchoolManageController2 {
 		return "/schoolmanage/schoolAdminInsertUserIdForm";
 	}
 	
-	@RequestMapping(value="/schoolmanage/userIdList", method=RequestMethod.GET)
+	@RequestMapping(value="/userIdList", method=RequestMethod.GET)
 	public String userIdListGET(Model model , HttpSession session)throws Exception{	
 		SchoolAdminVO schoolAdmin = (SchoolAdminVO)session.getAttribute("schoolAdmin");
 		String id = schoolAdmin.getSchoolAdminId();

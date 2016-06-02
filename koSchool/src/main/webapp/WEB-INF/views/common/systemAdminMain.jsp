@@ -27,7 +27,7 @@
 
 							<div class="col-sm-3">
 								<div class="pricing-table green">
-								<a href="/schoolmanage/systemInsertSchoolAdminForm">
+								<a href="/systemInsertSchoolAdminForm">
 									<div class="pt-header">
 										<div class="plan-pricing">
 											<div class="pricing">학교관리자 등록</div>
@@ -38,7 +38,7 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="pricing-table blue">
-								<a href="/schoolmanage/schoolAdminList">
+								<a href="/schoolAdminList">
 									<div class="pt-header">
 										<div class="plan-pricing">
 											<div class="pricing">학교관리자 목록</div>

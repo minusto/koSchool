@@ -43,6 +43,7 @@ public interface SchoolManageDAO {
 	public void updateMember(MemberVO member)throws Exception;
 	public void updateTeacher(TeacherVO teacherVO)throws Exception;
 	
-	
+	public void deleteTeacher1(String memberId)throws Exception;
+	public void deleteTeacher2(String memberId)throws Exception;
 
 }

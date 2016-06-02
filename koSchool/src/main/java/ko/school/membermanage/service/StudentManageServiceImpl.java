@@ -29,6 +29,8 @@ public class StudentManageServiceImpl implements StudentManageService{
 	public void updateStudent(StudentVO student) throws Exception {
 		dao.updateStudent(student);
 	}
+	
+
 
 	@Override
 	public List<MemberVO> sameSchoolStudentNullList(String id) throws Exception {
@@ -71,6 +73,13 @@ public class StudentManageServiceImpl implements StudentManageService{
 	public List<ParentList> parentList() throws Exception {
 		return dao.parentList();
 	}
+
+	@Override
+	public String getStudentPic(MemberVO member) throws Exception {
+		return dao.getStudentPic(member);
+	}
+	
+	
 
 	
 }

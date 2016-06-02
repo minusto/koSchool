@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/jejugothic.css" />
 <!-- 폰트추가 -->
 <style type="text/css">
-body {
+* {
 	font-family: 'Jeju Gothic', sans-serif;
 }
 </style>
@@ -103,7 +103,7 @@ body {
 				<ul class="dropdown-menu animated fadeInDown">
 					<li class="title">새 쪽지 <span class="badge pull-right" id="notReadMessage"></span>
 					</li>
-					<li class="message"><button id="newMessage" data-target="#messageModal" data-toggle="modal" class="btn-success">새 메세지가 없습니다.</button>
+					<li class="message"><a href="#" id="newMessage" data-target="#messageModal" data-toggle="modal">새 메세지가 없습니다.</a>
 					</li>
 				</ul></li>
 
@@ -122,7 +122,8 @@ body {
 							<h4 class="username">${member.memberName }</h4>
 							<p>${member.memberEmail }</p>
 							<div class="btn-group margin-bottom-2x" role="group">
-								<button type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default"
+								onclick="location.href='/teacherProfile'">
 									<i class="fa fa-user"></i> Profile
 								</button>
 								<button type="button" class="btn btn-default"

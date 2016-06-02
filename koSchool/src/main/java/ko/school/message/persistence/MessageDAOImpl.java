@@ -42,5 +42,16 @@ public class MessageDAOImpl implements MessageDAO {
 		return session.selectList(namespace+ ".listReceiveMessage", memberId);
 	}
 
+	@Override
+	public MessageVO sendMessageRead(int messageNum) {
+		return session.selectOne(namespace + ".sendMessageRead", messageNum);
+	}
+
+	@Override
+	public void changeReadCheck(int messageNum) {
+		session.update(namespace + ".changeReadCheck", messageNum);
+		
+	}
+
 
 }

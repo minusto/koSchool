@@ -44,7 +44,7 @@
 											
 										<tbody>
 											<tr>
-												<td><a href="/schoolmanage/schoolAdminDetail?id=${SchoolAdminListVO.schoolAdminId }">${SchoolAdminListVO.schoolAdminId }</a></td>
+												<td><a href="/schoolAdminDetail?id=${SchoolAdminListVO.schoolAdminId }">${SchoolAdminListVO.schoolAdminId }</a></td>
 												<td>${SchoolAdminListVO.schoolAdminTel }</td>
 												<td>${SchoolAdminListVO.deleteRequest }</td>
 												<td>

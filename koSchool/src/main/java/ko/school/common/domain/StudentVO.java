@@ -1,6 +1,10 @@
 package ko.school.common.domain;
 
-public class StudentVO{
+import java.io.Serializable;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class StudentVO implements Serializable {
 
 	private String memberId;
 	private String studentCode;
@@ -10,6 +14,16 @@ public class StudentVO{
 	private String studentGender;
 	private String studentMajor;
 	private String studentPicture;
+	private MultipartFile file;
+	
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 
 	public String getMemberId() {
 		return memberId;

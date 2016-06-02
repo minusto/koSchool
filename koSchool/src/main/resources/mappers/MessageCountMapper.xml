@@ -30,4 +30,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listReceiveMessage" resultType="messageVO">
 		SELECT * FROM message WHERE receivermemberid = #{memberId} ORDER BY messageNum DESC
 	</select>
+	
+	<!-- 메시지 디테일 쿼리문 / 작성자 박종현 -->
+	<select id="sendMessageRead" resultType="messageVO">
+		SELECT * FROM message WHERE messageNum = #{messageNum}
+	</select>
+	
+	<!-- 읽은 쪽지의 상태를 확인으로 변경하는 쿼리문 / 작성자 박종현 -->
+	<update id="changeReadCheck">
+		UPDATE message SET messageReadCheck = '확인' WHERE messageNum = #{messageNum}
+	</update>
 </mapper>

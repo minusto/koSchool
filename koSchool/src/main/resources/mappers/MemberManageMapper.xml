@@ -109,4 +109,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND st.memberId = m.memberId
 	</select>
 	
+	<select id="getStudentPic" resultType="String">
+		select studentPicture
+		from student
+		where memberId=#{memberId}
+	</select>
+	
 </mapper>

@@ -40,4 +40,15 @@ public class MessageServiceImpl implements MessageService {
 		return dao.listReceiveMessage(memberId);
 	}
 
+	@Override
+	public MessageVO sendMessageReadService(int messageNum) {
+		return dao.sendMessageRead(messageNum);
+	}
+
+	@Override
+	public void changeReadCheckService(int messageNum) {
+		dao.changeReadCheck(messageNum);
+		
+	}
+
 }

@@ -1,11 +1,21 @@
 package ko.school.message.domain;
 
 public class MessageVO {
+	private int messageNum;
 	private String senderMemberId;
 	private String receiverMemberId;
 	private String messageContent;
 	private String messageReceiveDate;
 	private String messageReadCheck;
+	
+	
+	public int getMessageNum() {
+		return messageNum;
+	}
+
+	public void setMessageNum(int messageNum) {
+		this.messageNum = messageNum;
+	}
 
 	public String getMessageReadCheck() {
 		return messageReadCheck;

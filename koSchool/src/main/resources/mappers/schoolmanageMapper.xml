@@ -133,6 +133,18 @@
 		subjectId = #{subjectId}
 		WHERE memberId = #{memberId}
 	</update>
+	
+	<!-- 학교관리자 ==> 교사 내용 삭제(member table) -->
+	<update id="deleteTeacher1">
+		DELETE FROM teacher
+		WHERE memberId = #{memberId}
+	</update>
+	
+	<!-- 교사 ==> 교사 내용 삭제 (teacher table)-->
+	<update id="deleteTeacher2">
+	DELETE FROM teacher 
+	WHERE memberId = #{memberId}
+	</update>
 
 
 </mapper>

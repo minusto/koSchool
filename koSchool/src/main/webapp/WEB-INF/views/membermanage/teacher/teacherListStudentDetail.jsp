@@ -8,21 +8,7 @@
 <head>
     <title>빈칸</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
-    <!-- CSS Libs -->
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/checkbox3.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="lib/css/select2.min.css">
-    <!-- CSS App -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/themes/flat-blue.css">
+   
 	<!-- jQuery-->
     <script src="/resources/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -33,6 +19,8 @@
     			$('#del').css("display","none");
     			$('#commitGo').css("display","inline");
     			$('#cancelGo').css("display","inline");
+    			
+    			$('#pic').css("display","inline");
     		})
     		$('#correctionOk').on('click','#cancelGo',function(){
     			$('input[id=inputPassword3]').attr("readonly",true);
@@ -43,6 +31,10 @@
     		})
     		$('#deleteOk').click(function(){
     			location.href="deleteStudent?m_id=${student.memberId}";
+    		})
+    		
+    			$('#cancelGo').click(function(){
+    				$('#pic').css("display","none");
     		})
     	})
     </script>
@@ -55,6 +47,9 @@
   		position: relative;
   		width: 800px;
   		height: 800px;
+	}
+	#pic{
+	display: none;
 	}
 </style>
 <body class="flat-blue">
@@ -79,9 +74,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row no-margin col-xs-12">
-                                    	<div class="col-md-2 col-xs-12">
+                                    	<div class="col-md-1 ">
                                         </div>
-                                        <div class="col-md-4 col-xs-12">
+                                        <div class="col-md-2">
+                                       
                                             <div class="card profile">
                                                 <div class="card-profile-img">
 
@@ -93,15 +89,28 @@
 													</c:if>
 
                                                 </div>
+                                                
                                             </div>
+                                            <div class=" col-md-12">
+                                                <br>
+                                                </div>
+                                                
                                         </div>
                                         <div class="col-md-4 col-xs-12">
                                         </div>
                                     </div>
-                                    <form class="form-horizontal" action="correctionStudent" method="post">
+                                    <form class="form-horizontal" action="correctionStudent" method="post" enctype="multipart/form-data">
+                                    		<div class="col-md-2"></div>
+                                    		<div class="col-md-3"id="pic">
+	                                                <label  class='control-label col-lg-2'>사진</label><input type='file' class='form-control' name='file' >
+	                                                </div>	
+	                                                <div class="col-xs-12">
+	                                                <br><br>
+	                                                </div>
                                     	<div class="col-xs-12">
                                     		<div class="form-inline">
 												<div class="col-md-5 col-xs-12" >
+													
 													<label for="inputPassword3" class="control-label col-lg-2">학생ID</label>
 													<input id="inputPassword2" class="form-control" type="text" value="${student.memberId}" name="memberId" readonly="readonly">
 													<br>
@@ -145,7 +154,7 @@
                                            			<label for="inputPassword3" class="control-label col-lg-2">비고</label>
                                             		<input type="text" class="form-control" id="inputPassword3" value="${student.memberNote}" name="memberNote" readonly="readonly">
                                         			<!-- 이미지사진 파일 -->
-                                        			<input type="hidden" class="form-control" id="inputPassword3" value="${student.studentPicture}" name="studentPicture" readonly="readonly">
+<%--                                         			<input type="hidden" class="form-control" id="inputPassword3" value="${student.studentPicture}" name="studentPicture" readonly="readonly"> --%>
                                         			
                                         		</div>
 											</div>
@@ -169,7 +178,7 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="studentListScore.jsp">
+																			<a href="studentListScore">
 																			<h3>내신 성적 조회</h3>
 																			</a>
 																		</div>
@@ -224,20 +233,7 @@
             </div>
         </div>
 	</div>
-            <!-- Javascript Libs -->
-            <script type="text/javascript" src="lib/js/jquery.min.js"></script>
-            <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="lib/js/Chart.min.js"></script>
-            <script type="text/javascript" src="lib/js/bootstrap-switch.min.js"></script>
-            <script type="text/javascript" src="lib/js/jquery.matchHeight-min.js"></script>
-            <script type="text/javascript" src="lib/js/jquery.dataTables.min.js"></script>
-            <script type="text/javascript" src="lib/js/dataTables.bootstrap.min.js"></script>
-            <script type="text/javascript" src="lib/js/select2.full.min.js"></script>
-            <script type="text/javascript" src="lib/js/ace/ace.js"></script>
-            <script type="text/javascript" src="lib/js/ace/mode-html.js"></script>
-            <script type="text/javascript" src="lib/js/ace/theme-github.js"></script>
-            <script type="text/javascript" src="js/app.js"></script>
-            <script type="text/javascript" src="js/index.js"></script>
+           
 </body>
 
 </html>

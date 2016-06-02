@@ -31,6 +31,15 @@
 		border-bottom: 1px solid rgba(38, 185, 154, 0.40);
 	}
 </style>
+<script src="/resources/js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){
+		$('tbody').on('click','tr',function(){
+			var noticeBoardNum = $(this).find('#noticeBoardNum').html();
+			location.href="/noticeBoardDetail?noticeBoardNum=" + noticeBoardNum; 
+		})
+	})
+</script>
 
 </head>
 
@@ -77,8 +86,8 @@
 										<tbody>
 											<c:forEach var="noticeBoard" items="${noticeBoardList }">
 												<tr>
-													<td>${noticeBoard.noticeBoardNum }</td>
-													<td><a href="/noticeBoardDetail?noticeBoardNum=${noticeBoard.noticeBoardNum }">${noticeBoard.noticeBoardTitle }</a></td>
+													<td id="noticeBoardNum">${noticeBoard.noticeBoardNum }</td>
+													<td>${noticeBoard.noticeBoardTitle }</td>
 													<td>
 														<fmt:formatDate value="${noticeBoard.noticeBoardDate }" pattern="yyyy-MM-dd" />
 													</td>

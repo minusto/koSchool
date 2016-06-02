@@ -26,7 +26,7 @@
 									</div>
 								</div>
 								<div class="card-body table-responsive col-md-5">
-									<form id="contact-form" method="post" action="/updateNoticeBoardForm"><!-- enctype="multipart/form-data" -->
+									<form id="contact-form" method="post" action="/updateNoticeBoardForm" enctype="multipart/form-data">
 										<div class="messages"></div>
 										<div class="controls">
 											<div class="row">
@@ -43,16 +43,16 @@
 												</div>
 												<div class="col-md-12">
 													<label for="exampleInputFile">File input</label> 
-													<!-- <input type="file"  name="noticeBoardFileName"> -->
+													<input type="file"  name="file">
 													<p class="help-block">영문명 파일로 올려주세요</p>
 												</div>
 												<input type="hidden" name="noticeBoardNum" value="${noticeBoardDetail.noticeBoardNum}">
-												<%-- <input type="hidden" name="noticeBoardFileName" value="${noticeBoardDetail.noticeBoardFileName}"> --%>
+												<input type="hidden" name="noticeBoardFileName" value="${noticeBoardDetail.noticeBoardFileName}">
 										
 												<div class="pull-right">
 													<input type="submit" class="btn btn-default" value="수정">
 													&nbsp;&nbsp;&nbsp;
-													<input type="reset" class="btn btn-default" value="취소">
+													<input type="reset" class="btn btn-default" value="취소" onclick="location:history.go(-1)">
 												</div>
 
 											</div>

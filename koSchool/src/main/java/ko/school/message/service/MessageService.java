@@ -14,4 +14,6 @@ public interface MessageService {
 	public void sendMessageSevice(MessageVO message);	
 	public List<MessageVO> listSendMessageService(String memberId);
 	public List<MessageVO> listReceiveMessageService(String memberId);
+	public MessageVO sendMessageReadService(int messageNum);
+	public void changeReadCheckService(int messageNum);
 }

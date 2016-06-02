@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ko.school.common.domain.MemberVO;
@@ -76,5 +77,18 @@ public class CountMessageController {
 		}		
 		return entity;
 	}
-
+	
+	// 보낸쪽지 디테일 메소드 (미확인->확인 상태 변경포함) / 작성자 박종현
+	@RequestMapping("sendMessageRead")
+	public MessageVO sendMessageRead(@RequestParam("messageNum") int messageNum){
+		//service.changeReadCheckService(messageNum); //확인 상태로 변경
+		return service.sendMessageReadService(messageNum);
+	}
+	
+	// 받은쪽지 디테일 메소드 (미확인->확인 상태 변경포함) / 작성자 박종현
+	@RequestMapping("receiveMessageRead")
+	public MessageVO receiveMessageRead(@RequestParam("messageNum") int messageNum){
+		service.changeReadCheckService(messageNum); //확인 상태로 변경
+		return service.sendMessageReadService(messageNum);
+	}
 }

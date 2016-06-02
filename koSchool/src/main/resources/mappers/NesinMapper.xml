@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.NesinMapper">
+	<!-- 과목정보조회 -->
+	<select id="subjectList" resultType="Subject">
+		SELECT * FROM subject
+	</select>
+	<!-- 과목 선택 (내신성적입력) -->
+	<select id="selectSubject" resultType="Subject">
+		SELECT * FROM subject
+		WHERE subjectName = #{s_name}
+	</select>
+	
+	<!-- 학생목록 출력 -->
+	<select id="studentList" resultType="StudentList">
+		SELECT m.memberid, m.membername, m.memberbirthday, m.schoolid, st.studentcode, st.studentgrade, st.studentclass, st.studentnum, st.studentgender, st.studentmajor 
+		FROM member m, student st
+		WHERE m.memberid = st.memberid
+		AND m.schoolid=#{schoolId}
+		AND st.studentCode IS NOT NULL
+		ORDER BY m.memberid
+	</select>
+	
+	<!-- 내신성적입력 -->
+   <insert id="insertSubjectScore">
+   		INSERT INTO score (subjectId, memberId, midExam , finalExam , perfomanceEvaluation, semester
+   		)VALUES(
+         	#{subjectId},#{memberId}, #{midExam} , #{finalExam} , #{perfomanceEvaluation}, #{semester}
+   		)
+   </insert>
+   <!-- 전체과목별 내신점수리스트 -->
+   <select id="allSubjectScoreList" resultType="AllSubjectScoreList">
+   		SELECT s.subjectId AS subjectId ,s3.subjectType AS subjectType,s3.subjectName AS subjectName,
+   		s3.subjectUnit AS subjectUnit,
+   		s.memberId AS memberId, (s.midexam*0.4)+(s.finalexam*0.4)+(s.perfomanceevaluation*0.2) AS subjectTotal,
+		s2.subjectAvg AS subjectAvg, s.semester AS semester, s3.subjectGrade AS subjectGrade
+		from score s,
+		(SELECT subjectId, AVG((midexam*0.4)+(finalexam*0.4)+(perfomanceevaluation*0.2)) AS subjectAvg from score
+		WHERE semester = #{semester}
+		GROUP BY subjectId) s2,
+		subject s3
+		WHERE s.subjectId = s2.subjectId
+		AND s.subjectId = s3.subjectId
+		AND semester = #{semester}
+   </select>
+   
+   <!-- 전체 과목별 등수 -->
+   <select id="allRankingScoreList" resultType="AllRankingScoreList">
+   		SELECT RANK() OVER (partition by s.subjectId ORDER BY s.subjectTotal DESC) AS Rank,
+   		s.subjectId AS subjectId, s.memberId AS memberId, s.subjectTotal AS subjectTotal
+		FROM	
+		(SELECT s.subjectId AS subjectId ,s3.subjectType AS subjectType,s3.subjectName AS subjectName,
+		s3.subjectUnit AS subjectUnit,
+   		s.memberId AS memberId, (s.midexam*0.4)+(s.finalexam*0.4)+(s.perfomanceevaluation*0.2) AS subjectTotal,
+		s2.subjectAvg AS subjectAvg
+		from score s,
+		(SELECT subjectId, AVG((midexam*0.4)+(finalexam*0.4)+(perfomanceevaluation*0.2)) AS subjectAvg from score
+		group by subjectId) s2,
+		subject s3
+		WHERE s.subjectId = s2.subjectId
+		AND s.subjectId = s3.subjectId
+		AND semester= #{semester}) s
+   </select>
+   
+   <!-- 전체 과목별 전체명수  -->
+   <select id="allStudentNum" resultType="AllStudentNum">
+   		SELECT subjectId,count(*) AS allStudentNum FROM SCORE
+   		WHERE semester = #{semester}
+		GROUP BY subjectId
+   </select>
+   
+   <!-- 교사 ==> 학생 세부 열람 -->
+	<select id="selectStudentDetail" resultType="StudentDetail" >
+		SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress,
+		 m.memberTel, m.memberEmail, m.memberNote, m.schoolId,
+		st.studentCode, st.studentGrade, st.studentClass, st.studentNum, st.studentGender, 
+		st.studentMajor, st.studentPicture
+		FROM member m, student st
+		WHERE m.memberId = st.memberId
+		AND m.memberId = #{m_id}
+		ORDER BY m.memberId
+	</select>
+   
+   
+	
+</mapper>
