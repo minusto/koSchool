@@ -28,7 +28,7 @@ public class ProfileController {
 	@Inject
 	private ProfileService service;
 	
-	//교사-->프로필
+	//교사-->프로필 작성자: 유지훈
 	@RequestMapping(value="/teacherProfile", method=RequestMethod.GET)
 	public String teacherProfile(Model model, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
@@ -42,7 +42,7 @@ public class ProfileController {
 	}
 	
 
-	//교사-->프로필수정 겟
+	//교사-->프로필수정 겟 작성자: 유지훈
 	@RequestMapping(value="/teacherProfileUpdate", method=RequestMethod.GET)
 	public String teacherProfilepdate(Model model, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
@@ -56,7 +56,7 @@ public class ProfileController {
 		return "/membermanage/teacher/teacherProfileUpdate";
 	}
 	
-	//교사 프로필 수정 포스트
+	//교사 프로필 수정 포스트 작성자: 유지훈
 	@RequestMapping(value="/teacherProfileUpdate", method=RequestMethod.POST)
 	public String teacherProfilepdate(MemberVO mVO, TeacherVO tVO,HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
@@ -103,7 +103,7 @@ public class ProfileController {
 	}
 	
 	
-	//학생-->프로필
+	//학생-->프로필 작성자: 유지훈
 	@RequestMapping(value="/studentProfile", method=RequestMethod.GET)
 	public String studentProfile(Model model, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();

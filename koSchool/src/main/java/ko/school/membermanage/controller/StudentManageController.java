@@ -39,7 +39,7 @@ public class StudentManageController {
 		model.addAttribute("path", "학생 관리 > 학생 정보 입력");
 		return "/membermanage/teacher/teacherInsertStudentForm";
 	}
-	//학생 정보 입력
+	//학생 정보 입력 작성자: 유지훈
 	@RequestMapping(value="/teacherInsertStudentForm", method=RequestMethod.POST)
 	public String insertStudent(MemberVO member, StudentVO student,HttpServletRequest request)throws Exception{
 		
@@ -102,7 +102,7 @@ public class StudentManageController {
 		model.addAttribute("path", "학생관리 > 학생 정보 열람 > Detail" );
 		return "/membermanage/teacher/teacherListStudentDetail";
 	}
-	//학생 정보 수정
+	//학생 정보 수정 작성자: 유지훈
 	@RequestMapping(value="/correctionStudent", method=RequestMethod.POST)
 	public String correctionStudent(MemberVO member, StudentVO student, Model model,HttpServletRequest request)throws Exception{
 			

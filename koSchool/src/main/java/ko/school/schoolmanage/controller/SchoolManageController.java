@@ -37,14 +37,14 @@ public class SchoolManageController {
 	
 	
 	
-	//시스템 관리자->학교관리자 등록폼 겟
+	//시스템 관리자->학교관리자 등록폼 겟 작성자: 유지훈
 	@RequestMapping(value = "/systemInsertSchoolAdminForm", method = RequestMethod.GET)
 	public String schoolAdminRegist() {
 		logger.info("시스템 등록폼");
 		return "/schoolmanage/systemInsertSchoolAdminForm";
 	}
 	
-	//시스템 관리자->학교관리자 등록폼 포스트
+	//시스템 관리자->학교관리자 등록폼 포스트 작성자: 유지훈
 	@RequestMapping(value = "/systemInsertSchoolAdminForm", method = RequestMethod.POST)
 	public String schoolAdminRegist(SchoolAdminVO sVo,SchoolAdminRegistVO srVo,RedirectAttributes rttr)throws Exception {
 
@@ -53,7 +53,7 @@ public class SchoolManageController {
 		return "redirect:/schoolAdminList";
 	}
 	
-	//시스템관리자-> 학교관리자 리스트
+	//시스템관리자-> 학교관리자 리스트 작성자: 유지훈
 	@RequestMapping(value = "/schoolAdminList", method = RequestMethod.GET)
 	public String schoolAdminList(Model model)throws Exception {
 		
@@ -61,7 +61,7 @@ public class SchoolManageController {
 		return "/schoolmanage/schoolAdminList";
 	}
 	
-	//시스템관리자->학교관리자 상세보기
+	//시스템관리자->학교관리자 상세보기 작성자: 유지훈
 	@RequestMapping(value="/schoolAdminDetail",method=RequestMethod.GET)
 	public String read(@RequestParam("id") String id,Model model)throws Exception{
 		
@@ -69,7 +69,7 @@ public class SchoolManageController {
 		return "/schoolmanage/schoolAdminDetail";
 	}
 	
-	//시스템 관리자-> 학교관리자 수정 겟
+	//시스템 관리자-> 학교관리자 수정 겟 작성자: 유지훈
 	@RequestMapping(value = "/schoolAdminUpdate", method = RequestMethod.GET)
 	public String schoolAdminUpdate(@RequestParam("id") String id,Model model)throws Exception {
 		model.addAttribute(service.schoolAdminDetail(id));
@@ -78,7 +78,7 @@ public class SchoolManageController {
 		
 	
 	}
-	//시스템관리자 ->학교관리자 수정 포스트
+	//시스템관리자 ->학교관리자 수정 포스트 작성자: 유지훈
 	@RequestMapping(value = "/schoolAdminUpdate", method = RequestMethod.POST)
 	public String schoolAdminUpdate(SchoolAdminVO sVo,SchoolAdminRegistVO srVo)throws Exception {
 		
@@ -87,7 +87,7 @@ public class SchoolManageController {
 		
 	
 	}
-	//학교관리자-> 교사 등록 겟
+	//학교관리자-> 교사 등록 겟 작성자: 유지훈
 	@RequestMapping(value = "/schoolAdminInsertTeacherForm", method = RequestMethod.GET)
 	public String teacherRegist(Model model)throws Exception {
 		
@@ -97,7 +97,7 @@ public class SchoolManageController {
 		return "/schoolmanage/schoolAdminInsertTeacherForm";
 	
 	}
-	//학교 관리자 ->교사 등록 포스트 
+	//학교 관리자 ->교사 등록 포스트  작성자: 유지훈
 	@RequestMapping(value = "/schoolAdminInsertTeacherForm", method = RequestMethod.POST)
 	public String teacherRegist(RegistManageVO rVO,MemberVO mVO, TeacherVO tVO,HttpServletRequest request) throws Exception {
 		
@@ -143,8 +143,8 @@ public class SchoolManageController {
 		
 	}
 	
-	
-	//학교관리자-> 교사 리스트
+	 
+	//학교관리자-> 교사 리스트 작성자: 유지훈
 	@RequestMapping(value = "/schoolAdminTeacherList", method = RequestMethod.GET)
 	public String teacherList(Model model, HttpServletRequest request)throws Exception {
 		HttpSession session = request.getSession();
@@ -154,7 +154,7 @@ public class SchoolManageController {
 		return  "/schoolmanage/schoolAdminTeacherList";
 	}
 	
-	//학교관리자 -> 교사 상세리스트
+	//학교관리자 -> 교사 상세리스트 
 	@RequestMapping(value = "/teacherListDetail", method = RequestMethod.GET)
 	public String teacherListDetail(@RequestParam("memberId") String memberId , Model model)throws Exception{
 		model.addAttribute("teacher",service.detailTeacher(memberId));
@@ -162,7 +162,7 @@ public class SchoolManageController {
 	}
 	
 	
-	//학교 관리자 -> 교사 수정 GET
+	//학교 관리자 -> 교사 수정 GET 
 	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.GET)
 	public String teacherUpdate(MemberVO memberVO, Model model)throws Exception{
 		TeacherDetailVO teacherDetailVO = service.detailTeacher(memberVO.getMemberId());
@@ -170,7 +170,7 @@ public class SchoolManageController {
 		return  "/schoolmanage/teacherUpdate";
 		
 	}
-	//학교관리자 -> 교사 수정 POST
+	//학교관리자 -> 교사 수정 POST 
 	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.POST)
 	public String teacherUpdate(MemberVO member , TeacherVO teacherVO , Model model)throws Exception{
 		service.updateMember(member);
