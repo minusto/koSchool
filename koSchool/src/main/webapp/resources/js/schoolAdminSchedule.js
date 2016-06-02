@@ -1,23 +1,36 @@
 		$(window.onload = function() {
-	
+
 			$("#scheduleDel").on('click',function(){
 				var result=confirm("정말 삭제하시겠습니까?");
 				if(result){
 					location.href="/deleteSchedule?id="+$("#scheduleId").val()+"&title="+$("#scheduleTitle").val();
 				}
 				});
-				
+			
+			var loadNum=0;
+
+			
 		
 	
 
 			//현재 날짜 구하기
 			var now = new Date();
 			var year = now.getFullYear();
-			var month = now.getMonth() + 1;
-			var day = now.getDate();
+			var getMonth = now.getMonth() + 1;
+			var getDay = now.getDate();
+			var month="";
+			var day="";
+			if(getMonth<10){
+				month+=0;
+				month+=getMonth;
+			}
+			if(getDay<10){
+				day+=0;
+				day+=getDay;
+			}
 
 			var today = year + '-' + month + '-' + day;
-
+			
 			$('#calendar').fullCalendar(
 					{
 						header : {
@@ -105,8 +118,6 @@
 						},
 						eventClick : function(calEvent, jsEvent, view) {
 							//일정 클릭시 상세 정보 
-							
-							
 							$.ajax({
 								url : "getSchedule",
 								headers : {
@@ -115,7 +126,6 @@
 									,"X-HTTP-Method-Override": "POST"},
 								dataType : "json",
 								success : function(data) {
-									//alert("ajax");
 									$.each(data, function(index, schedule) {
 										var abc = {
 											id : schedule.scheduleId,
@@ -154,7 +164,6 @@
 				url : "getSchedule",
 				dataType : "json",
 				success : function(data) {
-
 					$.each(data, function(index, schedule) {
 						var abc = {
 							id : schedule.scheduleId,
@@ -166,6 +175,8 @@
 						$('#calendar').fullCalendar('renderEvent', abc, true)
 						
 					})
+
+					
 				}
 			});
 		
