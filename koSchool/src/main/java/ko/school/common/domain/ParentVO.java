@@ -2,18 +2,32 @@ package ko.school.common.domain;
 
 public class ParentVO{
 
-	private String parentId;
+	private String memberId;
 	private String familyRelation;
 	private String parentName;
-	private String parentPassword;
-	private String memberId;
+	private String studentMemberId;
 
-	public String getParentId() {
-		return parentId;
+	
+	@Override
+	public String toString() {
+		return "ParentVO [memberId=" + memberId + ", familyRelation=" + familyRelation + ", parentName=" + parentName
+				+ ", studentMemberId=" + studentMemberId + "]";
 	}
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getStudentMemberId() {
+		return studentMemberId;
+	}
+
+	public void setStudentMemberId(String studentMemberId) {
+		this.studentMemberId = studentMemberId;
 	}
 
 	public String getFamilyRelation() {
@@ -31,20 +45,6 @@ public class ParentVO{
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
 	}
+	
 
-	public String getParentPassword() {
-		return parentPassword;
-	}
-
-	public void setParentPassword(String parentPassword) {
-		this.parentPassword = parentPassword;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
 }

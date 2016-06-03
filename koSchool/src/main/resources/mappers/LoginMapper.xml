@@ -5,17 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="ko.school.mapper.LoginMapper">
 
-	<!-- 액터 ==> 학생,교사  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승 -->
+	<!-- 액터 ==> 학생,교사,학부모  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승 -->
 	<select id="memberCheck" resultType="MemberVO">
 		SELECT *
 		FROM member
 		WHERE memberid=#{id} AND memberpassword=#{password}
-	</select>
-	<!-- 액터 ==> 학부모  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승 -->
-	<select id="parentCheck" resultType="ParentVO">
-		SELECT *
-		FROM parent
-		WHERE parentid=#{id} AND parentPassword=#{password}
 	</select>
 	<!-- 액터 ==> 학교관리자  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승 -->
 	<select id="schoolAdminCheck" resultType="SchoolAdminVO">
@@ -39,6 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="studentCheck" resultType="StudentVO">
 		SELECT *
 		FROM student
+		WHERE memberid=#{id}
+	</select>
+	<!-- 액터 ==> 학부모  / 작업내용 : 로그인정보와 일치시 객체리턴 / 작성자 : 이재승 -->
+	<select id="parentCheck" resultType="ParentVO">
+		SELECT *
+		FROM parent
 		WHERE memberid=#{id}
 	</select>
 </mapper>

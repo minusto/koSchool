@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ko.school.common.domain.MemberVO;
+import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
 import ko.school.common.domain.TeacherVO;
 
@@ -29,9 +30,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		               session.setAttribute("teacher", (TeacherVO)modelMap.get("teacher"));
 		            }else if((StudentVO)modelMap.get("student")!=null){
 		               session.setAttribute("student", (StudentVO)modelMap.get("student"));
-		            }
-			} else if (grade.equals("parent")) {
-				session.setAttribute("parent", (Object) modelMap.get("parent"));
+		            } else if ((ParentVO)modelMap.get("parent")!=null) {
+						session.setAttribute("parent", (Object) modelMap.get("parent"));
+					}
 			} else if (grade.equals("schoolAdmin")) {
 				session.setAttribute("schoolAdmin", (Object) modelMap.get("schoolAdmin"));
 			} else if (grade.equals("systemAdmin")) {

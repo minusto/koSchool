@@ -95,7 +95,6 @@ public class StudentManageController {
 	//학생 세부 정보
 	@RequestMapping(value="/teacherListStudentDetail", method=RequestMethod.GET)
 	public String teacherListStudentDetail(@RequestParam String m_id, Model model)throws Exception{
-		System.out.println(m_id);
 		StudentDetail student = service.selectStudentDetail(m_id);
 		model.addAttribute("student",student);
 		model.addAttribute("path", "학생관리 > 학생 정보 열람 > Detail" );
