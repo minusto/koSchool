@@ -42,9 +42,8 @@ public class MockScoreController {
 		
 		MemberVO memberVo = (MemberVO)session.getAttribute("member");
 		TeacherVO teacherVo = (TeacherVO)session.getAttribute("teacher");
-		TeacherDetailVO teacherDetailVo = new TeacherDetailVO();
 		
-Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		
 		int classNumInt = teacherVo.getTeacherClass() % 100;
 		String classNum = Integer.toString(classNumInt);
