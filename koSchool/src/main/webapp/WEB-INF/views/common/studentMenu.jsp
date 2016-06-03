@@ -243,5 +243,5 @@
 	</nav>
 </div>
 <body>
-<jsp:include page="../message/message.jsp"/>
+	<jsp:include page="../message/message.jsp"/>
 </body>
