@@ -44,7 +44,7 @@
 	<script type="text/javascript" src="/resources/lib/js/ace/mode-html.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/ace/theme-github.js"></script>
 	<!-- Javascript -->
-	<script type="text/javascript" src="/resources/js/app.js"></script>
+<!-- 	<script type="text/javascript" src="/resources/js/app.js"></script> -->
 	
 	<script type="text/javascript">
 
@@ -242,3 +242,6 @@
 		<!-- /.navbar-collapse -->
 	</nav>
 </div>
+<body>
+<jsp:include page="../message/message.jsp"/>
+</body>

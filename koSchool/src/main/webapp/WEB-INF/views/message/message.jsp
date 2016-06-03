@@ -66,6 +66,7 @@
 						$('#receiveMessageTbody').append('<td class="contentTd">' + sendMessage.messageReadCheck + '</td>');
 						$('#receiveMessageTbody').append('</tr>');
 					});
+					
 				}
 			});
 		}//ajax 함수 끝	
