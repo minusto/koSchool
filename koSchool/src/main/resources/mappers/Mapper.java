@@ -1,4 +1,4 @@
-package mappers;
+/*package mappers;
 
 import java.util.List;
 import java.util.Map;
@@ -143,3 +143,4 @@ public interface Mapper  {
 	public List<AllStudentNum> allStudentNum(int semeter); //전체 과목별 전체명수 
 
 }
+*/
