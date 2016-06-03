@@ -11,6 +11,7 @@ public class TeacherDetailVO {
 	private String memberTel;
 	private String memberNote;
 	private String memberEmail;
+	private String schoolId;
 	private int teacherClass;
 	private String teacherPicture;
 	private String teacherPosition;
@@ -19,8 +20,8 @@ public class TeacherDetailVO {
 	public TeacherDetailVO(){}
 	
 	public TeacherDetailVO(String memberId, String memberName, String memberBirthday, String memberAddress,
-			String memberTel, String memberNote, String memberEmail, int teacherClass, String teacherPicture,
-			String teacherPosition, String subjectId) {
+			String memberTel, String memberNote, String memberEmail, String schoolId, int teacherClass,
+			String teacherPicture, String teacherPosition, String subjectId) {
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;
@@ -29,12 +30,13 @@ public class TeacherDetailVO {
 		this.memberTel = memberTel;
 		this.memberNote = memberNote;
 		this.memberEmail = memberEmail;
+		this.schoolId = schoolId;
 		this.teacherClass = teacherClass;
 		this.teacherPicture = teacherPicture;
 		this.teacherPosition = teacherPosition;
 		this.subjectId = subjectId;
 	}
-	
+
 	public String getMemberId() {
 		return memberId;
 	}
@@ -77,6 +79,12 @@ public class TeacherDetailVO {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
+	public String getSchoolId() {
+		return schoolId;
+	}
+	public void setSchoolId(String schoolId) {
+		this.schoolId = schoolId;
+	}
 	public int getTeacherClass() {
 		return teacherClass;
 	}
@@ -101,5 +109,6 @@ public class TeacherDetailVO {
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
 	}
-
+	
+	
 }

@@ -168,7 +168,7 @@
 								<li><a href="teacherInsertStudentForm">학생 정보 입력</a></li>
 								<li><a href="teacherListStudent">학생 정보 열람</a></li>
 								<li><a href="teacherInsertScoreForm">내신 성적 입력</a></li>
-								<li><a href="teacherInsertMockScoreForm">모의고사 성적 입력</a>
+								<li><a href="/insertMockScoreForm">모의고사 성적 입력</a>
 								</li>
 							</ul>
 						</div>

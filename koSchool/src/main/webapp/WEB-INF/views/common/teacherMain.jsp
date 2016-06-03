@@ -68,7 +68,7 @@
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="teacherInsertMockScoreForm">
+																			<a href="/insertMockScoreForm">
 																			<h3>모의고사 성적 입력</h3>
 																			</a>
 																		</div>

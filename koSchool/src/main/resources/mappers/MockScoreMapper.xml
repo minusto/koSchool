@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.MockScoreMapper">
+	
+	<!-- 학생의 모든 정보(비밀번호 제외)를 뽑아 오는 쿼리문 -->
+	<!-- 
+		SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress, m.memberTel, 
+			m.memberEmail, m.memberNote, m.schoolId, s.studentCode, s.studentGrade, 
+			s.studentClass, s.studentNum, s.studentGender, s.studentMajor, s.studentPicture
+		FROM student s JOIN member m
+		ON s.memberId = m.memberId
+	-->
+	<!-- 교사의 모든 정보를 뽑아오는 쿼리문 -->
+	<!-- 
+		SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress, m.memberTel, 
+			m.memberEmail, m.memberNote, m.schoolId, t.teacherClass, t.teacherPicture,
+			t.teacherPosition, t.subjectId
+		FROM teacher t JOIN member m
+		ON t.memberId = m.memberId
+	 -->
+	 <!-- 학부모의 모든 정보를 뽑아오는 쿼리문 -->
+	 <!-- 
+	 	SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress, m.memberTel, 
+			m.memberEmail, m.memberNote, m.schoolId, p.studentMemberId, p.familyRelation,
+			p.parentName, p.parentPassword
+		FROM parent p JOIN member m
+		ON p.memberId = m.memberId
+	  -->
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 교사의 반 학생 리스트 불러오기 / 작성자 : 구혜인 -->
+	<select id="studentListInTeacherClass" resultType="StudentDetail">
+		SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress, m.memberTel, 
+			m.memberEmail, m.memberNote, m.schoolId, s.studentCode, s.studentGrade, 
+			s.studentClass, s.studentNum, s.studentGender, s.studentMajor, s.studentPicture
+		FROM student s JOIN member m
+		ON s.memberId = m.memberId
+		WHERE schoolId = #{schoolId}
+		AND studentClass = #{teacherClass}
+		ORDER BY s.memberId
+	</select>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 탐구 과목 리스트 불러오기(한국사 제외) / 작성자 : 구혜인 -->
+	<select id="researchSubjectList" resultType="ResearchSubjectVO">
+		SELECT * FROM researchSubject WHERE researchSubjectId != 'rsubA03' ORDER BY researchSubjectId
+	</select>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 제2외국어 과목 리스트 불러오기 / 작성자 : 구혜인 -->
+	<select id="secondLanguageList" resultType="SecondLanguageVO">
+		SELECT * FROM secondLanguage ORDER BY languageId
+	</select>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 모의고사 아이디 가져오기 / 작성자 : 구혜인 -->
+ 	<select id="selectMockId" resultType="String">
+		SELECT mockId FROM MockType WHERE mockYear = #{mockYear} AND mockMonth = #{mockMonth} AND mockGrade = #{mockGrade}
+	</select>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 탐구 과목 아이디 가져오기 / 작성자 : 구혜인 -->
+ 	<select id="selectResearchSubjectId" resultType="String">
+		SELECT researchSubjectId FROM researchSubject WHERE researchSubjectName = #{researchName}
+	</select>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 제2외국어 과목 아이디 가져오기 / 작성자 : 구혜인 -->
+ 	<select id="selectSecondLanguageId" resultType="String">
+		SELECT languageId FROM secondLanguage WHERE languageSubjectName = #{languageSubjectName}
+	</select>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 입력되었던 모의고사인지 확인 / 작성자 : 구혜인 -->
+ 	<select id="checkMockTestInsertedScore" resultType="MockTestVO">
+		SELECT * FROM mockTest WHERE mockId = #{mockId} AND memberId = #{memberId}
+	</select>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - MockTest - 1학년 / 작성자 : 구혜인 -->
+ 	<insert id="insertMockTestScoreGrade1">
+		INSERT INTO mockTest (
+			mockId, memberId, languageOriginalScore, languageStandardScore, languagePercentile,
+				mathOriginalScore, mathStandardScore, mathPercentile, englishOriginalScore,
+				englishStandardScore, englishPercentile
+		) VALUES (
+			#{mockId}, #{memberId}, #{languageOriginalScore}, #{languageStandardScore}, #{languagePercentile}, 
+				#{mathOriginalScore}, #{mathStandardScore}, #{mathPercentile}, #{englishOriginalScore}, 
+				#{englishStandardScore}, #{englishPercentile}
+		)
+	</insert>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - MockTest - 2학년 / 작성자 : 구혜인 -->
+ 	<insert id="insertMockTestScoreGrade2">
+		INSERT INTO mockTest (
+			mockId, memberId, languageOriginalScore, languageStandardScore, languagePercentile,
+				mathType, mathOriginalScore, mathStandardScore, mathPercentile, englishOriginalScore,
+				englishStandardScore, englishPercentile, languageId
+		) VALUES (
+			#{mockId}, #{memberId}, #{languageOriginalScore}, #{languageStandardScore}, #{languagePercentile}, 
+				#{mathType}, #{mathOriginalScore}, #{mathStandardScore}, #{mathPercentile}, #{englishOriginalScore}, 
+				#{englishStandardScore}, #{englishPercentile}, #{languageId}
+		)
+	</insert>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - MockTest - 3학년 / 작성자 : 구혜인 -->
+ 	<insert id="insertMockTestScoreGrade3">
+		INSERT INTO mockTest (
+			mockId, memberId, languageOriginalScore, languageStandardScore, languageType, languagePercentile,
+				mathType, mathOriginalScore, mathStandardScore, mathPercentile, englishOriginalScore,
+				englishStandardScore, englishPercentile, languageId
+		) VALUES (
+			#{mockId}, #{memberId}, #{languageOriginalScore}, #{languageStandardScore}, #{languageType}, #{languagePercentile}, 
+				#{mathType}, #{mathOriginalScore}, #{mathStandardScore}, #{mathPercentile}, #{englishOriginalScore}, 
+				#{englishStandardScore}, #{englishPercentile}, #{languageId}
+		)
+	</insert>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - SecondLanguage / 작성자 : 구혜인 -->
+ 	<insert id="insertSecondLanguageScore">
+		INSERT INTO secondLanguageScore (
+			mockId, memberId, secondLanguageOriginalScore, secondLanguageStandardScore, secondLanguagePercentile
+		) VALUES (
+			#{mockId}, #{memberId}, #{secondLanguageOriginalScore}, #{secondLanguageStandardScore}, #{secondLanguagePercentile}
+		)
+	</insert>
+	
+	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - ResearchSubject / 작성자 : 구혜인 -->
+ 	<insert id="insertResearchSubjectScore">
+		INSERT INTO researchSubjectScore (
+			mockId, memberId, researchSubjectId, researchSubjectOriginalScore, 
+				researchSubjectStandardScore, researchSubjectPercentile
+		) VALUES (
+			#{mockId}, #{memberId}, #{researchSubjectId}, #{researchSubjectOriginalScore}, 
+				#{researchSubjectStandardScore}, #{researchSubjectPercentile}
+		)
+	</insert>
+	
+
+
+	
+</mapper>
+
+
+
+
+
+
+
