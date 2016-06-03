@@ -1,6 +1,7 @@
 package ko.school.score.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -26,8 +27,8 @@ public class MockScoreDAOImpl implements MockScoreDAO {
 
 	//액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 교사의 반 학생 리스트 불러오기 / 작성자 : 구혜인
 	@Override
-	public List<StudentDetail> studentListInTeacherClass(TeacherDetailVO teacherDetailVo) throws Exception {
-		return session.selectList(namespace + ".studentListInTeacherClass", teacherDetailVo);
+	public List<StudentDetail> studentListInTeacherClass(Map<String, String> map) throws Exception {
+		return session.selectList(namespace + ".studentListInTeacherClass", map);
 	}
 	
 	//액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 탐구 과목 리스트 불러오기 / 작성자 : 구혜인

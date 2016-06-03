@@ -1,6 +1,8 @@
 package ko.school.score.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -42,10 +44,16 @@ public class MockScoreController {
 		TeacherVO teacherVo = (TeacherVO)session.getAttribute("teacher");
 		TeacherDetailVO teacherDetailVo = new TeacherDetailVO();
 		
-		teacherDetailVo.setSchoolId(memberVo.getSchoolId());
-		teacherDetailVo.setTeacherClass(teacherVo.getTeacherClass());
+Map<String, String> map = new HashMap<String, String>();
 		
-		studentList = service.studentListInTeacherClassService(teacherDetailVo);
+		int classNumInt = teacherVo.getTeacherClass() % 100;
+		String classNum = Integer.toString(classNumInt);
+		
+		map.put("schoolId", memberVo.getSchoolId());
+		map.put("classNum", classNum);
+		
+		studentList = service.studentListInTeacherClassService(map);
+		
 		List<ResearchSubjectVO> researchSubjectList = service.researchSubjectListService();
 		List<SecondLanguageVO> secondLanguageList = service.secondLanguageListService();
 
