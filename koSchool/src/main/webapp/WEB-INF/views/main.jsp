@@ -1,27 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%
-	request.setCharacterEncoding("UTF-8");
-	String login = request.getParameter("login");
-	request.setAttribute("login", login);
-	String logout = request.getParameter("logout");
-	request.setAttribute("logout", logout);
-	if (session != null) {
-		if (session.getAttribute("grade") != null) {
-			String grade = (String) session.getAttribute("grade");
-			if (grade.equals("학교관리자")) {
-				response.sendRedirect("schoolAdminMain.jsp");
-			} else if (grade.equals("교사")) {
-				response.sendRedirect("teacherMain.jsp");
-			} else if (grade.equals("학생")) {
-				response.sendRedirect("studentMain.jsp");
-			} else if (grade.equals("학부모")) {
-				response.sendRedirect("parentMain.jsp");
-			}
-		}
-	}
-%>
- --%>
+
  <!DOCTYPE html>
 <html>
 
@@ -62,39 +41,38 @@
 	<div class="app-container">
 		<br><br>
 		<div id="mainPictureDiv" class="mainPicture">
-			<a> <img class="img-responsive hidden-xs" alt="MainPicture"
+		<!--<a> <img class="img-responsive hidden-xs" alt="MainPicture"  -->
+			<a> <img class="img-responsive" alt="MainPicture"
 				src="/resources/img/MainPicture.png">
 			</a>
 		</div>
 		<br>
 		<div id="loginSelectStudentDiv" class="loginSelectDiv">
 			<ul class="list-unstyled list-inline">
-				<li id="liStudent" data-toggle="modal" data-target="#modalSuccess">
+				<li id="liStudent" data-toggle="modal" data-target="#modalSuccess" >
 					<a href="#" class="loginSelectA"> <img id="loginSelectStudent"
 						alt="학생로그인" src="/resources/img/LoginSelectStudent.png">
 				</a>
 				</li>
-				<li id="liTeacher" data-toggle="modal" data-target="#modalInfo">
+				<li id="liTeacher" data-toggle="modal" data-target="#modalInfo" >
 					<a href="#" class="loginSelectA"> <img id="loginSelectTeacher"
 						alt="교사로그인" src="/resources/img/LoginSelectTeacher.png">
 				</a>
 				</li>
-				<li id="liParent" data-toggle="modal" data-target="#modalWarning">
+				<li id="liParent" data-toggle="modal" data-target="#modalWarning" >
 					<a href="#" class="loginSelectA"> <img id="loginSelectParent"
 						alt="학부모로그인" src="/resources/img/LoginSelectParent.png">
 				</a>
 				</li>
-				<li id="liManager" data-toggle="modal" data-target="#modalDanger">
+				<li id="liManager" data-toggle="modal" data-target="#modalDanger" >
 					<a href="#" class="loginSelectA"> <img id="loginSelectManager"
 						alt="관리자로그인" src="/resources/img/LoginSelectManager.png">
 				</a>
 				</li>
 			</ul>
-		</div>
+		</div><br>
 		<div id="mainFooter" class="row">
-			<div class="footerImg col-md-3">
-
-			</div>
+	
 			<div class="footerNav col-md-5 col-xs-8" align="center">
 				<ul style="padding: 0px">
 					<li><a href="#">시스템소개</a></li>
@@ -112,8 +90,8 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- LOGIN FORM MODAL START -->
-
 	<!-- 학생 로그인 Modal -->
 	<div class="modal fade modal-success" id="modalSuccess" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -312,9 +290,7 @@
 	<script type="text/javascript" src="/resources/lib/js/ace/ace.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/ace/mode-html.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/ace/theme-github.js"></script>
-	<!-- Javascript -->
-	<script type="text/javascript" src="/resources/js/app.js"></script>
-	<script type="text/javascript" src="/resources/js/index.js"></script>
+
 	 <script type="text/javascript">
 		$(window.onload = function() {
 			var loginCheck = $("#result").attr('value');
