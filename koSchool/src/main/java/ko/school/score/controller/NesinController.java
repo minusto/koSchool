@@ -46,7 +46,7 @@ public class NesinController {
 	//내신 성적 폼 조회 (교사)
 		@RequestMapping(value = "/studentListScore", method = RequestMethod.GET)
 		public String studentListScore(@RequestParam("id") String id, Model model, HttpSession session)throws Exception{
-			session.setAttribute("id", id);
+			model.addAttribute("id",id);
 			StudentDetail student = service.selectStudentDetail(id);
 			model.addAttribute("student",student);
 			return "/score/nesin/studentListScore";

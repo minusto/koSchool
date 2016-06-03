@@ -5,9 +5,14 @@ public class ParentVO{
 	private String memberId;
 	private String familyRelation;
 	private String parentName;
-	private String memberpassword;
 	private String studentMemberId;
 
+	
+	@Override
+	public String toString() {
+		return "ParentVO [memberId=" + memberId + ", familyRelation=" + familyRelation + ", parentName=" + parentName
+				+ ", studentMemberId=" + studentMemberId + "]";
+	}
 
 	public String getMemberId() {
 		return memberId;
@@ -40,13 +45,6 @@ public class ParentVO{
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
 	}
-
-	public String getMemberpassword() {
-		return memberpassword;
-	}
-
-	public void setMemberpassword(String memberpassword) {
-		this.memberpassword = memberpassword;
-	}
+	
 
 }

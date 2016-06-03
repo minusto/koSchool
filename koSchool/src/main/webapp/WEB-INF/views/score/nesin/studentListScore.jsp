@@ -63,10 +63,6 @@
 					</div>
 					<div class="row">
 						<div class="col-md-8">
-							<div class="sub-title">
-								Table Bordered <span class="description">(
-									.table-bordered )</span>
-							</div>
 							<button id="view1">결과보기</button>
 							<div style="display:none">
 							<!-- 표준편차-->
