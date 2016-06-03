@@ -158,7 +158,7 @@
 						<div id="receiveMessageDiv">
 								<table id="receiveMessageTable" class="table table-striped">
 									<tr>
-										<td>받는 사람</td>
+										<td>보낸 사람</td>
 										<td>내용</td> 
 										<td>시간</td>
 										<td>확인여부</td>
@@ -172,7 +172,7 @@
 							<div id="sendMessageDiv">
 								<table id="sendMessageTable" class="table table-striped">
 									<tr>
-										<td>보낸 사람</td>
+										<td>받는 사람</td>
 										<td>내용</td>
 										<td>시간</td>
 										<td>확인여부</td>
