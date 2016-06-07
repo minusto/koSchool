@@ -29,7 +29,7 @@
 		  		        url:"/deleteTimetable",      
 		  		        success:function(data){   
 		  		        	if(data=="삭제")
-		  		            alert("삭제 되었습니다");   
+		  		            alert("삭제 완료");   
 		  		        	
 		  		        	 $(".timeview").empty();
 		  		        	 $(".timeview").append(content);
@@ -78,14 +78,14 @@
    $(function(){
   		$(document).on('click','.save',function() {
   		  var timedata = $(".timeview").html();
-  			alert(timedata); 			
+  			//alert(timedata); 			
   	 		$.ajax({      
   		        type:"POST",  
   		        url:"/timetable",      
   		        data: {timedata:timedata}, 
   		        success:function(data){   
   		        	if(data=="성공")
-  		            alert("입력 되었습니다");     
+  		            alert("입력 완료");     
   		        },    
   		      error:function(request,status,error){
 			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
