@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
+import ko.school.common.domain.TeacherVO;
 import ko.school.membermanage.domain.StudentDetail;
 import ko.school.membermanage.domain.StudentList;
 import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
 import ko.school.score.domain.AllSubjectScoreList;
+import ko.school.score.domain.NesinSaveForm;
 import ko.school.score.domain.SubjectScore;
 import ko.school.score.service.NesinService;
 
@@ -27,7 +29,6 @@ public class NesinController {
 	@Inject
 	private NesinService service;
 	// 학생 성적 입력
-	
 	@RequestMapping(value = "/teacherInsertScoreForm", method = RequestMethod.GET)
 	public String teacherInsertScoreForm(Model model, HttpSession session) throws Exception {
 		MemberVO member = (MemberVO)session.getAttribute("member");
@@ -39,14 +40,20 @@ public class NesinController {
 	}
 	//내신 성적 입력
 	@RequestMapping(value = "/subjectScore", method = RequestMethod.POST)
-	public String subjectScore(SubjectScore subjectscore)throws Exception{
+	public String subjectScore(SubjectScore subjectscore, HttpSession session, Model model)throws Exception{
 		service.insertSubjectScore(subjectscore);
+		TeacherVO teacher = (TeacherVO)session.getAttribute("teacher");
+		model.addAttribute("teacher",teacher);
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		String schoolId = member.getSchoolId();
+		List<StudentList> list2 = service.studentList(schoolId);
+		model.addAttribute("list2",list2);
 		return "/score/nesin/teacherInsertScoreForm";
 	}
 	//내신 성적 폼 조회 (교사)
 		@RequestMapping(value = "/studentListScore", method = RequestMethod.GET)
 		public String studentListScore(@RequestParam("id") String id, Model model, HttpSession session)throws Exception{
-			model.addAttribute("id",id);
+			session.setAttribute("id",id);
 			StudentDetail student = service.selectStudentDetail(id);
 			model.addAttribute("student",student);
 			return "/score/nesin/studentListScore";
@@ -88,6 +95,7 @@ public class NesinController {
 			model.addAttribute("student",student);
 			model.addAttribute("id",id);
 			model.addAttribute("subjectGrade", subjectGrade);
+			model.addAttribute("semester",semester);
 			List<AllSubjectScoreList> list = service.allSubjectScoreList(semester);
 			List<AllRankingScoreList> list2 = service.allRankingScoreList(semester);
 			List<AllStudentNum> list3 = service.allStudentNum(semester);
@@ -96,5 +104,19 @@ public class NesinController {
 			model.addAttribute("list3",list3);
 			return "/score/nesin/studentListScore";
 		}
+		
+		//내신 입력 테이블 저장
+		@RequestMapping(value = "/saveForm", method = RequestMethod.POST)
+		public String saveForm(NesinSaveForm nesinSaveForm, HttpSession session, Model model)throws Exception{
+			String subjectGrade = nesinSaveForm.getSubjectGrade();
+			service.deleteSaveForm(subjectGrade);
+			service.insertSaveForm(nesinSaveForm);
+			MemberVO member = (MemberVO)session.getAttribute("member");
+			String schoolId = member.getSchoolId();
+			List<StudentList> list2 = service.studentList(schoolId);
+			model.addAttribute("list2",list2);
+			return "/score/nesin/teacherInsertScoreForm";
+		}
+		
 	
 }

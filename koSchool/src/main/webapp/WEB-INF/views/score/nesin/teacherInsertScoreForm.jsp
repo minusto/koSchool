@@ -60,7 +60,7 @@
 													<th>삭제</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody id="tbody1">
 											</tbody>
 										</table>
 									<!--페이지 -->
@@ -68,17 +68,95 @@
 										<div class="col-sm-4">
 											<input id="addSubject" type="button" class="btn btn-default" value="과목추가">
 										</div>
-										<div class="col-sm-7"></div>
+										<div class="col-sm-7">
+										<!-- 테이블 저장 -->
+										 <button class="btn btn-primary btn-primary" data-target="#modalSave" data-toggle="modal" type="button"> 저장 </button>
+                                                	<div id="modalSave" class="modal fade modal-primary" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button class="close" aria-label="Close" data-dismiss="modal" type="button">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																	<h4 id="myModalLabel" class="modal-title">학년별 입력테이블 저장</h4>
+																</div>
+																<div class="modal-body"> 
+																	<div class="row" >
+																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																			<a href="#" id="firstSave">
+																			<h3>1학년</h3>
+																			</a>
+																		</div>
+																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																			<a href="#" id="sencondSave">
+																			<h3>2학년</h3>
+																			</a>
+																		</div>
+																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																			<a href="#" id="thirdSave">
+																			<h3>3학년</h3>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																</div>
+															</div>
+														</div>
+                                                	</div>
+                                        <!-- 테이블 저장 -->
+										 <button class="btn btn-primary btn-primary" data-target="#modalLoad" data-toggle="modal" type="button"> 불러오기 </button>
+                                                	<div id="modalLoad" class="modal fade modal-primary" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button class="close" aria-label="Close" data-dismiss="modal" type="button">
+																		<span aria-hidden="true">×</span>
+																	</button>
+																	<h4 id="myModalLabel" class="modal-title">학년별 입력테이블 불러오기</h4>
+																</div>
+																<div class="modal-body"> 
+																	<div class="row" >
+																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																			<a href="#" id="firstLoad">
+																			<h3>1학년</h3>
+																			</a>
+																		</div>
+																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																			<a href="#" id="sencondLoad">
+																			<h3>2학년</h3>
+																			</a>
+																		</div>
+																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																			<a href="#" id="thirdLoad">
+																			<h3>3학년</h3>
+																			</a>
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																</div>
+															</div>
+														</div>
+                                                	</div>
+										</div>
 									</div>
 									<div class="col-md-1">
-										<input type="hidden" name="semester">
-										<input type="hidden" name="memberId">
-										<input type="submit" class="btn btn-default" value="완료">
+										<input type="text" name="semester">
+										<input type="text" name="memberId">
+										<!-- 학년 검사 용도 -->
+										<input type="text" id="checkGrade" >
+										<input type="submit" name="success" class="btn btn-default" value="완료">
 									</div>
 									</form>
+									<div class="saveFormDiv">
+										<form action="saveForm" method="post">
+											<input type="text" name ="memberIdS" id="memberIdS" value="${teacher.memberId }">	
+											<input type="text" name="subjectGrade" id="subjectGradeS">				
+											<input type="submit" id="sendSaveForm">
+										</form>
+									</div>
 								</div>
-								
-
 								<div class="card-body table-responsive col-xs-3">
 									<div id="jbMenu"
 										style="width: 320px; height: 400px; overflow: auto;">
@@ -88,16 +166,17 @@
 											<thead>
 												<tr class="headings">
 													<th>번호</th>
-													<th>학생ID</th>
+													<th>학년</th>
 													<th>이름</th>
 													<th>생년월일</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody id="tbody2">
 												<c:forEach var="student" items="${list2 }">
 													<tr id="clickTr">
 														<td><%=i++%></td>
-														<td id="clickStu" style="cursor: pointer">${student.memberId }</td>
+														<td  id="clickStu" style="display:none">${student.memberId }</td>
+														<td  id="clickGrade">${student.studentGrade }학년</td>
 														<td>${student.memberName }</td>
 														<td><fmt:formatDate
 																value="${student.memberBirthday }" pattern="yyyy-MM-dd" /></td>
@@ -115,6 +194,5 @@
 		</div>
 	</div>
 </body>
-
 </html>
 ​

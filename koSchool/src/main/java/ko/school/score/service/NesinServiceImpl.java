@@ -1,6 +1,7 @@
 package ko.school.score.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,6 +12,8 @@ import ko.school.membermanage.domain.StudentList;
 import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
 import ko.school.score.domain.AllSubjectScoreList;
+import ko.school.score.domain.NesinLoadForm;
+import ko.school.score.domain.NesinSaveForm;
 import ko.school.score.domain.Subject;
 import ko.school.score.domain.SubjectScore;
 import ko.school.score.persistence.NesinDao;
@@ -42,6 +45,7 @@ public class NesinServiceImpl implements NesinService {
             subjectscore.setSubjectId(subjectscore.getArrSubjectId()[i]);
             subjectscore.setMemberId(subjectscore.getMemberId());
             subjectscore.setSemester(subjectscore.getSemester());
+            subjectscore.setNesinYear(subjectscore.getArrNesinYear()[i]);
             subjectscore.setMidExam(subjectscore.getArrMidExam()[i]);
             subjectscore.setFinalExam(subjectscore.getArrFinalExam()[i]);
             subjectscore.setPerformanceEvaluation(subjectscore.getArrPerformanceEvaluation()[i]);
@@ -68,5 +72,29 @@ public class NesinServiceImpl implements NesinService {
 	public StudentDetail selectStudentDetail(String id) throws Exception {
 		return dao.selectStudentDetail(id);
 	}
+
+	@Override
+	public void insertSaveForm(NesinSaveForm nesinSaveForm) throws Exception {
+		for (int i = 0; i < nesinSaveForm.getArrSubjectId().length; i++) {
+			nesinSaveForm.setSubjectId(nesinSaveForm.getArrSubjectId()[i]);
+			nesinSaveForm.setMemberIdS(nesinSaveForm.getMemberIdS());
+            dao.insertSaveForm(nesinSaveForm);
+         }
+		
+	}
+	
+	@Override
+	public List<NesinLoadForm> loadSaveForm(Map<String, String> map) throws Exception {
+		return dao.loadSaveForm(map);
+	}
+
+	@Override
+	public void deleteSaveForm(String subjectGrade) throws Exception {
+		dao.deleteSaveForm(subjectGrade);
+		
+	}
+
+	
+	
 
 }

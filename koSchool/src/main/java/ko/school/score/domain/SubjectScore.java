@@ -9,17 +9,55 @@ public class SubjectScore implements Serializable {
     private String perfomanceEvaluation;
     private String memberId;
     private int semester;
-   
+    private int nesinYear;
    private String[] arrSubjectId;   
    private String[] arrMidExam;
    private String[] arrFinalExam;
    private String[] arrPerformanceEvaluation;
    private String[] arrMemberId;
+   private int[] arrNesinYear;
 
    public SubjectScore(){}
    
    
-   public int getSemester() {
+   
+   public String getPerfomanceEvaluation() {
+	return perfomanceEvaluation;
+}
+
+
+
+public void setPerfomanceEvaluation(String perfomanceEvaluation) {
+	this.perfomanceEvaluation = perfomanceEvaluation;
+}
+
+
+
+public int getNesinYear() {
+	return nesinYear;
+}
+
+
+
+public void setNesinYear(int nesinYear) {
+	this.nesinYear = nesinYear;
+}
+
+
+
+public int[] getArrNesinYear() {
+	return arrNesinYear;
+}
+
+
+
+public void setArrNesinYear(int[] arrNesinYear) {
+	this.arrNesinYear = arrNesinYear;
+}
+
+
+
+public int getSemester() {
 	return semester;
    }
 

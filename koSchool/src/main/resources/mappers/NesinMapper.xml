@@ -26,9 +26,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 내신성적입력 -->
    <insert id="insertSubjectScore">
-   		INSERT INTO score (subjectId, memberId, midExam , finalExam , perfomanceEvaluation, semester
+   		INSERT INTO score (subjectId, memberId, midExam , finalExam , perfomanceEvaluation, semester, nesinYear
    		)VALUES(
-         	#{subjectId},#{memberId}, #{midExam} , #{finalExam} , #{perfomanceEvaluation}, #{semester}
+         	#{subjectId},#{memberId}, #{midExam} , #{finalExam} , #{perfomanceEvaluation}, #{semester}, #{nesinYear}
    		)
    </insert>
    <!-- 전체과목별 내신점수리스트 -->
@@ -83,7 +83,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND m.memberId = #{m_id}
 		ORDER BY m.memberId
 	</select>
+   <!-- 내신 입력 테이블 저장 -->
+   <insert id="insertSaveForm">
+   		INSERT INTO NESINSAVEFORM (
+   			memberId, subjectId
+   		)
+   		VALUES(
+         	#{memberIdS},#{subjectId}
+   		)
+   </insert>
+   <!-- 내신 입력 테이블 불러오기 -->
+   <select id="loadSaveForm" resultType="NesinLoadForm">
+   		SELECT n.memberId , n.subjectId, s.subjectUnit,
+   						s.subjectName, s.subjectType, s.subjectGrade
+		FROM nesinSaveForm n, subject s
+		WHERE n.subjectId = s.subjectId
+		AND memberId = #{id}
+		AND subjectGrade = #{grade}
+   </select>
    
+   <!-- 내신 입력테이블 삭제  -->
+   <delete id="deleteSaveForm">
+   		DELETE FROM nesinsaveform
+		WHERE subjectid IN (select s.subjectid
+		FROM nesinsaveform n, subject s
+		WHERE n.subjectid = s.subjectid
+		AND subjectgrade = #{subjectGrade})
+   </delete>
    
 	
 </mapper>

@@ -1,6 +1,7 @@
 package ko.school.score.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,8 @@ import ko.school.membermanage.domain.StudentList;
 import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
 import ko.school.score.domain.AllSubjectScoreList;
+import ko.school.score.domain.NesinLoadForm;
+import ko.school.score.domain.NesinSaveForm;
 import ko.school.score.domain.Subject;
 import ko.school.score.domain.SubjectScore;
 
@@ -61,6 +64,22 @@ public class NesinDaoImpl implements NesinDao {
 	@Override
 	public StudentDetail selectStudentDetail(String id) throws Exception {
 		return session.selectOne(namespace+".selectStudentDetail", id);
+	}
+
+	@Override
+	public void insertSaveForm(NesinSaveForm nesinSaveForm) throws Exception {
+		session.insert(namespace+".insertSaveForm",nesinSaveForm);
+	}
+
+	@Override
+	public List<NesinLoadForm> loadSaveForm(Map<String, String> map) throws Exception {
+		return session.selectList(namespace+".loadSaveForm", map);
+	}
+
+	@Override
+	public void deleteSaveForm(String subjectGrade) throws Exception {
+		session.delete(namespace+".deleteSaveForm", subjectGrade);
+		
 	}
 
 }

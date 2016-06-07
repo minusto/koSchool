@@ -20,8 +20,8 @@
 <title>내신점수 확인 페이지</title>
 <script src="/resources/js/jquery.js" type="text/javascript"></script>
 <script src="/resources/js/listScore.js" type="text/javascript"></script>
+<script src="/resources/js/nesinChartjs.js" type="text/javascript"></script>
 </head>
-
 <body class="flat-blue">
    <div class="app-container">
         <div class="row content-container">
@@ -98,17 +98,14 @@
 							<p id="listSize2" style="display:none"><%=i2%></p>
 							<p id="listSize3" style="display:none"><%=i3%></p>
 							</div>
-							<table class="table table-bordered">
+							<table class="table table-bordered" style="text-align:center" >
 								<thead>
 									<tr>
-										<th>교과</th>
-										<th>과목</th>
-										<th colspan="5">${semester }학기</th>
+										<th rowspan="2" style="text-align:center">교과</th>
+										<th rowspan="2" style="text-align:center">과목</th>
+										<th colspan="6" style="text-align:center" >${semester }학기</th>
 									</tr>
-								</thead>
-								<tbody>
 									<tr>
-										<td colspan="2"></td>
 										<td>단위수</td>
 										<td>원점수</td>
 										<td>과목평균</td>
@@ -116,12 +113,14 @@
 										<td>석차등급</td>
 										<td>이수자수</td>
 									</tr>
+								</thead>
+								<tbody>
 									<c:forEach var="list" items="${list }">
 									<c:if test="${id == list.memberId && subjectGrade == list.subjectGrade}">
 									<tr>
 										<td id="subjectId<%=++k%>" style="display:none">${list.subjectId }</td>
 										<td>${list.subjectType }</td>
-										<td>${list.subjectName }</td>
+										<td id="subjectName<%=k%>">${list.subjectName }</td>
 										<td>${list.subjectUnit }</td>
 										<td>${list.subjectTotal }</td>
 										<td id="avg<%=k%>"><fmt:formatNumber value="${list.subjectAvg }" pattern=".00"/></td>
@@ -147,7 +146,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body no-padding">
-                                    <canvas id="line-chart" class="chart"></canvas>
+                                    <canvas id="radar-chart" class="chart"></canvas>
                                 </div>
                             <div class="card">
                             	<div class="card-header">
