@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.MockTestMapper">
+		
+		<!-- 교사 ==> 학생 세부 열람 -->
+	<select id="selectStudentDetail" resultType="StudentDetail">
+		SELECT m.memberId, m.memberName, m.memberBirthday, m.memberAddress,
+		 m.memberTel, m.memberEmail, m.memberNote, m.schoolId,
+		st.studentCode, st.studentGrade, st.studentClass, st.studentNum, st.studentGender, 
+		st.studentMajor, st.studentPicture
+		FROM member m, student st
+		WHERE m.memberId = st.memberId
+		AND m.memberId = #{m_id}
+		ORDER BY m.memberId
+	</select>
+	
+	
+		<!-- 학생이 본 모의고사 리스트 출력 -->
+	<select id="studentMockTestList" resultType="MockTypeVO">
+	
+		SELECT mp.*
+		FROM mocktest mt ,mocktype mp
+		WHERE mt.mockid=mp.mockid
+		AND mt.memberid=#{studentId}
+	
+	</select>
+	
+	<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ모의고사 CHARTㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<!-- 학생이본 모의고사중 언어점수 출력 -->
+	<select id="selectMyKorScore" resultType="MockTestVO">
+		SELECT mockid,languageoriginalscore
+		FROM mocktest
+		WHERE memberid=#{id}
+		ORDER BY mockid ASC
+	</select>
+	
+	
+	<!-- 학생이 치룬 모의고사의 언어 점수 평균 -->
+	<select id="selectMockKorAvgScore" resultType="MockAvgScore">
+		SELECT mockid,ROUND(AVG(languageoriginalscore),2) AS avg
+		FROM mocktest
+		WHERE (mockid,NVL(languagetype,'국어')) in (SELECT mockid, NVL(languagetype,'국어') FROM mocktest WHERE memberid=#{id})
+		GROUP BY mockid
+		ORDER BY mockid ASC
+	</select>
+
+	<!-- 학생이본 모의고사중 수리점수 출력 -->
+	<select id="selectMyMathScore" resultType="MockTestVO">
+		SELECT mockid,mathoriginalscore
+		FROM mocktest
+		WHERE memberid=#{id}
+		ORDER BY mockid ASC
+	</select>
+
+	<!-- 학생이 치룬 모의고사의 수리 점수 평균 -->
+	<select id="selectMockMathAvgScore" resultType="MockAvgScore">
+		SELECT mockid,ROUND(AVG(mathoriginalscore),2) AS avg
+		FROM mocktest
+		WHERE (mockid,NVL(mathtype,'수리')) in (SELECT mockid, NVL(mathtype,'수리') FROM mocktest WHERE memberid=#{id})
+		GROUP BY mockid
+		ORDER BY mockid ASC
+	</select>
+	
+	<!-- 학생이본 모의고사중 외국어점수 출력 -->
+	<select id="selectMyEngScore" resultType="MockTestVO">
+		SELECT mockid,englishoriginalscore
+		FROM mocktest
+		WHERE memberid=#{id}
+		ORDER BY mockid ASC
+	</select>
+	
+	
+	
+	<!-- 학생이 치룬 모의고사의 외국어 점수 평균 -->
+	<select id="selectMockEngAvgScore" resultType="MockAvgScore">
+		SELECT mockid,ROUND(AVG(englishoriginalscore),2) AS avg
+		FROM mocktest
+		WHERE (mockid) in (SELECT mockid  FROM mocktest WHERE memberid=#{id})
+		GROUP BY mockid
+		ORDER BY mockid ASC
+	</select>
+	
+	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ CHART END ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	
+	
+	<!-- 한국사를 제외한 모든 탐구영역 리스트 출력-->
+	<select id="selectResearchSubjectList" resultType="ResearchSubjectVO">
+		SELECT * FROM researchSubject where researchSubjectId != 'rsubA03' ORDER BY researchSubjectId
+	</select>
+	
+	
+	<!-- 해당 모의고사를 치룬 학생의  탐구과목 정보(점수)를 가져온다 -->
+	<select id="studentMockResearchSocreList" resultType="MockResearchScoreDetailList">
+		SELECT a.memberId , a.MockId, a.researchsubjectid AS researchSubjectid1, a.researchsubjectoriginalscore AS researchsubjectoriginalscore1, a.researchsubjectstandardscore AS researchsubjectstandardscore1 ,a.researchsubjectpercentile AS researchsubjectpercentile1
+		 ,b.researchsubjectid AS researchSubjectid2, b.researchsubjectoriginalscore AS researchSubjectOriginalScore2, b.researchsubjectstandardscore AS researchSubjectStandardScore2,b.researchsubjectpercentile AS researchSubjectPercentile2
+  		FROM researchSubjectScore a, researchSubjectScore b
+ 		WHERE a.memberid = b.memberid
+		AND a.mockid = b.mockid
+		AND a.mockid = #{id}
+		AND a.researchsubjectid != 'rsubA03'
+		AND b.researchsubjectid != 'rsubA03'
+		AND a.researchsubjectid <![CDATA[<]]> b.researchsubjectid
+	</select>
+	
+		<!-- 학생이 치룬 모의고사의 탐구과목을 제외한 나머지 과목의 정보를 가져온다-->
+	<select id="studentMockScorePlusSecondLangList" resultType="MockScoreDetailList">
+		SELECT DISTINCT m.mockid,m.memberid,m.languagetype,m.languageoriginalscore,m.languagestandardscore,m.languagepercentile
+		,m.mathtype,m.mathoriginalscore,m.mathstandardscore,m.mathpercentile,m.englishoriginalscore,m.englishstandardscore,m.englishpercentile
+		,sl.languagesubjectname,sl.languageId,sls.secondlanguageoriginalscore,sls.secondlanguagestandardscore,sls.secondlanguagepercentile
+		FROM mocktest m,secondlanguagescore sls,secondlanguage sl
+		WHERE m.languageid=sl.languageid(+)
+		AND sls.mockid(+)=m.mockid
+		AND sls.memberid(+)=m.memberid
+		AND m.memberid=#{id}
+		ORDER BY m.mockid DESC
+	</select>
+	
+	
+		<!-- 한국사 시험을 치룬 학생의 점수 LIST -->
+	<select id="koreaHistroyScoreList" resultType="ResearchSubjectScoreVO">
+		SELECT rs.*
+		FROM mocktest m , researchsubjectscore rs
+		WHERE m.mockid=rs.mockid
+		AND rs.memberid=m.memberid
+		AND rs.researchsubjectid='rsubA03'
+		AND m.memberid=#{id}
+	</select>
+	
+	
+	
+	<!-- 과목별 학년석차 START -->
+	
+	<!-- 언어영역 학교석차 뽑기 -->
+	<select id="languageRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY m.languagestandardscore DESC) AS rank, m.languagestandardscore AS standardScore , m.memberid AS studentId
+		FROM (SELECT NVL(languagetype,'국어') AS languagetype,memberid,mockid,languagestandardscore FROM mocktest)m,student s, member mm
+		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND mockid=#{mockId}
+		AND m.languagetype =(SELECT NVL(languagetype,'국어') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
+	</select>
+	
+	<!-- 수리영역 학교석차 뽑기 -->
+	<select id="mathRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY m.mathstandardscore DESC) AS rank, m.mathstandardscore AS standardScore,m.memberid AS studentId
+		FROM (SELECT NVL(mathtype,'수리') AS mathtype,memberid,mockid,mathstandardscore FROM mocktest)m,student s, member mm
+		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND mockid=#{mockId}
+		AND m.mathtype =(SELECT NVL(mathtype,'수리') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
+	</select>
+	
+	<!-- 외국어 학교석차 뽑기 -->
+	<select id="englishRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY m.englishstandardscore DESC) AS rank, m.englishstandardscore AS standardscore , m.memberid AS studentId
+		FROM mocktest m,student s, member mm
+		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND mockid=#{mockId}
+	</select>
+	
+	<!-- 탐구영역 학교석차 뽑기 -->
+	<select id="researchSubjectRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY rss.researchsubjectstandardscore DESC) AS rank, rss.researchsubjectstandardscore AS standardscore , m.memberid AS studentId
+		FROM mocktest m,student s, member mm , researchsubjectscore rss
+		WHERE m.memberid=s.memberid 
+		AND mm.memberid=s.memberid
+		AND m.memberid=rss.memberid
+		AND m.mockid=rss.mockid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND m.mockid=#{mockId}
+		AND rss.researchsubjectid =#{researchSubjectId}
+	</select>
+	
+	<!-- 제2외국어 학교석차 뽑기 -->
+	<select id="secondLanguageRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY sls.secondlanguagestandardscore DESC) AS rank, sls.secondlanguagestandardscore AS standardscore
+		,m.memberid AS studentId
+		FROM secondlanguagescore sls , (SELECT mockid,memberid,NVL(languageid,'secondLang00') AS languageid FROM mocktest)m, secondlanguage sl,student s,member mm
+		WHERE sls.memberid=m.memberid
+		AND sl.languageid=m.languageid
+		AND m.mockid=sls.mockid
+		AND s.memberid=m.memberid
+		AND mm.memberid=s.memberid
+		AND m.mockid=#{mockId}
+		AND m.languageid=(SELECT NVL(languageid,'secondLang00') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+	</select>
+	
+
+	<!-- 탐구영역 한국사 학교석차 뽑기 -->
+	<select id="koreaHistorySubjectRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY rss.researchsubjectstandardscore DESC) AS rank, rss.researchsubjectstandardscore AS standardscore , m.memberid AS studentId
+		FROM mocktest m,student s, member mm , researchsubjectscore rss
+		WHERE m.memberid=s.memberid 
+		AND mm.memberid=s.memberid
+		AND m.memberid=rss.memberid
+		AND m.mockid=rss.mockid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND m.mockid=#{mockId}
+		AND rss.researchsubjectid ='rsubA03'
+	</select>
+	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ과목별 학년석차 END ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+
+
+
+	<!-- 과목별 학급석차 START -->
+	
+	<!-- 언어영역 학급석차 -->
+	<select id="languageClassRankList" resultType="LanguageRankList">
+	SELECT RANK() OVER (ORDER BY m.languagestandardscore DESC) AS rank, m.languagestandardscore AS standardScore , m.memberid AS studentId
+		FROM (SELECT NVL(languagetype,'국어') AS languagetype,memberid,mockid,languagestandardscore FROM mocktest)m,student s, member mm
+		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND mockid=#{mockId}
+		AND s.studentgrade=#{studentGrade}
+		AND s.studentclass=#{studentClass}
+		AND m.languagetype =(SELECT NVL(languagetype,'국어') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
+	</select>
+	
+	<!-- 수리영역 학급석차 -->
+	<select id="mathClassRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY m.mathstandardscore DESC) AS rank, m.mathstandardscore AS standardScore,m.memberid AS studentId
+		FROM (SELECT NVL(mathtype,'수리') AS mathtype,memberid,mockid,mathstandardscore FROM mocktest)m,student s, member mm
+		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND mockid=#{mockId}
+		AND s.studentgrade=#{studentGrade}
+		AND s.studentclass=#{studentClass}
+		AND m.mathtype =(SELECT NVL(mathtype,'수리') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
+	</select>
+	
+	<!-- 외국어 학급석차 -->
+	<select id="englishClassRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY m.englishstandardscore DESC) AS rank, m.englishstandardscore AS standardscore , m.memberid AS studentId
+		FROM mocktest m,student s, member mm
+		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND mockid=#{mockId}
+		AND s.studentgrade=#{studentGrade}
+		AND s.studentclass=#{studentClass}
+	</select>
+	
+	<!-- 탐구영역 학급석차 -->
+	<select id="researchSubjectClassRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY rss.researchsubjectstandardscore DESC) AS rank, rss.researchsubjectstandardscore AS standardscore , m.memberid AS studentId
+		FROM mocktest m,student s, member mm , researchsubjectscore rss
+		WHERE m.memberid=s.memberid 
+		AND mm.memberid=s.memberid
+		AND m.memberid=rss.memberid
+		AND m.mockid=rss.mockid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND m.mockid=#{mockId}
+		AND rss.researchsubjectid =#{researchSubjectId}
+		AND s.studentgrade=#{studentGrade}
+		AND s.studentclass=#{studentClass}
+	</select>
+	
+	<!-- 제2외국어 학급석차 뽑기 -->
+	<select id="secondLanguageClassRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY sls.secondlanguagestandardscore DESC) AS rank, sls.secondlanguagestandardscore AS standardscore
+		,m.memberid AS studentId
+		FROM secondlanguagescore sls , (SELECT mockid,memberid,NVL(languageid,'secondLang00') AS languageid FROM mocktest)m, secondlanguage sl,student s,member mm
+		WHERE sls.memberid=m.memberid
+		AND sl.languageid=m.languageid
+		AND m.mockid=sls.mockid
+		AND s.memberid=m.memberid
+		AND mm.memberid=s.memberid
+		AND m.mockid=#{mockId}
+		AND m.languageid=(SELECT NVL(languageid,'secondLang00') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND s.studentgrade=#{studentGrade}
+		AND s.studentclass=#{studentClass}
+	</select>
+	
+	<!-- 탐구영역 한국사 학급석차 뽑기 -->
+	<select id="koreaHistorySubjectClassRankList" resultType="LanguageRankList">
+		SELECT RANK() OVER (ORDER BY rss.researchsubjectstandardscore DESC) AS rank, rss.researchsubjectstandardscore AS standardscore , m.memberid AS studentId
+		FROM mocktest m,student s, member mm , researchsubjectscore rss
+		WHERE m.memberid=s.memberid 
+		AND mm.memberid=s.memberid
+		AND m.memberid=rss.memberid
+		AND m.mockid=rss.mockid
+		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND m.mockid=#{mockId}
+		AND rss.researchsubjectid ='rsubA03'
+		AND s.studentgrade=#{studentGrade}
+		AND s.studentclass=#{studentClass}
+	</select>
+	
+</mapper>

@@ -187,8 +187,7 @@
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
 								<li><a href="studentListScore2">내신성적조회</a></li>
-								<li><a href="studentListMockTestScore.jsp?studentId=${id}">모의고사성적조회</a></li>
-
+								<li><a href="mockTestList?id=${member.memberId }">모의고사성적조회</a></li>
 							</ul>
 						</div>
 					</div></li>

@@ -59,7 +59,7 @@
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="studentListMockTestScore.jsp?studentId=${id }">
+																			<a href="mockTestList?id=${parent.studentMemberId }">
 																			<h3>모의고사 성적 조회</h3>
 																			</a>
 																		</div>
