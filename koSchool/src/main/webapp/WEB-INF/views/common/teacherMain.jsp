@@ -159,12 +159,12 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="teacherInsertNoticeParentForm.jsp">
+																			<a href="/message/schoolNewsLetter">
 																			<h3>가정통신문 발송</h3>
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="teacherListNoticeParent.jsp">
+																			<a href="/message/schoolNewsLetterList">
 																			<h3>가정통신문 조회</h3>
 																			</a>
 																		</div>
