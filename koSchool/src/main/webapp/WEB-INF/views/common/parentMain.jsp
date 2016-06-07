@@ -54,7 +54,7 @@
 																<div class="modal-body">
 																	<div class="row">
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="studentListScore2">
+																			<a href="studentListScore.jsp">
 																			<h3>내신 성적 조회</h3>
 																			</a>
 																		</div>
@@ -198,12 +198,12 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="/noticeBoardList">
+																			<a href="studentNoticeBoardList.jsp">
 																			<h3>교내 공지사항</h3>
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="parentNoticeBoardList.jsp">
+																			<a href="/message/schoolNewsLetterList">
 																			<h3>가정 통신문 조회</h3>
 																			</a>
 																		</div>
@@ -213,7 +213,7 @@
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="/scheduleList">
+																			<a href="scheduleList.jsp">
 																			<h3>일정</h3>
 																			</a>
 																		</div>
@@ -224,7 +224,7 @@
 															</div>
 														</div>
                                                 	</div>
-                                                	
+                                                	<jsp:include page="../message/message.jsp"/>
                                                 </div>
                                             </div>
                                         </div>
