@@ -14,5 +14,6 @@ public interface SchoolManageService2 {
 	public int insertStudentIdManage(StudentVO student)throws Exception;//학생아이디 등록+나머지 null;
 	public SchoolRegistVO schoolRegistSchoolIdService(String id)throws Exception; // 학교아이디,관리자아이디 세션
 	public List<RegistManageVO> userList(String id); //유저리스트
+	public int insertParentIdManage(ParentVO parent)throws Exception; //학부모 아이디 등록 + 나머지 null;
 	
 }

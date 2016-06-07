@@ -42,5 +42,10 @@ public class SchoolManageServiceImpl2 implements SchoolManageService2 {
 	public List<RegistManageVO> userList(String id) {
 		return dao.userList(id);
 	}
+
+	@Override
+	public int insertParentIdManage(ParentVO parent) throws Exception {
+		return dao.insertParentIdManage(parent);
+	}
 	
 }
