@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ko.school.mapper.schoolNewsLetterMapper">
+
+
+<!-- 가정통신문 등록 -->
+<insert id="schoolNewsLetterInsert">
+insert into schoolNewsLetter 
+			(schoolNewsLetterNum , 
+			memberId ,
+			<!-- teacherSignCheck,
+			parentSignCheck, -->
+			title,
+			content) VALUES (schoolNewsLetterNum_seq.nextval,
+								#{memberId},
+								<!-- #{teacherSignCheck},
+								#{parentSignCheck}, -->
+								#{title},
+								#{content})
+	<selectKey resultType="int" keyProperty="schoolNewsLetterNum" order="AFTER">
+		select max(schoolnewsletternum) from schoolnewsletter
+	</selectKey>		
+</insert>
+
+
+<!-- 해당 선생님에 속해있는 학생들의 학부모 리스트(로우값 반환) -->
+<select id="teacherParentList" resultType="ParentVO">
+	select a.* from parent a
+	where
+		a.studentMemberId in (
+			select a.memberId from student a
+			where
+				a.studentClass = (select a.teacherClass from teacher a where a.memberId = #{memberId})
+		)
+</select>
+
+<!-- 가정통신문 학무보 서명 테이블 등록 -->
+<insert id="schoolNewsLetterSignInsert">
+insert into schoolNewsLetterSign
+			(
+			 SCHOOLNEWSLETTERSIGNNUM,
+			 memberId , 
+			 schoolNewsLetterNum  
+			 <!-- ,sign -->
+			 )
+			values(
+			schoolNewsLetterSignNum_seq.nextval,
+			#{memberId} , 
+			#{schoolNewsLetterNum}
+			<!-- ,#{sign} -->
+			)
+</insert>
+
+<!-- 자식의 담임 선생 구하는 쿼리 -->
+<select id="teacherMemberId" resultType="String">
+	select a.memberid from teacher a
+	where
+		a.teacherclass in (
+			select a.studentclass from student a
+			where
+				a.memberid = (select a.studentmemberid from parent a where a.memberId = #{memberId})
+		)
+</select>
+
+<!-- 가정통신문 리스트 (선생님/학부모 공통) -->
+<select id="schoolNewsLetterList" resultType="SchoolNewsLetterVO">
+	select * from schoolNewsLetter where memberId = #{memberId}
+</select>
+
+
+<!-- 등급 구하기 쿼리문 -->
+<select id="memberGradeByMemberId" resultType="String">
+select memberGrade from registmanage where memberId = #{memberId}
+</select>
+
+<!-- 학부모 가정통신문 상세페이지 -->
+<select id="schoolNewsLetterDetail" resultType="SchoolNewsLetterVO">
+select * from schoolNewsLetter
+WHERE schoolNewsLetterNum = #{schoolNewsLetterNum}
+</select>
+
+<update id="schoolNewsLetterSignUpdate">
+	update schoolNewsLetterSign set
+		sign = #{sign}
+	where
+		1 = 1
+		and memberId = #{memberId}
+		and schoolNewsLetterNum = #{schoolNewsLetterNum}
+</update>
+
+<select id="schoolNewsLetterSignList" resultType="SchoolNewsLetterSignVO">
+	select
+		(select memberName from member where member.memberId = a.memberId) memberName
+		, a.*
+	from schoolNewsLetterSign a where a.schoolNewsLetterNum = #{schoolNewsLetterNum}
+</select>
+
+</mapper>
