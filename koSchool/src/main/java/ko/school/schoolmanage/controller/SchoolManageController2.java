@@ -50,7 +50,7 @@ public class SchoolManageController2 {
 				service.insertStudentIdManage(student);
 			}else{
 				System.out.println("부모");
-				//service.insertParentId(parent);
+				service.insertParentIdManage(parent);
 			}
 					
 		return "/schoolmanage/schoolAdminInsertUserIdForm";

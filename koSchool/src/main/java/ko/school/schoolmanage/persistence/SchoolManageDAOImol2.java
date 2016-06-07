@@ -47,4 +47,9 @@ public class SchoolManageDAOImol2 implements SchoolMangeDAO2 {
 		return sqlsession.selectList(namespace + ".userList" , id);
 	}
 
+	@Override
+	public int insertParentIdManage(ParentVO parent) throws Exception {
+		return sqlsession.insert(namespace + ".insertParentIdManage" , parent);
+	}
+
 }
