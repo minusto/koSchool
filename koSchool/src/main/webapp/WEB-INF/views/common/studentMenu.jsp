@@ -215,7 +215,7 @@
 					<div id="dropdown-form" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="studentTimeTable.jsp">시간표 조회</a></li>
+								<li><a href="/studentTimetable">시간표 조회</a></li>
 								<li><a href="#">식단표 조회</a></li>
 
 							</ul>

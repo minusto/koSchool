@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.TimetableMapper">
+	
+	<insert id="inserttimetable">
+		insert into timetable(timenum, timetable, memberid,teachergrade, teacherclass)
+		values (timetable_seq.NEXTVAL,#{timetable},#{memberId},#{teachergrade},#{teacherclass})
+	</insert>
+	
+	<select id="getTimetable" resultType="String">
+	select timetable
+	from timetable
+	where 	memberId=#{memberId} and
+	 timenum=(select max(timenum)
+					   from timetable 
+					   where memberId=#{memberId})
+	</select>
+	
+	<delete id="deleteTimetable">
+	
+	delete from timetable
+	where memberId=#{memberId} and teacherclass=#{teacherclass} and teachergrade=#{teachergrade}
+	</delete>
+	
+	<select id="getStudentTimetable" resultType="String">
+		select tt.timetable
+		from student st,timetable tt
+		where tt.teacherclass=#{studentClass} and tt.teachergrade=#{studentGrade}
+		and st.memberid=#{memberId}
+
+	</select>
+
+	
+</mapper>
+
+
+
+
+
+
+

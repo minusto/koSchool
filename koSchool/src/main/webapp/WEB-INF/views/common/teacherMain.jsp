@@ -190,7 +190,7 @@
                                                         <li>교내 공지사항</li>
                                                         <li>학급 게시판</li>
                                                         <li>일정</li>
-                                                        <li>&nbsp;</li>
+                                                        <li>시간표</li>
                                                     </ul>
                                                 </div>
                                                 <div class="pt-footer">
@@ -219,6 +219,11 @@
 																		<div class="col-sm-4 col-xs-12" style="text-align:center;">
 																			<a href="/scheduleList">
 																			<h3>일정</h3>
+																			</a>
+																		</div>
+																		<div class="col-sm-4 col-xs-12" style="text-align:center;">
+																			<a href="/timetable">
+																			<h3>시간표</h3>
 																			</a>
 																		</div>
 																	</div>

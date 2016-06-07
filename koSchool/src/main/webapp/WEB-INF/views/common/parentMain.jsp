@@ -150,7 +150,7 @@
 																<div class="modal-body">
 																	<div class="row">
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="studentTimeTable.jsp">
+																			<a href="/studentTimetable">
 																			<h3>시간표 조회</h3>
 																			</a>
 																		</div>

@@ -209,6 +209,7 @@
 								<li><a href="/noticeBoardList">교내 공지사항</a></li>
 								<li><a href="teacherClassBoardList.jsp">학급 게시판</a></li>
 								<li><a href="/scheduleList">일정</a></li>
+								<li><a href="/timetable">시간표</a></li>
 							</ul>
 						</div>
 					</div></li>
