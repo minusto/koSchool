@@ -191,9 +191,26 @@
 											</tr>
 											
 											<tr>	
-												<td align="left" colspan="3">학부모  서명</td>	
+												<td align="center" colspan="3">학부모  서명확인란</td>	
 											</tr>
 		
+											<!-- 선생님일 경우 -->
+									<c:if test="${grade eq 'teacher'}">
+										<c:forEach var="list" items="${signList}">
+											<tr>
+												<td>${list.memberName}</td>
+												<td>${list.memberId}</td>
+												<c:choose>
+													<c:when test="${!empty list.sign }">
+														<td><img height="30"  src="${list.sign}" /></td>
+													</c:when>
+													<c:when test="${empty list.sign }">
+														<td>싸인요망</td>
+													</c:when>
+												</c:choose>
+											</tr>	
+										</c:forEach>
+									</c:if>
 										</tbody> 
 									</table>
 									
@@ -213,14 +230,7 @@
 									</c:if>
 									
 									<br />
-									<!-- 선생님일 경우 -->
-									<c:if test="${grade eq 'teacher'}">
-										<c:forEach var="list" items="${signList}">
-											${list.memberName}<br />
-											${list.memberId}<br />
-											<img src="${list.sign}" /><br />
-										</c:forEach>
-									</c:if>
+									
 									
 							</div>
 						</div>
