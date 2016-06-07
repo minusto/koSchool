@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM student s JOIN member m
 		ON s.memberId = m.memberId
 		WHERE schoolId = #{schoolId}
+		AND studentGrade = #{grade}
 		AND studentClass = #{classNum}
 		ORDER BY s.memberId
 	</select>

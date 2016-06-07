@@ -45,10 +45,14 @@ public class MockScoreController {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
+		int gradeNum = teacherVo.getTeacherClass() / 100;
+		String grade = Integer.toString(gradeNum);
+		
 		int classNumInt = teacherVo.getTeacherClass() % 100;
 		String classNum = Integer.toString(classNumInt);
 		
 		map.put("schoolId", memberVo.getSchoolId());
+		map.put("grade", grade);
 		map.put("classNum", classNum);
 		
 		studentList = service.studentListInTeacherClassService(map);
