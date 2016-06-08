@@ -41,7 +41,10 @@ public class StudentManageController {
 	}
 	//학생 정보 입력 작성자: 유지훈
 	@RequestMapping(value="/teacherInsertStudentForm", method=RequestMethod.POST)
-	public String insertStudent(MemberVO member, StudentVO student,HttpServletRequest request)throws Exception{
+	public String insertStudent(MemberVO member, StudentVO student,HttpServletRequest request,Model model)throws Exception{
+		
+		
+		
 		
 		MultipartFile file = student.getFile();// 파일 받음
 		if(!file.isEmpty()){		// 파일 존재 할 경우
@@ -78,6 +81,12 @@ public class StudentManageController {
 		service.updateMember(member);
 		service.updateStudent(student);
 		
+		HttpSession session=request.getSession();
+		MemberVO teacherMember = (MemberVO)session.getAttribute("member");
+		String id = teacherMember.getSchoolId();
+		List<MemberVO> list=  service.sameSchoolStudentNullList(id);
+		model.addAttribute("list",list);
+
 		return "/membermanage/teacher/teacherInsertStudentForm";
 	}
 	

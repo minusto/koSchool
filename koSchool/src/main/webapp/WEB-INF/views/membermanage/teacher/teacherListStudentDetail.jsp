@@ -51,6 +51,14 @@
 	#pic{
 	display: none;
 	}
+	
+	 #studentDetailLabel{
+	 	width: 50%;
+	 }
+	 
+	 #studentDetailFooter{
+	 	padding-left: 25%;
+	 }
 </style>
 <body class="flat-blue">
     <div class="app-container">
@@ -66,17 +74,12 @@
                                     <div class="card-title">
                                         <div class="title">${student.memberName} 학생 정보</div>
                                     </div>
-                                    <div class="pull-right card-action">
-                                        <div class="btn-group" role="group" aria-label="...">
-                                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalCardProfileExample"><i class="fa fa-code"></i></button>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                                 <div class="card-body">
-                                    <div class="row no-margin col-xs-12">
-                                    	<div class="col-md-1 ">
-                                        </div>
-                                        <div class="col-md-2">
+                                    <div id="studentDetailPicture" class="row col-xs-12 center-block">
+                                    <div class="col-md-4"></div>
+                                        <div class="col-md-4">
                                        
                                             <div class="card profile">
                                                 <div class="card-profile-img">
@@ -85,7 +88,7 @@
                                                     <c:if test="${student.studentPicture!=null }">
 														<c:set var="head" value="${fn:substring(student.studentPicture,0,fn:length(student.studentPicture)-4) }"></c:set>
 														<c:set var="pattern" value="${fn:substringAfter(student.studentPicture,head) }"></c:set>
-														<li class="profile-img"><img src="upload/${ head}_resize${pattern}"class="profile-img"></li>
+														<img src="upload/${ head}_resize${pattern}"class="profile-img">
 													</c:if>
 
                                                 </div>
@@ -100,9 +103,9 @@
                                         </div>
                                     </div>
                                     <form class="form-horizontal" action="correctionStudent" method="post" enctype="multipart/form-data">
-                                    		<div class="col-md-2"></div>
+                                    		<div class="col-md-4"></div>
                                     		<div class="col-md-3"id="pic">
-	                                                <label  class='control-label col-lg-2'>사진</label><input type='file' class='form-control' name='file' >
+	                                                <label  class='control-label col-lg-3'>사진</label><input type='file' class='form-control' name='file' >
 	                                                </div>	
 	                                                <div class="col-xs-12">
 	                                                <br><br>
@@ -111,47 +114,47 @@
                                     		<div class="form-inline">
 												<div class="col-md-5 col-xs-12" >
 													
-													<label for="inputPassword3" class="control-label col-lg-2">학생ID</label>
+													<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">학생ID</label>
 													<input id="inputPassword2" class="form-control" type="text" value="${student.memberId}" name="memberId" readonly="readonly">
 													<br>
-                                        			<label for="inputPassword3" class="control-label col-lg-2">이름</label>
+                                        			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">이름</label>
                                                 	<input type="text" class="form-control" id="inputPassword3" value="${student.memberName}" name="memberName" readonly="readonly">
                                         			<br>
-                                        			<label for="inputPassword3" class="control-label col-lg-2">생년월일</label>
+                                        			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">생년월일</label>
                                                 	<input type="date" class="form-control" id="inputPassword3" value="<fmt:formatDate value="${student.memberBirthday}" pattern="yyyy-MM-dd"/>" name="memberBirthday" readonly="readonly">
                                           	 		<br>
-                                        			<label for="inputPassword3" class="control-label col-lg-2">주소</label>
+                                        			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">주소</label>
                                                	 	<input type="text" class="form-control" id="inputPassword3" value="${student.memberAddress}" name="memberAddress" readonly="readonly">
                                            		 	<br>
-                                           		 	<label for="inputPassword3" class="control-label col-lg-2">전화번호</label>
+                                           		 	<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">전화번호</label>
                                                     <input type="text" class="form-control" id="inputPassword3" value="${student.memberTel}" name="memberTel" readonly="readonly">
                                            		 	<br>
-                                           		 	<label for="inputPassword3" class="control-label col-lg-2">이메일</label>
+                                           		 	<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">이메일</label>
                                            			<input type="email" class="form-control" id="inputPassword3" value="${student.memberEmail}" name="memberEmail" readonly="readonly">
                                            			<br>
-                                           			<label for="inputPassword3" class="control-label col-lg-2">학교ID</label>
+                                           			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">학교ID</label>
                                             		<input type="text" class="form-control" id="inputPassword3" value="${student.schoolId}" name="schoolId" readonly="readonly">
                                         		</div>
 												<div class="col-md-5 col-xs-12">
-											 		<label for="inputEmail3" class="control-label col-lg-2">학번</label>
+											 		<label id="studentDetailLabel" for="inputEmail3" class="control-label col-lg-2">학번</label>
                                            		 	<input type="text" class="form-control" id="inputPassword3" value="${student.studentCode}" name="studentCode" readonly="readonly">
                                         			<br>
-                                        			<label for="inputPassword3" class="control-label col-lg-2">학년</label>
+                                        			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">학년</label>
                                                 	<input type="text" class="form-control" id="inputPassword3" value="${student.studentGrade}" name="studentGrade" readonly="readonly">
                                         			<br>
-                                        			<label for="inputPassword3" class="control-label col-lg-2">반</label>
+                                        			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">반</label>
                                                 	<input type="text" class="form-control" id="inputPassword3" value="${student.studentClass}" name="studentClass" readonly="readonly">
                                           	 		<br>
-                                        			<label for="inputPassword3" class="control-label col-lg-2">출석번호</label>
+                                        			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">출석번호</label>
                                                	 	<input type="text" class="form-control" id="inputPassword3" value="${student.studentNum}" name="studentNum" readonly="readonly">
                                            		 	<br>
-                                           		 	<label for="inputPassword3" class="control-label col-lg-2">성별</label>
+                                           		 	<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">성별</label>
                                                     <input type="text" class="form-control" id="inputPassword3" value="${student.studentGender}" name="studentGender" readonly="readonly">
                                            		 	<br>
-                                           		 	<label for="inputPassword3" class="control-label col-lg-2">학과</label>
+                                           		 	<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">학과</label>
                                            			<input type="text" class="form-control" id="inputPassword3" value="${student.studentMajor}" name="studentMajor" readonly="readonly">
                                            			<br>
-                                           			<label for="inputPassword3" class="control-label col-lg-2">비고</label>
+                                           			<label id="studentDetailLabel" for="inputPassword3" class="control-label col-lg-2">비고</label>
                                             		<input type="text" class="form-control" id="inputPassword3" value="${student.memberNote}" name="memberNote" readonly="readonly">
                                         			<!-- 이미지사진 파일 -->
 <%--                                         			<input type="hidden" class="form-control" id="inputPassword3" value="${student.studentPicture}" name="studentPicture" readonly="readonly"> --%>
@@ -159,10 +162,10 @@
                                         		</div>
 											</div>
                                     	</div>
-                                        <div class="col-xs-12">
+                                        <div id="studentDetailFooter" class="col-xs-12 center-block">
                                         <br><br>
                                             <div class="col-md-3 col-xs-12">
-                                                <button type="button" class="btn btn-default" onclick="location.href='teacherListStudent.jsp'">이전페이지</button>
+                                                <button type="button" class="btn btn-default" onclick="location.href='teacherListStudent'">목록보기</button>
                                             </div>
                                             <div class="col-md-3 col-xs-12">
                                                 <button class="btn btn-primary btn-success" data-target="#modalSuccess" data-toggle="modal" type="button"> 성적조회 </button>
