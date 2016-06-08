@@ -73,6 +73,7 @@ public class NesinDaoImpl implements NesinDao {
 
 	@Override
 	public List<NesinLoadForm> loadSaveForm(Map<String, String> map) throws Exception {
+		System.out.println("dao까지감");
 		return session.selectList(namespace+".loadSaveForm", map);
 	}
 

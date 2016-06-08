@@ -94,8 +94,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </insert>
    <!-- 내신 입력 테이블 불러오기 -->
    <select id="loadSaveForm" resultType="NesinLoadForm">
-   		SELECT n.memberId , n.subjectId, s.subjectUnit,
-   						s.subjectName, s.subjectType, s.subjectGrade
+   		SELECT n.memberId AS memberId, n.subjectId AS subjectId, s.subjectUnit AS subjectUnit,
+   						s.subjectName AS subjectName, s.subjectType AS subjectType, s.subjectGrade AS subjectGrade
 		FROM nesinSaveForm n, subject s
 		WHERE n.subjectId = s.subjectId
 		AND memberId = #{id}

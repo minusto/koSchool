@@ -37,8 +37,6 @@ public class JsonController {
 	@RequestMapping("/loadForm_ajax")
 	public List<NesinLoadForm> loadForm_ajax(@RequestParam("studentGrade") String studentGrade,
 			@RequestParam("check") String check, HttpSession session)throws Exception{
-		System.out.println(studentGrade);
-		System.out.println(check);
 		TeacherVO teacher = (TeacherVO)session.getAttribute("teacher");
 		String memberId = teacher.getMemberId();
 		Map<String, String> map = new HashMap<String, String>();
@@ -48,7 +46,6 @@ public class JsonController {
 			map.put("grade", "1");
 			map.put("id", memberId);
 			list = service.loadSaveForm(map);
-			System.out.println(list.get(1).getSubjectName());
 			if(studentGrade.equals("1")){
 				for(int i=0; i<list.size(); i++){
 					list.get(i).setNesinYear(2016);
