@@ -62,7 +62,7 @@
 									
 									
  									
- 									<a href="#" class="pull-right" ><button class="btn btn-default" onclick="location.href='/schoolmanage/systemInsertSchoolAdminForm'">학교관리자 등록</button></a><br><br>
+ 									<a href="#" class="pull-right" ><button class="btn btn-default" onclick="location.href='/systemInsertSchoolAdminForm'">학교관리자 등록</button></a><br><br>
  									<br><br>
 									
 							</div>
