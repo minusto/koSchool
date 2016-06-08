@@ -63,6 +63,10 @@ public class SchoolNewsLetterController {
 		
 		//가정통신문 등록
 		service.schoolNewsLetterInsert(schoolNews);
+		System.out.println("memberId=========" +schoolNews.getMemberId());
+		System.out.println("number===========" + schoolNews.getSchoolNewsLetterNum());
+		System.out.println("title===========" + schoolNews.getTitle());
+		System.out.println("content=========" + schoolNews.getContent());
 		
 		//교사의 담당학생 학부모 로우값 반환
 		List<ParentVO> parentList = service.teacherParentList(schoolNews);
