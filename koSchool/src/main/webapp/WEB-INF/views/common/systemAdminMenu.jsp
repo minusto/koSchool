@@ -61,14 +61,6 @@
 				class="navbar-right-expand-toggle pull-right visible-xs">
 				<i class="fa fa-times icon"></i>
 			</button>
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown" role="button" aria-expanded="false"><i
-					class="fa fa-comments-o"></i></a>
-				<ul class="dropdown-menu animated fadeInDown">
-					<li class="title">알림 <span class="badge pull-right">0</span>
-					</li>
-					<li class="message">알림 없음</li>
-				</ul></li>
 
 			<li class="dropdown profile"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown" role="button" aria-expanded="false">시스템관리자<span

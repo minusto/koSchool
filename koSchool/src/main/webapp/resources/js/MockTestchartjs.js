@@ -1,7 +1,9 @@
 //언어 차트 START
 $(function() {
-	var selectNowMock = $("#selectNowMock").html().substr(7,7);
-	
+	if(($("#selectNowMock").html())!= null){
+		var selectNowMock = $("#selectNowMock").html().substr(7,7);
+	}
+		
 	var myKorScore = new Array("0","0","0","0","0","0","0","0","0","0");
 	for(var i in myKorScore){	
 		if(typeof $("#myKorScore"+i).val() !== 'undefined'){
@@ -99,7 +101,9 @@ $(function() {
 
 //수리 차트 START
 $(function() {
-	var selectNowMock = $("#selectNowMock").html().substr(7,7);
+	if(($("#selectNowMock").html())!= null){
+		var selectNowMock = $("#selectNowMock").html().substr(7,7);
+	}
 
 	var myMathScore = new Array("0","0","0","0","0","0","0","0","0","0");
 	for(var i in myMathScore){	
@@ -196,7 +200,9 @@ $(function() {
 
 //외국어 차트 START
 $(function() {
-	var selectNowMock = $("#selectNowMock").html().substr(7,7);
+	if(($("#selectNowMock").html())!= null){
+		var selectNowMock = $("#selectNowMock").html().substr(7,7);
+	}
 	
 	var myEngScore = new Array("0","0","0","0","0","0","0","0","0","0");
 	for(var i in myEngScore){	

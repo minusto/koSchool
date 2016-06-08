@@ -100,14 +100,14 @@ public class SchoolManageDAOImpl implements SchoolManageDAO{
 
 	@Override
 	public void updateMember(MemberVO member) throws Exception {
-		System.out.println("=== dao start");
-		System.out.println("=== memberName :: " + member.getMemberName());
-		System.out.println("=== memberBirthday :: " + member.getMemberBirthday());
-		System.out.println("=== memberTel :: " + member.getMemberTel());
-		System.out.println("=== memberEmail :: " + member.getMemberEmail());
-		System.out.println("=== memberId :: " + member.getMemberId());
+//		System.out.println("=== dao start");
+//		System.out.println("=== memberName :: " + member.getMemberName());
+//		System.out.println("=== memberBirthday :: " + member.getMemberBirthday());
+//		System.out.println("=== memberTel :: " + member.getMemberTel());
+//		System.out.println("=== memberEmail :: " + member.getMemberEmail());
+//		System.out.println("=== memberId :: " + member.getMemberId());
 		session.update(namespace + ".updateMember" , member);
-		System.out.println("=== dao end");
+//		System.out.println("=== dao end");
 	}
 
 	@Override
@@ -121,6 +121,18 @@ public class SchoolManageDAOImpl implements SchoolManageDAO{
 
 	public void deleteTeacher2(String memberId) {
 		session.delete(namespace + ".deleteTeacher2" , memberId);
+	}
+	
+	//액터 : 학교관리자 / 작업 : 교사등록폼에서 학교 관리자의 학교 ID를 박아주기. 학교관리자의 ID로 학교 ID 불러오기 / 작성자 : 구혜인
+	@Override
+	public String selectSchoolIdBySchoolAdminID(String schoolAdminId) throws Exception {
+		return session.selectOne(namespace + ".selectSchoolIdBySchoolAdminID", schoolAdminId);
+	}
+	
+	//액터 : 학교관리자 / 작업 : 교사등록폼에서 학교 관리자의 학교 ID를 박아주기. 학교관리자의 ID로 학교 ID 불러오기 / 작성자 : 구혜인
+	@Override
+	public SubjectVO subjectBysubjectId(String subjectId) throws Exception {
+		return session.selectOne(namespace + ".subjectBysubjectId", subjectId);
 	}
 	
 	

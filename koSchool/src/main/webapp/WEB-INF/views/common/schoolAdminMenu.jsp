@@ -56,15 +56,6 @@
 							class="navbar-right-expand-toggle pull-right visible-xs">
 							<i class="fa fa-times icon"></i>
 						</button>
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown" role="button" aria-expanded="false"><i
-					class="fa fa-comments-o"></i></a>
-				<ul class="dropdown-menu animated fadeInDown">
-					<li class="title">채팅 <span class="badge pull-right"></span>
-					</li>
-					<li class="message"><a href="http://localhost:50000">채팅하기</a>
-					</li>
-				</ul></li>
 
 						<li class="dropdown profile"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -75,8 +66,8 @@
 									class="profile-img"></li>
 								<li>
 									<div class="profile-info">
-                                        <h4 class="username">${schoolAdmin.schoolAdminName }</h4>
-                                        <p>${schoolAdmin.schoolAdminTel }</p>
+	                                       <h4 class="username">${schoolAdmin.schoolAdminName }</h4>
+	                                       <p>${schoolAdmin.schoolAdminTel }</p>
 										<div class="btn-group margin-bottom-2x" role="group">
 											<button type="button" class="btn btn-default">
 												<i class="fa fa-user"></i> Profile
@@ -87,7 +78,8 @@
 										</div>
 									</div>
 								</li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</nav>
@@ -95,9 +87,9 @@
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="side-menu-container">
 						<div class="navbar-header">
-							<a class="navbar-brand" href="#">
+							<a class="navbar-brand" href="schoolAdminMain">
 								<div class="icon fa fa-book"></div>
-								<div class="title" onclick="location.href='/schoolAdminMain'">학사관리</div>
+								<div class="title">학사관리</div>
 							</a>
 							<button type="button"
 								class="navbar-expand-toggle pull-right visible-xs">
