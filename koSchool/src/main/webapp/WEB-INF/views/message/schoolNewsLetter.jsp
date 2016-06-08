@@ -29,7 +29,7 @@
 									<div class="col-lg-1"></div>
 									<div class="card-body table-responsive col-lg-10">
 										<!-- Table -->
-											<form id="frm" method="post" action="/message/schoolNewsLetter">
+											<form id="frm" method="post" action="schoolNewsLetter">
 										<table class="table table-striped">
 											<thead>
 												<tr class="headings">

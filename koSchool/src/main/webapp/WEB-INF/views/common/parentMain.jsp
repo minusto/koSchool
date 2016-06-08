@@ -203,7 +203,7 @@
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="/message/schoolNewsLetterList">
+																			<a href="schoolNewsLetterList">
 																			<h3>가정 통신문 조회</h3>
 																			</a>
 																		</div>
