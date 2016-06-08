@@ -10,7 +10,31 @@
 <head>
 <title>빈칸</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<!-- jQuery-->
+    <script src="/resources/js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+		$(function(){
+			$('#upform').css('display','none');
+			
+			$('#upup').click(function(){
+				$('#upform').css('display','inline');
+				$('#upup').css('display','none');
+			})
+		
+	$(document).on('click','#sub',function(){
+		  if ($('input[name=memberPassword]').val()=="" || $('input[name=memberPassword]').val() == null) {
+			 alert('비밀번호를 입력하세요');
+			return false;
+		}
+    			if ($('input[name=memberPassword]').val()!=$('input[name=pCheck]').val()){
+    				alert("비밀번호와 비밀번호 확인란 이 다릅니다.");
+    				return false;
+    			}else{
+    				alert("수정 되었습니다.")
+    			} 
+	})
+		})
+	</script>
 </head>
 
 <body class="flat-blue">
@@ -96,8 +120,34 @@
 
 										</tr>
 									</table>
-									<a href="/teacherMain" class="pull-right"><button
+									<div id="upform" class="col-md-5">
+									<form action="/upStudentProfile" method="post">
+										<div class="form-group">
+                                            <label class="col-sm-12 control-label">비밀번호</label>
+                                            <div class="col-sm-12">
+                                                <input id="password "type="password" class="form-control" name="memberPassword" >
+                                            </div>
+                                        </div>
+                                        
+										<div class="form-group">
+                                            <label class="col-sm-12 control-label">비밀번호 체크</label>
+                                            <div class="col-sm-12">
+                                               <input name="pCheck" type="password" class="form-control " >
+                                            </div>
+                                        </div>
+                                            <div class="col-md-12">
+                                            <br>
+                                            </div>
+                                        <div class="form-group col-md-6">
+                                                <input id="sub" type="submit" class="form-control " value="수정">
+                                            </div>
+                                            
+									</form>
+									</div>
+									<div class="col-md-12"></div>
+									<a href="/" class="pull-right"><button
 											type="button" class="btn btn-primary">돌아가기</button></a>
+											<button type="button" class="btn btn-primary" id="upup">비밀번호 수정</button>
 								</div>
 							</div>
 						</div>

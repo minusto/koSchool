@@ -69,7 +69,7 @@
 	                                       <h4 class="username">${schoolAdmin.schoolAdminName }</h4>
 	                                       <p>${schoolAdmin.schoolAdminTel }</p>
 										<div class="btn-group margin-bottom-2x" role="group">
-											<button type="button" class="btn btn-default">
+											<button type="button" class="btn btn-default" onclick="location.href='/schoolAdminProfile'">
 												<i class="fa fa-user"></i> Profile
 											</button>
 											<button type="button" class="btn btn-default" onclick="location.href='logout'">

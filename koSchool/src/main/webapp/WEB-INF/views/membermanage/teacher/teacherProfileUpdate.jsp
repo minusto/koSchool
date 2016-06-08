@@ -25,6 +25,20 @@
 				  $(this).css('color','#333');
 				 }
 			});
+
+		
+	$('#upbutton').on('click','#upup',function(){
+		  if ($('input[name=memberPassword]').val()=="" || $('input[name=memberPassword]').val() == null) {
+			 alert('비밀번호를 입력하세요');
+			return false;
+		}
+    			if ($('input[name=memberPassword]').val()!=$('input[name=pCheck]').val()){
+    				alert("비밀번호와 비밀번호 확인란 이 다릅니다.");
+    				return false;
+    			}else{
+    				alert("수정 되었습니다.")
+    			} 
+	})
 		})
 	</script>
 </head>
@@ -53,8 +67,18 @@
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" name="memberName" value="${member.memberName}">
                                                 <input type="hidden" class="form-control" name="memberId" value="${member.memberId}">
-                                   
-                                            
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
+                                            <div class="col-sm-5">
+                                                <input id="password "type="password" class="form-control" name="memberPassword" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label ">비밀번호 체크</label>
+                                            <div class="col-sm-5">
+                                                <input name="pCheck" type="password" class="form-control " required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -147,9 +171,10 @@
                                                 <input type="text" class="form-control" name="teacherPosition" value="${teacher.teacherPosition}">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-default">수정</button>
+                                        
+                                        <div   class="form-group">
+                                            <div id="upbutton" class="col-sm-offset-2 col-sm-10">
+                                                <button id="upup"type="submit" class="btn btn-default">수정</button>
                                                 
                                             </div>
                                         </div>

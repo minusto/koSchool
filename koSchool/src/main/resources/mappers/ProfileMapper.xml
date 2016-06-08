@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	UPDATE member
 	SET
 	memberName =#{memberName},
+	memberPassword=#{memberPassword},
 	memberBirthday=#{memberBirthday},
 	memberTel=#{memberTel},
 	memberAddress = #{memberAddress},
@@ -33,6 +34,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		teacherPosition=#{teacherPosition}, 
 		subjectId=#{subjectId}
 		WHERE memberId=#{memberId}
+	</update>
+	
+	<update id="schoolAdminUpdate">
+	UPDATE schoolAdmin
+	SET
+	schoolAdminName = #{schoolAdminName},
+	schoolAdminTel =#{schoolAdminTel},
+	schoolAdminPassword=#{schoolAdminPassword}
+	WHERE schoolAdminId = #{schoolAdminId}
+	
+	</update>
+	
+	<update id="updateStudentPword">
+	UPDATE member
+	SET memberpassword =#{memberPassword}
+	WHERE memberid=#{memberId}
 	</update>
 
 	

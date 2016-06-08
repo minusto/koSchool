@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import ko.school.common.domain.MemberVO;
+import ko.school.common.domain.SchoolAdminVO;
 import ko.school.common.domain.TeacherVO;
 
 @Repository
@@ -33,6 +34,22 @@ public class ProfileDAOImpl implements ProfileDAO {
 		session.update(namespace+".updateTeacher",tVO);
 		
 	}
+
+	@Override
+	public void schoolAdminUpdate(SchoolAdminVO saVO) throws Exception {
+		session.update(namespace+".schoolAdminUpdate",saVO);
+		
+	}
+
+	@Override
+	public void updateStudentPword(MemberVO mVO) throws Exception {
+		session.update(namespace+".updateStudentPword",mVO);
+		
+	}
+	
+	
+	
+	
 	
 	
 

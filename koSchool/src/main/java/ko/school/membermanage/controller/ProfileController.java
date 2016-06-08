@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ko.school.common.domain.MemberVO;
+import ko.school.common.domain.SchoolAdminVO;
 import ko.school.common.domain.StudentVO;
 import ko.school.common.domain.TeacherVO;
 import ko.school.membermanage.service.ProfileService;
@@ -116,9 +117,49 @@ public class ProfileController {
 		return "/common/studentProfile";
 	}
 	
+	//학생 -->프로필 비번 수정
+	@RequestMapping(value="/upStudentProfile", method=RequestMethod.POST)
+	public String upStudentProfile(MemberVO memberVO, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO mVO = (MemberVO)session.getAttribute("member");
+		System.out.println(memberVO.getMemberPassword());
+		
+		
+		mVO.setMemberPassword(memberVO.getMemberPassword());
+		service.updateStudentPword(mVO);
+		
+		
+		return "redirect:/studentProfile";
+	}
+	
 	//학부모--> 프로필  폼만 만듬 
 	
 	
+	//학교관리자 프로필
+	@RequestMapping(value="/schoolAdminProfile", method=RequestMethod.GET)
+	public String schoolAdminProfile(Model model,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		SchoolAdminVO saVO = (SchoolAdminVO)session.getAttribute("schoolAdmin");
+		model.addAttribute("schoolAdmin", saVO);
+		//session.setAttribute("schoolAdmin", saVO);
+		
+		
+		return "/common/schoolAdminProfile";
+	}
+	
+	
+	//학교관리자 프로필 정보수정
+	@RequestMapping(value="/updateSchoolAdminProfile", method=RequestMethod.POST)
+	public String schoolAdminUpdate(HttpServletRequest request,SchoolAdminVO saVO) throws Exception {
+		HttpSession session = request.getSession();
+		
+		
+		service.schoolAdminUpdate(saVO);
+		
+		session.setAttribute("schoolAdmin", saVO);
+		
+		return "redirect:/schoolAdminProfile";
+	}
 	
 	
 	
