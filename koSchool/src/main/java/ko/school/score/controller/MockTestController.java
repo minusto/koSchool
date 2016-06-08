@@ -27,7 +27,7 @@ import ko.school.score.service.MockTestService;
 
 @Controller
 public class MockTestController {
-
+	//모의고사 성적 조회 컨트롤러 - 작성자 : 이재승
 	@Inject
 	private MockTestService service;
 

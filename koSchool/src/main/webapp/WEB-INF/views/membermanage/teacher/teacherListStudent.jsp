@@ -80,7 +80,7 @@
 										</tbody> 
 									</table>
 									<!--페이지 -->
-									<a href="teacherInsertStudentForm.jsp" class="pull-right" ><button class="btn btn-default">등록</button></a><br><br>
+									<a href="teacherInsertStudentForm" class="pull-right" ><button class="btn btn-default">등록</button></a><br><br>
  									<br><br>
 									<!-- 검색 -->
 									<form action="" method="post" class="pull-right">

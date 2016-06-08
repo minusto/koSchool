@@ -1,7 +1,6 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <%@ include file="logic/teacherSessionCheck.jsp" %> --%>
 <!DOCTYPE html>
 <% int i=1; //이만한게 없음 스클립트에 존재이유임 더 좋은 방법있으면 알려주세요^^ 작성자:김상완 %> 
 <html>
@@ -13,6 +12,14 @@
     <script src="/resources/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
 		$(function(){
+			var teacherClass=Number($("#teacherClass").val());
+			var schoolClass=teacherClass%100;
+			var schoolGrade=parseInt(teacherClass/100);
+			
+			$("#studentGrade").val(schoolGrade);
+			$("#studentClass").val(schoolClass);
+			
+			
 			$('tbody').on('click','#clickStu',function(){
 				$('input[name=memberId]').val($(this).html());
 				$('button[class=close]').trigger('click'); 
@@ -29,6 +36,7 @@
 	</script>
 </head>
 <body class="flat-blue">
+<input type="hidden" id="teacherClass" value="${teacher.teacherClass}">
     <div class="app-container">
         <div class="row content-container">
         	<jsp:include page="../../common/teacherMenu.jsp"/>
@@ -124,13 +132,13 @@
                                         <div class="form-group">
                                             <label  class="col-sm-2 control-label">학년</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control"  name="studentGrade" placeholder="studentGrade">
+                                                <input type="text" class="form-control"  name="studentGrade" placeholder="studentGrade" id="studentGrade">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label  class="col-sm-2 control-label">반</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control"  name="studentClass" placeholder="studentClass">
+                                                <input type="text" class="form-control"  name="studentClass" placeholder="studentClass" id="studentClass">
                                             </div>
                                         </div>
                                         <div class="form-group">
