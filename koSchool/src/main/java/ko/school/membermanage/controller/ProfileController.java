@@ -63,7 +63,7 @@ public class ProfileController {
 		HttpSession session = request.getSession();
 		
 		MultipartFile file = tVO.getFile(); // 파일 받음
-		
+		String prevPic = service.getTeacherPic(mVO);
 		if(!file.isEmpty()){		// 파일 존재 할 경우
 
 			String filename = file.getOriginalFilename();		//업로드 파일 이름 받음
@@ -97,6 +97,19 @@ public class ProfileController {
 			tVO.setTeacherPicture(service.getTeacherPic(mVO));
 		}
 		service.updateTeacher(mVO, tVO);
+		
+		//기존 사진 삭제 
+		if(!file.isEmpty()&&prevPic!=null){
+			File delFile =new File(request.getRealPath("/upload")+"/"+prevPic);
+			String headName = prevPic.substring(0, prevPic.lastIndexOf("."));
+			String pattern =prevPic.substring(prevPic.lastIndexOf(".")+1);
+			File delResizeFile =new File(request.getRealPath("/upload")+"/"+
+					headName+"_resize."+pattern);
+			if(delFile.exists()){
+				delFile.delete();
+				delResizeFile.delete();
+			}
+		}
 		
 		session.setAttribute("member", mVO);
 		session.setAttribute("teacher", tVO);
