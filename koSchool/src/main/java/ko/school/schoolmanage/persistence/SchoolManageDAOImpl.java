@@ -123,6 +123,12 @@ public class SchoolManageDAOImpl implements SchoolManageDAO{
 		session.delete(namespace + ".deleteTeacher2" , memberId);
 	}
 	
+	//액터 : 학교관리자 / 작업 : 교사등록폼에서 학교 관리자의 학교 ID를 박아주기. 학교관리자의 ID로 학교 ID 불러오기 / 작성자 : 구혜인
+	@Override
+	public String selectSchoolIdBySchoolAdminID(String schoolAdminId) throws Exception {
+		return session.selectOne(namespace + ".selectSchoolIdBySchoolAdminID", schoolAdminId);
+	}
+	
 	
 
 

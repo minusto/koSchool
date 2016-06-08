@@ -89,8 +89,12 @@ public class SchoolManageController {
 	}
 	//학교관리자-> 교사 등록 겟 작성자: 유지훈
 	@RequestMapping(value = "/schoolAdminInsertTeacherForm", method = RequestMethod.GET)
-	public String teacherRegist(Model model)throws Exception {
+	public String teacherRegist(HttpServletRequest request, Model model)throws Exception {
+		HttpSession session = request.getSession();
+		SchoolAdminVO schoolAdminVo = (SchoolAdminVO)session.getAttribute("schoolAdmin");
+		String schoolId = service.selectSchoolIdBySchoolAdminIDService(schoolAdminVo.getSchoolAdminId());
 		
+		model.addAttribute("schoolId", schoolId);
 		model.addAttribute("list", service.schoolList());
 		model.addAttribute("list2", service.subjectList());
 		logger.info("교사 등록폼 겟");

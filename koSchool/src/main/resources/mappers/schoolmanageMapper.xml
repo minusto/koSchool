@@ -56,6 +56,12 @@
 		set SchoolEndDate = #{schoolEndDate}
 		where SchoolAdminId = #{schoolAdminId}
 	</update>
+	
+	<!-- 액터 : 학교관리자 / 작업 : 교사등록폼에서 학교 관리자의 학교 ID를 박아주기. 학교관리자의 ID로 학교 ID 불러오기 / 작성자 : 구혜인 -->
+	<select id="selectSchoolIdBySchoolAdminID" resultType="String">
+		SELECT schoolId FROM schoolRegist WHERE schoolAdminID = #{schoolAdminId}
+	</select>
+	
 <!-- 학교관리자->교사등록폼 학교목록 -->
 	<select id="schoolList" resultType="SchoolVO">
 		SELECT *
