@@ -44,7 +44,7 @@
 	<script type="text/javascript" src="/resources/lib/js/ace/mode-html.js"></script>
 	<script type="text/javascript" src="/resources/lib/js/ace/theme-github.js"></script>
 	<!-- Javascript -->
-<!-- 	<script type="text/javascript" src="/resources/js/app.js"></script> -->
+	<script type="text/javascript" src="/resources/js/app.js"></script>
 	
 	<script type="text/javascript">
 
@@ -153,14 +153,14 @@
 		<div class="side-menu-container">
 			<div class="navbar-header">
 				 <c:choose>
-						<c:when test="${grade eq '학생'}">
-							<a class="navbar-brand" href="studentMain.jsp">
+						<c:when test="${grade eq 'student'}">
+							<a class="navbar-brand" href="/">
 								<div class="icon fa fa-book"></div>
 								<div class="title">학사관리</div>
 							</a>
 						</c:when>
 						<c:otherwise>
-							<a class="navbar-brand" href="parentMain.jsp">
+							<a class="navbar-brand" href="/">
 								<div class="icon fa fa-book"></div>
 								<div class="title">학사관리</div>
 							</a>
@@ -187,8 +187,7 @@
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
 								<li><a href="studentListScore2">내신성적조회</a></li>
-								<li><a href="studentListMockTestScore.jsp?studentId=${id}">모의고사성적조회</a></li>
-
+								<li><a href="mockTestList?id=${member.memberId }">모의고사성적조회</a></li>
 							</ul>
 						</div>
 					</div></li>
