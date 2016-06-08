@@ -60,7 +60,6 @@
    }
    //별도 보관
    document.getElementById("save").onclick = function(){
-	   alert(pic);
     var pic = "<img src ='" +  canvas.toDataURL() + "'>"
 
     //alert("save");
@@ -112,7 +111,6 @@
  </script>
 
 	<script type="text/javascript">
-	alert("${grade}");
 		function saveSign() {
 			var canvas = document.getElementById("can");
 			

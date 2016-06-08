@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,11 +41,11 @@ public class SchoolNewsLetterController {
 		
 		HttpSession session = request.getSession();
 		String grade = session.getAttribute("grade").toString();
-		
+		String teacherMemberId = "";
 
 		if ("parent".equals(grade)) {
 			ParentVO member = (ParentVO) session.getAttribute("parent");
-			String teacherMemberId = service.teacherMemberId(member);
+			teacherMemberId = service.teacherMemberId(member);
 			schoolNews.setMemberId(teacherMemberId);			
 		}
 		if ("teacher".equals(grade)) {
@@ -52,7 +53,10 @@ public class SchoolNewsLetterController {
 			schoolNews.setMemberId(memberVO.getMemberId());		
 		}
 		
-		model.addAttribute("list", service.schoolNewsLetterList(schoolNews));
+		//조회된 담임이 있을 경우에만 리스트를 가져온다.
+		if (!StringUtils.isEmpty(teacherMemberId)) {
+			model.addAttribute("list", service.schoolNewsLetterList(schoolNews));			
+		}
 		
 		return "/message/schoolNewsLetterList";
 	}
@@ -65,9 +69,7 @@ public class SchoolNewsLetterController {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		
 		schoolNews.setMemberId(member.getMemberId());
-		System.out.println("number===========" + schoolNews.getSchoolNewsLetterNum());
-		System.out.println("title===========" + schoolNews.getTitle());
-		System.out.println("content=========" + schoolNews.getContent());
+		
 		//가정통신문 등록
 		service.schoolNewsLetterInsert(schoolNews);
 		

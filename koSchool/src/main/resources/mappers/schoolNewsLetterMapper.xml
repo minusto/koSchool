@@ -32,7 +32,21 @@ insert into schoolNewsLetter
 		a.studentMemberId in (
 			select a.memberId from student a
 			where
-				a.studentClass = (select a.teacherClass from teacher a where a.memberId = #{memberId})
+			
+				case
+					when
+						<!-- 반이 1자리 수일 경우 -->
+						length(a.studentClass) = 1
+					then 
+						a.studentGrade || '0' || a.studentClass
+					when
+						<!-- 반이 2자리 수일 경우 -->
+						length(a.studentClass) = 2
+					then 
+						a.studentGrade || a.studentClass
+				end
+				
+				= (select a.teacherClass from teacher a where a.memberId = #{memberId})
 		)
 </select>
 
@@ -58,7 +72,20 @@ insert into schoolNewsLetterSign
 	select a.memberid from teacher a
 	where
 		a.teacherclass in (
-			select a.studentclass from student a
+			select
+				case
+					when
+						<!-- 반이 1자리 수일 경우 -->
+						length(a.studentClass) = 1
+					then 
+						a.studentGrade || '0' || a.studentClass
+					when
+						<!-- 반이 2자리 수일 경우 -->
+						length(a.studentClass) = 2
+					then 
+						a.studentGrade || a.studentClass
+				end
+			from student a
 			where
 				a.memberid = (select a.studentmemberid from parent a where a.memberId = #{memberId})
 		)
