@@ -1,7 +1,5 @@
 package ko.school.common.domain;
 
-import java.sql.Timestamp;
-
 public class MemberVO{
 
 	private String memberId;

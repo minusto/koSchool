@@ -1,17 +1,15 @@
 package ko.school.membermanage.domain;
 
-import java.io.Serializable;
+public class ParentNullList{
+	private String memberId;
 
-public class ParentNullList implements Serializable{
-	private String parentId;
-
-	public String getParentId() {
-		return parentId;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
-	
-	
+
+
 }

@@ -46,17 +46,17 @@
 										<tbody>
 											<c:forEach var="list" items="${list}">
 												<tr>
-													<td>${list.parentId }</td>
-													<td>${list.parentName }</td>
-													<td>${list.familyRelation }</td>
 													<td>${list.memberId }</td>
 													<td>${list.memberName }</td>
+													<td>${list.familyRelation }</td>
+													<td>${list.studentMemberId }</td>
+													<td>${list.studentMemberName }</td>
 												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
 									<!--페이지 -->
-									<a href="teacherInsertParentForm.jsp" class="pull-right" ><button class="btn btn-default">학부모 등록</button></a><br><br>
+									<a href="teacherInsertParentForm" class="pull-right" ><button class="btn btn-default">학부모 등록</button></a><br><br>
  									<br><br>
 									<!-- 검색 -->
 									<form action="" method="post" class="pull-right">

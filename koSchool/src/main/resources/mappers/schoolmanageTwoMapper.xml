@@ -35,8 +35,8 @@
 	</insert>
 	
 	<insert id="insertParentIdManage">
-		INSERT INTO parent(memberId , studentMemberId , familyRelation , parentName , parentpassword)
-		values( #{memberId} , null , null , null , '1234')
+		INSERT INTO parent(memberId , studentMemberId , familyRelation)
+		values(#{memberId} , null , null)
 	</insert>
 	
 	<!-- 아이디등록시 세션처리 -->

@@ -17,11 +17,11 @@
     <script src="/resources/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
 		$(function(){
-			$('tbody:eq(0)').on('click','#clickStu',function(){
-				$('input[name=parentId]').val($(this).html());
+			$(document).on('click','#clickStu1',function(){
+				$('input[id=parentId]').val($(this).html());
 				$('button[class=close]').trigger('click'); 
 			})
-			$('tbody:eq(0) #clickStu').on({
+			$('#clickStu1').on({
 				 mouseenter: function(){
 				  $(this).css('color','red');
 				 },
@@ -29,11 +29,11 @@
 				  $(this).css('color','#333');
 				 }
 			});
-			$('tbody:eq(1)').on('click','#clickStu',function(){
-				$('input[name=memberId]').val($(this).html());
+			$(document).on('click','#clickStu',function(){
+				$('input[id=memberId]').val($(this).html());
 				$('button[class=close]').trigger('click'); 
 			})
-			$('tbody:eq(1) #clickStu').on({
+			$('#clickStu').on({
 				 mouseenter: function(){
 				  $(this).css('color','red');
 				 },
@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-2 control-label">학부모ID</label>
                                             <div class="col-sm-5">
-                                            	<input type="text" class="form-control" id="parentId" name="parentId" placeholder="parentID">
+                                            	<input type="text" class="form-control" id="parentId" name="memberId" placeholder="parentID">
                                                 <!-- Button trigger modal -->
                                         		<button type="button" class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modalPrimary" >
                                             		학부모ID 찾기
@@ -86,7 +86,7 @@
 																		<c:forEach var="parent" items="${list }">
 																		<tr >
 																			<td><%=i++ %></td>
-																			<td id="clickStu" style="cursor:pointer">${parent.parentId }</td>
+																			<td id="clickStu1" style="cursor:pointer">${parent.memberId }</td>
 																		</tr>
 																		</c:forEach>
 																	</tbody>
@@ -102,7 +102,7 @@
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-2 control-label">이름</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="parentName"  name="parentName" placeholder="Name">
+                                                <input type="text" class="form-control" id="parentName"  name="memberName" placeholder="Name">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -114,7 +114,7 @@
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-2 control-label">학생ID</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="memberId" name="memberId" placeholder="StudentID">
+                                                <input type="text" class="form-control" id="memberId" name="studentMemberId" placeholder="StudentID">
                                             	<button type="button" class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modalPrimary2" >
                                             		학생ID 찾기
                                       			</button>

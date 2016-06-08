@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
+import ko.school.membermanage.domain.ParentInsertCommand;
 import ko.school.membermanage.domain.ParentList;
 import ko.school.membermanage.domain.ParentNullList;
 import ko.school.membermanage.domain.StudentDetail;
@@ -65,8 +66,8 @@ public class StudentManageServiceImpl implements StudentManageService{
 	}
 
 	@Override
-	public void insertParent(ParentVO parent)throws Exception {
-		dao.insertParent(parent);
+	public void insertParent(ParentInsertCommand command)throws Exception {
+		dao.insertParent(command);
 	}
 
 	@Override
@@ -77,6 +78,11 @@ public class StudentManageServiceImpl implements StudentManageService{
 	@Override
 	public String getStudentPic(MemberVO member) throws Exception {
 		return dao.getStudentPic(member);
+	}
+
+	@Override
+	public void parentUpdateMember(MemberVO member) {
+		dao.parentUpdateMember(member);
 	}
 	
 	

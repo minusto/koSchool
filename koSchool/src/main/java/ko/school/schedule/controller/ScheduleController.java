@@ -80,7 +80,7 @@ public class ScheduleController {
 		if(grade.equals("schoolAdmin")){
 			SchoolAdminVO vo=(SchoolAdminVO)session.getAttribute("schoolAdmin");
 			schoolAdminId=vo.getSchoolAdminId();
-		}else if(grade.equals("student")||grade.equals("teacher")){
+		}else if(grade.equals("student")||grade.equals("teacher")||grade.equals("parent")){
 			MemberVO memberVO=(MemberVO)session.getAttribute("member");
 			schoolAdminId=service.getSchoolAdminIdService(memberVO);
 		}

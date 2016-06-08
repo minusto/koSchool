@@ -4,15 +4,8 @@ public class ParentVO{
 
 	private String memberId;
 	private String familyRelation;
-	private String parentName;
 	private String studentMemberId;
 
-	
-	@Override
-	public String toString() {
-		return "ParentVO [memberId=" + memberId + ", familyRelation=" + familyRelation + ", parentName=" + parentName
-				+ ", studentMemberId=" + studentMemberId + "]";
-	}
 
 	public String getMemberId() {
 		return memberId;
@@ -38,13 +31,5 @@ public class ParentVO{
 		this.familyRelation = familyRelation;
 	}
 
-	public String getParentName() {
-		return parentName;
-	}
-
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
-	
 
 }

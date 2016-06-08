@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
+import ko.school.membermanage.domain.ParentInsertCommand;
 import ko.school.membermanage.domain.ParentList;
 import ko.school.membermanage.domain.ParentNullList;
 import ko.school.membermanage.domain.StudentDetail;
@@ -67,8 +68,8 @@ public class StudentManageDaoImpl implements StudentManageDao {
 	}
 
 	@Override
-	public void insertParent(ParentVO parent)throws Exception{
-		session.insert(namespace+".insertParent",parent);
+	public void insertParent(ParentInsertCommand command)throws Exception{
+		session.insert(namespace+".insertParent",command);
 	}
 
 	@Override
@@ -80,6 +81,12 @@ public class StudentManageDaoImpl implements StudentManageDao {
 	public String getStudentPic(MemberVO member) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".getStudentPic",member);
+	}
+
+	@Override
+	public void parentUpdateMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		session.update(namespace+".parentUpdateMember", member);
 	}
 	
 	

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
+import ko.school.membermanage.domain.ParentInsertCommand;
 import ko.school.membermanage.domain.ParentList;
 import ko.school.membermanage.domain.ParentNullList;
 import ko.school.membermanage.domain.StudentDetail;
@@ -177,8 +178,18 @@ public class StudentManageController {
 	}
 	//학부모 입력
 	@RequestMapping(value="/teacherInsertParentForm", method=RequestMethod.POST)
-	public String insertParent(ParentVO parent)throws Exception{
-		service.insertParent(parent);
+	public String insertParent(ParentInsertCommand command, HttpSession session)throws Exception{
+		MemberVO member2=(MemberVO)session.getAttribute("member");
+		String schoolId=member2.getSchoolId();
+		String memberName=command.getMemberName();
+		String memberId=command.getMemberId();
+		MemberVO member=new MemberVO();
+		member.setMemberName(memberName);
+		member.setMemberId(memberId);
+		member.setSchoolId(schoolId);
+		
+		service.parentUpdateMember(member);
+		service.insertParent(command);
 		return "/membermanage/teacher/teacherInsertParentForm";
 	}
 	//학부모 조회

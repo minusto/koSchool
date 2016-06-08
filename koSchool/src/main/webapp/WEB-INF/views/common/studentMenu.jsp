@@ -109,7 +109,7 @@
 				</ul></li>
 
 			<li class="dropdown profile"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown" role="button" aria-expanded="false">${member.memberName }${parent.parentName }<span
+				data-toggle="dropdown" role="button" aria-expanded="false">${member.memberName }<span
 					class="caret"></span></a>
 				<ul class="dropdown-menu animated fadeInDown">
 					<c:if test="${student.studentPicture!=null }">
@@ -130,7 +130,7 @@
 
 					<li>
 						<div class="profile-info">
-							<h4 class="username">${member.memberName }${parent.parentName }</h4>
+							<h4 class="username">${member.memberName }</h4>
 							<p>${member.memberEmail }${parent.familyRelation }</p>
 							<div class="btn-group margin-bottom-2x" role="group">
 								<button type="button" class="btn btn-default"
@@ -187,7 +187,12 @@
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
 								<li><a href="studentListScore2">내신성적조회</a></li>
+								<c:if test="${grade eq 'student' }">
 								<li><a href="mockTestList?id=${member.memberId }">모의고사성적조회</a></li>
+								</c:if>
+								<c:if test="${grade eq 'parent' }">
+								<li><a href="mockTestList?id=${parent.studentMemberId }">모의고사성적조회</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div></li>

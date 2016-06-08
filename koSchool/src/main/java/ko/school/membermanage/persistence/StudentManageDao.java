@@ -5,6 +5,7 @@ import java.util.List;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
+import ko.school.membermanage.domain.ParentInsertCommand;
 import ko.school.membermanage.domain.ParentList;
 import ko.school.membermanage.domain.ParentNullList;
 import ko.school.membermanage.domain.StudentDetail;
@@ -19,7 +20,8 @@ public interface StudentManageDao {
 	public void deleteStudent(String m_id)throws Exception; //교사 ==> 학생 내용 삭제
 	public void deleteStudent2(String m_id)throws Exception; //교사 ==> 학생 내용 삭제
 	public List<ParentNullList> parentNullList()throws Exception;//액터  : 교사 ==> 학부모 정보 NULL LIST
-	public void insertParent(ParentVO parent)throws Exception; //학부모 정보 입력
+	public void insertParent(ParentInsertCommand command)throws Exception; //학부모 정보 입력
 	public List<ParentList> parentList()throws Exception; ///액터: 교사 => 학부모리스트 출력
 	public String getStudentPic(MemberVO member) throws Exception;
+	public void parentUpdateMember(MemberVO member);
 }

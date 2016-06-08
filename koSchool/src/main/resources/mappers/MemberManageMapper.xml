@@ -90,23 +90,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 액터  : 교사 ==> 학부모 정보 NULL LIST -->
 	<select id="parentNullList" resultType="ParentNullList">
-		SELECT parentId FROM parent
-		WHERE memberId IS NULL
+		SELECT memberId FROM parent
+		WHERE studentMemberId IS NULL
 	</select>
 	
 	<!-- 학부모 정보 입력 -->
 	<update id="insertParent">
 		UPDATE parent SET 
-			parentName = #{parentName}, familyRelation =  #{familyRelation}, memberId = #{memberId}
-		WHERE parentId = #{parentId}
+			memberId=#{memberId},familyRelation =  #{familyRelation}, studentMemberId = #{studentMemberId}
+		WHERE memberId = #{memberId}
+	</update>
+	
+	<!-- 학부모 정보 멤버테이블에 입력 ㅡ 작성자:이재승-->
+	<update id="parentUpdateMember">
+		UPDATE member SET membername=#{memberName},schoolid=#{schoolId} where memberid=#{memberId}
 	</update>
 	
 	<!-- 액터 : 교사 => 학부모리스트 출력 -->
 	<select id="parentList" resultType="ParentList">
-		SELECT p.parentId, p.parentName, p.familyRelation, st.memberId, m.memberName
-		FROM parent p, student st, member m
-		WHERE p.memberId = st.memberId
-			AND st.memberId = m.memberId
+		SELECT p.memberid AS memberId, p.membername AS memberName, p.familyrelation AS familyRelation, m.memberid AS studentMemberId, m.membername AS studentMemberName
+		FROM (SELECT p.studentmemberid,p.memberid,p.familyrelation,m.membername
+			  FROM parent p,member m
+	  		  WHERE p.memberid=m.memberid) p ,member m 
+		WHERE m.memberid=p.studentmemberid
 	</select>
 	
 	<select id="getStudentPic" resultType="String">
