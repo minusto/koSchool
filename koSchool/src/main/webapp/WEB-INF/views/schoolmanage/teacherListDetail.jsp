@@ -33,7 +33,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">
-										<div class="title">교사 목록</div>
+										<div class="title">교사 정보</div>
 									</div>
 								</div>
 								

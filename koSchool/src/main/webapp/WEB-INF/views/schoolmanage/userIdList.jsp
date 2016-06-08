@@ -18,7 +18,27 @@
 <head>
 <title>빈칸</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<style type="text/css">
+	.headings {
+		background: rgba(52, 73, 94, 0.94);
+		color: white;
+	}
+	
+	tbody tr:hover td {
+		background: rgba(38, 185, 154, 0.07);
+		border-top: 1px solid rgba(38, 185, 154, 0.11);
+		border-bottom: 1px solid rgba(38, 185, 154, 0.11);
+	}
+	
+	tbody tr.selected {
+		background: rgba(38, 185, 154, 0.16);
+	}
+	
+	tbody tr.selected td {
+		border-top: 1px solid rgba(38, 185, 154, 0.40);
+		border-bottom: 1px solid rgba(38, 185, 154, 0.40);
+	}
+</style>
 </head>
 
 <body class="flat-blue">
@@ -39,7 +59,7 @@
 								<div class="col-md-2"></div>
 								<div class="card-body table-responsive col-md-8">
 									<!-- Table -->
-									<table class="table table-striped">
+									<table class="datatable table table-striped">
 										<thead>
 											<tr class="headings">
 												<th>사용자 ID</th>
@@ -51,7 +71,6 @@
 												<tr>
 													<td><a href="#">${list.memberId}</a></td>
 													<td>${list.memberGrade}</td>
-
 												</tr>
 											</c:forEach>
 
@@ -60,24 +79,12 @@
 
 									<!--페이지 -->
 
-
-
+									<br>
+									<br>
 									<a href="/schoolAdminInsertUserIdForm" class="pull-right"><button
 											class="btn btn-default">사용자 ID등록</button></a><br>
-									<br> <br>
-									<br>
-									<!-- 검색 -->
-									<form action="" method="post" class="pull-right">
-										<input type="checkbox" id="checkbox-1" name="area"
-											value="b_title"> <label>아이디</label> <input
-											type="checkbox" id="checkbox-1" name="area" value="b_name">
-										<label>등급</label> <input class="btn btn-default" type="text"
-											name="searchKey" size="10"> <input type="hidden"
-											name="temp" value="temp"> <input
-											class="btn btn-default" type="submit" value="검색">
-									</form>
-									<br>
-									<br>
+									<br> <br><br>
+									
 								</div>
 							</div>
 						</div>

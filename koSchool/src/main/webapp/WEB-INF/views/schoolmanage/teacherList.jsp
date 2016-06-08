@@ -62,7 +62,7 @@
 									<!--페이지 -->
 
 
-									<a href="/schoolmanage/schoolAdminInsertTeacherForm" class="pull-right"><button
+									<a href="/schoolAdminInsertTeacherForm" class="pull-right"><button
 											class="btn btn-default">등록</button></a><br>
 									<br> <br>
 									<br>
