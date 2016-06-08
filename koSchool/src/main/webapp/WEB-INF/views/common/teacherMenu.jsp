@@ -191,9 +191,9 @@
 					<div id="dropdown-form" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="/message/schoolNewsLetter">가정통신문
+								<li><a href="schoolNewsLetter">가정통신문
 										발송</a></li>
-								<li><a href="/message/schoolNewsLetterList">가정통신문 조회</a></li>
+								<li><a href="schoolNewsLetterList">가정통신문 조회</a></li>
 							</ul>
 						</div>
 					</div></li>
