@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -42,7 +42,10 @@
 														required="required">${noticeBoardDetail.noticeBoardContent}</textarea>
 												</div>
 												<div class="col-md-12">
-													<label for="exampleInputFile">File input</label> 
+													<label for="exampleInputFile">File input</label>
+													<c:if test="${noticeBoardDetail.noticeBoardFileName != null}">
+														<label>등록되어 있는 파일 : ${noticeBoardDetail.noticeBoardFileName }</label>
+													</c:if>
 													<input type="file"  name="file">
 													<p class="help-block">영문명 파일로 올려주세요</p>
 												</div>

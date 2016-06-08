@@ -137,7 +137,7 @@ public class NoticeBoardController {
 		
 		service.updateNoticBoardService(noticeBoardVo);
 		
-		if(preFileName != null) {
+		if(!file.isEmpty() && preFileName != null) {
 			File file2 = new File(request.getRealPath("/upload") + "/" + preFileName);
 			if(file2.exists()) {
 				file2.delete();
