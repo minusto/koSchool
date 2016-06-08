@@ -192,7 +192,7 @@
 									
 									<!-- 학부모일 경우 -->
 									<c:if test="${grade eq 'parent'}">
-										<form id="frm" action="/message/schoolNewsLetterSignUpdate" method="post">
+										<form id="frm" action="schoolNewsLetterSignUpdate" method="post">
 											<input type="hidden" name="schoolNewsLetterNum" value="${param.schoolNewsLetterNum}" />
 											<input type="hidden" name="sign" value="" />
 										</form>

@@ -25,7 +25,7 @@ public class SchoolNewsLetterController {
 	private SchoolNewsLetterService service;
 	
 	//교사 -> 학부모 가정 통신문 발송 겟 (세션담기)
-	@RequestMapping(value="/message/schoolNewsLetter" , method=RequestMethod.GET)
+	@RequestMapping(value="schoolNewsLetter" , method=RequestMethod.GET)
 	public String schoolNewsLetterInsertGET(HttpServletRequest request, Model model)throws Exception{
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
@@ -35,7 +35,7 @@ public class SchoolNewsLetterController {
 	
 	
 	//교사, 학부모 -> 가정 통신문 리스트 조회 
-	@RequestMapping(value="/message/schoolNewsLetterList" , method=RequestMethod.GET)
+	@RequestMapping(value="schoolNewsLetterList" , method=RequestMethod.GET)
 	public String schoolNewsLetterList(SchoolNewsLetterVO schoolNews , Model model, HttpServletRequest request)throws Exception{
 		
 		HttpSession session = request.getSession();
@@ -58,7 +58,7 @@ public class SchoolNewsLetterController {
 	}
 	
 	//교사 -> 가정통신문 발송 과 학부모별 가정통신문 발송
-	@RequestMapping(value="/message/schoolNewsLetter" , method=RequestMethod.POST)
+	@RequestMapping(value="schoolNewsLetter" , method=RequestMethod.POST)
 	public String schoolNewsLetterInsertPOST(SchoolNewsLetterVO schoolNews , ParentVO parentVO)throws Exception{
 		
 		//가정통신문 등록
@@ -88,14 +88,14 @@ public class SchoolNewsLetterController {
 	
 
 	//학부모 가정통신문 조회
-	@RequestMapping(value="/message/parentNoticeBoardList" , method=RequestMethod.GET)
+	@RequestMapping(value="parentNoticeBoardList" , method=RequestMethod.GET)
 	public String parentNoticeBoardList(SchoolNewsLetterVO schoolNews , Model model)throws Exception{
 		model.addAttribute("list", service.schoolNewsLetterList(schoolNews));
 		return "/message/parentNoticeBoardList";
 	}
 	
 	//학부모 가정통신문 상세페이지 (Detail)
-	@RequestMapping(value="/message/schoolNewsLetterDetail" , method=RequestMethod.GET)
+	@RequestMapping(value="schoolNewsLetterDetail" , method=RequestMethod.GET)
 	public String schoolNewsLetterDetail(HttpServletRequest request, @RequestParam("schoolNewsLetterNum") int schoolNewsLetterNum ,  Model model)throws Exception{
 		
 		HttpSession session = request.getSession();
@@ -114,7 +114,7 @@ public class SchoolNewsLetterController {
 	}
 	
 	//학부모 싸인 저장 Proc
-	@RequestMapping(value="/message/schoolNewsLetterSignUpdate" , method=RequestMethod.POST)
+	@RequestMapping(value="schoolNewsLetterSignUpdate" , method=RequestMethod.POST)
 	public String schoolNewsLetterSignUpdate(SchoolNewsLetterSignVO schoolNewsLetterSignVO, HttpServletRequest request)throws Exception{
 		
 		HttpSession session = request.getSession();

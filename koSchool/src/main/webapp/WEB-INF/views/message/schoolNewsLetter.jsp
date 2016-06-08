@@ -53,7 +53,7 @@
 										</table>
 										</form>
 										<button onclick="location.href='/'" class="btn btn-default">메인으로</button>
-										<button onclick="location.href='/message/schoolNewsLetterList'" class="btn btn-default">목록보기</button>											
+										<button onclick="location.href='schoolNewsLetterList'" class="btn btn-default">목록보기</button>											
 									</div>
 								</div>
 							</div>

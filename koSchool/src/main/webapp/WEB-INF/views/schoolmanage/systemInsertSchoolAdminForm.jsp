@@ -25,8 +25,7 @@
                                     </div>
                                 </div> 
                                 <div class="card-body">
-
-									<form class="form-horizontal"  method="POST">
+									<form class="form-horizontal" method="POST">
 										<fieldset>
 											<div class="control-group">
 												<label class="control-label" for="SchoolMasterID">관리자 ID</label>
@@ -60,9 +59,7 @@
 											</div>         
 											<input type="hidden" id="systemAdminId" name="systemAdminId"
 														value="${systemAdmin.systemAdminId}">
-												</div>                                 
-
-												<input class="btn btn-default" type="submit" value="등록">
+											<input class="btn btn-default" type="submit" value="등록">
 										</fieldset>
 									</form>
 								</div>

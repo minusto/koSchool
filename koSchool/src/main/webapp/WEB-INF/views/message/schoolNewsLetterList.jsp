@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-   	 tbody tr:hover td {
+   	 #newsLetterTbody tr:hover td {
 		background: rgba(38, 185, 154, 0.07);
 		border-top: 1px solid rgba(38, 185, 154, 0.11);
 		border-bottom: 1px solid rgba(38, 185, 154, 0.11);
@@ -45,17 +45,17 @@
 												<th>제목</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="newsLetterTbody">
 											<c:forEach var="list" items="${list}">
 												<tr>
 												<td>${list.schoolNewsLetterNum}</td>
-												<td><a href="/message/schoolNewsLetterDetail?schoolNewsLetterNum=${list.schoolNewsLetterNum}">${list.title}</a></td>			
+												<td><a href="schoolNewsLetterDetail?schoolNewsLetterNum=${list.schoolNewsLetterNum}">${list.title}</a></td>			
 												</tr>
 											</c:forEach>
 										</tbody> 
 									</table>
 									<!--페이지 -->
-									<a href="schoolNewsLetter.jsp" class="pull-right" ><button class="btn btn-default">가정통신문 발송</button></a><br><br>
+									<a href="schoolNewsLetter" class="pull-right" ><button class="btn btn-default">가정통신문 발송</button></a><br><br>
  									<br><br>
 									<!-- 검색 -->
 									<form action="" method="post" class="pull-right">

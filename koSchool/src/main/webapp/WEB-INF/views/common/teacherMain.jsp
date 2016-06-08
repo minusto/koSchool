@@ -159,12 +159,12 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="/message/schoolNewsLetter">
+																			<a href="schoolNewsLetter">
 																			<h3>가정통신문 발송</h3>
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="/message/schoolNewsLetterList">
+																			<a href="schoolNewsLetterList">
 																			<h3>가정통신문 조회</h3>
 																			</a>
 																		</div>
