@@ -40,11 +40,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from score s,
 		(SELECT subjectId, AVG((midexam*0.4)+(finalexam*0.4)+(perfomanceevaluation*0.2)) AS subjectAvg from score
 		WHERE semester = #{semester}
+		AND nesinyear = #{nesinYear}
 		GROUP BY subjectId) s2,
 		subject s3
 		WHERE s.subjectId = s2.subjectId
 		AND s.subjectId = s3.subjectId
 		AND semester = #{semester}
+		AND nesinyear = #{nesinYear}
    </select>
    
    <!-- 전체 과목별 등수 -->
@@ -58,17 +60,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		s2.subjectAvg AS subjectAvg
 		from score s,
 		(SELECT subjectId, AVG((midexam*0.4)+(finalexam*0.4)+(perfomanceevaluation*0.2)) AS subjectAvg from score
+		WHERE semester = #{semester}
+		AND nesinyear = #{nesinYear}
 		group by subjectId) s2,
 		subject s3
 		WHERE s.subjectId = s2.subjectId
 		AND s.subjectId = s3.subjectId
-		AND semester= #{semester}) s
+		AND semester = #{semester}
+		AND nesinyear = #{nesinYear}) s
    </select>
    
    <!-- 전체 과목별 전체명수  -->
    <select id="allStudentNum" resultType="AllStudentNum">
    		SELECT subjectId,count(*) AS allStudentNum FROM SCORE
    		WHERE semester = #{semester}
+   		AND nesinyear = #{nesinYear}
 		GROUP BY subjectId
    </select>
    
@@ -110,6 +116,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE n.subjectid = s.subjectid
 		AND subjectgrade = #{subjectGrade})
    </delete>
+   
+   <!-- 내신 조회를 위한 작업 -->
+   <!-- 학생 객체 -->
+	<select id="studentCheck" resultType="StudentVO">
+		SELECT *
+		FROM student
+		WHERE memberid=#{id}
+	</select>
    
 	
 </mapper>

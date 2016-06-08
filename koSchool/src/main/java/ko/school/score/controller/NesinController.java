@@ -1,6 +1,8 @@
 package ko.school.score.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -53,6 +55,7 @@ public class NesinController {
 	//내신 성적 폼 조회 (교사)
 		@RequestMapping(value = "/studentListScore", method = RequestMethod.GET)
 		public String studentListScore(@RequestParam("id") String id, Model model, HttpSession session)throws Exception{
+			//학생의 id
 			session.setAttribute("id",id);
 			StudentDetail student = service.selectStudentDetail(id);
 			model.addAttribute("student",student);
@@ -82,23 +85,58 @@ public class NesinController {
 				@RequestParam("subjectGrade") int subjectGrade, Model model, HttpSession session)throws Exception{
 			String grade = (String) session.getAttribute("grade");
 			String id = null;
+			int studentGrade = 0;
+			int nesinYear = 0;
 			if(grade.equals("teacher")){
+				//학생의 id
 				id = (String) session.getAttribute("id");
+				//학생객체 구해서 학년 구하기
+				StudentVO studentVO = service.studentCheck(id);
+				studentGrade = studentVO.getStudentGrade();
+				
 			}else if(grade.equals("student")){
 				StudentVO studentVO = (StudentVO) session.getAttribute("student");
 				id = studentVO.getMemberId();
+				//학년 구하기
+				studentGrade = studentVO.getStudentGrade();
 			}else if(grade.equals("parent")){
 				ParentVO parentVO = (ParentVO) session.getAttribute("parent");
 				id = parentVO.getStudentMemberId();
+				//학생객체 구해서 학년 구하기
+				StudentVO studentVO = service.studentCheck(id);
+				studentGrade = studentVO.getStudentGrade();
 			}
+			//구한 학년을 가지고 년도 계산
+			if(studentGrade == 1){
+				if(subjectGrade == 1){
+					nesinYear = 2016;
+				}
+			}else if(studentGrade == 2){
+				if(subjectGrade == 1){
+					nesinYear = 2015;
+				}else if(subjectGrade == 2){
+					nesinYear = 2016;
+				}
+			}else if(studentGrade == 3){
+				if(subjectGrade == 1){
+					nesinYear = 2014;
+				}else if(subjectGrade == 2){
+					nesinYear = 2015;
+				}else if(subjectGrade == 3){
+					nesinYear = 2016;
+				}
+			}
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("semester", semester);
+			map.put("nesinYear", nesinYear);
 			StudentDetail student = service.selectStudentDetail(id);
 			model.addAttribute("student",student);
 			model.addAttribute("id",id);
 			model.addAttribute("subjectGrade", subjectGrade);
 			model.addAttribute("semester",semester);
-			List<AllSubjectScoreList> list = service.allSubjectScoreList(semester);
-			List<AllRankingScoreList> list2 = service.allRankingScoreList(semester);
-			List<AllStudentNum> list3 = service.allStudentNum(semester);
+			List<AllSubjectScoreList> list = service.allSubjectScoreList(map);
+			List<AllRankingScoreList> list2 = service.allRankingScoreList(map);
+			List<AllStudentNum> list3 = service.allStudentNum(map);
 			model.addAttribute("list",list);
 			model.addAttribute("list2",list2);
 			model.addAttribute("list3",list3);

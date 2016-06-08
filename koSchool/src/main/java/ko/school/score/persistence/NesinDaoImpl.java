@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import ko.school.common.domain.StudentVO;
 import ko.school.membermanage.domain.StudentDetail;
 import ko.school.membermanage.domain.StudentList;
 import ko.school.score.domain.AllRankingScoreList;
@@ -47,18 +48,18 @@ public class NesinDaoImpl implements NesinDao {
 	}
 
 	@Override
-	public List<AllSubjectScoreList> allSubjectScoreList(int semester) throws Exception {
-		return session.selectList(namespace+".allSubjectScoreList", semester);
+	public List<AllSubjectScoreList> allSubjectScoreList(Map<String, Integer> map) throws Exception {
+		return session.selectList(namespace+".allSubjectScoreList", map);
+	}
+	
+	@Override
+	public List<AllRankingScoreList> allRankingScoreList(Map<String, Integer> map) throws Exception {
+		return session.selectList(namespace+".allRankingScoreList", map);
 	}
 
 	@Override
-	public List<AllRankingScoreList> allRankingScoreList(int semester) throws Exception {
-		return session.selectList(namespace+".allRankingScoreList", semester);
-	}
-
-	@Override
-	public List<AllStudentNum> allStudentNum(int semester) throws Exception {
-		return session.selectList(namespace+".allStudentNum", semester);
+	public List<AllStudentNum> allStudentNum(Map<String, Integer> map) throws Exception {
+		return session.selectList(namespace+".allStudentNum", map);
 	}
 
 	@Override
@@ -73,7 +74,6 @@ public class NesinDaoImpl implements NesinDao {
 
 	@Override
 	public List<NesinLoadForm> loadSaveForm(Map<String, String> map) throws Exception {
-		System.out.println("dao까지감");
 		return session.selectList(namespace+".loadSaveForm", map);
 	}
 
@@ -82,5 +82,12 @@ public class NesinDaoImpl implements NesinDao {
 		session.delete(namespace+".deleteSaveForm", subjectGrade);
 		
 	}
+
+	@Override
+	public StudentVO studentCheck(String id) throws Exception {
+		return session.selectOne(namespace + ".studentCheck",id);
+	}
+
+
 
 }

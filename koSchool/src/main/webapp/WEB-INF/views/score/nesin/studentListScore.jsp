@@ -103,7 +103,7 @@
 									<tr>
 										<th rowspan="2" style="text-align:center">교과</th>
 										<th rowspan="2" style="text-align:center">과목</th>
-										<th colspan="6" style="text-align:center" >${semester }학기</th>
+										<th colspan="6" style="text-align:center" ><b id="chartGrade">${subjectGrade }</b>학년 ${semester }학기</th>
 									</tr>
 									<tr>
 										<td>단위수</td>
@@ -122,7 +122,7 @@
 										<td>${list.subjectType }</td>
 										<td id="subjectName<%=k%>">${list.subjectName }</td>
 										<td>${list.subjectUnit }</td>
-										<td>${list.subjectTotal }</td>
+										<td id="originalScore<%=k %>">${list.subjectTotal }</td>
 										<td id="avg<%=k%>"><fmt:formatNumber value="${list.subjectAvg }" pattern=".00"/></td>
 										<td id="stdevResult<%=++size3%>"></td>
 										<td id="ranking<%=++i%>"></td>

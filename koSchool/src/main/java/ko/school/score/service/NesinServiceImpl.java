@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import ko.school.common.domain.StudentVO;
 import ko.school.membermanage.domain.StudentDetail;
 import ko.school.membermanage.domain.StudentList;
 import ko.school.score.domain.AllRankingScoreList;
@@ -54,18 +55,18 @@ public class NesinServiceImpl implements NesinService {
 	}
 
 	@Override
-	public List<AllSubjectScoreList> allSubjectScoreList(int semester) throws Exception {
-		return dao.allSubjectScoreList(semester);
+	public List<AllSubjectScoreList> allSubjectScoreList(Map<String, Integer> map) throws Exception {
+		return dao.allSubjectScoreList(map);
 	}
 
 	@Override
-	public List<AllRankingScoreList> allRankingScoreList(int semester) throws Exception {
-		return dao.allRankingScoreList(semester);
+	public List<AllRankingScoreList> allRankingScoreList(Map<String, Integer> map) throws Exception {
+		return dao.allRankingScoreList(map);
 	}
 
 	@Override
-	public List<AllStudentNum> allStudentNum(int semester) throws Exception {
-		return dao.allStudentNum(semester);
+	public List<AllStudentNum> allStudentNum(Map<String, Integer> map) throws Exception {
+		return dao.allStudentNum(map);
 	}
 
 	@Override
@@ -93,6 +94,12 @@ public class NesinServiceImpl implements NesinService {
 		dao.deleteSaveForm(subjectGrade);
 		
 	}
+
+	@Override
+	public StudentVO studentCheck(String id) throws Exception {
+		return dao.studentCheck(id);
+	}
+
 
 	
 	
