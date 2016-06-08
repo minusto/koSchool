@@ -102,6 +102,11 @@ public class SchoolManageServiceImpl implements SchoolManageService{
 	public void deleteTeacher2(String memberId) {
 		dao.deleteTeacher2(memberId);	
 	}
+
+	@Override
+	public String selectSchoolIdBySchoolAdminIDService(String schoolAdminId) throws Exception {
+		return dao.selectSchoolIdBySchoolAdminID(schoolAdminId);
+	}
 		
 
 		
