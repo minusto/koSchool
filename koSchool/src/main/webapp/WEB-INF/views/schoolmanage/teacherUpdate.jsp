@@ -2,12 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%int i=1; int j=1;%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>빈칸</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/resources/js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function(){
+		$('tbody').on('click','#clickStu',function(){
+			$('input[name=subjectId]').val($(this).html());
+			$('button[class=close]').trigger('click'); 
+		})
+		$('tbody #clickStu').on({
+			 mouseenter: function(){
+			  $(this).css('color','red');
+			 },
+			 mouseleave: function(){
+			  $(this).css('color','#333');
+			 }
+		});
+	})
+</script>
 </head>
 
 <body class="flat-blue">
@@ -66,7 +83,48 @@
                                         <div class="form-group">
                                             <label for="inputPassword3" class="col-sm-2 control-label">담당과목</label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" name="subjectId" value="${teacherDetailVO.subjectId}">
+                                                <input type="text" class="form-control" name="subjectId" value="${preSubject.subjectName }">
+                                                <button type="button" class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modalPrimary2" >
+                                            		과목ID 찾기
+                                      			</button>
+                                      			<!-- Modal -->
+                                      			<div class="modal fade modal-primary" id="modalPrimary2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            		<div class="modal-dialog">
+                                               			<div class="modal-content">
+                                                    		<div class="modal-header">
+                                                        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        		<h4 class="modal-title" id="myModalLabel">과목ID 리스트</h4>
+                                                    		</div>
+                                                    		<div class="modal-body">
+                                                               	<div class="row" style="width:100%; height:200px; overflow:auto">
+																<!-- Table -->
+																<div class="col-md-2"></div>
+																<div class="col-md-8">
+																<table class="table table-striped">
+																	<thead>
+																		<tr class="headings">
+																			<th>번호</th>
+																			<th>교과명</th>
+																			<th>과목명</th>
+																		</tr>
+																	</thead>
+																	<tbody >
+																		<c:forEach var="subject" items="${subjectList }">
+																		<tr >
+																			<td><%=j++ %></td>
+																			<td id="clickStu" style="cursor:pointer">${subject.subjectId }</td>
+																			<td>${subject.subjectType }</td>
+																			<td>${subject.subjectName }</td>
+																		</tr>
+																		</c:forEach>
+																	</tbody>
+																</table>
+																</div>
+																</div>
+                                                    		</div>
+                                                 		</div>
+                                             		</div>
+                                         		</div>
                                             </div>
                                         </div>
                                         

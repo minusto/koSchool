@@ -161,7 +161,9 @@ public class SchoolManageController {
 	//학교관리자 -> 교사 상세리스트 
 	@RequestMapping(value = "/teacherListDetail", method = RequestMethod.GET)
 	public String teacherListDetail(@RequestParam("memberId") String memberId , Model model)throws Exception{
-		model.addAttribute("teacher",service.detailTeacher(memberId));
+		TeacherDetailVO teacherDetailVo = service.detailTeacher(memberId);
+		model.addAttribute("subject", service.subjectBysubjectIdService(teacherDetailVo.getSubjectId()));
+		model.addAttribute("teacher", teacherDetailVo);
 		return "/schoolmanage/teacherListDetail";
 	}
 	
@@ -170,6 +172,8 @@ public class SchoolManageController {
 	@RequestMapping(value = "/teacherUpdate", method = RequestMethod.GET)
 	public String teacherUpdate(MemberVO memberVO, Model model)throws Exception{
 		TeacherDetailVO teacherDetailVO = service.detailTeacher(memberVO.getMemberId());
+		model.addAttribute("preSubject", service.subjectBysubjectIdService(teacherDetailVO.getSubjectId()));
+		model.addAttribute("subjectList", service.subjectList());
 		model.addAttribute("teacherDetailVO", teacherDetailVO);
 		return  "/schoolmanage/teacherUpdate";
 		

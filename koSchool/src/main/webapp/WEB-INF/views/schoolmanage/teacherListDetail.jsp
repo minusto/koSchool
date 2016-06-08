@@ -78,7 +78,7 @@
 										</tr>
 										<tr height="30">
 											<th width="150">담당과목</th>
-											<td width="150">${teacher.subjectId}</td>
+											<td width="150">${subject.subjectName}</td>
 										</tr>
 									</table>
 									<a href="/teacherUpdate?memberId=${teacher.memberId}" class="pull-right" ><button type="button" class="btn btn-primary">정보수정</button></a>
