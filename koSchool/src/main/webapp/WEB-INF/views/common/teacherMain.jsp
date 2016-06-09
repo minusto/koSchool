@@ -212,7 +212,7 @@
 																			</a>
 																		</div>
 																		<div class="col-sm-4 col-xs-12" style="text-align:center;">
-																			<a href="teacherClassBoardList.jsp">
+																			<a href="classBoardList">
 																			<h3>학급 게시판</h3>
 																			</a>
 																		</div>

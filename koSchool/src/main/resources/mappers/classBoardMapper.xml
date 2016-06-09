@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.classBoardMapper">
+
+<insert id="insertClassBoard">
+insert into ClassBoard ( 
+						 classBoardNum ,	
+						 classBoardTitle , 
+						 <!-- classBoardWriter , --> 
+						 classBoardContent,
+						<!--  classBoardDate ,  -->
+						 classBoardPassword,
+						<!--  classBoardHitcount ,  -->
+						 <!-- classBoardFilename,  -->
+						 <!-- classBoardRef , 
+						 classBoardStep , 
+						 classBoardLevel -->
+						 memberId,
+						 teacherClass
+
+				)values(
+						classBoardNum_seq.nextval,
+						#{classBoardTitle},
+						<!-- #{classBoardWriter}, -->
+						#{classBoardContent},
+						<!-- #{classBoardDate}, -->
+						#{classBoardPassword},
+						<!-- #{classBoardHitcount}, -->
+						<!-- #{classBoardFilename}, -->
+						<!-- #{classBoardRef},
+						#{classBoardStep},
+						#{classBoardLevel} -->
+						#{memberId},
+						#{teacherClass}
+						
+				)
+
+</insert>
+
+<select id="teacherClassBoardList" resultType="ClassBoardVO">
+	select a.* from classBoard a where a.teacherClass = #{teacherClass}
+</select>
+
+<!-- (선생님 학급게시판) 자신의글과 자신의 클래스에 속한 학생들의 글과 학생의 부모글 -->
+<!-- <select id="teacherClassBoardList" resultType="ClassBoardVO">
+select a.* from classboard a
+   where
+      a.MemberId in (
+         select a.memberId from student a
+         where
+            a.studentClass = (select a.teacherClass from teacher a where a.memberId = #{memberId})  
+            
+      )
+      		or a.memberid = #{memberId}      
+           or a.memberId in 
+			   (
+			   	select a.memberid from parent a
+				   where
+				      a.studentMemberId in (
+				         select a.memberId from student a
+				         where
+				            a.studentClass = (select a.teacherClass from teacher a where a.memberId = #{memberId}))
+			      )
+</select>
+(학생 학급게시판) 자신의 글과 자신의 클래스에 속한 학생들의글과 담임의 글과 부모의글 
+<select id="studentClassBoardList" resultType="ClassBoardVO">
+select a.* from classboard a
+   where
+      a.MemberId in (
+         select a.memberId from teacher a
+         where
+            a.teacherclass = (select a.studentclass from student a where a.memberId = #{memberId})  
+            
+      ) or a.memberid = #{memberId}      
+        or a.memberId in  (
+         select a.memberId from student a
+         where
+            a.studentclass = (select a.studentclass from student a where a.memberId = #{memberId})            
+or a.memberId in   
+(select a.memberid from parent a
+   where
+      a.studentMemberId in (
+         select a.memberId from student a
+         where
+            a.studentClass = (select a.studentclass from student a where a.memberId = #{memberId}))
+      )     
+</select> -->
+	
+<select id="teacherClass" parameterType="java.util.Map" resultType="String">
+	<if test="grade eq 'teacher'">
+		select a.teacherClass from teacher a where a.memberId = #{memberId}
+	</if>
+	<if test="grade eq 'student'">
+		select
+			case
+				when
+					<!-- 반이 1자리 수일 경우 -->
+					length(a.studentClass) = 1
+				then 
+					a.studentGrade || '0' || a.studentClass
+				when
+					<!-- 반이 2자리 수일 경우 -->
+					length(a.studentClass) = 2
+				then 
+					a.studentGrade || a.studentClass
+			end
+		from
+			student a
+		where
+			a.memberId = #{memberId}
+	</if>
+	<if test="grade eq 'parent'">
+		select
+			case
+				when
+					<!-- 반이 1자리 수일 경우 -->
+					length(a.studentClass) = 1
+				then 
+					a.studentGrade || '0' || a.studentClass
+				when
+					<!-- 반이 2자리 수일 경우 -->
+					length(a.studentClass) = 2
+				then 
+					a.studentGrade || a.studentClass
+			end
+		from
+			student a
+		where
+			a.memberId = (select a.studentMemberId from parent a where a.memberId = #{memberId})
+	</if>
+</select>
+
+</mapper>
+
+
+
+
+
+
+
+

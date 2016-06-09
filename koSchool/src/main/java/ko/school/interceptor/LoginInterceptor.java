@@ -1,5 +1,9 @@
 package ko.school.interceptor;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -8,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import ko.school.board.service.ClassBoardService;
 import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
@@ -15,6 +20,10 @@ import ko.school.common.domain.TeacherVO;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
+	
+	@Inject
+	private ClassBoardService service;
+	
 	//액터 ==> 모든사용자  / 작업내용 : 로그인시 세션 생성 / 작성자 : 이재승
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -38,6 +47,23 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			} else if (grade.equals("systemAdmin")) {
 				session.setAttribute("systemAdmin", (Object) modelMap.get("systemAdmin"));
 			}
+			
+			//teacherClass (학년, 반) 세션 담기 작성자 : 이용갑
+			try {
+				Map<String, Object> paramMap = new HashMap<String, Object>();
+				
+				if ("parent".equals(session.getAttribute("grade").toString())) {
+					paramMap.put("memberId", ((ParentVO) session.getAttribute("parent")).getMemberId());
+				} else {
+					paramMap.put("memberId", ((MemberVO) session.getAttribute("member")).getMemberId());					
+				}
+				paramMap.put("grade", session.getAttribute("grade").toString());
+				
+				session.setAttribute("teacherClass", service.teacherClass(paramMap));				
+			} catch (Exception e) {
+				return;
+			}
+			
 		}
 	}
 	//액터 ==> 모든사용자  / 작업내용 : 메인페이지 접근시 세션이 존재하면 액터에 맞는 Main페이지로 보냄 / 작성자 : 이재승
