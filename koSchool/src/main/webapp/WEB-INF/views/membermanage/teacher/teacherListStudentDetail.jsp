@@ -186,7 +186,7 @@
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																		<a href="mockTestList?id=${student.memberId }">
+																		<a href="/mockSimulation">
 																			
 																			<h3>모의고사 성적 조회</h3>
 																			</a>

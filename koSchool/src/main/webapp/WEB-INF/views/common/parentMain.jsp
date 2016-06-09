@@ -59,7 +59,7 @@
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="mockTestList?id=${parent.studentMemberId }">
+																			<a href="/mockSimulation">
 																			<h3>모의고사 성적 조회</h3>
 																			</a>
 																		</div>
@@ -107,7 +107,7 @@
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="studentMockTestSimulation.jsp">
+																			<a href="/mockSimulation">
 																			<h3>정시 시뮬레이션</h3>
 																			</a>
 																		</div>
@@ -198,7 +198,7 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="studentNoticeBoardList.jsp">
+																			<a href="/noticeBoardList">
 																			<h3>교내 공지사항</h3>
 																			</a>
 																		</div>

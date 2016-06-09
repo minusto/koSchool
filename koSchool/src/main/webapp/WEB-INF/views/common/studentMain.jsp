@@ -106,7 +106,7 @@
 																			</a>
 																		</div>
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="studentMockTestSimulation.jsp">
+																			<a href="/mockSimulation">
 																			<h3>정시 시뮬레이션</h3>
 																			</a>
 																		</div>
