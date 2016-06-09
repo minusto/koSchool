@@ -65,12 +65,11 @@
 										</table>
 									<!--페이지 -->
 									<div class="col-md-11">
-										<div class="col-sm-4">
-											<input id="addSubject" type="button" class="btn btn-default" value="과목추가">
-										</div>
-										<div class="col-sm-7">
+										<div class="col-sm-5">
+										<!-- 과목 추가  -->
+											<input id="addSubject" type="button" class="btn btn-primary" value="과목추가">
 										<!-- 테이블 저장 -->
-										 <button class="btn btn-primary btn-primary" data-target="#modalSave" data-toggle="modal" type="button"> 저장 </button>
+										 <button id="modalSaveButton" class="btn btn-primary btn-primary" data-target="#modalSave" data-toggle="modal" type="button"> 저장 </button>
                                                 	<div id="modalSave" class="modal fade modal-primary" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;">
 														<div class="modal-dialog">
 															<div class="modal-content">
@@ -104,7 +103,7 @@
 															</div>
 														</div>
                                                 	</div>
-                                        <!-- 테이블 저장 -->
+                                        <!-- 테이블 불러오기 -->
 										 <button class="btn btn-primary btn-primary" data-target="#modalLoad" data-toggle="modal" type="button"> 불러오기 </button>
                                                 	<div id="modalLoad" class="modal fade modal-primary" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" style="display: none;">
 														<div class="modal-dialog">
@@ -140,16 +139,17 @@
 														</div>
                                                 	</div>
 										</div>
+										<div class="col-sm-6"></div>
 									</div>
 									<div class="col-md-1">
-										<input type="text" name="semester">
-										<input type="text" name="memberId">
+										<input type="hidden" name="semester">
+										<input type="hidden" name="memberId">
 										<!-- 학년 검사 용도 -->
-										<input type="text" id="checkGrade" >
-										<input type="submit" name="success" class="btn btn-default" value="완료">
+										<input type="hidden" id="checkGrade" >
+										<input type="submit" name="success" class="btn btn-primary" value="완료">
 									</div>
 									</form>
-									<div class="saveFormDiv">
+									<div class="saveFormDiv" style="display:none">
 										<form action="saveForm" method="post">
 											<input type="text" name ="memberIdS" id="memberIdS" value="${teacher.memberId }">	
 											<input type="text" name="subjectGrade" id="subjectGradeS">				

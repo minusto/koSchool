@@ -36,7 +36,7 @@ public class NesinController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String schoolId = member.getSchoolId();
 		List<StudentList> list2 = service.studentList(schoolId);
-		model.addAttribute("list2",list2);
+		model.addAttribute("list2", list2);
 		model.addAttribute("path", "학생 관리 > 내신 성적 입력");
 		return "/score/nesin/teacherInsertScoreForm";
 	}

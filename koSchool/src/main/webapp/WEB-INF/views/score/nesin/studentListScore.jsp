@@ -62,8 +62,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8">
-							<button id="view1">결과보기</button>
+						<div class="col-md-12">
 							<div style="display:none">
 							<!-- 표준편차-->
 							<table>
@@ -101,8 +100,8 @@
 							<table class="table table-bordered" style="text-align:center" >
 								<thead>
 									<tr>
-										<th rowspan="2" style="text-align:center">교과</th>
-										<th rowspan="2" style="text-align:center">과목</th>
+										<th rowspan="2" style="text-align:center; vertical-align:middle; width:10%" >교과</th>
+										<th rowspan="2" style="text-align:center; vertical-align:middle; width:10%">과목</th>
 										<th colspan="6" style="text-align:center" ><b id="chartGrade">${subjectGrade }</b>학년 ${semester }학기</th>
 									</tr>
 									<tr>
@@ -142,51 +141,22 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <div class="title">학년평균 대비 분석</div>
+                                        <div class="title">과목별 비교분석 차트</div>
                                     </div>
                                 </div>
                                 <div class="card-body no-padding">
                                     <canvas id="radar-chart" class="chart"></canvas>
                                 </div>
-                            <div class="card">
-                            	<div class="card-header">
-                            		<div class="card-title">
-                                        <div class="title">학년평균 대비 분석</div>
-                                    </div>
-                                </div>
-                                <div class="card-body no-padding">
-                                	<p>국어 평균점수 60점대비 <b>+15점</b>인 75점입니다</p>
-                                	<p>영어 평균점수 70점대비 <b>+10점</b>인 80점입니다</p>
-                                	<p>수학 평균점수 40점대비 <b>+32점</b>인 72점입니다</p>
-                                	<p>사회 평균점수 40점대비 <b>+53점</b>인 93점입니다</p>
-                                	<p>과학 평균점수 70점대비 <b>-20점</b>인 50점입니다</p>
-                                </div>
-                            </div>
                             </div>
                         </div>
                         <div class="col-sm-6 col-xs-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <div class="title">반평균 대비 분석</div>
-                                    </div>
-                                </div>
-                                <div class="card-body no-padding">
-                                    <canvas id="bar-chart" class="chart"></canvas>
-                                </div>
-                            </div>
-                            <div class="card">
                             	<div class="card-header">
                             		<div class="card-title">
-                                        <div class="title">반 평균 대비 분석</div>
+                                        <div class="title">과목별 비교분석</div>
                                     </div>
                                 </div>
-                                <div class="card-body no-padding">
-                                	<p>국어 평균점수 60점대비 <b>+15점</b>인 75점입니다</p>
-                                	<p>영어 평균점수 70점대비 <b>+10점</b>인 80점입니다</p>
-                                	<p>수학 평균점수 40점대비 <b>+32점</b>인 72점입니다</p>
-                                	<p>사회 평균점수 40점대비 <b>+53점</b>인 93점입니다</p>
-                                	<p>과학 평균점수 70점대비 <b>-20점</b>인 50점입니다</p>
+                                <div id="nesinText" class="card-body">
                                 </div>
                             </div>
                             <div>

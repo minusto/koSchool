@@ -3,6 +3,24 @@ $(function() {
 		var semester = $(this).val();
 		$('input[name=semester]').val(semester);
 	});
+	//완료 버튼 눌렀을때 알림창 후 클릭취소
+	/*$('input[name=success]').click(function(){
+		alert('asd');
+		if($('input[name=semester]').val() == ''){
+			alert('학기를 입력하세요.');
+			return false;
+		}else if($('input[name=memberId]').val() == ''){
+			alert('학생을 선택하세요.');
+			return false;
+		}
+	})
+	$('#sendSaveForm').click(function(){
+		if($('.createIn').html()==undefined){
+			alert('저장할 과목을 선택해주세요.')
+			return false;
+			if($('#arrSubjectIdS'))
+		}
+	})*/
 	var i = 1;
 	$('#addSubject')
 			.on(
@@ -48,7 +66,7 @@ $(function() {
 						
 						//입력 테이블 저장 폼
 						var html2 = '<div class="createIn'+i+'">';
-						html2 += '<input type="text" name ="arrSubjectId" id="arrSubjectIdS'+i+'">';
+						html2 += '<input type="hidden" name ="arrSubjectId" id="arrSubjectIdS'+i+'">';
 						html2 += '</div>';
 						$('.saveFormDiv form').append(html2);
 						i++;
@@ -284,7 +302,8 @@ $(function() {
 	
 	//불러오기 ajax 함수
 		function loadTable(data){
-			alert('asdf')
+		//불러오기 실행하면 저장버튼 숨김
+			$('#modalSaveButton').css("display","none");
 			$.each(data, function(index, list) {
 				var html = '<tr>';
 				html += '<td>'+list.subjectGrade+'</td>';
@@ -292,8 +311,8 @@ $(function() {
 				html += '<td>'+list.subjectName+'</td>';
 				html += '<td>'+list.subjectUnit+'</td>';
 				html += '<td><input type="text" class="form-control" id="inputPassword3" size="1" name="arrMidExam">';
-				html += '<input type="text" name ="arrNesinYear" value="'+list.nesinYear+'">';
-				html += '<input type="text" name ="arrSubjectId" value="'+list.subjectId+'">';
+				html += '<input type="hidden" name ="arrNesinYear" value="'+list.nesinYear+'">';
+				html += '<input type="hidden" name ="arrSubjectId" value="'+list.subjectId+'">';
 				html += '</td>';
 				html += '<td><input type="text" class="form-control" id="inputPassword3" size="1" name="arrFinalExam"></td>';
 				html += '<td><input type="text" class="form-control" id="inputPassword3" size="1" name="arrPerformanceEvaluation"></td>';
@@ -319,6 +338,8 @@ $(function() {
 								$(this).find('#clickGrade').html());
 						//입력 테이블 폼 없애기
 						$('#tbody1').html('');
+						//저장버튼 보이기
+						$('#modalSaveButton').css("display","inline");
 						//입력 테이블 저장 폼 없애기
 						$('.saveFormDiv form div').html('');
 						$('#tbody2').find('tr').not($(this)).css(
