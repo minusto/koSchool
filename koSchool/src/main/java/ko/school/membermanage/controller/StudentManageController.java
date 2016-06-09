@@ -116,6 +116,8 @@ public class StudentManageController {
 			
 			MultipartFile file = student.getFile();// 파일 받음
 			
+			String prevPic = service.getStudentPic(member);
+			
 			if(!file.isEmpty()){		// 파일 존재 할 경우
 
 			String filename = file.getOriginalFilename();		//업로드 파일 이름 받음
@@ -151,19 +153,56 @@ public class StudentManageController {
 			
 			service.updateMember(member);
 			service.updateStudent(student);
+			
+			//수정시 기본사진 삭제
+			if(!file.isEmpty()&&prevPic!=null){
+				File delFile =new File(request.getRealPath("/upload")+"/"+prevPic);
+				String headName = prevPic.substring(0, prevPic.lastIndexOf("."));
+				String pattern =prevPic.substring(prevPic.lastIndexOf(".")+1);
+				File delResizeFile =new File(request.getRealPath("/upload")+"/"+
+						headName+"_resize."+pattern);
+				if(delFile.exists()){
+					delFile.delete();
+					delResizeFile.delete();
+				}
+			}
+			
+		
 			String m_id = student.getMemberId();
 			model.addAttribute("m_id", m_id);
 			return "redirect:teacherListStudentDetail";
 	}
 	
 	
-	//학생 정보 삭제
-	@RequestMapping(value="/deleteStudent", method=RequestMethod.GET)
-	public String deleteStudent(@RequestParam String m_id)throws Exception{
-		service.deleteStudent(m_id);
-		service.deleteStudent2(m_id);
-		return "redirect:teacherListStudent";
-	}
+	//학생 정보 삭제 -->사진도 같이삭제
+		@RequestMapping(value="/deleteStudent", method=RequestMethod.GET)
+		public String deleteStudent(@RequestParam String m_id,HttpServletRequest request)throws Exception{
+			
+			MemberVO mVO = new MemberVO();
+			mVO.setMemberId(m_id);
+			String deletePicName = service.getStudentPic(mVO) ;
+			
+			service.deleteStudent(m_id);
+			service.deleteStudent2(m_id);
+			
+			
+			if(deletePicName!=null){
+				File delFile =new File(request.getRealPath("/upload")+"/"+deletePicName);
+				String headName = deletePicName.substring(0, deletePicName.lastIndexOf("."));
+				String pattern =deletePicName.substring(deletePicName.lastIndexOf(".")+1);
+				File delResizeFile =new File(request.getRealPath("/upload")+"/"+
+						headName+"_resize."+pattern);
+				if(delFile.exists()){
+					delFile.delete();
+					delResizeFile.delete();
+				}
+			}
+			
+			
+			return "redirect:teacherListStudent";
+			
+		}
+		
 	//학부모 입력 폼
 	@RequestMapping(value="/teacherInsertParentForm", method=RequestMethod.GET)
 	public String teacherInsertParentForm(Model model, HttpSession session)throws Exception{
