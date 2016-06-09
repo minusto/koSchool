@@ -76,7 +76,7 @@ public class ProfileController {
 
 				tempfile = new File(request.getRealPath("/upload"),filename);	//리네임된 파일이름으로 재생성
 
-			}
+			} 
 
 			file.transferTo(tempfile);	// 업로드 디렉토리로 파일 이동
 			//이미지 리사이즈
