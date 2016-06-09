@@ -51,6 +51,8 @@ public class SchoolNewsLetterController {
 		if ("teacher".equals(grade)) {
 			MemberVO memberVO = (MemberVO) session.getAttribute("member");
 			schoolNews.setMemberId(memberVO.getMemberId());		
+			service.schoolNewsLetterList(schoolNews);
+			model.addAttribute("list", service.schoolNewsLetterList(schoolNews));
 		}
 		
 		//조회된 담임이 있을 경우에만 리스트를 가져온다.
