@@ -1,5 +1,7 @@
 package ko.school.board.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ClassBoardVO {
 	private int classBoardNum;
 	private String classBoardTitle;
@@ -8,14 +10,22 @@ public class ClassBoardVO {
 	private String classBoardDate;
 	private String classBoardPassword;
 	private int classBoardHitcount;
-	private String classBoardFilename;
+	private String classBoardFileName;
 	private int classBoardRef;
 	private int classBoardStep;
 	private int classBoardLevel;
 	private String memberId;
 	private String teacherClass;
 	
+	private MultipartFile file;
 	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public String getTeacherClass() {
 		return teacherClass;
 	}
@@ -65,10 +75,10 @@ public class ClassBoardVO {
 		this.classBoardHitcount = classBoardHitcount;
 	}
 	public String getClassBoardFilename() {
-		return classBoardFilename;
+		return classBoardFileName;
 	}
 	public void setClassBoardFilename(String classBoardFilename) {
-		this.classBoardFilename = classBoardFilename;
+		this.classBoardFileName = classBoardFilename;
 	}
 	public int getClassBoardRef() {
 		return classBoardRef;

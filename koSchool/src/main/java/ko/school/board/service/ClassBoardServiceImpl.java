@@ -37,4 +37,20 @@ public class ClassBoardServiceImpl implements ClassBoardService {
 	public String teacherClass(Map<String, Object> paramMap) throws Exception {
 		return dao.teacherClass(paramMap);
 	}
+
+	@Override
+	public ClassBoardVO classBoardDetailService(int classBoardNum) throws Exception {
+		return dao.classBoardDetailService(classBoardNum);
+	}
+
+	@Override
+	public void classBoardUpdate(ClassBoardVO classBoardVO) throws Exception {
+		dao.classBoardUpdate(classBoardVO);
+		
+	}
+
+	@Override
+	public void classBoardDelete(int classBoardNum) throws Exception {
+		dao.classBoardDelete(classBoardNum);
+	}
 }

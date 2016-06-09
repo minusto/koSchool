@@ -37,4 +37,19 @@ public class ClassBoardDAOImpl implements ClassBoardDAO {
 	public String teacherClass(Map<String, Object> paramMap) throws Exception {
 		return session.selectOne(namespace + ".teacherClass" , paramMap);
 	}
+
+	@Override
+	public ClassBoardVO classBoardDetailService(int classBoardNum) {
+		return session.selectOne(namespace + ".classBoardDetail" , classBoardNum);
+	}
+
+	@Override
+	public void classBoardUpdate(ClassBoardVO classBoardVO) throws Exception {
+		session.update(namespace + ".classBoardUpdate" , classBoardVO);	
+	}
+
+	@Override
+	public void classBoardDelete(int classBoardNum) throws Exception {
+		session.delete(namespace + ".classBoardDelete" , classBoardNum);
+	}
 }

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +21,25 @@
     })
 	</script>
 	<style type="text/css">
-   	 tbody tr:hover td {
+   	 .headings {
+		background: rgba(52, 73, 94, 0.94);
+		color: white;
+	}
+	
+	tbody tr:hover td {
 		background: rgba(38, 185, 154, 0.07);
 		border-top: 1px solid rgba(38, 185, 154, 0.11);
 		border-bottom: 1px solid rgba(38, 185, 154, 0.11);
-		}
+	}
+	
+	tbody tr.selected {
+		background: rgba(38, 185, 154, 0.16);
+	}
+	
+	tbody tr.selected td {
+		border-top: 1px solid rgba(38, 185, 154, 0.40);
+		border-bottom: 1px solid rgba(38, 185, 154, 0.40);
+	}
     </style>
 </head>
 
@@ -41,13 +56,12 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">
-										<div class="title">학생 목록</div>
+										<div class="title">학급게시판 목록</div>
 									</div>
 								</div>
-								<div class="col-lg-1"></div>
-								<div class="card-body table-responsive col-lg-10">
+									<div class="card-body table-responsive">
 									<!-- Table -->
-									<table class="table table-striped">
+									<table class="datatable table table-striped">
 										<thead>
 											<tr class="headings">
 												<th>글번호</th>
@@ -59,8 +73,8 @@
 											<c:forEach var="list" items="${list}">
 												<tr>
 												    <td>${list.classBoardNum}</td>
-													<td>${list.classBoardTitle}</td>
-													<td>${list.classBoardContent}</td>	
+													<td><a href="classBoardDetail?classBoardNum=${list.classBoardNum}">${list.classBoardTitle}</a></td>
+													<td>${fn:substring(list.classBoardContent,0,5)}</td>	
 												</tr>
 											</c:forEach>
 										</tbody> 

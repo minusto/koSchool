@@ -22,7 +22,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">
-										<div class="title">공지사항</div>
+										<div class="title">학급게시판 작성</div>
 									</div>
 								</div>
 								<div class="card-body table-responsive col-md-5">

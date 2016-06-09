@@ -133,6 +133,20 @@ or a.memberId in
 	</if>
 </select>
 
+	<select id="classBoardDetail" resultType="ClassBoardVO">
+		SELECT * FROM classBoard WHERE classBoardNum = #{classBoardNum}
+	</select>
+
+	<update id="classBoardUpdate">
+		UPDATE classBoard 
+		SET classBoardTitle = #{classBoardTitle}, classBoardContent = #{classBoardContent} <!-- classBoardFileName = #{classBoardFileName} -->
+		WHERE classBoardNum = #{classBoardNum}
+	</update>
+	
+	<delete id="classBoardDelete">
+		DELETE FROM classBoard WHERE classBoardNum = #{classBoardNum}
+	</delete>
+
 </mapper>
 
 

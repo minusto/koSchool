@@ -10,4 +10,7 @@ public interface ClassBoardDAO {
 	public List<ClassBoardVO> teacherClassBoardList(ClassBoardVO classBoardVO)throws Exception; //선생님학급게시판리스트 
 	public List<ClassBoardVO> studentClassBoardList(ClassBoardVO classBoardVO)throws Exception; //학생학급게시판리스트
 	public String teacherClass(Map<String, Object> paramMap) throws Exception;	//teacherClass (학년, 반) 구하기
+	public ClassBoardVO classBoardDetailService(int classBoardNum);
+	public void classBoardUpdate(ClassBoardVO classBoardVO)throws Exception;
+	public void classBoardDelete(int classBoardNum)throws Exception;
 }
