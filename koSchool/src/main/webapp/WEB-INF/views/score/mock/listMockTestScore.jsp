@@ -588,6 +588,11 @@
 		</div>	
 		<!-- 외국어 차트 END -->
 		
+		<br><br>
+		<div align="center">
+			<button class="btn btn-primary btn-success" onclick="location.href='/mockSimulation'" style="font-family: 'Jeju Gothic' ">정시 시뮬레이션</button>
+		</div>
+		
 	</div>
 	<script type="text/javascript" src="/resources/js/MockTestchartjs.js"></script>
 

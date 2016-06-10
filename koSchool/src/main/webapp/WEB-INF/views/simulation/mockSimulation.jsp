@@ -89,7 +89,22 @@
 <body class="flat-blue">
    <div class="app-container">
         <div class="row content-container">
-            <jsp:include page="../common/studentMenu.jsp"/>
+            <c:if test="${grade eq 'schoolAdmin' }">
+				<jsp:include page="../common/schoolAdminMenu.jsp" />
+			</c:if>
+			<c:if test="${grade eq 'student' }">
+				<jsp:include page="../common/studentMenu.jsp" />
+			</c:if>
+			
+			<c:if test="${grade eq 'teacher' }">
+				<jsp:include page="../common/teacherMenu.jsp" />
+			</c:if>
+			<c:if test="${grade eq 'parent' }">
+				<jsp:include page="../common/studentMenu.jsp" />
+			</c:if>
+            
+            
+            
 <!--			메인 컨텐츠 -->
             <div class="container-fluid">
                 <div class="side-body padding-top">
@@ -255,6 +270,12 @@
                 </div>
             </div>
             <!-- 메인컨텐츠 끝 -->
+            
+            <br><br>
+		<div align="center">
+			<button class="btn btn-primary btn-success" onclick="location.href='/universityDetail'" style="font-family: 'Jeju Gothic' ">임시 대학상세페이지 이동</button>
+		</div>
+            
         </div>
    	</div>
    	
