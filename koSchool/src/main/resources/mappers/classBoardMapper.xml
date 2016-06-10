@@ -13,8 +13,8 @@ insert into ClassBoard (
 						 classBoardContent,
 						<!--  classBoardDate ,  -->
 						 classBoardPassword,
-						<!--  classBoardHitcount ,  -->
-						 <!-- classBoardFilename,  -->
+						 classBoardHitcount ,
+						 <!-- classBoardFilename, -->
 						 <!-- classBoardRef , 
 						 classBoardStep , 
 						 classBoardLevel -->
@@ -28,7 +28,7 @@ insert into ClassBoard (
 						#{classBoardContent},
 						<!-- #{classBoardDate}, -->
 						#{classBoardPassword},
-						<!-- #{classBoardHitcount}, -->
+						0,
 						<!-- #{classBoardFilename}, -->
 						<!-- #{classBoardRef},
 						#{classBoardStep},
@@ -146,6 +146,10 @@ or a.memberId in
 	<delete id="classBoardDelete">
 		DELETE FROM classBoard WHERE classBoardNum = #{classBoardNum}
 	</delete>
+	
+	<update id="classBoardHitcount">
+		UPDATE classBoard SET classBoardHitcount = classBoardHitcount + 1 WHERE classBoardNum = #{classBoardNum}
+	</update>
 
 </mapper>
 

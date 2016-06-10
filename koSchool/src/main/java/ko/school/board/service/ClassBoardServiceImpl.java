@@ -53,4 +53,9 @@ public class ClassBoardServiceImpl implements ClassBoardService {
 	public void classBoardDelete(int classBoardNum) throws Exception {
 		dao.classBoardDelete(classBoardNum);
 	}
+
+	@Override
+	public void classBoardHitcountService(int classBoardNum) throws Exception {
+		dao.classBoardHitcount(classBoardNum);
+	}
 }

@@ -13,4 +13,5 @@ public interface ClassBoardDAO {
 	public ClassBoardVO classBoardDetailService(int classBoardNum);
 	public void classBoardUpdate(ClassBoardVO classBoardVO)throws Exception;
 	public void classBoardDelete(int classBoardNum)throws Exception;
+	public void classBoardHitcount(int classBoardNum)throws Exception;
 }

@@ -67,6 +67,7 @@
 												<th>글번호</th>
 												<th>제목</th>
 												<th>내용</th>
+												<th>조회수</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -74,7 +75,8 @@
 												<tr>
 												    <td>${list.classBoardNum}</td>
 													<td><a href="classBoardDetail?classBoardNum=${list.classBoardNum}">${list.classBoardTitle}</a></td>
-													<td>${fn:substring(list.classBoardContent,0,5)}</td>	
+													<td>${fn:substring(list.classBoardContent,0,5)}</td>
+													<td>${list.classBoardHitcount }</td>	
 												</tr>
 											</c:forEach>
 										</tbody> 

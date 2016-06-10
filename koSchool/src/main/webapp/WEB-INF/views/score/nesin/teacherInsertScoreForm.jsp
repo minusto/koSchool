@@ -172,7 +172,7 @@
 												</tr>
 											</thead>
 											<tbody id="tbody2">
-												<c:forEach var="student" items="${list2 }">
+												<c:forEach var="student" items="${list2}">
 													<tr id="clickTr">
 														<td><%=i++%></td>
 														<td  id="clickStu" style="display:none">${student.memberId }</td>

@@ -52,4 +52,10 @@ public class ClassBoardDAOImpl implements ClassBoardDAO {
 	public void classBoardDelete(int classBoardNum) throws Exception {
 		session.delete(namespace + ".classBoardDelete" , classBoardNum);
 	}
+
+	@Override
+	public void classBoardHitcount(int classBoardNum) throws Exception {
+		session.update(namespace + ".classBoardHitcount", classBoardNum);
+		
+	}
 }

@@ -14,4 +14,5 @@ public interface ClassBoardService {
 	public ClassBoardVO classBoardDetailService(int classBoardNum)throws Exception;
 	public void classBoardUpdate(ClassBoardVO classBoardVO)throws Exception;
 	public void classBoardDelete(int classBoardNum)throws Exception;
+	public void classBoardHitcountService(int classBoardNum)throws Exception;
 }

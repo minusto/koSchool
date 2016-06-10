@@ -60,6 +60,22 @@ public class ClassBoardController {
 			classBoardVO.setMemberId(member.getMemberId());
 		}
 
+		/*MultipartFile file = classBoardVO.getFile();
+		System.out.println("==========file ::" + file);
+		if(!file.isEmpty()) {
+			String filename = file.getOriginalFilename();
+			File tempFile = new File(request.getRealPath("/upload"),file.getOriginalFilename());
+			if(tempFile.exists() && tempFile.isFile()) {
+				filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+				tempFile = new File(request.getRealPath("/upload"), filename);
+			}
+			file.transferTo(tempFile);
+			classBoardVO.setClassBoardFilename(filename);
+		} else {
+			classBoardVO.setClassBoardFilename("");
+			System.out.println("==============2" + classBoardVO.getClassBoardFilename());
+		}*/
+		
 		classBoardVO.setTeacherClass(session.getAttribute("teacherClass").toString());
 		
 		service.insertClassBoard(classBoardVO);
@@ -102,7 +118,7 @@ public class ClassBoardController {
 	@RequestMapping(value="/classBoardDetail", method=RequestMethod.GET)
 	public String noticeBoardDetail(@RequestParam("classBoardNum") int classBoardNum, Model model) throws Exception {
 		if(hitcountFlag == true) {
-			/*service.classBoardHitcountService(classBoardNum);*/
+			service.classBoardHitcountService(classBoardNum);
 		} else {
 			hitcountFlag = true;
 		}
