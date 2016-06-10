@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ko.school.common.domain.MemberVO;
+import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.SchoolAdminVO;
 import ko.school.common.domain.StudentVO;
 import ko.school.common.domain.TeacherVO;
@@ -145,7 +146,33 @@ public class ProfileController {
 		return "redirect:/studentProfile";
 	}
 	
-	//학부모--> 프로필  폼만 만듬 
+	//학부모--> 프로필  겟
+	@RequestMapping(value="/parentProfile", method=RequestMethod.GET)
+	public String parentProfile(Model model, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		ParentVO pVO = (ParentVO)session.getAttribute("parent");
+		
+		model.addAttribute("member", memberVO);
+		model.addAttribute("parent", pVO);
+		
+		return "/common/parentProfile";
+	}
+	
+	
+	//학부모 -->프로필 비번 수정
+	@RequestMapping(value="/upParentProfile", method=RequestMethod.POST)
+	public String parentProfile(MemberVO memberVO, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO mVO = (MemberVO)session.getAttribute("member");
+		
+		
+		mVO.setMemberPassword(memberVO.getMemberPassword());
+		service.updateStudentPword(mVO);
+		
+		
+		return "redirect:/parentProfile";
+	}
 	
 	
 	//학교관리자 프로필

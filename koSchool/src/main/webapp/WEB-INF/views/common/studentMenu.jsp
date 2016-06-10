@@ -120,9 +120,9 @@
 						<li class="profile-img"><img
 							src="upload/${ head}_resize${pattern}" class="profile-img"></li>
 					</c:if>
-					<c:if test="${grade eq '학부모'}">
+					<c:if test="${grade eq 'parent'}">
 						<li class="profile-img"><img
-							src="img/profile/picjumbo.com_HNCK4153_resize.jpg"
+							src="/resources/img/profile/picjumbo.com_HNCK4153_resize.jpg"
 							class="profile-img"></li>
 					</c:if>
 
@@ -131,12 +131,24 @@
 					<li>
 						<div class="profile-info">
 							<h4 class="username">${member.memberName }</h4>
-							<p>${member.memberEmail }${parent.familyRelation }</p>
+							<p>${member.memberEmail }</p>
+							<p>${parent.familyRelation }</p>
 							<div class="btn-group margin-bottom-2x" role="group">
+							<c:choose>
+							<c:when test="${grade eq 'student'}">
 								<button type="button" class="btn btn-default"
 								onclick="location.href='/studentProfile'">
 									<i class="fa fa-user"></i> Profile
 								</button>
+								</c:when>
+								<c:otherwise>
+								<button type="button" class="btn btn-default"
+								onclick="location.href='/parentProfile'">
+									<i class="fa fa-user"></i> Profile
+								</button>
+								</c:otherwise>
+							</c:choose>
+								
 								<button type="button" class="btn btn-default"
 									onclick="location.href='logout'">
 									<i class="fa fa-sign-out"></i> Logout
