@@ -1,5 +1,7 @@
 package ko.school.board.domain;
 
+import java.sql.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ClassBoardVO {
@@ -7,7 +9,7 @@ public class ClassBoardVO {
 	private String classBoardTitle;
 	private String classBoardContent;
 	private String classBoardWriter;
-	private String classBoardDate;
+	private Date classBoardDate;
 	private String classBoardPassword;
 	private int classBoardHitcount;
 	private String classBoardFileName;
@@ -56,10 +58,10 @@ public class ClassBoardVO {
 	public void setClassBoardWriter(String classBoardWriter) {
 		this.classBoardWriter = classBoardWriter;
 	}
-	public String getClassBoardDate() {
+	public Date getClassBoardDate() {
 		return classBoardDate;
 	}
-	public void setClassBoardDate(String classBoardDate) {
+	public void setClassBoardDate(Date classBoardDate) {
 		this.classBoardDate = classBoardDate;
 	}
 	public String getClassBoardPassword() {

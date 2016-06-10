@@ -26,7 +26,7 @@
 									</div>
 								</div>
 								<div class="card-body table-responsive col-md-5">
-									<form id="frm" method="post">
+									<form id="frm" method="post" enctype="multipart/form-data">
 										<div class="messages"></div>
 										<div class="controls">
 											<div class="row">
@@ -52,7 +52,7 @@
 												</div>
 												<div class="col-md-12">
 													<label for="classBoardFilename">File input</label> 
-													<input type="file"  name="classBoardFilename">
+													<input type="file"  name="file">
 													<p class="help-block">영문명 파일로 올려주세요</p>
 												</div>
 											

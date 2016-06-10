@@ -78,9 +78,9 @@
 										</tr>
 										<tr height="30">
 											<th width="150">파일</th>
-											<%-- <td colspan="3"><a
-												href="/DownloadView?fileName=${classBoardDetail.classBoardFileName}">${classBoardDetail.classBoardFileName}</a>
-											</td> --%>
+											<td colspan="3"><a
+												href="/DownloadView?fileName=${classBoardDetail.classBoardFilename}">${classBoardDetail.classBoardFilename}</a>
+											</td>
 										</tr>
 										<tr height="150">
 											<td colspan="4">${classBoardDetail.classBoardContent}</td>

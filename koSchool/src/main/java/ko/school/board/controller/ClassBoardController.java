@@ -60,8 +60,7 @@ public class ClassBoardController {
 			classBoardVO.setMemberId(member.getMemberId());
 		}
 
-		/*MultipartFile file = classBoardVO.getFile();
-		System.out.println("==========file ::" + file);
+		MultipartFile file = classBoardVO.getFile();
 		if(!file.isEmpty()) {
 			String filename = file.getOriginalFilename();
 			File tempFile = new File(request.getRealPath("/upload"),file.getOriginalFilename());
@@ -73,8 +72,7 @@ public class ClassBoardController {
 			classBoardVO.setClassBoardFilename(filename);
 		} else {
 			classBoardVO.setClassBoardFilename("");
-			System.out.println("==============2" + classBoardVO.getClassBoardFilename());
-		}*/
+		}
 		
 		classBoardVO.setTeacherClass(session.getAttribute("teacherClass").toString());
 		

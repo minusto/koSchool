@@ -11,10 +11,10 @@ insert into ClassBoard (
 						 classBoardTitle , 
 						 <!-- classBoardWriter , --> 
 						 classBoardContent,
-						<!--  classBoardDate ,  -->
+						 classBoardDate , 
 						 classBoardPassword,
 						 classBoardHitcount ,
-						 <!-- classBoardFilename, -->
+						 classBoardFilename,
 						 <!-- classBoardRef , 
 						 classBoardStep , 
 						 classBoardLevel -->
@@ -26,10 +26,10 @@ insert into ClassBoard (
 						#{classBoardTitle},
 						<!-- #{classBoardWriter}, -->
 						#{classBoardContent},
-						<!-- #{classBoardDate}, -->
+						SYSDATE, 
 						#{classBoardPassword},
 						0,
-						<!-- #{classBoardFilename}, -->
+						#{classBoardFilename},
 						<!-- #{classBoardRef},
 						#{classBoardStep},
 						#{classBoardLevel} -->
