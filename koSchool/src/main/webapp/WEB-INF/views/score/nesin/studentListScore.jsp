@@ -109,6 +109,7 @@
 										<td>원점수</td>
 										<td>과목평균</td>
 										<td>표준편차</td>
+										<td>학교석차</td>
 										<td>석차등급</td>
 										<td>이수자수</td>
 									</tr>
@@ -125,6 +126,7 @@
 										<td id="avg<%=k%>"><fmt:formatNumber value="${list.subjectAvg }" pattern=".00"/></td>
 										<td id="stdevResult<%=++size3%>"></td>
 										<td id="ranking<%=++i%>"></td>
+										<td id="rating<%=i %>"></td>
 										<td id="allStudent<%=++j%>"></td>
 									</tr>
 									</c:if>
