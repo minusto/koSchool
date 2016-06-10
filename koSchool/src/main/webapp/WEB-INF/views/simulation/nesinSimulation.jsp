@@ -20,29 +20,51 @@
             <div class="container-fluid">
                 <div class="side-body padding-top">
 					<div id="compareToHopUniversityTotalExam" class="row">
-	                    <div class="table-responsive col-md-8 col-md-offset-2">
-                    	<h3>목표대학과의 비교</h3>
-	                    	<table id="hopeUniversityTable" class="table table-bordered">
+	                    <div class="table-responsive col-md-8 ">
+                    	<h3>이엘태그 학년별 내신 등급</h3>
+	                    	<table id="nesinTable" class="table table-bordered">
 	                    		<tr>
-	                    			<th>현재 내신 평균</th>
-	                    			<th>목표대학</th>
-	                    			<th>목표학과</th>
-	                    			<th>수시 커트라인</th>
-	                    			<th>점수 차이</th>
+	                    			<th>학년</th>
+	                    			<th>국</th>
+	                    			<th>영</th>
+	                    			<th>수</th>
+	                    			<th>사</th>
+	                    			<th>과</th>
+	                    			<th>기타</th>
 	                    		</tr>
 	                    		<tr>
-	                    			<td>4.3</td>
-	                    			<td><a id="hopeUniversityName" href="/universityDetail">서울대학교</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
-	                    			<td><a id="hopeUniversityMajor" href="/universityDetail">국어국문학과</a></td>
-	                    			<td>3.9</td>
-	                    			<td>0.4</td>
+	                    			<td>1</td>
+	                    			<td>1</td>
+	                    			<td>1</td>
+	                    			<td>1</td>
+	                    			<td>2</td>
+	                    			<td></td>
+	                    			<td>4</td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>2</td>
+	                    			<td>1</td>
+	                    			<td>1</td>
+	                    			<td>1</td>
+	                    			<td>2</td>
+	                    			<td></td>
+	                    			<td>4</td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>3</td>
+	                    			<td>1</td>
+	                    			<td>1</td>
+	                    			<td>1</td>
+	                    			<td>2</td>
+	                    			<td></td>
+	                    			<td>4</td>
 	                    		</tr>
 	                    	</table>
 	                    </div>
                     </div>
                     
                     <div id="recommendContainer" class="row">
-                    	<div class="col-md-8 col-md-offset-2">
+                    	<div class="col-md-12 ">
                     		<h3>추천 대학</h3>
                     		<div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
@@ -67,7 +89,7 @@
 					</div>
                     
 					<div class="row">
-                    	<div class="col-md-8 col-md-offset-2">
+                    	<div class="col-md-10 ">
                     		<h3>대학 검색</h3>
                     		<div id="searchUniversityResult" class="row">
                     			<div class="table-responsive col-md-12">
