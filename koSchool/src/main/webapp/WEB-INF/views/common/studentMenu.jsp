@@ -217,7 +217,7 @@
 					<div id="dropdown-table" class="panel-collapse collapse">
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
-								<li><a href="studentTotalExamSimulation.jsp">수시 시뮬레이션</a></li>
+								<li><a href="susiSimulation">수시 시뮬레이션</a></li>
 								<li><a href="/mockSimulation">정시 시뮬레이션</a></li>
 							</ul>
 						</div>

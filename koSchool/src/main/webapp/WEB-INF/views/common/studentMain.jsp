@@ -101,7 +101,7 @@
 																<div class="modal-body"> 
 																	<div class="row">
 																		<div class="col-sm-6 col-xs-12" style="text-align:center;">
-																			<a href="studentTotalExamSimulation.jsp">
+																			<a href="susiSimulation">
 																			<h3>수시 시뮬레이션</h3>
 																			</a>
 																		</div>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.SusiSimulationMapper">
+	
+   <!-- 내신 조회를 위한 작업 -->
+   <!-- 학생 객체 -->
+	<select id="studentCheck" resultType="StudentVO">
+		SELECT *
+		FROM student
+		WHERE memberid=#{id}
+	</select>
+	
+ <!-- 전체 과목별 등수 -->
+   <select id="allRankingScoreList" resultType="AllRankingScoreList">
+   		SELECT RANK() OVER (partition by s.subjectId ORDER BY s.subjectTotal DESC) AS Rank,
+   		s.subjectId AS subjectId, s.memberId AS memberId, s.subjectTotal AS subjectTotal
+		FROM	
+		(SELECT s.subjectId AS subjectId ,s3.subjectType AS subjectType,s3.subjectName AS subjectName,
+		s3.subjectUnit AS subjectUnit,
+   		s.memberId AS memberId, (s.midexam*0.4)+(s.finalexam*0.4)+(s.perfomanceevaluation*0.2) AS subjectTotal,
+		s2.subjectAvg AS subjectAvg
+		from score s,
+		(SELECT subjectId, AVG((midexam*0.4)+(finalexam*0.4)+(perfomanceevaluation*0.2)) AS subjectAvg from score
+		WHERE semester = #{semester}
+		AND nesinyear = #{nesinYear}
+		group by subjectId) s2,
+		subject s3
+		WHERE s.subjectId = s2.subjectId
+		AND s.subjectId = s3.subjectId
+		AND semester = #{semester}
+		AND nesinyear = #{nesinYear}) s
+   </select>
+   
+   <!-- 전체 과목별 전체명수  -->
+   <select id="allStudentNum" resultType="AllStudentNum">
+   		SELECT subjectId,count(*) AS allStudentNum FROM SCORE
+   		WHERE semester = #{semester}
+   		AND nesinyear = #{nesinYear}
+		GROUP BY subjectId
+   </select>
+   
+   <!-- 해당 학생의 과목 아이디, 교과 -->
+   <select id="susiSubject" resultType="SusiSubjectDTO">
+   	SELECT su.subjectId, su.subjectType FROM score sc, subject su
+	WHERE sc.subjectId = su.subjectId
+	AND memberId = #{id}
+	AND semester = #{semester}
+	AND nesinYear = #{nesinYear}
+	</select>
+   
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
+
