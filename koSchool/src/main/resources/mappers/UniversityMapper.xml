@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ko.school.mapper.UniversityMapper">
+	<!-- 대학 LIST -->
+	<select id="universityList" resultType="UniversityVO">
+		SELECT * FROM university
+	</select>
+	<!-- 학과 LIST -->
+	<select id="majorList" resultType="MajorVO">
+		SELECT * FROM major
+	</select>
+	
+	<!-- 반영비율 LIST -->
+	<select id="reflectionRateList" resultType="ReflectionRateVO">
+		SELECT * FROM reflectionrate
+	</select>
+	
+	<!-- 수능 영역별 반영비율 LIST -->
+	<select id="reflectionRatePerSATAreaList" resultType="ReflectionRatePerSATAreaVO">
+		SELECT * FROM ReflectionRatePerSATArea
+	</select>
+	
+	<!-- 가산점 LISt -->
+	<select id="extraPointList" resultType="ExtraPointVO">
+		SELECT * FROM extrapoint
+	</select>
+	
+	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ insert startㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<!-- 반영비율 Insert -->
+	<insert id="insertReflectionRate">
+		INSERT INTO ReflectionRate (
+			ReflectionRateId ,SATReflectionRate,SchoolReportReflectionRate,PracticeReflectionrate,
+			InterviewReflectionrate,EssayReflectionrate,AptitudeReflectionrate,ETCReflectionrate,ETCContent
+		)values(
+			#{reflectionRateId},#{satReflectionRate},#{schoolReportReflectionRate},#{practiceReflectionRate},#{interviewReflectionRate}
+			,#{essayReflectionRate}
+			,#{aptitudeReflectionRate},#{etcReflectionRate},#{etcContent}
+		)
+	</insert>
+	<!-- 대학학과별 입시정보 INSERT -->
+	<insert id="insertEntranceInfo">
+		INSERT INTO entranceinfo(
+			MajorId ,UniversityId ,EntranceYear ,RecruitSeparate ,HangooksaReflectionPlan ,RecruitNum 
+			,RecruitModelType ,ReflectionRateId  ,SATReflectionRateId ,ExtraPointId 
+		)values(
+			#{majorId},#{universityId},#{entranceYear},#{recruitSeparate},
+			#{hangooksaReflectionPlan},#{recruitNum},#{recruitModelType},#{reflectionRateId},
+			#{satReflectionRateId},#{extraPointId}
+		)
+	</insert>
+	<!-- 가산점 INSERT -->
+	<insert id="insertExtraPoint">
+		INSERT INTO extrapoint(
+			ExtraPointId ,KoreanExtraRate ,MathBTypeExtraRate ,SocialResearchExtraRate ,ScienceResearchExtraRate
+		)values(
+			#{extraPointId},#{koreanExtraRate},#{mathBTypeExtraRate},#{socialResearchExtraRate},#{scienceResearchExtraRate}
+		)
+	</insert>
+	<!-- 수능 영역별 반영비율 INSERT -->
+	<insert id="insertReflectionRatePerSATArea">
+		INSERT INTO ReflectionRatePerSATArea(
+			SATReflectionRateId,KoreanReflectionRate,MathBTypeReflectionRate,MathATypeReflectionRate,EnglishReflectionRate,
+			ResearchSubjectReflectionRate,SelectCombination,SelectNum,ResearchSubjectNum
+		)values(
+			#{satReflectionRateId},#{koreanReflectionRate},#{mathBTypeReflectionRate},#{mathATypeReflectionRate},#{englishReflectionRate},
+			#{researchSubjectReflectionRate},#{selectCombination},#{selectNum},#{researchSubjectNum}
+		)
+	</insert>
+	<!-- 정시점수 INSERT -->
+	<insert id="insertSATScore">
+		INSERT INTO satscore(
+			MajorId,UniversityId,EntranceYear,RecruitSeparate,StandardScoreCutline,TotalPercentile,SATScoreUseIndex,ConvertScoreMax,ConvertStandardScoreCutline
+		)values(
+			#{majorId},#{universityId},#{entranceYear},#{recruitSeparate},#{standardScoreCutline},
+			#{totalPercentile},#{satScoreUseIndex},#{convertScoreMax},#{convertStandardScoreCutline}
+		)
+	</insert>
+	
+	
+	
+</mapper>
