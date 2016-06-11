@@ -431,17 +431,20 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap2 = new HashMap<String, Object>();
 		if (studentGrade == 3) {
+			System.out.println("3학년 과목==========================");
 			double subject[] = new double[6];
 			int cnt[] = new int[6];
 			// 3학년 1학기
 			map.put("id", id);
 			map.put("semester", 1);
 			map.put("nesinYear", 2016);
+			System.out.println("1학기==========================");
 			resultMap = mainMethod(map);
 			// 3학년 2학기
 			map.put("id", id);
 			map.put("semester", 2);
 			map.put("nesinYear", 2016);
+			System.out.println("2학기==========================");
 			resultMap2 = mainMethod(map);
 			// 1학년 1,2학기 각 교과등급의 합
 			subject[0] = (double) ((int) resultMap.get("국어") + (int) resultMap2.get("국어"));

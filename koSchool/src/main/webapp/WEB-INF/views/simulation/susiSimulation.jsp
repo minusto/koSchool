@@ -70,12 +70,12 @@
 	                    		</tr>
 	                    		<tr>
 	                    			<td>2</td>
-	                    			<td>${sencond.kor }</td>
-	                    			<td>${sencond.eng }</td>
-	                    			<td>${sencond.math }</td>
-	                    			<td>${sencond.sol }</td>
-	                    			<td>${sencond.sci }</td>
-	                    			<td>${sencond.etc }</td>
+	                    			<td>${second.kor }</td>
+	                    			<td>${second.eng }</td>
+	                    			<td>${second.math }</td>
+	                    			<td>${second.sol }</td>
+	                    			<td>${second.sci }</td>
+	                    			<td>${second.etc }</td>
 	                    		</tr>
 	                    		<tr>
 	                    			<td>3</td>
