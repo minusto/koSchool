@@ -7,6 +7,14 @@ public class SusiRatingDTO {
 	private double sol;
 	private double sci;
 	private double etc;
+	
+	
+	@Override
+	public String toString() {
+		return "SusiRatingDTO [kor=" + kor + ", eng=" + eng + ", math=" + math + ", sol=" + sol + ", sci=" + sci
+				+ ", etc=" + etc + "]";
+	}
+	
 	public double getKor() {
 		return kor;
 	}

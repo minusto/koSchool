@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,7 +19,7 @@ public class SusiSimulationController {
 	private SusiSimulationService service;
 	
 	@RequestMapping(value="/susiSimulation", method=RequestMethod.GET)
-	public String susiSimulation(HttpSession session)throws Exception {
+	public String susiSimulation(HttpSession session, Model model)throws Exception {
 		String grade = (String) session.getAttribute("grade");
 		String id = null;
 		int studentGrade = 0;
@@ -41,36 +42,29 @@ public class SusiSimulationController {
 			StudentVO studentVO = service.studentCheck(id);
 			studentGrade = studentVO.getStudentGrade();
 		}
-		SusiRatingDTO[] dto = new SusiRatingDTO[6];
+		SusiRatingDTO[] dto = new SusiRatingDTO[3];
 		if(studentGrade == 1){
-			// 1학년 1학기 
-			dto[0] = service.grade1Semester1(studentGrade, id);
-			// 1학년 2학기
-			dto[1] = service.grade1Semester2(studentGrade, id);
+			// 1학년 1,2학기 
+			dto[0] = service.grade1(studentGrade, id);
 		}else if(studentGrade == 2){
-			// 1학년 1학기 
-			dto[0] = service.grade1Semester1(studentGrade, id);
-			// 1학년 2학기
-			dto[1] = service.grade1Semester2(studentGrade, id);
-			// 2학년 1학기 
-			dto[2] = service.grade2Semester1(studentGrade, id);
-			// 2학년 2학기
-			dto[3] = service.grade2Semester2(studentGrade, id);
+			// 1학년 1,2학기 
+			dto[0] = service.grade1(studentGrade, id);
+			// 2학년 1,2학기 
+			dto[1] = service.grade2(studentGrade, id);
 		}else if(studentGrade == 3){
-			// 1학년 1학기 
-			dto[0] = service.grade1Semester1(studentGrade, id);
-			// 1학년 2학기
-			dto[1] = service.grade1Semester2(studentGrade, id);
-			// 2학년 1학기 
-			dto[2] = service.grade2Semester1(studentGrade, id);
-			// 2학년 2학기
-			dto[3] = service.grade2Semester2(studentGrade, id);
-			// 3학년 1학기 
-			dto[4] = service.grade3Semester1(studentGrade, id);
-			// 3학년 2학기
-			dto[5] = service.grade3Semester2(studentGrade, id);
+			// 1학년 1,2학기 
+			dto[0] = service.grade1(studentGrade, id);
+			// 2학년 1,2학기 
+			dto[1] = service.grade2(studentGrade, id);
+			// 3학년 1,2학기 
+			dto[2] = service.grade3(studentGrade, id);
 		}
-		
+		//1학년 전체교과 평균등급
+		model.addAttribute("first",dto[0]);
+		//2학년 전체교과 평균등급
+		model.addAttribute("second",dto[1]);
+		//3학년 전체교과 평균등급
+		model.addAttribute("third",dto[2]);
 		return "/simulation/susiSimulation";
 	}
 	

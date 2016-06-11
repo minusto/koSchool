@@ -34,30 +34,30 @@
 	                    		</tr>
 	                    		<tr>
 	                    			<td>1</td>
-	                    			<td>1</td>
-	                    			<td>1</td>
-	                    			<td>1</td>
-	                    			<td>2</td>
-	                    			<td></td>
-	                    			<td>4</td>
+	                    			<td>${first.kor }</td>
+	                    			<td>${first.eng }</td>
+	                    			<td>${first.math }</td>
+	                    			<td>${first.sol }</td>
+	                    			<td>${first.sci }</td>
+	                    			<td>${first.etc }</td>
 	                    		</tr>
 	                    		<tr>
 	                    			<td>2</td>
-	                    			<td>1</td>
-	                    			<td>1</td>
-	                    			<td>1</td>
-	                    			<td>2</td>
-	                    			<td></td>
-	                    			<td>4</td>
+	                    			<td>${sencond.kor }</td>
+	                    			<td>${sencond.eng }</td>
+	                    			<td>${sencond.math }</td>
+	                    			<td>${sencond.sol }</td>
+	                    			<td>${sencond.sci }</td>
+	                    			<td>${sencond.etc }</td>
 	                    		</tr>
 	                    		<tr>
 	                    			<td>3</td>
-	                    			<td>1</td>
-	                    			<td>1</td>
-	                    			<td>1</td>
-	                    			<td>2</td>
-	                    			<td></td>
-	                    			<td>4</td>
+	                    			<td>${third.kor }</td>
+	                    			<td>${third.eng }</td>
+	                    			<td>${third.math }</td>
+	                    			<td>${third.sol }</td>
+	                    			<td>${third.sci }</td>
+	                    			<td>${third.etc }</td>
 	                    		</tr>
 	                    	</table>
 	                    </div>
