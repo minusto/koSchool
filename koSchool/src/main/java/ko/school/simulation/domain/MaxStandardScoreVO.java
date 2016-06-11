@@ -23,6 +23,7 @@ public class MaxStandardScoreVO {
 	private int sc_Biology2MaxScore;
 	private int sc_Geoscience1MaxScore;
 	private int sc_Geoscience2MaxScore;
+	private int HangooksaMaxScore;
 	
 	
 	public String getMockId() {
@@ -156,6 +157,12 @@ public class MaxStandardScoreVO {
 	}
 	public void setSc_Geoscience2MaxScore(int sc_Geoscience2MaxScore) {
 		this.sc_Geoscience2MaxScore = sc_Geoscience2MaxScore;
+	}
+	public int getHangooksaMaxScore() {
+		return HangooksaMaxScore;
+	}
+	public void setHangooksaMaxScore(int hangooksaMaxScore) {
+		HangooksaMaxScore = hangooksaMaxScore;
 	}
 	
 }
