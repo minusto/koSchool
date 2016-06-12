@@ -19,7 +19,7 @@ public class MockSimulationController {
 		return "/simulation/mockSimulation";
 	}
 	
-	
+
 	
 	@RequestMapping(value="/universityDetail", method=RequestMethod.GET)
 	public String universityDetail() {
