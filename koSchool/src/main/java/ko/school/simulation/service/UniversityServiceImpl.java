@@ -14,7 +14,6 @@ import ko.school.simulation.domain.ReflectionRateVO;
 import ko.school.simulation.domain.SATScoreVO;
 import ko.school.simulation.domain.UniversityVO;
 import ko.school.simulation.persistence.UniversityDAO;
-import ko.school.simulation.persistence.UniversityDAOImpl;
 
 @Service
 public class UniversityServiceImpl implements UniversityService {
@@ -70,5 +69,8 @@ public class UniversityServiceImpl implements UniversityService {
 		return dao.reflectionRateList();
 	}
 	
-	
+	@Override
+	public List<MajorVO> universityMajorList(String universityId) {
+		return dao.universityMajorList(universityId);
+	}
 }

@@ -13,6 +13,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM major
 	</select>
 	
+	<!-- 대학별 학과 LIST출력 -->
+	<select id="universityMajorList" resultType="MajorVO">
+		SELECT m.*
+		FROM major m,universitymajor um
+		WHERE m.majorid=um.majorid
+		AND um.universityid=#{universityid}
+		ORDER BY m.majorid ASC
+	</select>
+	
+	
+	
 	<!-- 반영비율 LIST -->
 	<select id="reflectionRateList" resultType="ReflectionRateVO">
 		SELECT * FROM reflectionrate

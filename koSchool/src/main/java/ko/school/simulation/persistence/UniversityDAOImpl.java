@@ -70,4 +70,9 @@ public class UniversityDAOImpl implements UniversityDAO {
 	public List<ReflectionRateVO> reflectionRateList() {
 		return session.selectList(namespace+".reflectionRateList");
 	}
+	
+	@Override
+	public List<MajorVO> universityMajorList(String universityId) {
+		return session.selectList(namespace+".universityMajorList",universityId);
+	}
 }

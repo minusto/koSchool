@@ -32,4 +32,5 @@ public interface UniversityDAO {
 
 	public List<ReflectionRateVO> reflectionRateList();
 
+	public List<MajorVO> universityMajorList(String universityId);
 }

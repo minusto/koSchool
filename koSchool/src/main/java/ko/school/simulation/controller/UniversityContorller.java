@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ko.school.simulation.domain.EntranceInfoVO;
 import ko.school.simulation.domain.ExtraPointVO;
@@ -30,8 +32,8 @@ public class UniversityContorller {
 		model.addAttribute("universityList", universityList);
 		
 		//학과 LIST
-		List<MajorVO> majorList=service.majorListService();
-		model.addAttribute("majorList", majorList);
+//		List<MajorVO> majorList=service.majorListService();
+//		model.addAttribute("majorList", majorList);
 		
 		//가산점 LIST
 		List<ExtraPointVO> extraPointList=service.extraPointList();
@@ -51,6 +53,10 @@ public class UniversityContorller {
 	public String universityInsert(Model model,ReflectionRateVO reflectRateVO,ReflectionRatePerSATAreaVO rrp,ExtraPointVO extraPointVO
 			,EntranceInfoVO entranceInfoVO,SATScoreVO satScoreVO){
 					
+		System.out.println(entranceInfoVO.getMajorId());
+		System.out.println(entranceInfoVO.getUniversityId());
+		System.out.println(entranceInfoVO.getEntranceYear());
+		System.out.println(entranceInfoVO.getRecruitSeparate());
 		//가산점 LIST
 		List<ExtraPointVO> extraPointList=service.extraPointList();
 		model.addAttribute("extraPointList", extraPointList);
@@ -64,8 +70,8 @@ public class UniversityContorller {
 		List<UniversityVO> list=service.universityListService();
 		model.addAttribute("universityList", list);
 		//학과 LIST
-		List<MajorVO> majorList=service.majorListService();
-		model.addAttribute("majorList", majorList);
+	//	List<MajorVO> majorList=service.majorListService();
+	//	model.addAttribute("majorList", majorList);
 		
 		//이미 등록된 반영비율을 선택했다면 insert시키지 않는다
 		int count=0;
@@ -109,11 +115,14 @@ public class UniversityContorller {
 		
 		//정시점수 INSERT
 		service.insertSATScore(satScoreVO);
-		
-
-		
 
 		return "/university/universityInsertForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getMajor{universityId}")//$
+	public List<MajorVO> getMajor(@PathVariable("universityId") String universityId){
+		return service.universityMajorList(universityId);
 	}
 	
 	

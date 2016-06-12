@@ -32,4 +32,5 @@ public interface UniversityService {
 
 	public List<ReflectionRateVO> reflectionRateList();
 
+	public List<MajorVO> universityMajorList(String universityId);
 }
