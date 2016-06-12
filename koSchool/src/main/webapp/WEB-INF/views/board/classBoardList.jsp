@@ -47,7 +47,7 @@
 <body class="flat-blue">
     <div class="app-container">
         <div class="row content-container">
-            <jsp:include page="../common/studentMenu.jsp"/>
+            <jsp:include page="../common/teacherMenu.jsp"/>
             <!-- 메인 컨텐츠 -->
            <div class="container-fluid">
 				<div class="side-body">
