@@ -106,7 +106,6 @@
 			</c:if>
             
             
-            
 <!--			메인 컨텐츠 -->
             <div class="container-fluid">
                 <div class="side-body padding-top">
@@ -114,29 +113,29 @@
 	                    <div class="table-responsive col-md-8 col-md-offset-2">
                     	<h3>목표대학과의 비교</h3>
 	                    	<c:choose>
-                    			<c:when test="${ grade == '학생' }">
-                    				<c:choose>
-                    					<c:when test="${checkHopeUniversityExist > 0}">
-                    						<table id="hopeUniversityTable" class="table table-bordered">
-	                    						<tr>
-					                    			<th>모의고사 총합</th>
-					                    			<th>목표대학</th>
-					                    			<th>목표학과</th>
-					                    			<th>정시 커트라인</th>
-					                    			<th>점수 차이</th>
-					                    		</tr>
-					                    		<tr>
-					                    			<td>${mockTestSumList[0].TOTAL}</td>
-					                    			<td><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
-					                    			<td><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>
-					                    			<td>${info.mockTestCutline}</td>
-					                    			<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />
-					                    			<td>${finalTotal}</td>
-					                    		</tr>
-	                    					</table>
-                    					</c:when>
-                    					<c:otherwise>
-                    						<form action="logic/insertHopeUniversityOk.jsp?id=${id}" method="post">
+	                    		<c:when test="${hopeUniversityVo != null}">
+	                    			<table id="hopeUniversityTable" class="table table-bordered">
+                   						<tr>
+			                    			<th>모의고사 총합</th>
+			                    			<th>목표대학</th>
+			                    			<th>목표학과</th>
+			                    			<th>정시 커트라인</th>
+			                    			<th>점수 차이</th>
+			                    		</tr>
+			                    		<tr>
+			                    			<td>${mockTestSumList[0].TOTAL}</td>
+			                    			<td><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
+			                    			<td><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>
+			                    			<td>${info.mockTestCutline}</td>
+			                    			<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />
+			                    			<td>${finalTotal}</td>
+			                    		</tr>
+                   					</table>
+	                    		</c:when>
+	                    		<c:otherwise><!-- 목표대학이 설정되어있지 않을 경우 -->
+	                    			<c:choose>
+	                    				<c:when test="${ grade eq 'student' }">
+	                    					<form action="logic/insertHopeUniversityOk.jsp?id=${id}" method="post">
                     							<h4>희망대학 설정하기</h4>
 	                    						대학교 : <select id="selectUniversity" name="universityName">
 	                    							<optgroup label="선택한 대학">
@@ -156,37 +155,23 @@
 	                    						&nbsp;&nbsp;
 	                    						<input type="submit" value="등록" class="flat-blue btn btn-primary"/>                						
                     						</form>
-                    					</c:otherwise>
-                    				</c:choose>
-                    			</c:when>
-	                    		<c:otherwise>
-		                    		<c:choose>
-		                    			<c:when test="${checkHopeUniversityExist > 0}">
-		                    				<table id="hopeUniversityTable" class="table table-bordered">
-		                    					<tr>
-					                    			<th>현재 모의고사 평균 등급</th>
-					                    			<th>목표대학</th>
-					                    			<th>목표학과</th>
-					                    			<th>정시 커트라인</th>
-					                    			<th>점수 차이</th>
-					                    		</tr>
-					                    		<tr>
-					                    			<td>${mockTestSumList[0].TOTAL}</td>
-					                    			<td><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
-					                    			<td><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>
-					                    			<td>${info.mockTestCutline}</td>
-					                    			<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />
-					                    			<td>${finalTotal}</td>
-					                    		</tr>
-	                    					</table>
-		                   				</c:when>
-		                   				<c:otherwise>
-		                   					<table id="hopeUniversityTable" class="table table-bordered">
+	                    				</c:when>
+	                    				<c:when test="${ grade eq 'parent' }">
+	                    					<table id="hopeUniversityTable" class="table table-bordered">
 				                    			<tr><th colspan="4">안녕하세요 학부모님</th></tr>
 				                    			<tr><td colspan="4">자녀의 희망대학이 설정되어있지 않습니다</td></tr>
-			                    			</table>	                    						
-		                   				</c:otherwise>
-	                   				</c:choose>
+			                    			</table>
+	                    				</c:when>
+	                    				<c:when test="${ grade eq 'teacher' }">
+	                    					<table id="hopeUniversityTable" class="table table-bordered">
+				                    			<tr><th colspan="4">안녕하세요 선생님</th></tr>
+				                    			<tr><td colspan="4">학생의 희망대학이 설정되어있지 않습니다</td></tr>
+			                    			</table>
+	                    				</c:when>
+	                    				<c:otherwise>
+	                    					<p>해당없음</p>
+	                    				</c:otherwise>
+	                    			</c:choose>
 	                    		</c:otherwise>
 	                    	</c:choose>
                 			<br><br>
@@ -248,15 +233,15 @@
 					                    					</tr>
 				                    					</tfoot>
 				                    					<tbody>
-					                    					<c:forEach var="allEntranceInfoList" items="${allEntranceInfoList }">
+					                    					<c:forEach var="allEntranceInfoList" items="${allMockList }">
 					                    						<tr>
 						                    						<td>
-						                    							<img class="tableUniversityMark" alt="서울대학교마크" src="${allEntranceInfoList.universityMark }">
+						                    							<img class="tableUniversityMark" alt="${allEntranceInfoList.universityName }마크" src="${allEntranceInfoList.universityMark }">
 						                    							<a id="hopeUniversityName" href="/universityDetail">${allEntranceInfoList.universityName }</a>
 						                    						</td>
 						                    						<td><a id="hopeUniversityMajor" href="/universityDetail">${allEntranceInfoList.majorName }</a></td>
-						                    						<td>${allEntranceInfoList.mockTestCutline }</td>
-						                    						<td>${allEntranceInfoList.mockTestRecruitNum }</td>
+						                    						<td>${allEntranceInfoList.standardScoreCutline }</td>
+						                    						<td>${allEntranceInfoList.recruitNum }</td>
 						                    					</tr>
 					                    					</c:forEach>
 				                    					</tbody>

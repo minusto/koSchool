@@ -4,8 +4,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ko.school.mapper.MockSimulationMapper">
-	
-	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 수시가 아닌 모든 입시정보의 EntranceInfo, University, Major 내용 / 작성자 : 구혜인 -->
+	<select id="selectAllMockUniversityList" resultType="MockSimulationDTO">
+		SELECT e.universityId, universityName, campusName, universityLocal, universityURL, universityMark, 
+			e.majorId, majorName, kind, college,
+			e.entranceYear, e.recruitseparate, hangooksaReflectionPlan, recruitNum, recruitModelType, reflectionRateId, schoolReportReflectionRateId, satReflectionRateId, extraPointId,
+			standardScoreCutline, totalPercentile, satScoreUseIndex, convertScoreMax, convertStandardScoreCutline
+		FROM entranceInfo e, university u, major m, satScore s
+		WHERE e.universityId = u.universityId
+		AND e.majorId = m.majorId
+		AND e.majorId = s.majorId
+		AND e.universityId = s.universityId
+		AND e.entranceYear = s.entranceYear
+		AND e.recruitSeparate = s.recruitSeparate
+		AND NOT e.recruitseparate = '수시'
+	</select>
 	
 	
 	
