@@ -12,6 +12,7 @@ import ko.school.common.domain.StudentVO;
 import ko.school.membermanage.domain.ParentInsertCommand;
 import ko.school.membermanage.domain.ParentList;
 import ko.school.membermanage.domain.ParentNullList;
+import ko.school.membermanage.domain.StudentCommend;
 import ko.school.membermanage.domain.StudentDetail;
 import ko.school.membermanage.domain.StudentList;
 import ko.school.membermanage.persistence.StudentManageDao;
@@ -22,13 +23,13 @@ public class StudentManageServiceImpl implements StudentManageService{
 	private StudentManageDao dao;
 	
 	@Override
-	public void updateMember(MemberVO member) throws Exception {
-		dao.updateMember(member);
+	public void updateMember(StudentCommend commend) throws Exception {
+		dao.updateMember(commend);
 	}
 
 	@Override
-	public void updateStudent(StudentVO student) throws Exception {
-		dao.updateStudent(student);
+	public void updateStudent(StudentCommend commend) throws Exception {
+		dao.updateStudent(commend);
 	}
 	
 
@@ -76,8 +77,8 @@ public class StudentManageServiceImpl implements StudentManageService{
 	}
 
 	@Override
-	public String getStudentPic(MemberVO member) throws Exception {
-		return dao.getStudentPic(member);
+	public String getStudentPic(StudentCommend commend) throws Exception {
+		return dao.getStudentPic(commend);
 	}
 
 	@Override

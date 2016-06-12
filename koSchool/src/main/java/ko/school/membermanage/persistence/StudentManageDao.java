@@ -8,12 +8,13 @@ import ko.school.common.domain.StudentVO;
 import ko.school.membermanage.domain.ParentInsertCommand;
 import ko.school.membermanage.domain.ParentList;
 import ko.school.membermanage.domain.ParentNullList;
+import ko.school.membermanage.domain.StudentCommend;
 import ko.school.membermanage.domain.StudentDetail;
 import ko.school.membermanage.domain.StudentList;
 
 public interface StudentManageDao {
-	public void updateMember(MemberVO member)throws Exception; //교사 ==> 학생정보 입력
-	public void updateStudent(StudentVO student)throws Exception; //교사 ==> 학생정보 입력 
+	public void updateMember(StudentCommend commend)throws Exception; //교사 ==> 학생정보 입력
+	public void updateStudent(StudentCommend commend)throws Exception; //교사 ==> 학생정보 입력 
 	public List<MemberVO> sameSchoolStudentNullList(String id)throws Exception; //교사 ==> 학생 정보 NULL LIST
 	public List<StudentList> studentList(String schoolId)throws Exception; //학생목록출력
 	public StudentDetail selectStudentDetail(String m_id)throws Exception; //교사 ==> 학생 세부 열람
@@ -22,6 +23,6 @@ public interface StudentManageDao {
 	public List<ParentNullList> parentNullList()throws Exception;//액터  : 교사 ==> 학부모 정보 NULL LIST
 	public void insertParent(ParentInsertCommand command)throws Exception; //학부모 정보 입력
 	public List<ParentList> parentList()throws Exception; ///액터: 교사 => 학부모리스트 출력
-	public String getStudentPic(MemberVO member) throws Exception;
+	public String getStudentPic(StudentCommend commend) throws Exception;
 	public void parentUpdateMember(MemberVO member);
 }

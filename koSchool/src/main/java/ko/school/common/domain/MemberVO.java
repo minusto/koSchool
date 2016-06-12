@@ -1,7 +1,7 @@
 package ko.school.common.domain;
 
 public class MemberVO{
-
+	
 	private String memberId;
 	private String memberPassword;
 	private String memberName;

@@ -12,8 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		memberAddress = #{memberAddress},
 		memberTel = #{memberTel},
 		memberNote = #{memberNote},
-		memberEmail =
-		#{memberEmail}
+		memberEmail = #{memberEmail}
 		WHERE memberId = #{memberId}
 	</update>
 

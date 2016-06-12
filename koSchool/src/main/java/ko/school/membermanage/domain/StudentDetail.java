@@ -3,6 +3,12 @@ package ko.school.membermanage.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
 public class StudentDetail implements Serializable{
 	private String memberId;
 	private String memberName;
@@ -19,9 +25,21 @@ public class StudentDetail implements Serializable{
 	private String studentGender;
 	private String studentMajor;
 	private String studentPicture;
+	private MultipartFile file;
 	
 	public StudentDetail(){};
 	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+
 	public String getMemberId() {
 		return memberId;
 	}

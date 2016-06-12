@@ -14,6 +14,7 @@ public class StudentVO implements Serializable {
 	private String studentGender;
 	private String studentMajor;
 	private String studentPicture;
+	
 	private MultipartFile file;
 	
 

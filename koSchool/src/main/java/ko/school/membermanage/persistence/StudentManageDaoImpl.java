@@ -13,6 +13,7 @@ import ko.school.common.domain.StudentVO;
 import ko.school.membermanage.domain.ParentInsertCommand;
 import ko.school.membermanage.domain.ParentList;
 import ko.school.membermanage.domain.ParentNullList;
+import ko.school.membermanage.domain.StudentCommend;
 import ko.school.membermanage.domain.StudentDetail;
 import ko.school.membermanage.domain.StudentList;
 
@@ -26,13 +27,13 @@ public class StudentManageDaoImpl implements StudentManageDao {
 	private static String namespace="ko.school.mapper.MemberManageMapper";
 	
 	@Override
-	public void updateMember(MemberVO member) throws Exception {
-		session.update(namespace+".updateMember",member);
+	public void updateMember(StudentCommend commend) throws Exception {
+		session.update(namespace+".updateMember", commend);
 	}
 
 	@Override
-	public void updateStudent(StudentVO student) throws Exception {
-		session.update(namespace+".updateStudent",student);
+	public void updateStudent(StudentCommend commend) throws Exception {
+		session.update(namespace+".updateStudent", commend);
 	}
 
 	@Override
@@ -78,14 +79,12 @@ public class StudentManageDaoImpl implements StudentManageDao {
 	}
 
 	@Override
-	public String getStudentPic(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace+".getStudentPic",member);
+	public String getStudentPic(StudentCommend commend) throws Exception {
+		return session.selectOne(namespace+".getStudentPic",commend);
 	}
 
 	@Override
 	public void parentUpdateMember(MemberVO member) {
-		// TODO Auto-generated method stub
 		session.update(namespace+".parentUpdateMember", member);
 	}
 	

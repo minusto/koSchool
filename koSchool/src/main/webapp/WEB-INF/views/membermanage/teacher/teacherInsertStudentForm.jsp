@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <!DOCTYPE html>
 <% int i=1; //이만한게 없음 스클립트에 존재이유임 더 좋은 방법있으면 알려주세요^^ 작성자:김상완 %> 
 <html>
@@ -34,6 +35,12 @@
 			})
 		})
 	</script>
+	<style type="text/css">
+	.error{
+		color: #ff0000;
+		
+	}
+</style>
 </head>
 <body class="flat-blue">
 <input type="hidden" id="teacherClass" value="${teacher.teacherClass}">
@@ -46,11 +53,12 @@
                     <div class="row">
                         <div class="col-xs-12">
                            <div class="card-body">
-                                    <form class="form-horizontal"  method="post" enctype="multipart/form-data">
+                                    <form action="teacherInsertStudentForm" class="form-horizontal"  method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-2 control-label">학생ID</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="memberId"  >
+                                                <form:errors path="detailRequest.memberId" cssClass="error"/>
                                                 <!-- Button trigger modal -->
                                         		<button type="button" class="btn btn-primary btn-primary" data-toggle="modal" data-target="#modalPrimary" >
                                             		학생ID 찾기
@@ -96,6 +104,7 @@
                                             <label  class="col-sm-2 control-label">이름</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="memberName" placeholder="memberName">
+                                            	<form:errors path="detailRequest.memberName" cssClass="error"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -114,12 +123,14 @@
                                             <label class="col-sm-2 control-label">전화번호</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" name="memberTel" placeholder="Tel">
+                                            	<form:errors path="detailRequest.memberTel" cssClass="error"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">이메일</label>
                                             <div class="col-sm-5">
                                                 <input type="email" class="form-control"  name="memberEmail" placeholder="aaa@bbb.com">
+                                            	<form:errors path="detailRequest.memberEmail" cssClass="error"/>
                                             </div>
                                         </div>
                                        
@@ -127,6 +138,7 @@
                                             <label class="col-sm-2 control-label">학번</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" name="studentCode" placeholder="memberAddress">
+                                            	<form:errors path="detailRequest.studentCode" cssClass="error"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -139,6 +151,7 @@
                                             <label  class="col-sm-2 control-label">반</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentClass" placeholder="studentClass" id="studentClass">
+                                            	
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -151,12 +164,14 @@
                                             <label class="col-sm-2 control-label">성별</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentGender" placeholder="M/W">
+                                            	<form:errors path="detailRequest.studentGender" cssClass="error"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label  class="col-sm-2 control-label">학과</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control"  name="studentMajor" placeholder="문과/이과">
+                                            	<form:errors path="detailRequest.studentMajor" cssClass="error"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -170,6 +185,7 @@
                                             <label  class="col-sm-2 control-label">비고</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" name="memberNote" value="없음">
+                                            	<form:errors path="detailRequest.memberNote" cssClass="error"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
