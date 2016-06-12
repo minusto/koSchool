@@ -44,21 +44,23 @@
 									</div>
 								</div>
 							</div>
+								<div class="col-sm-3">
+								<div class="pricing-table blue">
+								<a href="/universityManage">
+									<div class="pt-header">
+										<div class="plan-pricing">
+											<div class="pricing">대학교 관리</div>
+											<div class="pricing-type"></div>
+										</div>
+									</div>
+								</div>
+							</div>
 							
 							<div class="clear-both"></div>
 						</div>
 					</div>
 				</div>
 
-
-
-				<!--         컨텐츠 끝 -->
-				<footer class="app-footer">
-					<div class="wrapper">
-						<span class="pull-right">오른쪽쓸것 <a href="#"></a></span> 왼쪽
-					</div>
-				</footer>
-			</div>
 			
 </body>
 

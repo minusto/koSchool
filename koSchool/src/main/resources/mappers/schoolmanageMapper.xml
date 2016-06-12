@@ -89,7 +89,7 @@
 		teacherClass ,
 		teacherPicture , teacherPosition , subjectId , memberId
 		)VALUES(
-		${teacherClass}, #{teacherPicture} , #{teacherPosition} , #{subjectId}
+		#{teacherClass}, #{teacherPicture} , #{teacherPosition} , #{subjectId}
 		, #{memberId}
 		)
 	</insert>

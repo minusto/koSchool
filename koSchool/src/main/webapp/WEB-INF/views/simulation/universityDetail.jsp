@@ -7,7 +7,7 @@
 <head>
 <title>대학 세부</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="stylesheet" type="text/css" href="/resources/css/ghi.css">
 </head>
 <body class="flat-blue">
 	<div class="app-container">

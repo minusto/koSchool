@@ -15,22 +15,10 @@
     <script type="text/javascript">
 		$(function(){
 			$('tbody:eq(0)').on('click','#clickStu',function(){
-				$('input[name=schoolId]').val($(this).html());
-				$('button[class=close]').trigger('click'); 
-			})
-			$('tbody:eq(0) #clickStu').on({
-				 mouseenter: function(){
-				  $(this).css('color','red');
-				 },
-				 mouseleave: function(){
-				  $(this).css('color','#333');
-				 }
-			});
-			$('tbody:eq(1)').on('click','#clickStu',function(){
 				$('input[name=subjectId]').val($(this).html());
 				$('button[class=close]').trigger('click'); 
 			})
-			$('tbody:eq(1) #clickStu').on({
+			$('tbody:eq(0) #clickStu').on({
 				 mouseenter: function(){
 				  $(this).css('color','red');
 				 },
@@ -104,15 +92,11 @@
                                                 <input type="text" class="form-control" name="memberNote" value="없음">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">학교ID</label>
-                                            <div class="col-sm-5">
-                                            	<input type="text" class="form-control" name="schoolId" value="${schoolId }" readonly>
-                                            </div>
-                                        </div>
+                                    
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">담당학급</label>
                                             <div class="col-sm-5">
+                                            <input type="hidden" class="form-control" name="schoolId" value="${schoolId }" >
                                                 <input type="text" class="form-control" name="teacherClass" placeholder="TeacherClass">
                                             </div>
                                         </div>

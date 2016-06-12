@@ -1,29 +1,24 @@
 package ko.school.simulation.domain;
 
-public class HopeUniversityVO {
-	private String memerID;
+public class SusiScoreVO {
 	private String majorId;
-	private String universiyId;
+	private String universityId;
 	private int entranceYear;
 	private String recruitSeparate;
+	private double minScore;
+	private double maxScore;
 	
-	public String getMemerID() {
-		return memerID;
-	}
-	public void setMemerID(String memerID) {
-		this.memerID = memerID;
-	}
 	public String getMajorId() {
 		return majorId;
 	}
 	public void setMajorId(String majorId) {
 		this.majorId = majorId;
 	}
-	public String getUniversiyId() {
-		return universiyId;
+	public String getUniversityId() {
+		return universityId;
 	}
-	public void setUniversiyId(String universiyId) {
-		this.universiyId = universiyId;
+	public void setUniversityId(String universityId) {
+		this.universityId = universityId;
 	}
 	public int getEntranceYear() {
 		return entranceYear;
@@ -36,6 +31,18 @@ public class HopeUniversityVO {
 	}
 	public void setRecruitSeparate(String recruitSeparate) {
 		this.recruitSeparate = recruitSeparate;
+	}
+	public double getMinScore() {
+		return minScore;
+	}
+	public void setMinScore(double minScore) {
+		this.minScore = minScore;
+	}
+	public double getMaxScore() {
+		return maxScore;
+	}
+	public void setMaxScore(double maxScore) {
+		this.maxScore = maxScore;
 	}
 	
 }
