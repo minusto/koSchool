@@ -1,5 +1,7 @@
 package ko.school.simulation.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
 import ko.school.simulation.domain.SusiRatingDTO;
+import ko.school.simulation.domain.UniversityVO;
 import ko.school.simulation.service.SusiSimulationService;
 
 @Controller
@@ -65,6 +68,12 @@ public class SusiSimulationController {
 		model.addAttribute("second",dto[1]);
 		//3학년 전체교과 평균등급
 		model.addAttribute("third",dto[2]);
+		
+		//차트에서 대학리스트 불러오기
+		List<UniversityVO> list = service.univerSityChartList();
+		System.out.println("list :: " + list.get(0));
+		model.addAttribute("list", list);
+				
 		return "/simulation/susiSimulation";
 	}
 	

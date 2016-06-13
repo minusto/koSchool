@@ -14,6 +14,7 @@ import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
 import ko.school.simulation.domain.SusiRatingDTO;
 import ko.school.simulation.domain.SusiSubjectDTO;
+import ko.school.simulation.domain.UniversityVO;
 import ko.school.simulation.persistence.SusiSimulationDAO;
 
 @Service
@@ -483,6 +484,12 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			System.out.println("결과값= " + r_dto.toString());
 		}
 		return r_dto;
+	}
+
+	//차트에서 대학교 리스트 불러오기
+	@Override
+	public List<UniversityVO> univerSityChartList()throws Exception {
+		return dao.univerSityChartList();
 	}
 
 }
