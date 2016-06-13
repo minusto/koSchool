@@ -14,8 +14,8 @@ public interface SusiSimulationService {
 	public SusiRatingDTO grade2(int studentGrade, String id) throws Exception; //2학년 1,2학기 과목 등급
 	public SusiRatingDTO grade3(int studentGrade, String id) throws Exception; //3학년 1,2학기 과목 등급
 
-	public List<UniversityVO> univerSityChartList() throws Exception; // 차트에 대학교 리스트 불러오기 
-	
+	/*public List<UniversityVO> univerSityChartList() throws Exception; // 차트에 대학교 리스트 불러오기 
+*/	
 	
 	
 	

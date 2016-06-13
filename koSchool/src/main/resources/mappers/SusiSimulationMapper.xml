@@ -52,9 +52,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 수시 시뮬레이션 차트 (대학리스트) -->
-   <select id="univerSityChartList" resultType="UniversityVO">
-   SELECT * FROM University
-   </select>
+   <!-- <select id="univerSityChartList" resultType="UniversityVO">
+   	select
+	    a.universityName
+	    , a.universityId
+	    , (select min(b.averscore) from susiScore b where a.universityId = b.universityId) minAverscore
+	    , (select max(b.averscore) from susiScore b where a.universityId = b.universityId) maxAverscore
+	from
+	    university a
+   </select> -->
 	
 	
 	

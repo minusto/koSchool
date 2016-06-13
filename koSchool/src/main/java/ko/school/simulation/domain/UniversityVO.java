@@ -8,7 +8,21 @@ public class UniversityVO {
 	private String universityURL;
 	private String universityMark;
 	
+	private String minAverscore;
+	private String maxAverscore;
 	
+	public String getMinAverscore() {
+		return minAverscore;
+	}
+	public void setMinAverscore(String minAverscore) {
+		this.minAverscore = minAverscore;
+	}
+	public String getMaxAverscore() {
+		return maxAverscore;
+	}
+	public void setMaxAverscore(String maxAverscore) {
+		this.maxAverscore = maxAverscore;
+	}
 	public String getUniversityId() {
 		return universityId;
 	}

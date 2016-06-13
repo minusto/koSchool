@@ -70,9 +70,8 @@ public class SusiSimulationController {
 		model.addAttribute("third",dto[2]);
 		
 		//차트에서 대학리스트 불러오기
-		List<UniversityVO> list = service.univerSityChartList();
-		System.out.println("list :: " + list.get(0));
-		model.addAttribute("list", list);
+		/*List<UniversityVO> list = service.univerSityChartList();
+		model.addAttribute("list", list);*/
 				
 		return "/simulation/susiSimulation";
 	}
