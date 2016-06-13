@@ -7,7 +7,7 @@ public class MaxStandardScoreVO {
 	private int mathATypeMaxScore;
 	private int englishMaxScore;
 	private int so_LifeNMoralityMaxScore;
-	private int so_MorallityNIdeaMaxScore;
+	private int so_MoralityNIdeaMaxScore;
 	private int so_KoreanGeographyMaxScore;
 	private int so_WorldGeographyMaxScore;
 	private int so_EastAsiaHistoryMaxScore;
@@ -62,11 +62,11 @@ public class MaxStandardScoreVO {
 	public void setSo_LifeNMoralityMaxScore(int so_LifeNMoralityMaxScore) {
 		this.so_LifeNMoralityMaxScore = so_LifeNMoralityMaxScore;
 	}
-	public int getSo_MorallityNIdeaMaxScore() {
-		return so_MorallityNIdeaMaxScore;
+	public int getSo_MoralityNIdeaMaxScore() {
+		return so_MoralityNIdeaMaxScore;
 	}
-	public void setSo_MorallityNIdeaMaxScore(int so_MorallityNIdeaMaxScore) {
-		this.so_MorallityNIdeaMaxScore = so_MorallityNIdeaMaxScore;
+	public void setSo_MoralityNIdeaMaxScore(int so_MoralityNIdeaMaxScore) {
+		this.so_MoralityNIdeaMaxScore = so_MoralityNIdeaMaxScore;
 	}
 	public int getSo_KoreanGeographyMaxScore() {
 		return so_KoreanGeographyMaxScore;

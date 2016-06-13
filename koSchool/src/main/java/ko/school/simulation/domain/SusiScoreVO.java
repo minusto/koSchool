@@ -5,8 +5,7 @@ public class SusiScoreVO {
 	private String universityId;
 	private int entranceYear;
 	private String recruitSeparate;
-	private double minScore;
-	private double maxScore;
+	private double averScore;
 	
 	public String getMajorId() {
 		return majorId;
@@ -32,17 +31,11 @@ public class SusiScoreVO {
 	public void setRecruitSeparate(String recruitSeparate) {
 		this.recruitSeparate = recruitSeparate;
 	}
-	public double getMinScore() {
-		return minScore;
+	public double getAverScore() {
+		return averScore;
 	}
-	public void setMinScore(double minScore) {
-		this.minScore = minScore;
-	}
-	public double getMaxScore() {
-		return maxScore;
-	}
-	public void setMaxScore(double maxScore) {
-		this.maxScore = maxScore;
+	public void setAverScore(double averScore) {
+		this.averScore = averScore;
 	}
 	
 }

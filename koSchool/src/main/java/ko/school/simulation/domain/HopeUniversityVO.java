@@ -1,17 +1,18 @@
 package ko.school.simulation.domain;
 
 public class HopeUniversityVO {
-	private String memerID;
+	private String memberId;
 	private String majorId;
-	private String universiyId;
+	private String universityId;
 	private int entranceYear;
 	private String recruitSeparate;
 	
-	public String getMemerID() {
-		return memerID;
+	
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setMemerID(String memerID) {
-		this.memerID = memerID;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getMajorId() {
 		return majorId;
@@ -19,11 +20,11 @@ public class HopeUniversityVO {
 	public void setMajorId(String majorId) {
 		this.majorId = majorId;
 	}
-	public String getUniversiyId() {
-		return universiyId;
+	public String getUniversityId() {
+		return universityId;
 	}
-	public void setUniversiyId(String universiyId) {
-		this.universiyId = universiyId;
+	public void setUniversityId(String universityId) {
+		this.universityId = universityId;
 	}
 	public int getEntranceYear() {
 		return entranceYear;
