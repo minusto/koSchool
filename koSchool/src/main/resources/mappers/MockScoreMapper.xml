@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 탐구 과목 리스트 불러오기(한국사 제외) / 작성자 : 구혜인 -->
 	<select id="researchSubjectList" resultType="ResearchSubjectVO">
-		SELECT * FROM researchSubject WHERE researchSubjectId != 'rsubA03' ORDER BY researchSubjectId
+		SELECT * FROM researchSubject WHERE researchSubjectName != '한국사' ORDER BY researchSubjectId
 	</select>
 	
 	<!-- 액터 ==> 교사 / 작업 내용 : 모의고사 성적 입력 - 제2외국어 과목 리스트 불러오기 / 작성자 : 구혜인 -->
