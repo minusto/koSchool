@@ -91,5 +91,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
+	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 점수 뽑아오기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+	<!-- 대학 정시 DETAIL 뽑기 -->
+	<select id="universitySATDetail" resultType="UniversitySATDetail">
+		SELECT e.*,
+		ep.koreanextrarate,ep.mathbtypeextrarate,ep.socialresearchextrarate,ep.scienceresearchextrarate,
+		rrp.koreanreflectionrate,rrp.mathbtypereflectionrate,rrp.mathatypereflectionrate,rrp.englishreflectionrate,rrp.socialReflectionRate,rrp.scienceReflectionRate,rrp.selectcombination,rrp.selectnum,rrp.researchsubjectnum,
+		sat.standardscorecutline,sat.totalpercentile,sat.satscoreuseindex,sat.convertscoremax,sat.convertstandardscorecutline,
+		rr.satreflectionrate,rr.schoolreportreflectionrate,rr.practicereflectionrate,rr.interviewreflectionrate,rr.essayreflectionrate,rr.aptitudereflectionrate,rr.etcreflectionrate,rr.etccontent
+		FROM EntranceInfo e,ReflectionRate rr,ExtraPoint ep,ReflectionRatePerSATArea rrp,SATScore sat
+		WHERE sat.majorid=e.majorid AND sat.universityid=e.universityid AND sat.entranceyear=e.entranceyear AND sat.recruitseparate=e.recruitseparate
+		AND rrp.satreflectionrateid=e.satreflectionrateid
+		AND ep.extrapointid=e.extrapointid
+		AND rr.reflectionrateid=e.reflectionrateid
+		AND e.majorid=#{majorId} AND e.universityid=#{universityId}
+	</select>
+	
+	<!-- 학생이본 가장 최근의 모의고사 모든 정보 가져오기 -->
+	<select id="studentMockScoreDetail" resultType="StudentMockScoreDetail">
+		SELECT DISTINCT m.mockid,m.memberid,m.languagetype,m.languageoriginalscore,m.languagestandardscore,m.languagepercentile
+		,m.mathtype,m.mathoriginalscore,m.mathstandardscore,m.mathpercentile,m.englishoriginalscore,m.englishstandardscore,m.englishpercentile
+		,m.languageid,sls.secondlanguageoriginalscore,sls.secondlanguagestandardscore,sls.secondlanguagepercentile,f.*,khs.koreahistoryid,khs.koreahistoryoriginalscore,khs.koreahistorystandardscore
+		FROM mocktest m,secondlanguagescore sls,secondlanguage sl,(SELECT a.researchsubjectid AS researchSubjectid1, a.researchsubjectoriginalscore AS researchsubjectoriginalscore1, a.researchsubjectstandardscore AS researchsubjectstandardscore1 ,a.researchsubjectpercentile AS researchsubjectpercentile1
+		 ,b.researchsubjectid AS researchSubjectid2, b.researchsubjectoriginalscore AS researchSubjectOriginalScore2, b.researchsubjectstandardscore AS researchSubjectStandardScore2,b.researchsubjectpercentile AS researchSubjectPercentile2
+  		FROM researchSubjectScore a, researchSubjectScore b
+ 		WHERE a.memberid = b.memberid
+		AND a.mockid = b.mockid
+		AND a.mockid = (select MAX(mockid) from mocktest where memberid=#{studentId})
+						AND a.researchsubjectid != 'Hangooksa'
+						AND b.researchsubjectid != 'Hangooksa'
+						AND a.researchsubjectid <![CDATA[<]]> b.researchsubjectid
+						AND a.memberid=#{studentId}) f,(SELECT mockid,memberid,researchsubjectid AS koreahistoryid,researchsubjectoriginalscore AS koreahistoryoriginalscore,researchsubjectstandardscore AS koreahistorystandardscore
+													FROM researchsubjectscore
+													WHERE mockid=(select MAX(mockid) from mocktest where memberid=#{studentId})
+													AND memberid=#{studentId}
+													AND researchsubjectid='Hangooksa') khs
+
+		WHERE m.languageid=sl.languageid(+)
+		AND sls.mockid(+)=m.mockid
+		AND sls.memberid(+)=m.memberid
+		AND khs.mockid(+)=m.mockid
+		AND khs.memberid(+)=m.memberid
+		AND m.memberid=#{studentId}
+		AND m.mockid=(select MAX(mockid) from mocktest where memberid=#{studentId})
+		ORDER BY m.mockid DESC
+
+		
+	</select>
+	
+	<!-- 모의고사 과목별 최고 표준점수 가져오기 -->
+	<select id="mockTestMaxStandardScore" resultType="MockTestMaxStandardScore">
+		SELECT koreanMaxScore,mathBTypeMaxScore,mathATypeMaxScore,englishMaxScore,hangooksaMaxScore
+		FROM maxstandardscore
+		WHERE mockid=#{mockId}
+	</select>
+	
+	<!-- 모의고사 탐구과목 최고 표준점수 가져오기 -->
+	<select id="researchSubjectMaxScore" resultType="ResearchSubjectMaxScore">
+		SELECT ${research1} AS researchSubject1MaxScore,${research2} AS researchSubject2MaxScore
+		FROM maxstandardscore
+		WHERE mockid=#{mockId}
+	</select>
+	
 	
 </mapper>
