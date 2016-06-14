@@ -76,16 +76,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="/resources/css/ghi.css">
     
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			$(document).on('change', '#selectUniversity', function() { //희망대학 입력 - 대학교 선택했을 경우 대학교 이름을 가지고 새로고침
-				var uniName = $(this).val();
-				location.href = "studentMockTestSimulation.jsp?selectUniversityName="+uniName;
+			$(document).on('change', '#selectUniversity', function() { //희망대학 입력 
+				$('#selectMajor').empty();
+				//$('#selectMajor').removeAttr('selected');
+				var uniId = $(this).val();
+				$.ajax({
+					url : '/ajaxMajorList',
+					dataType : 'json',
+					type : 'post',
+					data : {uniId : uniId},
+					success : function(data) {
+						var html = '<option id="firstMajorOption">-- 학과 선택 --</option>';
+						
+						$.each(data, function(index, list) {
+							html += '<option value="' + list.majorId + '">' + list.majorName + '</option>';								
+						});
+						$("#selectMajor").append(html);
+					}
+				});
+			});
+			
+			$("#insertHopeUniversityForm").submit(function(e) {
+				e.preventDefault();
+				$.ajax({
+					url : '/ajaxInsertHopeUniversity',
+					type : 'get',
+					data : $(this).serialize(),
+					async : false,
+					success : function(data) {
+						$("#hopeUniversityContainer").empty();
+						var html = '';
+						html += '<table id="hopeUniversityTable" class="table table-bordered">';
+						html += '<tr>';
+						html += '<th>모의고사 총합</th>';
+						html += '<th>목표대학</th>';
+						html += '<th>목표학과</th>';
+						html += '<th>정시 커트라인</th>';
+						html += '<th>점수 차이</th>';
+						html += '</tr><tr>';
+						html += '<td id="hopeUniversityCol1">${mockTestSumList[0].TOTAL}</td>';
+						html += '<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td>';
+						html += '<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>';
+						html += '<td id="hopeUniversityCol4">${info.mockTestCutline}</td>';
+						html += '<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />';
+						html += '<td id="hopeUniversityCol5">${finalTotal}</td>';
+						html += '</tr></table>';
+						
+						$("#hopeUniversityContainer").append(html);
+						
+					}, error : function(xhr, status, error) {
+						alert ('xhr : ' + xhr.status + ', status : ' + status + ', error : ' + error);
+					}
+				});
 			});
 		});
 		
 	</script>
+	<style type="text/css">
+		#selectUniversity {
+			width : 150px;
+		}
+		#selectMajor {
+			width : 150px;
+		}
+	</style>
 </head>
 
 <body class="flat-blue">
@@ -112,69 +169,65 @@
 					<div id="compareToHopUniversityTotalExam" class="row">
 	                    <div class="table-responsive col-md-8 col-md-offset-2">
                     	<h3>목표대학과의 비교</h3>
-	                    	<c:choose>
-	                    		<c:when test="${hopeUniversityVo != null}">
-	                    			<table id="hopeUniversityTable" class="table table-bordered">
-                   						<tr>
-			                    			<th>모의고사 총합</th>
-			                    			<th>목표대학</th>
-			                    			<th>목표학과</th>
-			                    			<th>정시 커트라인</th>
-			                    			<th>점수 차이</th>
-			                    		</tr>
-			                    		<tr>
-			                    			<td>${mockTestSumList[0].TOTAL}</td>
-			                    			<td><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
-			                    			<td><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>
-			                    			<td>${info.mockTestCutline}</td>
-			                    			<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />
-			                    			<td>${finalTotal}</td>
-			                    		</tr>
-                   					</table>
-	                    		</c:when>
-	                    		<c:otherwise><!-- 목표대학이 설정되어있지 않을 경우 -->
-	                    			<c:choose>
-	                    				<c:when test="${ grade eq 'student' }">
-	                    					<form action="logic/insertHopeUniversityOk.jsp?id=${id}" method="post">
-                    							<h4>희망대학 설정하기</h4>
-	                    						대학교 : <select id="selectUniversity" name="universityName">
-	                    							<optgroup label="선택한 대학">
-		                    							<option>${selectUniversityName }</option>
-	                    							</optgroup>
-	                    							<optgroup label="대학리스트">
-		                    							<c:forEach var="universityList" items="${universityList }">
-			                    							<option>${universityList.universityName }</option>
-		                    							</c:forEach>
-	                    							</optgroup>
-	                    						</select>&nbsp;&nbsp;
-	                    						학과 : <select id="selectMajor" name="majorName">
-	                    							<c:forEach var="majorList" items="${majorList }">
-	                    								<option>${majorList.majorName }</option>
-	                    							</c:forEach>
-	                    						</select>
-	                    						&nbsp;&nbsp;
-	                    						<input type="submit" value="등록" class="flat-blue btn btn-primary"/>                						
-                    						</form>
-	                    				</c:when>
-	                    				<c:when test="${ grade eq 'parent' }">
-	                    					<table id="hopeUniversityTable" class="table table-bordered">
-				                    			<tr><th colspan="4">안녕하세요 학부모님</th></tr>
-				                    			<tr><td colspan="4">자녀의 희망대학이 설정되어있지 않습니다</td></tr>
-			                    			</table>
-	                    				</c:when>
-	                    				<c:when test="${ grade eq 'teacher' }">
-	                    					<table id="hopeUniversityTable" class="table table-bordered">
-				                    			<tr><th colspan="4">안녕하세요 선생님</th></tr>
-				                    			<tr><td colspan="4">학생의 희망대학이 설정되어있지 않습니다</td></tr>
-			                    			</table>
-	                    				</c:when>
-	                    				<c:otherwise>
-	                    					<p>해당없음</p>
-	                    				</c:otherwise>
-	                    			</c:choose>
-	                    		</c:otherwise>
-	                    	</c:choose>
-                			<br><br>
+                    		<div id="hopeUniversityContainer">
+		                    	<c:choose>
+		                    		<c:when test="${hopeUniversity.universityId != null}">
+		                    			<table id="hopeUniversityTable" class="table table-bordered">
+	                   						<tr>
+				                    			<th>모의고사 총합</th>
+				                    			<th>목표대학</th>
+				                    			<th>목표학과</th>
+				                    			<th>정시 커트라인</th>
+				                    			<th>점수 차이</th>
+				                    		</tr>
+				                    		<tr>
+				                    			<td id="hopeUniversityCol1">${mockTestSumList[0].TOTAL}</td>
+				                    			<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
+				                    			<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>
+				                    			<td id="hopeUniversityCol4">${info.mockTestCutline}</td>
+				                    			<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />
+				                    			<td id="hopeUniversityCol5">${finalTotal}</td>
+				                    		</tr>
+	                   					</table>
+		                    		</c:when>
+		                    		<c:otherwise><!-- 목표대학이 설정되어있지 않을 경우 -->
+		                    			<c:choose>
+		                    				<c:when test="${ grade eq 'student' }">
+		                    					<form id="insertHopeUniversityForm" method="post">
+	                    							<h4>희망대학 설정하기</h4>
+		                    						대학교 : <select id="selectUniversity" name="universityId">
+			                    						<option>-- 대학 선택 --</option>
+			                    						<c:forEach var="universityList" items="${universityList }">
+				                    							<option value="${universityList.universityId }">${universityList.universityName }</option>
+			                    						</c:forEach>
+		                    							<!-- <optgroup label="대학리스트">
+		                    							</optgroup> -->
+		                    						</select>&nbsp;&nbsp;
+		                    						학과 : <select id="selectMajor" name="majorId"></select>
+		                    						&nbsp;&nbsp;
+		                    						<input type="submit" value="등록" class="flat-blue btn btn-primary"/>                						
+	                    						</form>
+		                    				</c:when>
+		                    				<c:when test="${ grade eq 'parent' }">
+		                    					<table id="hopeUniversityTable" class="table table-bordered">
+					                    			<tr><th colspan="4">안녕하세요 학부모님</th></tr>
+					                    			<tr><td colspan="4">자녀의 희망대학이 설정되어있지 않습니다</td></tr>
+				                    			</table>
+		                    				</c:when>
+		                    				<c:when test="${ grade eq 'teacher' }">
+		                    					<table id="hopeUniversityTable" class="table table-bordered">
+					                    			<tr><th colspan="4">안녕하세요 선생님</th></tr>
+					                    			<tr><td colspan="4">학생의 희망대학이 설정되어있지 않습니다</td></tr>
+				                    			</table>
+		                    				</c:when>
+		                    				<c:otherwise>
+		                    					<p>해당없음</p>
+		                    				</c:otherwise>
+		                    			</c:choose>
+		                    		</c:otherwise>
+		                    	</c:choose>
+	                			<br><br>
+                			</div>
 	                    </div>
                     </div>
                     

@@ -20,7 +20,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND NOT e.recruitseparate = '수시'
 	</select>
 	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생의 아이디로 입력되어있는 희망 대학을 반환 / 작성자 : 구혜인 -->
+	<select id="selectExistHopeUniversity" resultType="HopeUniversityVO">
+		SELECT * FROM hopeUniversity WHERE memberId = #{memberId}
+	</select>
 	
+	<!-- 액터 ==> 학생 / 작업 내용 : EntranceInfo에 있는 대학교 리스트 중 수시가 아닌 info 조회 / 작성자 : 구혜인 -->
+ 	<select id="selectUniversityList" resultType="UniversityVO">
+		SELECT * FROM university 
+		WHERE universityId IN (SELECT DISTINCT universityId FROM entranceInfo WHERE NOT recruitSeparate = '수시') 
+		ORDER BY universityName
+	</select>
+	
+	<!-- 액터 ==> 학생 / 작업 내용 : EntranceInfo에 있는 대학교에 해당하는 학과 조회 / 작성자 : 구혜인 -->
+	<select id="selectMajorList" resultType="MajorVO">
+		SELECT * FROM major
+		WHERE majorId IN (SELECT DISTINCT majorId FROM entranceInfo WHERE universityId = #{universityId})
+	</select>
+	
+	<!-- 액터 ==> 학생 / 작업 내용 : 학생이 선택한 희망 대학 학과를 가지고 EntranceInfo에 있는 최신 정보 조회 / 작성자 : 구혜인 -->
+	<select id="selectEIforHopeUniversity" resultType="EntranceInfoVO">
+		SELECT * FROM entranceInfo
+		WHERE universityId = #{universityId}
+		AND majorId = #{majorId}
+		AND NOT recruitSeparate = '수시'
+		AND entranceYear = (SELECT MAX(entranceYear) FROM entranceInfo
+			WHERE universityId = #{universityId}
+			AND majorId = #{majorId}
+			AND NOT recruitSeparate = '수시')
+	</select>
+	
+	<!-- 액터 ==> 학생 / 작업 내용 : 학생이 선택한 희망 대학 학과를 가지고 hopuUniversity에 입력 / 작성자 : 구혜인 -->
+	<insert id="insertHopeUniversity">
+		INSERT INTO hopeUniversity (
+			memberId, entranceYear, recruitSeparate, universityId, majorId
+		) VALUES (
+			#{memberId}, #{entranceYear}, #{recruitSeparate}, #{universityId}, #{majorId}
+		)
+	</insert>
 	
 	
 	
