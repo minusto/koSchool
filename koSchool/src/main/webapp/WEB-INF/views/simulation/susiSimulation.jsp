@@ -13,6 +13,39 @@
 </head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/resources/js/susiChart.js"></script>
+  <script type="text/javascript">/* 
+google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+    	  
+        var data = google.visualization.arrayToDataTable([
+           
+		<c:forEach var="i" items="${list}" varStatus="status">
+			["${i.universityName}", 10, "${i.minAverscore}", "${i.maxAverscore}", 0],
+		</c:forEach>
+        ], true);
+
+        
+        var options = {
+          //legend: 'none',
+          bar: { groupWidth: '20%' }, // Remove space between bars.
+          candlestick: {
+            fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
+            risingColor: { strokeWidth: 0, fill: '#0f9d58' }   // green
+          }
+        };
+
+        var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        
+        removeLine();    
+      }
+      
+      function removeLine() {
+    	  $("rect[fill='#3366cc']").remove();
+      } */
+</script>
+
 <body class="flat-blue">
     <div class="app-container">
         <div class="row content-container">
@@ -89,7 +122,9 @@
                     	</div>
 					</div>
 					<h3>진학 가능 대학</h3>
-					<div id="chart_div"></div>
+					
+					
+					<!-- <div id="chart_div"></div> -->
                     
 					<div class="row">
                     	<div class="col-md-10 ">

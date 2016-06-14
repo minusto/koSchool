@@ -12,6 +12,7 @@ import ko.school.common.domain.StudentVO;
 import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
 import ko.school.simulation.domain.SusiSubjectDTO;
+import ko.school.simulation.domain.UniversityVO;
 
 @Repository
 public class SusiSimulationDAOImpl implements SusiSimulationDAO {
@@ -39,6 +40,11 @@ public class SusiSimulationDAOImpl implements SusiSimulationDAO {
 	public List<SusiSubjectDTO> susiSubject(Map<String, Object> map) throws Exception {
 		return session.selectList(namespace+".susiSubject", map);
 	}
+
+	/*@Override
+	public List<UniversityVO> univerSityChartList() throws Exception {
+		return session.selectList(namespace + ".univerSityChartList");
+	}*/
 	
 	
 	

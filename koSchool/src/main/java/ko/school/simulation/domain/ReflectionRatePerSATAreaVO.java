@@ -6,7 +6,8 @@ public class ReflectionRatePerSATAreaVO {
 	private double mathBTypeReflectionRate;
 	private double mathATypeReflectionRate;
 	private double englishReflectionRate;
-	private double researchSubjectReflectionRate;
+	private double socialReflectionRate;
+	private double scienceReflectionRate;
 	private String selectCombination;
 	private int selectNum;
 	private int researchSubjectNum;
@@ -42,11 +43,17 @@ public class ReflectionRatePerSATAreaVO {
 	public void setEnglishReflectionRate(double englishReflectionRate) {
 		this.englishReflectionRate = englishReflectionRate;
 	}
-	public double getResearchSubjectReflectionRate() {
-		return researchSubjectReflectionRate;
+	public double getSocialReflectionRate() {
+		return socialReflectionRate;
 	}
-	public void setResearchSubjectReflectionRate(double researchSubjectReflectionRate) {
-		this.researchSubjectReflectionRate = researchSubjectReflectionRate;
+	public void setSocialReflectionRate(double socialReflectionRate) {
+		this.socialReflectionRate = socialReflectionRate;
+	}
+	public double getScienceReflectionRate() {
+		return scienceReflectionRate;
+	}
+	public void setScienceReflectionRate(double scienceReflectionRate) {
+		this.scienceReflectionRate = scienceReflectionRate;
 	}
 	public String getSelectCombination() {
 		return selectCombination;
