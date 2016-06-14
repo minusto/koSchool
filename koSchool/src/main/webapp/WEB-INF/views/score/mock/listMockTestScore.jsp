@@ -590,7 +590,7 @@
 		
 		<br><br>
 		<div align="center">
-			<button class="btn btn-primary btn-success" onclick="location.href='/mockSimulation'" style="font-family: 'Jeju Gothic' ">정시 시뮬레이션</button>
+			<button class="btn btn-primary btn-success" onclick="location.href='/mockSimulation?studentId=${studentId}'" style="font-family: 'Jeju Gothic' ">정시 시뮬레이션</button>
 		</div>
 		
 	</div>
