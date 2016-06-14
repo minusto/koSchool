@@ -37,7 +37,7 @@ public class AjaxMockSimulationController {
 	}
 	//희망대학 등록을 눌렀을 경우
 	@RequestMapping(value="/ajaxInsertHopeUniversity", method=RequestMethod.GET)
-	public void ajaxInsertHopeUniversity(UniversityMajorVO universityMajorVo, HttpServletRequest request, Model model) throws Exception {
+	public MockSimulationDTO ajaxInsertHopeUniversity(UniversityMajorVO universityMajorVo, HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO memberVo = (MemberVO) session.getAttribute("member");
 		String memberId = memberVo.getMemberId();
@@ -47,9 +47,26 @@ public class AjaxMockSimulationController {
 		map.put("universityId", universityMajorVo.getUniversityId());
 		map.put("majorId", universityMajorVo.getMajorId());
 		
+		//맵을 가지고 entranceInfo에서 정보를 가져와 희망대학을 입력. 만든 희망대학 객체를 뷰로 보냄
 		HopeUniversityVO hopeUniversityVo = service.insertHopeUniversityService(map);
+		model.addAttribute("hopeUniversity", hopeUniversityVo);
 		
-		model.addAttribute("hopeUniversityVo", hopeUniversityVo);
+		
+		//희망대학 부분에 출력할 내용을 뽑아서 보냄
+		MockSimulationDTO mockSimulationDTO = service.hopeUniversityPrintService(hopeUniversityVo);
+		model.addAttribute("hopeUniversity", mockSimulationDTO);
+		
+		//희망대학을 만들었으니 최근 본 모의고사의 언수외탐 표준점수 총합을 구해서 뷰로 보내줌
+		Integer standardScoreSum = service.selectStandardScoreSumService(memberId);
+		if(standardScoreSum != null) {//표준점수의 총합을 보내줘야 하는데 스크립트로 들어가야 하기 때문에 DTO에 넣어서 같이 보내주기로 함.
+			model.addAttribute("standardScoreSum", standardScoreSum);
+			mockSimulationDTO.setSelectNum(standardScoreSum);
+		} else {
+			model.addAttribute("standardScoreSum", 0);
+			mockSimulationDTO.setSelectNum(0);
+		}
+		
+		return mockSimulationDTO;
 	}
 
 	

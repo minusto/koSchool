@@ -59,7 +59,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인 -->
+ 	<select id="selectStandardScoreSum" resultType="Integer">
+		SELECT
+			(SELECT (languageStandardScore + mathStandardScore + englishStandardScore)
+				FROM mockTest
+				WHERE memberId = #{memberId} 
+				AND mockId = (SELECT MAX(mockId) FROM mockTest 
+					WHERE memberId = #{memberId} ))
+			+ 
+			(SELECT SUM(researchSubjectStandardScore) FROM researchSubjectScore
+				WHERE mockId = (SELECT MAX(mockId) FROM mockTest 
+					WHERE memberId = #{memberId} )
+				AND NOT researchSubjectId = 'Hangooksa') AS standardSum FROM dual
+	</select>
 	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 대학교 아이디로 이름을 반환 / 작성자 : 구혜인 -->
+	<select id="selctUniversityName" resultType="String">
+		SELECT universityName FROM university WHERE universityId = #{universityId}
+	</select>
+	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학과 아이디로 이름을 반환 / 작성자 : 구혜인 -->
+	<select id="selectMajorName" resultType="String">
+		SELECT majorName FROM major WHERE majorId = #{majorId}
+	</select>
+	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : satScore테이블의 주키로 해당하는 로우 반환 / 작성자 : 구혜인 -->
+	<select id="selectSATScore" resultType="SATScoreVO">
+		SELECT * FROM satScore 
+		WHERE universityId = #{universityId} 
+		AND majorId = #{majorId} 
+		AND entranceYear = #{entranceYear} 
+		AND recruitSeparate = #{recruitSeparate}
+	</select>
 	
 	
 	

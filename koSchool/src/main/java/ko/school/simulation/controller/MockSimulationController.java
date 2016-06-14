@@ -51,12 +51,26 @@ public class MockSimulationController {
 		model.addAttribute("allMockList", allMockEntranceInfoList);
 		//
 		
-		//희망대학이 없는 경우 -> 입학정보가 있는 대학교 리스트
 		if(hopeUniversityVo == null) {
+			//희망대학이 없는 경우 -> 입학정보가 있는 대학교 리스트
 			List<UniversityVO> universityList = service.selectUniversityListService();
 			model.addAttribute("universityList", universityList);
+			//
+		} else {
+			//희망대학이 있는 경우 -> 최근 본 모의고사의 언수외탐 표준점수 총합을 구함
+			Integer standardScoreSum = service.selectStandardScoreSumService(studentId);
+			if(standardScoreSum != null) {
+				model.addAttribute("standardScoreSum", standardScoreSum);
+			} else {
+				model.addAttribute("standardScoreSum", 0);
+			}
+			//
+			
+			//희망대학 부분에 출력할 내용을 뽑아서 보냄
+			MockSimulationDTO mockSimulationDTO = service.hopeUniversityPrintService(hopeUniversityVo);
+			model.addAttribute("hopeUniversity", mockSimulationDTO);
+			//
 		}
-		//
 		
 		return "/simulation/mockSimulation";
 	}

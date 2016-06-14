@@ -11,6 +11,7 @@ import ko.school.simulation.domain.EntranceInfoVO;
 import ko.school.simulation.domain.HopeUniversityVO;
 import ko.school.simulation.domain.MajorVO;
 import ko.school.simulation.domain.MockSimulationDTO;
+import ko.school.simulation.domain.SATScoreVO;
 import ko.school.simulation.domain.UniversityVO;
 import ko.school.simulation.persistence.MockSimulationDAO;
 
@@ -58,4 +59,30 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 		return hopeUniversityVo;
 	}
 	
+	
+	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인
+	@Override
+	public Integer selectStandardScoreSumService(String memberId) throws Exception {
+		return dao.selectStandardScoreSum(memberId);
+	}
+	
+	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 희망대학에 대한 부분을 출력하기 위한 데이터를 가져간다 / 작성자 : 구혜인
+	@Override
+	public MockSimulationDTO hopeUniversityPrintService(HopeUniversityVO hopeUniversityVo) throws Exception {
+		MockSimulationDTO mockSimulationDTO = new MockSimulationDTO();
+		mockSimulationDTO.setUniversityId(hopeUniversityVo.getUniversityId());
+		mockSimulationDTO.setMajorId(hopeUniversityVo.getMajorId());
+		mockSimulationDTO.setRecruitSeparate(hopeUniversityVo.getRecruitSeparate());
+		mockSimulationDTO.setEntranceYear(hopeUniversityVo.getEntranceYear());
+
+		mockSimulationDTO.setUniversityName(dao.selctUniversityName(hopeUniversityVo.getUniversityId()));
+		mockSimulationDTO.setMajorName(dao.selectMajorName(hopeUniversityVo.getMajorId()));
+		
+		SATScoreVO satScoreVo = dao.selectSATScore(hopeUniversityVo);
+		mockSimulationDTO.setStandardScoreCutline(satScoreVo.getStandardScoreCutline());
+		return mockSimulationDTO;
+	}
+	
 }
+
+

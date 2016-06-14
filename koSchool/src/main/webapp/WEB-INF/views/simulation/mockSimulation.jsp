@@ -117,12 +117,19 @@
 						html += '<th>정시 커트라인</th>';
 						html += '<th>점수 차이</th>';
 						html += '</tr><tr>';
-						html += '<td id="hopeUniversityCol1">${mockTestSumList[0].TOTAL}</td>';
-						html += '<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td>';
-						html += '<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>';
-						html += '<td id="hopeUniversityCol4">${info.mockTestCutline}</td>';
-						html += '<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />';
-						html += '<td id="hopeUniversityCol5">${finalTotal}</td>';
+						if(data.selectNum != 0) {
+							html += '<td id="hopeUniversityCol1">' + data.selectNum + '</td>';//표준점수의 총합을 selectNum에 담아 같이 가져옴
+						} else {
+							html += '<td id="hopeUniversityCol1">모의고사 점수 없음</td>';
+						}
+						html += '<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">' + data.universityName + '</a></td>';
+						html += '<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">' + data.majorName + '${hopeUniversity.majorName }</a></td>';
+						html += '<td id="hopeUniversityCol4">' + data.standardScoreCutline + '</td>';
+						if(data.selectNum != 0) {
+							html += '<td id="hopeUniversityCol5">' + (data.selectNum - data.standardScoreCutline) + '</td>';
+						} else {
+							html += '<td id="hopeUniversityCol5">-</td>';
+						}
 						html += '</tr></table>';
 						
 						$("#hopeUniversityContainer").append(html);
@@ -181,12 +188,21 @@
 				                    			<th>점수 차이</th>
 				                    		</tr>
 				                    		<tr>
-				                    			<td id="hopeUniversityCol1">${mockTestSumList[0].TOTAL}</td>
-				                    			<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">${universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
-				                    			<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">${majorName }</a></td>
-				                    			<td id="hopeUniversityCol4">${info.mockTestCutline}</td>
-				                    			<fmt:formatNumber var="finalTotal" value="${mockTestSumList[0].TOTAL - info.mockTestCutline}" pattern="#.00" />
-				                    			<td id="hopeUniversityCol5">${finalTotal}</td>
+				                    			<c:if test="${standardScoreSum != 0 }">
+					                    			<td id="hopeUniversityCol1">${standardScoreSum }</td>
+				                    			</c:if>
+				                    			<c:if test="${standardScoreSum == 0 }">
+					                    			<td id="hopeUniversityCol1">모의고사 점수 없음</td>
+				                    			</c:if>
+				                    			<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">${hopeUniversity.universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
+				                    			<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">${hopeUniversity.majorName }</a></td>
+				                    			<td id="hopeUniversityCol4">${hopeUniversity.standardScoreCutline}</td>
+				                    			<c:if test="${standardScoreSum != 0 }">
+					                    			<td id="hopeUniversityCol5">${standardScoreSum - hopeUniversity.standardScoreCutline}</td>
+				                    			</c:if>
+				                    			<c:if test="${standardScoreSum == 0 }">
+					                    			<td id="hopeUniversityCol5">-</td>
+				                    			</c:if>
 				                    		</tr>
 	                   					</table>
 		                    		</c:when>
@@ -200,8 +216,6 @@
 			                    						<c:forEach var="universityList" items="${universityList }">
 				                    							<option value="${universityList.universityId }">${universityList.universityName }</option>
 			                    						</c:forEach>
-		                    							<!-- <optgroup label="대학리스트">
-		                    							</optgroup> -->
 		                    						</select>&nbsp;&nbsp;
 		                    						학과 : <select id="selectMajor" name="majorId"></select>
 		                    						&nbsp;&nbsp;
