@@ -9,11 +9,10 @@
 <head>
     <title>수시 시뮬레이션</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
+  
 </head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/resources/js/susiChart.js"></script>
-
 <body class="flat-blue">
     <div class="app-container">
         <div class="row content-container">

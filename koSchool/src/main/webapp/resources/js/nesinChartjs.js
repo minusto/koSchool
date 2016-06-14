@@ -31,15 +31,15 @@ $(function() {
 		}
 	}else if(grade == "2"){
 		//2학년 과목일때 과목 수는 10개
-		var s_name = new Array(10);
+		var s_name = new Array(9);
 		for(var i=0; i<s_name.length; i++){	
 			s_name[i] = $("#subjectName"+(i+1)).html();
 		}
-		var originalScore = new Array(10);
+		var originalScore = new Array(9);
 		for(var i=0; i<originalScore.length; i++){
 			originalScore[i] = Number($("#originalScore"+(i+1)).html());
 		}
-		var avg = new Array(10);
+		var avg = new Array(9);
 		for(var i=0; i<avg.length; i++){
 			avg[i] = Number($("#avg"+(i+1)).html());
 		}
@@ -57,15 +57,15 @@ $(function() {
 		}
 	}else{
 		//3학년 과목일때 과목 수는 6개
-		var s_name = new Array(6);
+		var s_name = new Array(11);
 		for(var i=0; i<s_name.length; i++){	
 			s_name[i] = $("#subjectName"+(i+1)).html();
 		}
-		var originalScore = new Array(6);
+		var originalScore = new Array(11);
 		for(var i=0; i<originalScore.length; i++){
 			originalScore[i] = Number($("#originalScore"+(i+1)).html());
 		}
-		var avg = new Array(6);
+		var avg = new Array(11);
 		for(var i=0; i<avg.length; i++){
 			avg[i] = Number($("#avg"+(i+1)).html());
 		}
@@ -130,7 +130,7 @@ $(function() {
   };
   }else if(grade=="2"){
 	  data = {
-			    labels: [s_name[0], s_name[1], s_name[2], s_name[3], s_name[4], s_name[5], s_name[6], s_name[7], s_name[8], s_name[9] ],
+			    labels: [s_name[0], s_name[1], s_name[2], s_name[3], s_name[4], s_name[5], s_name[6], s_name[7], s_name[8] ],
 			    datasets: [
 			      {
 			        label: "내점수",
@@ -140,7 +140,7 @@ $(function() {
 			        pointStrokeColor: "#fff",
 			        pointHighlightFill: "#fff",
 			        pointHighlightStroke: "#1ABC9C",
-			        data: [originalScore[0],originalScore[1], originalScore[2], originalScore[3], originalScore[4], originalScore[5],originalScore[6], originalScore[7], originalScore[8], originalScore[9] ]
+			        data: [originalScore[0],originalScore[1], originalScore[2], originalScore[3], originalScore[4], originalScore[5],originalScore[6], originalScore[7], originalScore[8] ]
 			      }, {
 			        label: "평균점수",
 			        fillColor: "rgba(34, 167, 240,0.2)",
@@ -149,13 +149,13 @@ $(function() {
 			        pointStrokeColor: "#fff",
 			        pointHighlightFill: "#fff",
 			        pointHighlightStroke: "#22A7F0",
-			        data: [avg[0], avg[1], avg[2], avg[3], avg[4], avg[5], avg[6], avg[7], avg[8], avg[9]]
+			        data: [avg[0], avg[1], avg[2], avg[3], avg[4], avg[5], avg[6], avg[7], avg[8] ]
 			      }
 			    ]
 			  };
   }else{
 	  data = {
-			    labels: [s_name[0], s_name[1], s_name[2], s_name[3], s_name[4], s_name[5]],
+			    labels: [s_name[0], s_name[1], s_name[2], s_name[3], s_name[4], s_name[5], s_name[6], s_name[7], s_name[8], s_name[9], s_name[10] ],
 			    datasets: [
 			      {
 			        label: "내점수",
@@ -165,7 +165,7 @@ $(function() {
 			        pointStrokeColor: "#fff",
 			        pointHighlightFill: "#fff",
 			        pointHighlightStroke: "#1ABC9C",
-			        data: [originalScore[0],originalScore[1], originalScore[2], originalScore[3], originalScore[4], originalScore[5] ]
+			        data: [originalScore[0],originalScore[1], originalScore[2], originalScore[3], originalScore[4], originalScore[5], originalScore[6], originalScore[7], originalScore[8], originalScore[9], originalScore[10] ]
 			      }, {
 			        label: "평균점수",
 			        fillColor: "rgba(34, 167, 240,0.2)",
@@ -174,7 +174,7 @@ $(function() {
 			        pointStrokeColor: "#fff",
 			        pointHighlightFill: "#fff",
 			        pointHighlightStroke: "#22A7F0",
-			        data: [avg[0], avg[1], avg[2], avg[3], avg[4], avg[5] ]
+			        data: [avg[0], avg[1], avg[2], avg[3], avg[4], avg[5], avg[6], avg[7], avg[8], avg[9], avg[10] ]
 			      }
 			    ]
 			  };

@@ -50,7 +50,6 @@ public class StudentManageController {
 												BindingResult errors, HttpServletRequest request,Model model)throws Exception{
 		try {
 			if(errors.hasErrors()){
-				System.out.println("발리데이션");
 				System.out.println(errors.toString());
 				HttpSession session=request.getSession();
 				MemberVO teacherMember = (MemberVO)session.getAttribute("member");
@@ -90,7 +89,6 @@ public class StudentManageController {
 				commend.setStudentPicture(filename);	// 업로드된 파일이름 등록
 
 			}
-			System.out.println("들어감");
 			service.updateMember(commend);
 			service.updateStudent(commend);
 			
@@ -101,7 +99,6 @@ public class StudentManageController {
 			model.addAttribute("list",list);
 			return "/membermanage/teacher/teacherInsertStudentForm";
 		} catch (Exception e) {
-			System.out.println("걍 오류");
 			e.printStackTrace();
 			return "/membermanage/teacher/teacherInsertStudentForm";
 		}
