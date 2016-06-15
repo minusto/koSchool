@@ -1,6 +1,8 @@
 package ko.school.simulation.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.simulation.domain.HopeUniversityVO;
 import ko.school.simulation.domain.MockSimulationDTO;
+import ko.school.simulation.domain.UniversityMajorVO;
 import ko.school.simulation.domain.UniversityVO;
 import ko.school.simulation.service.MockSimulationService;
 
@@ -75,7 +78,22 @@ public class MockSimulationController {
 		return "/simulation/mockSimulation";
 	}
 	
-
+	@RequestMapping(value="InsertHopeUniversity", method=RequestMethod.POST)
+	public String InsertHopeUniversity(UniversityMajorVO universityMajorVo, HttpServletRequest request, Model model) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberVo = (MemberVO) session.getAttribute("member");
+		String memberId = memberVo.getMemberId();
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("memberId", memberId);
+		map.put("universityId", universityMajorVo.getUniversityId());
+		map.put("majorId", universityMajorVo.getMajorId());
+		
+		//맵을 가지고 entranceInfo에서 정보를 가져와 희망대학을 입력. 만든 희망대학 객체를 뷰로 보냄
+		service.insertHopeUniversityService(map);
+		
+		return "redirect:/mockSimulation";
+	}
 	
 	@RequestMapping(value="/universityDetail", method=RequestMethod.GET)
 	public String universityDetail() throws Exception {
