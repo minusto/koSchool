@@ -125,7 +125,7 @@ google.charts.load('current', {'packages':['corechart']});
                     	</div>
 					</div>
 					<h3>진학 가능 대학</h3>
-					<!-- <div id="chart_div"></div> -->
+					 <div id="chart_div"></div>
                     <jsp:include page="../simulation/susiSimulationTable.jsp"/>
 					<div class="row">
                     	<div class="col-md-10 ">
