@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import ko.school.common.domain.StudentVO;
 import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
+import ko.school.score.domain.Subject;
+import ko.school.simulation.domain.SusiInfoVO;
 import ko.school.simulation.domain.SusiSubjectDTO;
 import ko.school.simulation.domain.UniversityVO;
 
@@ -46,7 +48,15 @@ public class SusiSimulationDAOImpl implements SusiSimulationDAO {
 		return session.selectList(namespace + ".univerSityChartList");
 	}*/
 	
-	
+	@Override
+	public List<SusiInfoVO> susiInfoList(Map<String, String> map) throws Exception {
+		return session.selectList(namespace+".susiInfoList", map);
+	}
+
+	@Override
+	public Subject selectSubject(String id) throws Exception {
+		return session.selectOne(namespace+".selectSubject", id);
+	}
 	
 	
 }

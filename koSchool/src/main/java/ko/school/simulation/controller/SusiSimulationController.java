@@ -69,6 +69,9 @@ public class SusiSimulationController {
 		//3학년 전체교과 평균등급
 		model.addAttribute("third",dto[2]);
 		
+		session.setAttribute("first",dto[0]);
+		session.setAttribute("second",dto[1]);
+		session.setAttribute("third",dto[2]);
 		//차트에서 대학리스트 불러오기
 		/*List<UniversityVO> list = service.univerSityChartList();
 		model.addAttribute("list", list);*/

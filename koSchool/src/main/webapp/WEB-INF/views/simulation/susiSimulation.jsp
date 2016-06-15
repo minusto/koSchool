@@ -13,6 +13,8 @@
 </head>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/resources/js/susiChart.js"></script>
+<script src="/resources/js/jquery.js" type="text/javascript"></script>
+<script src="/resources/js/susiJquery.js" type="text/javascript"></script>
   <script type="text/javascript">/* 
 google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -100,6 +102,7 @@ google.charts.load('current', {'packages':['corechart']});
                     <div id="recommendContainer" class="row">
                     	<div class="col-md-12 ">
                     		<h3>추천 대학</h3>
+                    		<button id="testId">국민대학교</button>
                     		<div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
                     				<li id="firstRecommend"><a href="/universityDetail">
@@ -122,10 +125,8 @@ google.charts.load('current', {'packages':['corechart']});
                     	</div>
 					</div>
 					<h3>진학 가능 대학</h3>
-					
-					
 					<!-- <div id="chart_div"></div> -->
-                    
+                    <jsp:include page="../simulation/susiSimulationTable.jsp"/>
 					<div class="row">
                     	<div class="col-md-10 ">
                     		<h3>대학 검색</h3>
