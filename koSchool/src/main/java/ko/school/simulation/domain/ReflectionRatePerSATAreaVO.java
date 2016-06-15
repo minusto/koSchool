@@ -9,7 +9,6 @@ public class ReflectionRatePerSATAreaVO {
 	private double socialReflectionRate;
 	private double scienceReflectionRate;
 	private String selectCombination;
-	private int selectNum;
 	private int researchSubjectNum;
 	
 	
@@ -60,12 +59,6 @@ public class ReflectionRatePerSATAreaVO {
 	}
 	public void setSelectCombination(String selectCombination) {
 		this.selectCombination = selectCombination;
-	}
-	public int getSelectNum() {
-		return selectNum;
-	}
-	public void setSelectNum(int selectNum) {
-		this.selectNum = selectNum;
 	}
 	public int getResearchSubjectNum() {
 		return researchSubjectNum;

@@ -22,6 +22,7 @@ public class UniversitySATDetail {
 	private double aptitudeReflectionRate;
 	private double etcReflectionRate;
 	private String etcContent;
+	private int modelSum;
 	//가산점 (ExtraPoint)
 	private double koreanExtraRate;
 	private double mathBTypeExtraRate;
@@ -35,7 +36,6 @@ public class UniversitySATDetail {
 	private double socialReflectionRate;
 	private double scienceReflectionRate;
 	private String selectCombination;
-	private int selectNum;
 	private int researchSubjectNum;
 	//정시점수 (SAT Score)
 	private double standardScoreCutline;
@@ -157,6 +157,12 @@ public class UniversitySATDetail {
 	public void setEtcContent(String etcContent) {
 		this.etcContent = etcContent;
 	}
+	public int getModelSum() {
+		return modelSum;
+	}
+	public void setModelSum(int modelSum) {
+		this.modelSum = modelSum;
+	}
 	public double getKoreanExtraRate() {
 		return koreanExtraRate;
 	}
@@ -223,12 +229,6 @@ public class UniversitySATDetail {
 	public void setSelectCombination(String selectCombination) {
 		this.selectCombination = selectCombination;
 	}
-	public int getSelectNum() {
-		return selectNum;
-	}
-	public void setSelectNum(int selectNum) {
-		this.selectNum = selectNum;
-	}
 	public int getResearchSubjectNum() {
 		return researchSubjectNum;
 	}
@@ -265,6 +265,7 @@ public class UniversitySATDetail {
 	public void setConvertStandardScoreCutline(double convertStandardScoreCutline) {
 		this.convertStandardScoreCutline = convertStandardScoreCutline;
 	}
+	
 	@Override
 	public String toString() {
 		return "UniversitySATDetail [majorId=" + majorId + ", universityId=" + universityId + ", entranceYear="
@@ -276,21 +277,17 @@ public class UniversitySATDetail {
 				+ schoolReportReflectionRate + ", practiceReflectionRate=" + practiceReflectionRate
 				+ ", interviewReflectionRate=" + interviewReflectionRate + ", essayReflectionRate="
 				+ essayReflectionRate + ", aptitudeReflectionRate=" + aptitudeReflectionRate + ", etcReflectionRate="
-				+ etcReflectionRate + ", etcContent=" + etcContent + ", koreanExtraRate=" + koreanExtraRate
-				+ ", mathBTypeExtraRate=" + mathBTypeExtraRate + ", socialResearchExtraRate=" + socialResearchExtraRate
-				+ ", scienceResearchExtraRate=" + scienceResearchExtraRate + ", koreanReflectionRate="
-				+ koreanReflectionRate + ", mathBTypeReflectionRate=" + mathBTypeReflectionRate
-				+ ", mathATypeReflectionRate=" + mathATypeReflectionRate + ", englishReflectionRate="
-				+ englishReflectionRate + ", socialReflectionRate=" + socialReflectionRate + ", scienceReflectionRate="
-				+ scienceReflectionRate + ", selectCombination=" + selectCombination + ", selectNum=" + selectNum
+				+ etcReflectionRate + ", etcContent=" + etcContent + ", modelSum=" + modelSum + ", koreanExtraRate="
+				+ koreanExtraRate + ", mathBTypeExtraRate=" + mathBTypeExtraRate + ", socialResearchExtraRate="
+				+ socialResearchExtraRate + ", scienceResearchExtraRate=" + scienceResearchExtraRate
+				+ ", koreanReflectionRate=" + koreanReflectionRate + ", mathBTypeReflectionRate="
+				+ mathBTypeReflectionRate + ", mathATypeReflectionRate=" + mathATypeReflectionRate
+				+ ", englishReflectionRate=" + englishReflectionRate + ", socialReflectionRate=" + socialReflectionRate
+				+ ", scienceReflectionRate=" + scienceReflectionRate + ", selectCombination=" + selectCombination
 				+ ", researchSubjectNum=" + researchSubjectNum + ", standardScoreCutline=" + standardScoreCutline
 				+ ", totalPercentile=" + totalPercentile + ", satScoreUseIndex=" + satScoreUseIndex
 				+ ", convertScoreMax=" + convertScoreMax + ", convertStandardScoreCutline="
 				+ convertStandardScoreCutline + "]";
 	}
-
-	
-	
-	
 	
 }

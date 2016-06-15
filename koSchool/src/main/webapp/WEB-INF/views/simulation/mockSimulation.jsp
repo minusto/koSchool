@@ -118,15 +118,15 @@
 						html += '<th>점수 차이</th>';
 						html += '</tr><tr>';
 						if(data.selectNum != 0) {
-							html += '<td id="hopeUniversityCol1">' + data.selectNum + '</td>';//표준점수의 총합을 selectNum에 담아 같이 가져옴
+							html += '<td id="hopeUniversityCol1">' + data.entranceYear + '</td>';//표준점수의 총합을 selectNum에 담아 같이 가져옴
 						} else {
 							html += '<td id="hopeUniversityCol1">모의고사 점수 없음</td>';
 						}
 						html += '<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">' + data.universityName + '</a></td>';
 						html += '<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">' + data.majorName + '${hopeUniversity.majorName }</a></td>';
 						html += '<td id="hopeUniversityCol4">' + data.standardScoreCutline + '</td>';
-						if(data.selectNum != 0) {
-							html += '<td id="hopeUniversityCol5">' + (data.selectNum - data.standardScoreCutline) + '</td>';
+						if(data.entranceYear != 0) {
+							html += '<td id="hopeUniversityCol5">' + (data.entranceYear - data.standardScoreCutline) + '</td>';
 						} else {
 							html += '<td id="hopeUniversityCol5">-</td>';
 						}

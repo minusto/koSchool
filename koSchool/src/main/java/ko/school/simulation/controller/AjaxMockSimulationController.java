@@ -60,10 +60,10 @@ public class AjaxMockSimulationController {
 		Integer standardScoreSum = service.selectStandardScoreSumService(memberId);
 		if(standardScoreSum != null) {//표준점수의 총합을 보내줘야 하는데 스크립트로 들어가야 하기 때문에 DTO에 넣어서 같이 보내주기로 함.
 			model.addAttribute("standardScoreSum", standardScoreSum);
-			mockSimulationDTO.setSelectNum(standardScoreSum);
+			mockSimulationDTO.setEntranceYear(standardScoreSum);
 		} else {
 			model.addAttribute("standardScoreSum", 0);
-			mockSimulationDTO.setSelectNum(0);
+			mockSimulationDTO.setEntranceYear(0);
 		}
 		
 		return mockSimulationDTO;
