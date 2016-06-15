@@ -246,7 +246,6 @@
 						<div class="panel-body">
 							<ul class="nav navbar-nav">
 								<li><a href="/noticeBoardList">교내 공지사항</a></li>
-								<li><a href="parentNoticeBoardList.jsp">가정 통신문 조회</a></li>
 								<li><a href="classBoardList">학급 게시판</a></li>
 								<li><a href="/scheduleList">일정</a></li>
 							</ul>

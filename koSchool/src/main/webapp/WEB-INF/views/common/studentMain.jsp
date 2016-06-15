@@ -178,7 +178,6 @@
                                                 <div class="pt-body">
                                                     <ul class="plan-detail">
                                                         <li>교내 공지사항</li>
-                                                        <li>가정 통신문 조회</li>
                                                         <li>학급 게시판</li>
                                                         <li>일정</li>
                                                     </ul>
@@ -199,11 +198,6 @@
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 																			<a href="/noticeBoardList">
 																			<h3>교내 공지사항</h3>
-																			</a>
-																		</div>
-																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-																			<a href="parentNoticeBoardList.jsp">
-																			<h3>가정 통신문 조회</h3>
 																			</a>
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
