@@ -15,7 +15,7 @@
 <script type="text/javascript" src="/resources/js/susiChart.js"></script>
 <script src="/resources/js/jquery.js" type="text/javascript"></script>
 <script src="/resources/js/susiJquery.js" type="text/javascript"></script>
-  <script type="text/javascript">/* 
+  <script type="text/javascript">
 google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -23,7 +23,7 @@ google.charts.load('current', {'packages':['corechart']});
         var data = google.visualization.arrayToDataTable([
            
 		<c:forEach var="i" items="${list}" varStatus="status">
-			["${i.universityName}", 10, "${i.minAverscore}", "${i.maxAverscore}", 0],
+			["${i.universityName}", 10, eval("${i.minAverscore}"), eval("${i.maxAverscore}"), 0],
 		</c:forEach>
         ], true);
 
@@ -45,7 +45,7 @@ google.charts.load('current', {'packages':['corechart']});
       
       function removeLine() {
     	  $("rect[fill='#3366cc']").remove();
-      } */
+      } 
 </script>
 
 <body class="flat-blue">

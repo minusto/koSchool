@@ -43,10 +43,10 @@ public class SusiSimulationDAOImpl implements SusiSimulationDAO {
 		return session.selectList(namespace+".susiSubject", map);
 	}
 
-	/*@Override
+	@Override
 	public List<UniversityVO> univerSityChartList() throws Exception {
 		return session.selectList(namespace + ".univerSityChartList");
-	}*/
+	}
 	
 	@Override
 	public List<SusiInfoVO> susiInfoList(Map<String, String> map) throws Exception {
