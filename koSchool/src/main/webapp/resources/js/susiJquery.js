@@ -71,17 +71,17 @@ $(function() {
 		var uniName = $('#sUniName').val();
 		$('#sUniName').val('');
 		$.ajax({
-			url : 'searchUniName?uniName=' + uniName,
+			url : 'selectLocation3?uniName='+uniName,
 			type : 'post',
 			dataType : 'json',
 			data : $(this).serialize(),
-			success : searchUniTable,
+			success : searchUniTable2,
 			error:function(request,status,error){
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		       }
 		});
 	})
-	function searchUniTable(date){
+	function searchUniTable2(data){
 		$.each(data, function(index, list){
 			var html = '<tr>';
 			html += '<td id="center">' + list.location + '</td>';

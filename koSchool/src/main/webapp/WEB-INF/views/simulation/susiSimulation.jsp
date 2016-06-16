@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setAttribute("path", "진학시뮬레이션 > 수시시뮬레이션");
@@ -7,103 +8,115 @@
 <html>
 
 <head>
-    <title>수시 시뮬레이션</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+<title>수시 시뮬레이션</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/resources/js/susiChart.js"></script>
 <script src="/resources/js/jquery.js" type="text/javascript"></script>
 <script src="/resources/js/susiJquery.js" type="text/javascript"></script>
-  <script type="text/javascript">
-google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-    	  
-        var data = google.visualization.arrayToDataTable([
-           
-		<c:forEach var="i" items="${list}" varStatus="status">
-			["${i.universityName}", 10, eval("${i.minAverscore}"), eval("${i.maxAverscore}"), 0],
-		</c:forEach>
-        ], true);
+<script type="text/javascript">
+	google.charts.load('current', {
+		'packages' : [ 'corechart' ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
 
-        
-        var options = {
-          //legend: 'none',
-          bar: { groupWidth: '20%' }, // Remove space between bars.
-          candlestick: {
-            fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
-            risingColor: { strokeWidth: 0, fill: '#0f9d58' }   // green
-          }
-        };
+		var data = google.visualization.arrayToDataTable([
 
-        var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-        
-        removeLine();    
-      }
-      
-      function removeLine() {
-    	  $("rect[fill='#3366cc']").remove();
-      } 
+				<c:forEach var="i" items="${list}" varStatus="status">[
+						"${i.universityName}", 10, eval("${i.minAverscore}"),
+						eval("${i.maxAverscore}"), 0], </c:forEach> ], true);
+
+		var options = {
+			//legend: 'none',
+			bar : {
+				groupWidth : '20%'
+			}, // Remove space between bars.
+			candlestick : {
+				fallingColor : {
+					strokeWidth : 0,
+					fill : '#a52714'
+				}, // red
+				risingColor : {
+					strokeWidth : 0,
+					fill : '#0f9d58'
+				}
+			// green
+			}
+		};
+
+		var chart = new google.visualization.CandlestickChart(document
+				.getElementById('chart_div'));
+		chart.draw(data, options);
+
+		removeLine();
+	}
+
+	function removeLine() {
+		$("rect[fill='#3366cc']").remove();
+	}
 </script>
 
 <body class="flat-blue">
-    <div class="app-container">
-        <div class="row content-container">
-            <jsp:include page="../common/studentMenu.jsp"/>
-<!--			메인 컨텐츠 -->
-            <div class="container-fluid">
-                <div class="side-body padding-top">
+	<div class="app-container">
+		<div class="row content-container">
+			<jsp:include page="../common/studentMenu.jsp" />
+			<!--			메인 컨텐츠 -->
+			<div class="container-fluid">
+				<div class="side-body padding-top">
 					<div id="compareToHopUniversityTotalExam" class="row">
-	                    <div class="table-responsive col-md-12 ">
-                    	<h3>이엘태그 학년별 내신 등급</h3>
-	                    	<table id="nesinTable" class="table table-bordered" style="text-align:center">
-	                    		<tr>
-	                    			<td>학년</td>
-	                    			<td>국</td>
-	                    			<td>영</td>
-	                    			<td>수</td>
-	                    			<td>사</td>
-	                    			<td>과</td>
-	                    			<td>기타</td>
-	                    		</tr>
-	                    		<tr>
-	                    			<td>1</td>
-	                    			<td>${first.kor }</td>
-	                    			<td>${first.eng }</td>
-	                    			<td>${first.math }</td>
-	                    			<td>${first.sol }</td>
-	                    			<td>${first.sci }</td>
-	                    			<td>${first.etc }</td>
-	                    		</tr>
-	                    		<tr>
-	                    			<td>2</td>
-	                    			<td>${second.kor }</td>
-	                    			<td>${second.eng }</td>
-	                    			<td>${second.math }</td>
-	                    			<td>${second.sol }</td>
-	                    			<td>${second.sci }</td>
-	                    			<td>${second.etc }</td>
-	                    		</tr>
-	                    		<tr>
-	                    			<td>3</td>
-	                    			<td>${third.kor }</td>
-	                    			<td>${third.eng }</td>
-	                    			<td>${third.math }</td>
-	                    			<td>${third.sol }</td>
-	                    			<td>${third.sci }</td>
-	                    			<td>${third.etc }</td>
-	                    		</tr>
-	                    	</table>
-	                    </div>
-                    </div>
-                    
-                    <div id="recommendContainer" class="row">
-                    	<div class="col-md-12 ">
-                    		<h3>추천 대학</h3>
-                    		<button id="testId">국민대학교</button>
-                    		<!-- <div id="recommendUniversityDiv">
+						<div class="table-responsive col-md-12 ">
+							<h3>이엘태그 학년별 내신 등급</h3>
+							<table id="nesinTable" class="table table-bordered"
+								style="text-align: center">
+								<tr>
+									<td>학년</td>
+									<td>국</td>
+									<td>영</td>
+									<td>수</td>
+									<td>사</td>
+									<td>과</td>
+									<td>기타</td>
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>${first.kor }</td>
+									<td>${first.eng }</td>
+									<td>${first.math }</td>
+									<td>${first.sol }</td>
+									<td>${first.sci }</td>
+									<td>${first.etc }</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>${second.kor }</td>
+									<td>${second.eng }</td>
+									<td>${second.math }</td>
+									<td>${second.sol }</td>
+									<td>${second.sci }</td>
+									<td>${second.etc }</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>${third.kor }</td>
+									<td>${third.eng }</td>
+									<td>${third.math }</td>
+									<td>${third.sol }</td>
+									<td>${third.sci }</td>
+									<td>${third.etc }</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+					<div id="recommendContainer" class="row">
+						<div class="col-md-12 ">
+							<h3>추천 대학</h3>
+							<button id="testId">국민대학교</button>
+							<!-- <div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
                     				<li id="firstRecommend"><a href="/universityDetail">
                     					<img id="SeoulUniversityMark" alt="서울대학교마크" src="img/SeoulUniversityMark.jpg">
@@ -122,29 +135,25 @@ google.charts.load('current', {'packages':['corechart']});
                     				</a></li>
                     			</ul>
                     		</div> -->
-                    	</div>
+						</div>
 					</div>
 					<h3>진학 가능 대학</h3>
-<<<<<<< HEAD
 					<!-- <div id="chart_div"></div> -->
-=======
-					 <div id="chart_div"></div>
-                    <jsp:include page="../simulation/susiSimulationTable.jsp"/>
->>>>>>> branch 'master' of https://github.com/minusto/koSchool.git
-					<div class="row">
-                    	<div class="col-md-12 ">
-                    	<h3>대학 검색</h3>
-                    		<div id="searchUniversityResult" class="row">
-                    			<jsp:include page="susiSimulationTable.jsp"/>
-                   			</div>
-                    	</div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-          
+					<div id="chart_div"></div>
+
+
+					<div id="searchUniversityResult" class="row">
+						<div class="col-md-12 ">
+							<h3>대학 검색</h3>
+							<jsp:include page="susiSimulationTable.jsp" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 
 </html>

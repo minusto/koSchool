@@ -211,8 +211,8 @@ public class SusiAjaxController {
 		return resultList;
 	}
 	
-	@RequestMapping("/searchUniName")
-	public List<SusiTableDTO> searchUniName(@RequestParam("uniName") String uniName,
+	@RequestMapping("/selectLocation3")
+	public List<SusiTableDTO> selectLocation3(@RequestParam("uniName") String uniName,
 			HttpSession session, Model model) throws Exception {
 		String ss = "수시";
 		Map<String, String> map = new HashMap<String, String>();
@@ -241,6 +241,7 @@ public class SusiAjaxController {
 			susiTable.setKind(list.get(i).getKind());
 			susiTable.setRecruitNum(list.get(i).getRecruitNum());
 			susiTable.setAverScore(list.get(i).getAverScore());
+			
 			// 수시 진단결과 계산
 			// 수시 진단결과 계산: 배점
 			pointPerGrade[0] = list.get(i).getPointPerGrade1();
@@ -264,6 +265,7 @@ public class SusiAjaxController {
 			//소수 둘째 자리반올림
 			resultScore=Math.round(resultScore*100)/100.0;
 			susiTable.setResultScore(resultScore);
+			
 			// 지원 가능 여부
 			/*
 			 resultAver = service.getResultAver(first, second, third,
