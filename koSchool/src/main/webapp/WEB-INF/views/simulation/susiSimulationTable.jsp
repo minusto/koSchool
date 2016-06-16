@@ -9,6 +9,15 @@
 	text-align:center; 
 	vertical-align:middle;
 }
+.a{
+	color: #3b3;
+}
+.b{
+	color: orange;
+}
+.c{
+	color: red;
+}
 </style>
 </head>
 <body class="flat-blue">

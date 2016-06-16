@@ -23,7 +23,19 @@ $(function() {
 			html += '<td id="center">' + list.averScore + '</td>';
 			html += '<td id="center">' + list.resultScore + '</td>';
 			html += '<td id="center">없음</td>';
-			html += '<td id="center">' + list.sfMessage + '</td>';
+			if(list.sfMessage == '합격안정'){
+				html += '<td id="center" class="a">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '합격가능'){
+				html += '<td id="center" class="a">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '소신지원'){
+				html += '<td id="center" class="b">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '모험지원'){
+				html += '<td id="center" class="b">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '위험지원'){
+				html += '<td id="center" class="c">' + list.sfMessage + '</td>';
+			}else{
+				html += '<td id="center">' + list.sfMessage + '</td>';
+			}
 			html += '</tr>'
 			$('#susiTable1').append(html);
 		})
@@ -58,7 +70,19 @@ $(function() {
 			html += '<td id="center">' + list.averScore + '</td>';
 			html += '<td id="center">' + list.resultScore + '</td>';
 			html += '<td id="center">없음</td>';
-			html += '<td id="center">' + list.sfMessage + '</td>';
+			if(list.sfMessage == '합격안정'){
+				html += '<td id="center" class="a">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '합격가능'){
+				html += '<td id="center" class="a">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '소신지원'){
+				html += '<td id="center" class="b">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '모험지원'){
+				html += '<td id="center" class="b">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '위험지원'){
+				html += '<td id="center" class="c">' + list.sfMessage + '</td>';
+			}else{
+				html += '<td id="center">' + list.sfMessage + '</td>';
+			}
 			html += '</tr>'
 
 			$('#susiTable1').append(html);
@@ -92,10 +116,25 @@ $(function() {
 			html += '<td id="center">' + list.averScore + '</td>';
 			html += '<td id="center">' + list.resultScore + '</td>';
 			html += '<td id="center">없음</td>';
-			html += '<td id="center">' + list.sfMessage + '</td>';
+			if(list.sfMessage == '합격안정'){
+				html += '<td id="center" class="a">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '합격가능'){
+				html += '<td id="center" class="a">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '소신지원'){
+				html += '<td id="center" class="b">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '모험지원'){
+				html += '<td id="center" class="b">' + list.sfMessage + '</td>';
+			}else if(list.sfMessage == '위험지원'){
+				html += '<td id="center" class="c">' + list.sfMessage + '</td>';
+			}else{
+				html += '<td id="center">' + list.sfMessage + '</td>';
+			}
 			html += '</tr>'
+			
+			
 
 			$('#susiTable1').append(html);
 		})
 	}
+	
 })

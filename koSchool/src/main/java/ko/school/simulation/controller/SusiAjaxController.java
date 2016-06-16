@@ -89,11 +89,10 @@ public class SusiAjaxController {
 			resultScore=Math.round(resultScore*100)/100.0;
 			susiTable.setResultScore(resultScore);
 			// 지원 가능 여부
-			/*
-			 * resultAver = service.getResultAver(first, second, third,
-			 * gradeReflectionRate, reflectionSubjects);
-			 */
-			resultAver = 2.4;
+			
+			resultAver = service.getResultAver(first, second, third,
+			gradeReflectionRate, reflectionSubjects);
+			
 			if (resultAver <= (list.get(i).getAverScore() - 0.2)) { // 2.5일때
 																	// 2.3이하면 안전
 				susiTable.setSfMessage("합격안정");
@@ -108,14 +107,17 @@ public class SusiAjaxController {
 																			// 2.7이하
 				susiTable.setSfMessage("소신지원");
 			} else if ((resultAver > (list.get(i).getAverScore() + 0.2))
-					&& (resultAver <= (list.get(i).getAverScore() + 0.4))) {// 2.5일때
+					&& (resultAver <= (list.get(i).getAverScore() + 0.35))) {// 2.5일때
 																			// 2.7초과
-																			// 2.9이하
+																			// 2.85이하
 				susiTable.setSfMessage("모험지원");
-			} else if (resultAver > (list.get(i).getAverScore() + 0.4)) {// 2.5일때
-																			// 2.9보다
-																			// 크면
+			} else if ((resultAver > (list.get(i).getAverScore() + 0.35))
+					&& (resultAver <= (list.get(i).getAverScore() + 0.5))){// 2.5일때
+																			// 2.85초과
+																			// 3이하
 				susiTable.setSfMessage("위험지원");
+			} else{
+				susiTable.setSfMessage("지원불가");
 			}
 
 			resultList.add(susiTable);

@@ -56,15 +56,13 @@
 	function removeLine() {
 		$("rect[fill='#3366cc']").remove();
 	}
-	
-	/* 상완 */
-$(function() {
-	$(document).on('click', 'g text', function() {
-		alert('asdf');
-	})
-})
 </script>
-
+<style type="text/css">
+#center2{
+	text-align:center; 
+	vertical-align:middle;
+}
+</style>
 <body class="flat-blue">
 	<div class="app-container">
 		<div class="row content-container">
@@ -74,17 +72,17 @@ $(function() {
 				<div class="side-body padding-top">
 					<div id="compareToHopUniversityTotalExam" class="row">
 						<div class="table-responsive col-md-12 ">
-							<h3>이엘태그 학년별 내신 등급</h3>
+							<h3>${studentName }님의 학년별 내신 등급</h3>
 							<table id="nesinTable" class="table table-bordered"
 								style="text-align: center">
 								<tr>
-									<td>학년</td>
-									<td>국</td>
-									<td>영</td>
-									<td>수</td>
-									<td>사</td>
-									<td>과</td>
-									<td>기타</td>
+									<th id="center2">학년</th>
+									<th id="center2">국어</th>
+									<th id="center2">영어</th>
+									<th id="center2">수학</th>
+									<th id="center2">사회</th>
+									<th id="center2">과학</th>
+									<th id="center2">기타</th>
 								</tr>
 								<tr>
 									<td>1</td>
@@ -142,10 +140,11 @@ $(function() {
                     		</div> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
-					<h3>진학 가능 대학</h3>
+					<h3>수시 대학목록</h3>
 					<!-- <div id="chart_div"></div> -->
 					<div id="chart_div"></div>
-					
+					<br>
+					<h3>추천 학과목록  &nbsp; (나의 내신등급: ${resultAver})</h3>
 					 <jsp:include page="../simulation/susiRecommendTable.jsp"/>
 
 

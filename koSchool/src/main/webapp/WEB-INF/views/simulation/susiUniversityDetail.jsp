@@ -36,6 +36,18 @@
 				<div class="side-body padding-top">
 					<div class="row">
 						<div class="table-responsive col-md-8 col-md-offset-2">
+
+							<img id="universityMark" alt="${susiInfoVO.universityName }"
+								src="${susiInfoVO.universityMark }">
+							<div id="entranceUniversityInfo">
+								<ul class="list-unstyled list-inline">
+									<li class="entranceInfoUniversityName">${susiInfoVO.universityName }</li>
+									<li class="entranceInfoUniversityMajor">${susiInfoVO.majorName }</li>
+									<li id="entrancInfoDetail"><a
+										href="${susiInfoVO.universityURL }">홈페이지</a></li>
+									<li>${universitySATInfo.recruitSeparate }</li>
+								</ul>
+							</div>
 							<table class="mTable" width="100%">
 								<colgroup>
 									<col width="20%">
@@ -46,10 +58,6 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<td class="tdTop" valign="middle" align="center" rowspan="5">
-											<img width="130" height="130"
-											src="http://img.uway.com/univ/logo3/LOGO1_01201.gif">
-										</td>
 										<th>대학명</th>
 										<td class="tdTop">${susiInfoVO.universityName }</td>
 										<th>모집단위</th>

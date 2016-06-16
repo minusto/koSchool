@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ko.school.common.domain.MemberVO;
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
 import ko.school.simulation.domain.SusiDetailDTO;
@@ -31,28 +32,36 @@ public class SusiSimulationController {
 	@RequestMapping(value = "/susiSimulation", method = RequestMethod.GET)
 	public String susiSimulation(HttpSession session, Model model) throws Exception {
 		model.addAttribute("path", "진학시뮬레이션 > 수시시뮬레이션");
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		model.addAttribute("studentName", member.getMemberName());
 		String grade = (String) session.getAttribute("grade");
 		String id = null;
 		int studentGrade = 0;
+		String sMajor = null;
+		double[] gradeReflectionRate = new double[3];
 		if (grade.equals("teacher")) {
 			// 학생의 id
 			id = (String) session.getAttribute("id");
 			// 학생객체 구해서 학년 구하기
 			StudentVO studentVO = service.studentCheck(id);
 			studentGrade = studentVO.getStudentGrade();
+			sMajor = studentVO.getStudentMajor();
 
 		} else if (grade.equals("student")) {
 			StudentVO studentVO = (StudentVO) session.getAttribute("student");
 			id = studentVO.getMemberId();
 			// 학년 구하기
 			studentGrade = studentVO.getStudentGrade();
+			sMajor = studentVO.getStudentMajor();
 		} else if (grade.equals("parent")) {
 			ParentVO parentVO = (ParentVO) session.getAttribute("parent");
 			id = parentVO.getStudentMemberId();
 			// 학생객체 구해서 학년 구하기
 			StudentVO studentVO = service.studentCheck(id);
 			studentGrade = studentVO.getStudentGrade();
+			sMajor = studentVO.getStudentMajor();
 		}
+		
 		SusiRatingDTO[] dto = new SusiRatingDTO[3];
 		if (studentGrade == 1) {
 			// 1학년 1,2학기
@@ -83,6 +92,21 @@ public class SusiSimulationController {
 		// 차트에서 대학리스트 불러오기
 		List<UniversityVO> list = service.univerSityChartList();
 		model.addAttribute("list", list);
+		
+		// 학생부 총 평균등급
+		double resultAver = 0.0;
+		String reflectionSubjects = null;
+		if(sMajor.equals("문과")){
+			reflectionSubjects = "국영수사";
+		}else if(sMajor.equals("이과")){
+			reflectionSubjects = "국영수과";
+		}
+		resultAver = service.getResultAver(dto[0], dto[1]	, dto[2],
+		gradeReflectionRate, reflectionSubjects);
+		
+		resultAver = Math.round(resultAver*100)/100.0;
+		
+		model.addAttribute("resultAver",resultAver);
 
 		return "/simulation/susiSimulation";
 	}

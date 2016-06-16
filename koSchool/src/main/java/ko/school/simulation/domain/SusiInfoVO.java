@@ -29,8 +29,9 @@ public class SusiInfoVO {
 	private String universityName; 
 	private String universityLocal;
 	private double schoolreportreflectionrate;
-	
-	
+	private String universityURL;
+	private String universityMark;
+
 	@Override
 	public String toString() {
 		return "SusiInfoVO [majorId=" + majorId + ", universityId=" + universityId + ", recruitSeparate="
@@ -44,13 +45,25 @@ public class SusiInfoVO {
 				+ ", pointPerGrade6=" + pointPerGrade6 + ", pointPerGrade7=" + pointPerGrade7 + ", pointPerGrade8="
 				+ pointPerGrade8 + ", pointPerGrade9=" + pointPerGrade9 + ", averScore=" + averScore + ", majorName="
 				+ majorName + ", kind=" + kind + ", college=" + college + ", universityName=" + universityName
-				+ ", universityLocal=" + universityLocal + "]";
+				+ ", universityLocal=" + universityLocal + ", schoolreportreflectionrate=" + schoolreportreflectionrate
+				+ ", universityURL=" + universityURL + ", universityMark=" + universityMark + "]";
 	}
-	
-	
 
+	public String getUniversityURL() {
+		return universityURL;
+	}
 
+	public void setUniversityURL(String universityURL) {
+		this.universityURL = universityURL;
+	}
 
+	public String getUniversityMark() {
+		return universityMark;
+	}
+
+	public void setUniversityMark(String universityMark) {
+		this.universityMark = universityMark;
+	}
 
 	public double getSchoolreportreflectionrate() {
 		return schoolreportreflectionrate;

@@ -164,7 +164,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	s.grade1ReflectionRate, s.grade2ReflectionRate, s.grade3ReflectionRate, s.reflectionSubjects, s.pointperGradeId,
    	p.pointPerGrade1, p.pointPerGrade2, p.pointPerGrade3, p.pointPerGrade4, p.pointPerGrade5, p.pointPerGrade6,
    	p.pointPerGrade7, p.pointPerGrade8, p.pointPerGrade9, ss.averScore, m.majorName, m.kind, m.college,
-   	u.universityName, u.universityLocal
+   	u.universityName, u.universityLocal, u.universityURL, u.universityMark
    	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u
    	WHERE e.schoolReportReflectionRateId = s.schoolReportReflectionRateId
    	AND s.pointPerGradeId = p.pointPerGradeId 
