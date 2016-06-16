@@ -1,5 +1,6 @@
 package ko.school.simulation.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +60,7 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 		return hopeUniversityVo;
 	}
 	
-	
+	//희망대학 출력
 	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인
 	@Override
 	public Integer selectStandardScoreSumService(String memberId) throws Exception {
@@ -82,6 +83,39 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 		mockSimulationDTO.setStandardScoreCutline(satScoreVo.getStandardScoreCutline());
 		return mockSimulationDTO;
 	}
+	
+	
+	//추천대학
+	@Override
+	public List<MockSimulationDTO> recommandUniversityListService(HopeUniversityVO hopeUniversityVo) throws Exception {
+		List<MockSimulationDTO> recommandAllList = null;
+		List<MockSimulationDTO> recommandList = new ArrayList<MockSimulationDTO>();
+		
+		Integer mockScore = dao.selectStandardScoreSum(hopeUniversityVo.getMemberId());
+		if(mockScore != null) { //모의고사 점수가 있는 경우 모의고사 점수를 이용하여 대학 추천
+			recommandAllList = dao.recommandUniversityListByMock(hopeUniversityVo);
+			
+		} else {
+			if(hopeUniversityVo.getUniversityId() != null) { //모의고사 점수가 없는 경우 희망대학이 있을 때만 추천
+				recommandAllList = dao.recommandUniversityListByHope(hopeUniversityVo);
+			}
+		}
+		
+		if(!recommandAllList.isEmpty()) { //제일 점수차가 적은 3개만 반환해줌
+			recommandList.add(recommandAllList.get(0));
+			if(recommandAllList.size() >= 2) {
+				recommandList.add(recommandAllList.get(1));
+			}
+			if(recommandAllList.size() >= 3) {
+				recommandList.add(recommandAllList.get(2));				
+			}
+		} else {
+			recommandList = null;
+		}
+		
+		return recommandList;
+	}
+	
 	
 }
 

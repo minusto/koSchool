@@ -23,6 +23,7 @@ public interface MockSimulationDAO {
 	
 	public void insertHopeUniversity(HopeUniversityVO hopeUniversityVo) throws Exception; //액터 ==> 학생 / 작업 내용 : 학생이 선택한 희망 대학 학과를 가지고 hopuUniversity에 입력 / 작성자 : 구혜인
 	
+	//희망대학 출력
 	public Integer selectStandardScoreSum(String memberId)throws Exception; //액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인
 	
 	public String selctUniversityName(String universityId) throws Exception; //액터 ==> 학생, 학부모, 교사 / 작업 내용 : 대학교 아이디로 이름을 반환 / 작성자 : 구혜인
@@ -31,5 +32,9 @@ public interface MockSimulationDAO {
 	
 	public SATScoreVO selectSATScore(HopeUniversityVO hopeUniversityVo) throws Exception; //액터 ==> 학생, 학부모, 교사 / 작업 내용 : satScore테이블의 주키로 해당하는 로우 반환 / 작성자 : 구혜인
 	
+	//추천대학
+	public List<MockSimulationDTO> recommandUniversityListByMock(HopeUniversityVO hopeUniversityVo) throws Exception; //액터 ==> 학생, 학부모, 교사 / 작업 내용 : 모의고사 점수로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인
+	
+	public List<MockSimulationDTO> recommandUniversityListByHope(HopeUniversityVO hopeUniversityVo) throws Exception; //액터 ==> 학생, 학부모, 교사 / 작업 내용 : 희망대학 커트라인으로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인
 	
 }

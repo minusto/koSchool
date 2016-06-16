@@ -59,19 +59,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인 -->
- 	<select id="selectStandardScoreSum" resultType="Integer">
+		<!-- sql문이 너무 길거나 중복되어진다면 include로 가져와 사용할 수 있다.고한다. -->
+		<!-- 학생이 최근 본 모의고사의 표준점수 총합 / 작성자 : 구혜인 -->
+	<sql id="recentMockStandardScoreSum">
 		SELECT
 			(SELECT (languageStandardScore + mathStandardScore + englishStandardScore)
 				FROM mockTest
 				WHERE memberId = #{memberId} 
-				AND mockId = (SELECT MAX(mockId) FROM mockTest 
-					WHERE memberId = #{memberId} ))
+				AND mockId = (SELECT MAX(mockId) FROM mockTest WHERE memberId = #{memberId}))
 			+ 
 			(SELECT SUM(researchSubjectStandardScore) FROM researchSubjectScore
-				WHERE mockId = (SELECT MAX(mockId) FROM mockTest 
-					WHERE memberId = #{memberId} )
+				WHERE mockId = (SELECT MAX(mockId) FROM mockTest WHERE memberId = #{memberId})
 				AND NOT researchSubjectId = 'Hangooksa') AS standardSum FROM dual
+	</sql>
+	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인 -->
+ 	<select id="selectStandardScoreSum" resultType="Integer">
+		<include refid="recentMockStandardScoreSum"></include>
 	</select>
 	
 	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 대학교 아이디로 이름을 반환 / 작성자 : 구혜인 -->
@@ -93,7 +97,74 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND recruitSeparate = #{recruitSeparate}
 	</select>
 	
+		<!-- 희망대학이 있다면 희망대학에 의한 조건 추가 - 같은 계열, 같은 학과이름, 같은 단대 / 작성자 : 구혜인 -->
+	<sql id="attachByHope">
+		AND e.majorID IN (SELECT majorId FROM major 
+			WHERE kind = (SELECT kind FROM major WHERE majorId = #{majorId}))
+		AND (college = (SELECT college FROM major WHERE majorId = #{majorId})
+			OR majorName = (SELECT majorName FROM major WHERE majorId = #{majorId}))
+		AND NOT (e.universityId = #{universityId} AND NOT e.majorId = #{majorId})
+	</sql>
 	
+		<!-- 모의고사가 없는 경우 희망대학으로 비교 - 희망대학의 표준점수 커트라인 / 작성자 : 구혜인 -->
+	<sql id="standardScoreCutlineOfHope"><!-- 희망대학이 있을 경우 -->
+		SELECT standardScoreCutline FROM satScore
+			WHERE universityId = #{universityId} AND majorId = #{majorId}
+			AND entranceYear = (SELECT MAX(entranceYear) FROM entranceINfo 
+				WHERE universityId = #{universityId} AND majorId = #{majorId}
+				AND NOT recruitSeparate = '수시')
+	</sql>
+	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 모의고사 점수로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인 -->
+	<!-- 모의고사 O, 희망대학 O/X -->
+	<select id="recommandUniversityListByMock" resultType="MockSimulationDTO">
+		SELECT e.universityId, u.universityName, u.campusName, u.universityLocal, u.universityURL, u.universityMark,
+			e.majorId, m.majorName, m.kind, m.college,
+			e.entranceYear, e.recruitSeparate, 
+			e.hangooksaReflectionPlan, e.recruitNum, e.recruitModelType, 
+			e.reflectionRateId, e.schoolReportReflectionRateId, e.SATReflectionRateId, e.extraPointId,
+			s.standardScoreCutline, s.totalPercentile, s.satScoreUseIndex, s.convertScoreMax, s.ConvertStandardScoreCutline,
+			ABS(standardScoreCutline - ( <include refid="recentMockStandardScoreSum"/> ) ) AS GAP
+		FROM entranceInfo e JOIN university u
+		ON e.universityId = u.universityId
+		JOIN major m
+		ON e.majorId = m.majorId
+		JOIN satScore s
+		ON (s.majorId = e.majorId
+		AND s.universityId = e.universityId
+		AND s.entranceYear = e.entranceYear
+		AND s.recruitSeparate = e.recruitSeparate)
+		WHERE NOT e.recruitSeparate = '수시'
+		AND ABS(standardScoreCutline - ( <include refid="recentMockStandardScoreSum"/> ) ) <![CDATA[<]]> 200
+		<if test="universityId != null">
+			<include refid="attachByHope"/>
+		</if>
+		ORDER BY GAP
+	</select>
+	
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 희망대학 커트라인으로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인 -->
+	<!-- 모의고사 X, 희망대학 O -->
+	<select id="recommandUniversityListByHope" resultType="MockSimulationDTO">
+		SELECT e.universityId, u.universityName, u.campusName, u.universityLocal, u.universityURL, u.universityMark,
+			e.majorId, m.majorName, m.kind, m.college,
+			e.entranceYear, e.recruitSeparate, 
+			e.hangooksaReflectionPlan, e.recruitNum, e.recruitModelType, 
+			e.reflectionRateId, e.schoolReportReflectionRateId, e.SATReflectionRateId, e.extraPointId,
+			s.standardScoreCutline, s.totalPercentile, s.satScoreUseIndex, s.convertScoreMax, s.ConvertStandardScoreCutline,
+			ABS( standardScoreCutline - ( <include refid="standardScoreCutlineOfHope"/> ) ) AS GAP
+		FROM entranceInfo e JOIN university u
+		ON e.universityId = u.universityId
+		JOIN major m
+		ON e.majorId = m.majorId
+		JOIN satScore s
+		ON (s.majorId = e.majorId
+		AND s.universityId = e.universityId
+		AND s.entranceYear = e.entranceYear
+		AND s.recruitSeparate = e.recruitSeparate)
+		WHERE NOT e.recruitSeparate = '수시'
+		AND ABS( standardScoreCutline - ( <include refid="standardScoreCutlineOfHope"/> ) ) <![CDATA[<]]> 200
+		<include refid="attachByHope"/>
+	</select>
 	
 	
 	
