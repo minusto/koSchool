@@ -25,6 +25,14 @@ public interface SusiSimulationService {
 	public double getResultScore(String uniName, double[] pointPerGrade, SusiRatingDTO first,
 			SusiRatingDTO second, SusiRatingDTO third, double[] gradeReflectionRate, String reflectionSubjects)throws Exception; //수시 진단 결과
 	
+	public List<SusiInfoVO> selectLocationList(Map<String, String> map)throws Exception; //선택지역 대학교 정보 목록
+
+	public double getResultAver(SusiRatingDTO first, SusiRatingDTO second, SusiRatingDTO third,
+			double[] gradeReflectionRate, String reflectionSubjects); // 수시 평균 등급
+
+	public List<SusiInfoVO> selectLocationList2(Map<String, String> map)throws Exception; //선택지역, 계열 대학교 정보 목록
+
+	public List<SusiInfoVO> searchUniName(Map<String, String> map)throws Exception; //대학명검색 
 	
 	
 }

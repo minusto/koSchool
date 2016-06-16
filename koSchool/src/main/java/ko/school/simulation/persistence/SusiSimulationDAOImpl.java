@@ -57,6 +57,21 @@ public class SusiSimulationDAOImpl implements SusiSimulationDAO {
 	public Subject selectSubject(String id) throws Exception {
 		return session.selectOne(namespace+".selectSubject", id);
 	}
+
+	@Override
+	public List<SusiInfoVO> selectLocationList(Map<String, String> map) throws Exception {
+		return session.selectList(namespace+".selectLocationList", map);
+	}
+
+	@Override
+	public List<SusiInfoVO> selectLocationList2(Map<String, String> map) throws Exception {
+		return session.selectList(namespace+".selectLocationList2", map);
+	}
+
+	@Override
+	public List<SusiInfoVO> searchUniName(Map<String, String> map) throws Exception {
+		return session.selectList(namespace+".searchUniName", map);
+	}
 	
 	
 }

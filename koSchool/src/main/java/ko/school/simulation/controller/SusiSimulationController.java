@@ -1,6 +1,9 @@
 package ko.school.simulation.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -9,10 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
+import ko.school.simulation.domain.SusiInfoVO;
 import ko.school.simulation.domain.SusiRatingDTO;
+import ko.school.simulation.domain.SusiTableDTO;
 import ko.school.simulation.domain.UniversityVO;
 import ko.school.simulation.service.SusiSimulationService;
 

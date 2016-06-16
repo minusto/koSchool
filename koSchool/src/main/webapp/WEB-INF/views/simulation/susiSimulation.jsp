@@ -56,17 +56,17 @@ google.charts.load('current', {'packages':['corechart']});
             <div class="container-fluid">
                 <div class="side-body padding-top">
 					<div id="compareToHopUniversityTotalExam" class="row">
-	                    <div class="table-responsive col-md-8 ">
+	                    <div class="table-responsive col-md-12 ">
                     	<h3>이엘태그 학년별 내신 등급</h3>
-	                    	<table id="nesinTable" class="table table-bordered">
+	                    	<table id="nesinTable" class="table table-bordered" style="text-align:center">
 	                    		<tr>
-	                    			<th>학년</th>
-	                    			<th>국</th>
-	                    			<th>영</th>
-	                    			<th>수</th>
-	                    			<th>사</th>
-	                    			<th>과</th>
-	                    			<th>기타</th>
+	                    			<td>학년</td>
+	                    			<td>국</td>
+	                    			<td>영</td>
+	                    			<td>수</td>
+	                    			<td>사</td>
+	                    			<td>과</td>
+	                    			<td>기타</td>
 	                    		</tr>
 	                    		<tr>
 	                    			<td>1</td>
@@ -103,7 +103,7 @@ google.charts.load('current', {'packages':['corechart']});
                     	<div class="col-md-12 ">
                     		<h3>추천 대학</h3>
                     		<button id="testId">국민대학교</button>
-                    		<div id="recommendUniversityDiv">
+                    		<!-- <div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
                     				<li id="firstRecommend"><a href="/universityDetail">
                     					<img id="SeoulUniversityMark" alt="서울대학교마크" src="img/SeoulUniversityMark.jpg">
@@ -121,57 +121,16 @@ google.charts.load('current', {'packages':['corechart']});
                     					<span id="thirdRecommendMajorName" class="recommendMajorName">국어국문학과</span>
                     				</a></li>
                     			</ul>
-                    		</div>
+                    		</div> -->
                     	</div>
 					</div>
 					<h3>진학 가능 대학</h3>
 					<!-- <div id="chart_div"></div> -->
-                    <jsp:include page="../simulation/susiSimulationTable.jsp"/>
 					<div class="row">
-                    	<div class="col-md-10 ">
-                    		<h3>대학 검색</h3>
+                    	<div class="col-md-12 ">
+                    	<h3>대학 검색</h3>
                     		<div id="searchUniversityResult" class="row">
-                    			<div class="table-responsive col-md-12">
-                    				<div class="row">
-                       		 			<div class="col-xs-12">
-		                    				<div class="card">
-			                    				<div class="card-body">
-				                    				<table id="searchResultTable" class="datatable table table-bordered table-striped">
-				                    					<thead>
-					                    					<tr>
-					                    						<th>학교 이름</th>
-					                    						<th>학과 이름</th>
-					                    						<th>수시 커트라인</th>
-					                    						<th>모집인원</th>
-					                    					</tr>
-				                    					</thead>
-				                    					<tfoot>
-				                    						<tr>
-					                    						<th>학교 이름</th>
-					                    						<th>학과 이름</th>
-					                    						<th>수시 커트라인</th>
-					                    						<th>모집인원</th>
-					                    					</tr>
-				                    					</tfoot>
-				                    					<tbody>
-					                    					<c:forEach var="allEntranceInfoList" items="${allEntranceInfoList }">
-					                    						<tr>
-						                    						<td>
-						                    							<img class="tableUniversityMark" alt="서울대학교마크" src="${allEntranceInfoList.universityMark }">
-						                    							<a id="hopeUniversityName" href="/universityDetail">${allEntranceInfoList.universityName }</a>
-						                    						</td>
-						                    						<td><a id="hopeUniversityMajor" href="/universityDetail">${allEntranceInfoList.majorName }</a></td>
-						                    						<td>${allEntranceInfoList.mockTestCutline }</td>
-						                    						<td>${allEntranceInfoList.mockTestRecruitNum }</td>
-						                    					</tr>
-					                    					</c:forEach>
-				                    					</tbody>
-				                    				</table>
-			                    				</div>
-		                    				</div>
-	                    				</div>
-                    				</div>
-                    			</div>
+                    			<jsp:include page="susiSimulationTable.jsp"/>
                    			</div>
                     	</div>
                     </div>

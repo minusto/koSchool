@@ -208,22 +208,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			for (int i = 0; i < subject.length; i++) {
 				if (cnt[i] != 0) {
 					if (i == 0) {
-						r_dto.setKor(subject[0] / (double) cnt[0]);
+						r_dto.setKor(Math.round((subject[0] / (double) cnt[0])*100)/100.0);
 						r_dto.setKorUnit((int)resultMap.get("국어단위수"));
 					} else if (i == 1) {
-						r_dto.setEng(subject[1] / (double) cnt[1]);
+						r_dto.setEng(Math.round((subject[1] / (double) cnt[1])*100)/100.0);
 						r_dto.setEngUnit((int)resultMap.get("영어단위수"));
 					} else if (i == 2) {
-						r_dto.setMath(subject[2] / (double) cnt[2]);
+						r_dto.setMath(Math.round((subject[2] / (double) cnt[2])*100)/100.0);
 						r_dto.setMathUnit((int)resultMap.get("수학단위수"));
 					} else if (i == 3) {
-						r_dto.setSol(subject[3] / (double) cnt[3]);
+						r_dto.setSol(Math.round((subject[3] / (double) cnt[3])*100)/100.0);
 						r_dto.setSolUnit((int)resultMap.get("사회단위수"));
 					} else if (i == 4) {
-						r_dto.setSci(subject[4] / (double) cnt[4]);
+						r_dto.setSci(Math.round((subject[4] / (double) cnt[4])*100)/100.0);
 						r_dto.setSciUnit((int)resultMap.get("과학단위수"));
 					} else if (i == 5) {
-						r_dto.setEtc(subject[5] / (double) cnt[5]);
+						r_dto.setEtc(Math.round((subject[5] / (double) cnt[5])*100)/100.0);
 						r_dto.setEtcUnit((int)resultMap.get("기타단위수"));
 					}
 				}
@@ -263,22 +263,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
 								if (i == 0) {
-									r_dto.setKor(subject[0] / (double) cnt[0]);
+									r_dto.setKor(Math.round((subject[0] / (double) cnt[0])*100)/100.0);
 									r_dto.setKorUnit((int)resultMap.get("국어단위수"));
 								} else if (i == 1) {
-									r_dto.setEng(subject[1] / (double) cnt[1]);
+									r_dto.setEng(Math.round((subject[1] / (double) cnt[1])*100)/100.0);
 									r_dto.setEngUnit((int)resultMap.get("영어단위수"));
 								} else if (i == 2) {
-									r_dto.setMath(subject[2] / (double) cnt[2]);
+									r_dto.setMath(Math.round((subject[2] / (double) cnt[2])*100)/100.0);
 									r_dto.setMathUnit((int)resultMap.get("수학단위수"));
 								} else if (i == 3) {
-									r_dto.setSol(subject[3] / (double) cnt[3]);
+									r_dto.setSol(Math.round((subject[3] / (double) cnt[3])*100)/100.0);
 									r_dto.setSolUnit((int)resultMap.get("사회단위수"));
 								} else if (i == 4) {
-									r_dto.setSci(subject[4] / (double) cnt[4]);
+									r_dto.setSci(Math.round((subject[4] / (double) cnt[4])*100)/100.0);
 									r_dto.setSciUnit((int)resultMap.get("과학단위수"));
 								} else if (i == 5) {
-									r_dto.setEtc(subject[5] / (double) cnt[5]);
+									r_dto.setEtc(Math.round((subject[5] / (double) cnt[5])*100)/100.0);
 									r_dto.setEtcUnit((int)resultMap.get("기타단위수"));
 								}
 							}
@@ -320,22 +320,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
 								if (i == 0) {
-									r_dto.setKor(subject[0] / (double) cnt[0]);
+									r_dto.setKor(Math.round((subject[0] / (double) cnt[0])*100)/100.0);
 									r_dto.setKorUnit((int)resultMap.get("국어단위수"));
 								} else if (i == 1) {
-									r_dto.setEng(subject[1] / (double) cnt[1]);
+									r_dto.setEng(Math.round((subject[1] / (double) cnt[1])*100)/100.0);
 									r_dto.setEngUnit((int)resultMap.get("영어단위수"));
 								} else if (i == 2) {
-									r_dto.setMath(subject[2] / (double) cnt[2]);
+									r_dto.setMath(Math.round((subject[2] / (double) cnt[2])*100)/100.0);
 									r_dto.setMathUnit((int)resultMap.get("수학단위수"));
 								} else if (i == 3) {
-									r_dto.setSol(subject[3] / (double) cnt[3]);
+									r_dto.setSol(Math.round((subject[3] / (double) cnt[3])*100)/100.0);
 									r_dto.setSolUnit((int)resultMap.get("사회단위수"));
 								} else if (i == 4) {
-									r_dto.setSci(subject[4] / (double) cnt[4]);
+									r_dto.setSci(Math.round((subject[4] / (double) cnt[4])*100)/100.0);
 									r_dto.setSciUnit((int)resultMap.get("과학단위수"));
 								} else if (i == 5) {
-									r_dto.setEtc(subject[5] / (double) cnt[5]);
+									r_dto.setEtc(Math.round((subject[5] / (double) cnt[5])*100)/100.0);
 									r_dto.setEtcUnit((int)resultMap.get("기타단위수"));
 								}
 							}
@@ -384,22 +384,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
 								if (i == 0) {
-									r_dto.setKor(subject[0] / (double) cnt[0]);
+									r_dto.setKor(Math.round((subject[0] / (double) cnt[0])*100)/100.0);
 									r_dto.setKorUnit((int)resultMap.get("국어단위수"));
 								} else if (i == 1) {
-									r_dto.setEng(subject[1] / (double) cnt[1]);
+									r_dto.setEng(Math.round((subject[1] / (double) cnt[1])*100)/100.0);
 									r_dto.setEngUnit((int)resultMap.get("영어단위수"));
 								} else if (i == 2) {
-									r_dto.setMath(subject[2] / (double) cnt[2]);
+									r_dto.setMath(Math.round((subject[2] / (double) cnt[2])*100)/100.0);
 									r_dto.setMathUnit((int)resultMap.get("수학단위수"));
 								} else if (i == 3) {
-									r_dto.setSol(subject[3] / (double) cnt[3]);
+									r_dto.setSol(Math.round((subject[3] / (double) cnt[3])*100)/100.0);
 									r_dto.setSolUnit((int)resultMap.get("사회단위수"));
 								} else if (i == 4) {
-									r_dto.setSci(subject[4] / (double) cnt[4]);
+									r_dto.setSci(Math.round((subject[4] / (double) cnt[4])*100)/100.0);
 									r_dto.setSciUnit((int)resultMap.get("과학단위수"));
 								} else if (i == 5) {
-									r_dto.setEtc(subject[5] / (double) cnt[5]);
+									r_dto.setEtc(Math.round((subject[5] / (double) cnt[5])*100)/100.0);
 									r_dto.setEtcUnit((int)resultMap.get("기타단위수"));
 								}
 							}
@@ -441,22 +441,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
 								if (i == 0) {
-									r_dto.setKor(subject[0] / (double) cnt[0]);
+									r_dto.setKor(Math.round((subject[0] / (double) cnt[0])*100)/100.0);
 									r_dto.setKorUnit((int)resultMap.get("국어단위수"));
 								} else if (i == 1) {
-									r_dto.setEng(subject[1] / (double) cnt[1]);
+									r_dto.setEng(Math.round((subject[1] / (double) cnt[1])*100)/100.0);
 									r_dto.setEngUnit((int)resultMap.get("영어단위수"));
 								} else if (i == 2) {
-									r_dto.setMath(subject[2] / (double) cnt[2]);
+									r_dto.setMath(Math.round((subject[2] / (double) cnt[2])*100)/100.0);
 									r_dto.setMathUnit((int)resultMap.get("수학단위수"));
 								} else if (i == 3) {
-									r_dto.setSol(subject[3] / (double) cnt[3]);
+									r_dto.setSol(Math.round((subject[3] / (double) cnt[3])*100)/100.0);
 									r_dto.setSolUnit((int)resultMap.get("사회단위수"));
 								} else if (i == 4) {
-									r_dto.setSci(subject[4] / (double) cnt[4]);
+									r_dto.setSci(Math.round((subject[4] / (double) cnt[4])*100)/100.0);
 									r_dto.setSciUnit((int)resultMap.get("과학단위수"));
 								} else if (i == 5) {
-									r_dto.setEtc(subject[5] / (double) cnt[5]);
+									r_dto.setEtc(Math.round((subject[5] / (double) cnt[5])*100)/100.0);
 									r_dto.setEtcUnit((int)resultMap.get("기타단위수"));
 								}
 							}
@@ -508,22 +508,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
 								if (i == 0) {
-									r_dto.setKor(subject[0] / (double) cnt[0]);
+									r_dto.setKor(Math.round((subject[0] / (double) cnt[0])*100)/100.0);
 									r_dto.setKorUnit((int)resultMap.get("국어단위수"));
 								} else if (i == 1) {
-									r_dto.setEng(subject[1] / (double) cnt[1]);
+									r_dto.setEng(Math.round((subject[1] / (double) cnt[1])*100)/100.0);
 									r_dto.setEngUnit((int)resultMap.get("영어단위수"));
 								} else if (i == 2) {
-									r_dto.setMath(subject[2] / (double) cnt[2]);
+									r_dto.setMath(Math.round((subject[2] / (double) cnt[2])*100)/100.0);
 									r_dto.setMathUnit((int)resultMap.get("수학단위수"));
 								} else if (i == 3) {
-									r_dto.setSol(subject[3] / (double) cnt[3]);
+									r_dto.setSol(Math.round((subject[3] / (double) cnt[3])*100)/100.0);
 									r_dto.setSolUnit((int)resultMap.get("사회단위수"));
 								} else if (i == 4) {
-									r_dto.setSci(subject[4] / (double) cnt[4]);
+									r_dto.setSci(Math.round((subject[4] / (double) cnt[4])*100)/100.0);
 									r_dto.setSciUnit((int)resultMap.get("과학단위수"));
 								} else if (i == 5) {
-									r_dto.setEtc(subject[5] / (double) cnt[5]);
+									r_dto.setEtc(Math.round((subject[5] / (double) cnt[5])*100)/100.0);
 									r_dto.setEtcUnit((int)resultMap.get("기타단위수"));
 								}
 							}
@@ -640,7 +640,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 		}
 		// 수시 진단 결과 resultScore
 		double resultScore = 0.0 ;
-		if(uniName.equals("국민대학교")){
 			//각 학년별 (반영 교과목 이수단위*학년반영비율*반영교과목 석차등급별 배점)/반영교과목 이수단위 합
 			resultScore =
 			//1학년
@@ -669,6 +668,7 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			(korUnit[1]+engUnit[1]+mathUnit[1]+solUnit[1]+sciUnit[1]+etcUnit[1]) +
 			(korUnit[2]+engUnit[2]+mathUnit[2]+solUnit[2]+sciUnit[2]+etcUnit[2])); 
 			System.out.println("resultScore: "+resultScore);
+		if(uniName.equals("국민대학교")||uniName.equals("한양대학교")){
 			//전체점수 곱하기 10
 			resultScore = resultScore * 10;
 		}
@@ -707,6 +707,118 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			return pointPerGrade[8];
 		}
 		
+	}
+
+	@Override
+	public List<SusiInfoVO> selectLocationList(Map<String, String> map) throws Exception {
+		return dao.selectLocationList(map);
+	}
+
+	@Override
+	public double getResultAver(SusiRatingDTO first, SusiRatingDTO second, SusiRatingDTO third,
+			double[] gradeReflectionRate, String reflectionSubjects) {
+		double kor[] = new double[3];
+		int korUnit[] = new int[3];
+		double eng[] = new double[3];
+		int engUnit[] = new int[3];
+		double math[] = new double[3];
+		int mathUnit[] = new int[3];
+		double sol[] = new double[3];
+		int solUnit[] = new int[3];
+		double sci[] = new double[3];
+		int sciUnit[] = new int[3];
+		double etc[] = new double[3];
+		int etcUnit[] = new int[3];
+		if(reflectionSubjects.matches(".*국.*")) { // 반영 과목 검사
+			System.out.println("국어 배점 변환");
+			kor[0] = first.getKor(); // 1학년
+			korUnit[0] = first.getKorUnit();
+			kor[1] = second.getKor(); // 2학년
+			korUnit[1] = second.getKorUnit();
+			kor[2] = third.getKor();// 3학년
+			korUnit[2] = third.getKorUnit();
+		}
+		if(reflectionSubjects.matches(".*영.*")){
+			System.out.println("영어 배점 변환");
+			eng[0] = first.getEng();  // 1학년
+			engUnit[0] = first.getEngUnit();
+			eng[1] = second.getEng(); // 2학년
+			engUnit[1] = second.getEngUnit();
+			eng[2] = third.getEng();// 3학년
+			engUnit[2] = third.getEngUnit();
+		}
+		if(reflectionSubjects.matches(".*수.*")){
+			System.out.println("수학 배점 변환");
+			math[0] = first.getMath();// 1학년
+			mathUnit[0] = first.getMathUnit();
+			math[1] = second.getMath();  // 2학년
+			mathUnit[1] = second.getMathUnit();
+			math[2] = third.getMath(); // 3학년
+			mathUnit[2] = third.getMathUnit();
+		}
+		if(reflectionSubjects.matches(".*사.*")){
+			System.out.println("사회 배점 변환");
+			sol[0] = first.getSol();  // 1학년
+			solUnit[0] = first.getSolUnit();
+			sol[1] = second.getSol(); // 2학년
+			solUnit[1] = second.getSolUnit();
+			sol[2] = third.getSol(); // 3학년
+			solUnit[2] = third.getSolUnit();
+		}
+		if(reflectionSubjects.matches(".*과.*")){
+			System.out.println("과학 배점 변환");
+			sci[0] = first.getSci();  // 1학년
+			sciUnit[0] = first.getSciUnit();
+			sci[1] = second.getSci();// 2학년
+			sciUnit[1] = second.getSciUnit();
+			sci[2] = third.getSci(); // 3학년
+			sciUnit[2] = third.getSciUnit();
+		}
+		if(reflectionSubjects.matches(".*기.*")){
+			System.out.println("기타 배점 변환");
+			etc[0] = first.getEtc(); // 1학년
+			etcUnit[0] = first.getEtcUnit();
+			etc[1] = second.getEtc(); // 2학년
+			etcUnit[1] = second.getEtcUnit();
+			etc[2] = third.getEtc(); // 3학년
+			etcUnit[2] = third.getEtcUnit();
+		}
+		// 수시 진단 결과 resultScore
+		double resultAver = 0.0 ;
+			//각 학년별 (반영 교과목 이수단위*학년반영비율*반영교과목 석차등급별 배점)/반영교과목 이수단위 합
+		resultAver =
+				// 1학년
+				(
+						((korUnit[0] * kor[0]) + (engUnit[0] * eng[0]) + (mathUnit[0] * math[0]) + (solUnit[0] * sol[0])
+						+ (sciUnit[0] * sci[0]) + (etcUnit[0] * etc[0])) +
+				// 더하기 2학년
+						((korUnit[1] * kor[1]) + (engUnit[1] * eng[1]) + (mathUnit[1] * math[1]) + (solUnit[1] * sol[1])
+								+ (sciUnit[1] * sci[1]) + (etcUnit[1] * etc[1]))
+						+
+						// 더하기 3학년
+						((korUnit[2] * kor[2]) + (engUnit[2] * eng[2]) + (mathUnit[2] * math[2]) + (solUnit[2] * sol[2])
+								+ (sciUnit[2] * sci[2]) + (etcUnit[2] * etc[2]))
+				)
+				/
+				// 나누기 반영교과목 이수단위 합
+				(
+						(korUnit[0] + engUnit[0] + mathUnit[0] + solUnit[0] + sciUnit[0] + etcUnit[0])
+								+ (korUnit[1] + engUnit[1] + mathUnit[1] + solUnit[1] + sciUnit[1] + etcUnit[1])
+								+ (korUnit[2] + engUnit[2] + mathUnit[2] + solUnit[2] + sciUnit[2] + etcUnit[2])
+				);
+			System.out.println("resultAver: "+resultAver);
+			
+			return resultAver;
+	}
+
+	@Override
+	public List<SusiInfoVO> selectLocationList2(Map<String, String> map) throws Exception {
+		return dao.selectLocationList2(map);
+	}
+
+	@Override
+	public List<SusiInfoVO> searchUniName(Map<String, String> map) throws Exception {
+		return dao.searchUniName(map);
 	}
 	
 	

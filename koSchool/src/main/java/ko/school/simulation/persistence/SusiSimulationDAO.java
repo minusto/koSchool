@@ -23,4 +23,8 @@ public interface SusiSimulationDAO {
 	public List<SusiInfoVO> susiInfoList(Map<String, String> map)throws Exception; //수시 대학교 정보 목록
 	public Subject selectSubject(String id)throws Exception;//과목
 	
+	public List<SusiInfoVO> selectLocationList(Map<String, String> map)throws Exception; //선택지역 대학교 정보 목록
+	public List<SusiInfoVO> selectLocationList2(Map<String, String> map)throws Exception; //선택지역, 계열 대학교 정보 목록
+
+	public List<SusiInfoVO> searchUniName(Map<String, String> map)throws Exception; //대학명검색 
 }
