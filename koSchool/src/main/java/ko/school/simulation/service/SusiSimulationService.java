@@ -38,5 +38,7 @@ public interface SusiSimulationService {
 	public SusiInfoVO susiUniversityDetail(Map<String, String> map)throws Exception;// 학과 세부정보
 	public SusiDetailDTO susiDetailDTO(Map<String, String> map)throws Exception;// 반영비율정보
 	
+	public List<SusiInfoVO> susiRecomList(Map<String, String> map)throws Exception;//수시 추천대학
+	
 	
 }

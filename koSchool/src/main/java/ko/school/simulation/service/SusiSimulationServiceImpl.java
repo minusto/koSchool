@@ -831,6 +831,12 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 	public SusiDetailDTO susiDetailDTO(Map<String, String> map) throws Exception {
 		return dao.susiDetailDTO(map);
 	}
+	//수시 추천대학
+	@Override
+	public List<SusiInfoVO> susiRecomList(Map<String, String> map) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.susiRecomList(map);
+	}
 	
 	
 

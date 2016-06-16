@@ -84,5 +84,11 @@ public class SusiSimulationDAOImpl implements SusiSimulationDAO {
 		return session.selectOne(namespace+".susiDetailDTO", map);
 	}
 	
+	//수시 추천대학
+	@Override
+	public List<SusiInfoVO> susiRecomList(Map<String, String> map) throws Exception {
+		return session.selectList(namespace+".susiRecommendList",map);
+	}
+	
 	
 }

@@ -199,6 +199,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	AND e.recruitSeparate = #{susi}
 	</select>
 	
+	    <!-- 수시 대학교 인문 or 자연 -->
+   <select id="susiRecommendList" resultType="SusiInfoVO">
+   	SELECT e.majorId, e.universityId, e.recruitSeparate ,e.recruitModelType, e.reflectionRateId, 
+   	e.recruitNum, s.schoolReportReflectionRateId,
+	s.grade1ReflectionRate, s.grade2ReflectionRate, s.grade3ReflectionRate, s.reflectionSubjects, s.pointperGradeId,
+	p.pointPerGrade1, p.pointPerGrade2, p.pointPerGrade3, p.pointPerGrade4, p.pointPerGrade5, p.pointPerGrade6,
+	p.pointPerGrade7, p.pointPerGrade8, p.pointPerGrade9, ss.averScore, m.majorName, m.kind, m.college,
+	u.universityName, u.universityLocal
+	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u
+	WHERE e.schoolReportReflectionRateId = s.schoolReportReflectionRateId
+	AND s.pointPerGradeId = p.pointPerGradeId 
+	AND e.majorId = ss.majorId 
+	AND e.universityId = ss.universityId
+	AND e.entranceYear = ss.entranceYear
+	AND e.recruitSeparate = ss.recruitSeparate
+	AND e.majorId = m.majorId
+	AND e.universityId = u.universityId
+	AND u.universityName = #{uniName}
+	AND e.recruitSeparate = #{susi} 
+	AND m.kind = #{kind}
+	AND ss.averScore<![CDATA[>]]> #{averScore}-0.2 
+	AND ss.averScore<![CDATA[<=]]> #{averScore}+0.5 
+	order by ss.averScore
+   </select>
+	
 	
 	
 	
