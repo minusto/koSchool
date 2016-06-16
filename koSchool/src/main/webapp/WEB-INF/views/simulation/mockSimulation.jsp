@@ -71,7 +71,7 @@
                     	<h3>목표대학과의 비교</h3>
                     		<div id="hopeUniversityContainer">
 		                    	<c:choose>
-		                    		<c:when test="${hopeUniversity.universityId != null}">
+		                    		<c:when test="${hopeUniversity != null}">
 		                    			<table id="hopeUniversityTable" class="table table-bordered">
 	                   						<tr>
 				                    			<th>모의고사 총합</th>
@@ -141,6 +141,9 @@
                     <div id="recommendContainer" class="row">
                     	<div class="col-md-8 col-md-offset-2">
                     		<h3>추천 대학</h3>
+                    		<c:if test="${hopeUniversity == null && standardScoreSum > 0 }">
+                    			<label>(모의고사 총합 : ${standardScoreSum } )</label>
+                    		</c:if>
                     		<div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
                    
