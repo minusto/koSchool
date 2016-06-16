@@ -70,7 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			+ 
 			(SELECT SUM(researchSubjectStandardScore) FROM researchSubjectScore
 				WHERE mockId = (SELECT MAX(mockId) FROM mockTest WHERE memberId = #{memberId})
-				AND NOT researchSubjectId = 'Hangooksa') AS standardSum FROM dual
+				AND NOT researchSubjectId = 'Hangooksa'
+				AND memberID = #{memberId}) AS standardSum FROM dual
 	</sql>
 	
 	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인 -->
