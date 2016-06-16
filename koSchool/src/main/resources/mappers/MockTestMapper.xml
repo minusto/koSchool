@@ -88,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 한국사를 제외한 모든 탐구영역 리스트 출력-->
 	<select id="selectResearchSubjectList" resultType="ResearchSubjectVO">
-		SELECT * FROM researchSubject where researchSubjectId != 'rsubA03' ORDER BY researchSubjectId
+		SELECT * FROM researchSubject where researchSubjectId != 'Hangooksa' ORDER BY researchSubjectId
 	</select>
 	
 	
@@ -100,8 +100,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		WHERE a.memberid = b.memberid
 		AND a.mockid = b.mockid
 		AND a.mockid = #{id}
-		AND a.researchsubjectid != 'rsubA03'
-		AND b.researchsubjectid != 'rsubA03'
+		AND a.researchsubjectid != 'Hangooksa'
+		AND b.researchsubjectid != 'Hangooksa'
 		AND a.researchsubjectid <![CDATA[<]]> b.researchsubjectid
 	</select>
 	
@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM mocktest m , researchsubjectscore rs
 		WHERE m.mockid=rs.mockid
 		AND rs.memberid=m.memberid
-		AND rs.researchsubjectid='rsubA03'
+		AND rs.researchsubjectid='Hangooksa'
 		AND m.memberid=#{id}
 	</select>
 	
@@ -201,7 +201,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND m.mockid=rss.mockid
 		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
 		AND m.mockid=#{mockId}
-		AND rss.researchsubjectid ='rsubA03'
+		AND rss.researchsubjectid ='Hangooksa'
 	</select>
 	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ과목별 학년석차 END ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
 
@@ -286,7 +286,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND m.mockid=rss.mockid
 		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
 		AND m.mockid=#{mockId}
-		AND rss.researchsubjectid ='rsubA03'
+		AND rss.researchsubjectid ='Hangooksa'
 		AND s.studentgrade=#{studentGrade}
 		AND s.studentclass=#{studentClass}
 	</select>

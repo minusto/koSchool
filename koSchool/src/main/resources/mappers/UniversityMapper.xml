@@ -4,6 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ko.school.mapper.UniversityMapper">
+	<!-- 학생이본 가장 최근의 모의고사 -->
+	<select id="recentMockId" resultType="String">
+		SELECT MAX(mockid) 
+		FROM mocktest 
+		WHERE memberid=#{studentId}
+	</select>
 	<!-- 대학 LIST -->
 	<select id="universityList" resultType="UniversityVO">
 		SELECT * FROM university
@@ -22,6 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY m.majorid ASC
 	</select>
 	
+	<select id="researchSubjectName" resultType="String">
+		SELECT researchsubjectname
+		FROM researchsubject
+		WHERE researchsubjectid=#{researchSubjectId}
+	</select>
 	
 	
 	<!-- 반영비율 LIST -->
@@ -44,11 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertReflectionRate">
 		INSERT INTO ReflectionRate (
 			ReflectionRateId ,SATReflectionRate,SchoolReportReflectionRate,PracticeReflectionrate,
-			InterviewReflectionrate,EssayReflectionrate,AptitudeReflectionrate,ETCReflectionrate,ETCContent
+			InterviewReflectionrate,EssayReflectionrate,AptitudeReflectionrate,ETCReflectionrate,ETCContent,ModelSum
 		)values(
 			#{reflectionRateId},#{satReflectionRate},#{schoolReportReflectionRate},#{practiceReflectionRate},#{interviewReflectionRate}
 			,#{essayReflectionRate}
-			,#{aptitudeReflectionRate},#{etcReflectionRate},#{etcContent}
+			,#{aptitudeReflectionRate},#{etcReflectionRate},#{etcContent},#{modelSum}
 		)
 	</insert>
 	<!-- 대학학과별 입시정보 INSERT -->
@@ -74,10 +85,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertReflectionRatePerSATArea">
 		INSERT INTO ReflectionRatePerSATArea(
 			SATReflectionRateId,KoreanReflectionRate,MathBTypeReflectionRate,MathATypeReflectionRate,EnglishReflectionRate,
-			ResearchSubjectReflectionRate,SelectCombination,SelectNum,ResearchSubjectNum
+			ResearchSubjectReflectionRate,SelectCombination,ResearchSubjectNum
 		)values(
 			#{satReflectionRateId},#{koreanReflectionRate},#{mathBTypeReflectionRate},#{mathATypeReflectionRate},#{englishReflectionRate},
-			#{researchSubjectReflectionRate},#{selectCombination},#{selectNum},#{researchSubjectNum}
+			#{researchSubjectReflectionRate},#{selectCombination},#{researchSubjectNum}
 		)
 	</insert>
 	<!-- 정시점수 INSERT -->
@@ -91,27 +102,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
+	
+	
 	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 점수 뽑아오기 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+	<!-- 선택한 대학교명, 학과명, 모집구분(수시,가군,나군,다군) 뽑아오기 -->
+	<select id="universitySATInfo" resultType="UniversitySATInfoDTO">
+		SELECT m.majorName,u.universityName,u.universityURL,u.universityMark,e.recruitSeparate,m.kind
+		FROM major m,university u,entranceinfo e,universitymajor um
+		WHERE um.majorid=m.majorid
+		AND um.universityid=u.universityid
+		AND e.universityid=um.universityid
+		AND e.majorid=um.majorid
+		AND e.majorid=#{majorId}
+		AND e.universityid=#{universityId}
+		AND e.recruitseparate=#{recruitSeparate}
+	</select>
+	
+	
+	
 	<!-- 대학 정시 DETAIL 뽑기 -->
 	<select id="universitySATDetail" resultType="UniversitySATDetail">
 		SELECT e.*,
 		ep.koreanextrarate,ep.mathbtypeextrarate,ep.socialresearchextrarate,ep.scienceresearchextrarate,
-		rrp.koreanreflectionrate,rrp.mathbtypereflectionrate,rrp.mathatypereflectionrate,rrp.englishreflectionrate,rrp.socialReflectionRate,rrp.scienceReflectionRate,rrp.selectcombination,rrp.selectnum,rrp.researchsubjectnum,
+		rrp.koreanreflectionrate,rrp.mathbtypereflectionrate,rrp.mathatypereflectionrate,rrp.englishreflectionrate,rrp.socialReflectionRate,rrp.scienceReflectionRate,rrp.selectcombination,rrp.researchsubjectnum,
 		sat.standardscorecutline,sat.totalpercentile,sat.satscoreuseindex,sat.convertscoremax,sat.convertstandardscorecutline,
-		rr.satreflectionrate,rr.schoolreportreflectionrate,rr.practicereflectionrate,rr.interviewreflectionrate,rr.essayreflectionrate,rr.aptitudereflectionrate,rr.etcreflectionrate,rr.etccontent
+		rr.satreflectionrate,rr.modelSum,rr.schoolreportreflectionrate,rr.practicereflectionrate,rr.interviewreflectionrate,rr.essayreflectionrate,rr.aptitudereflectionrate,rr.etcreflectionrate,rr.etccontent
 		FROM EntranceInfo e,ReflectionRate rr,ExtraPoint ep,ReflectionRatePerSATArea rrp,SATScore sat
 		WHERE sat.majorid=e.majorid AND sat.universityid=e.universityid AND sat.entranceyear=e.entranceyear AND sat.recruitseparate=e.recruitseparate
 		AND rrp.satreflectionrateid=e.satreflectionrateid
 		AND ep.extrapointid=e.extrapointid
 		AND rr.reflectionrateid=e.reflectionrateid
-		AND e.majorid=#{majorId} AND e.universityid=#{universityId}
+		AND e.majorid=#{majorId} 
+		AND e.universityid=#{universityId}
+		AND sat.recruitSeparate=#{recruitSeparate}
 	</select>
 	
 	<!-- 학생이본 가장 최근의 모의고사 모든 정보 가져오기 -->
 	<select id="studentMockScoreDetail" resultType="StudentMockScoreDetail">
 		SELECT DISTINCT m.mockid,m.memberid,m.languagetype,m.languageoriginalscore,m.languagestandardscore,m.languagepercentile
 		,m.mathtype,m.mathoriginalscore,m.mathstandardscore,m.mathpercentile,m.englishoriginalscore,m.englishstandardscore,m.englishpercentile
-		,m.languageid,sls.secondlanguageoriginalscore,sls.secondlanguagestandardscore,sls.secondlanguagepercentile,f.*,khs.koreahistoryid,khs.koreahistoryoriginalscore,khs.koreahistorystandardscore
+		,m.languageid,sls.secondlanguageoriginalscore,sls.secondlanguagestandardscore,sls.secondlanguagepercentile,f.*,khs.koreahistoryid,khs.koreahistoryoriginalscore,khs.koreahistorystandardscore ,khs.koreahistorypercentile
 		FROM mocktest m,secondlanguagescore sls,secondlanguage sl,(SELECT a.researchsubjectid AS researchSubjectid1, a.researchsubjectoriginalscore AS researchsubjectoriginalscore1, a.researchsubjectstandardscore AS researchsubjectstandardscore1 ,a.researchsubjectpercentile AS researchsubjectpercentile1
 		 ,b.researchsubjectid AS researchSubjectid2, b.researchsubjectoriginalscore AS researchSubjectOriginalScore2, b.researchsubjectstandardscore AS researchSubjectStandardScore2,b.researchsubjectpercentile AS researchSubjectPercentile2
   		FROM researchSubjectScore a, researchSubjectScore b
@@ -121,7 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						AND a.researchsubjectid != 'Hangooksa'
 						AND b.researchsubjectid != 'Hangooksa'
 						AND a.researchsubjectid <![CDATA[<]]> b.researchsubjectid
-						AND a.memberid=#{studentId}) f,(SELECT mockid,memberid,researchsubjectid AS koreahistoryid,researchsubjectoriginalscore AS koreahistoryoriginalscore,researchsubjectstandardscore AS koreahistorystandardscore
+						AND a.memberid=#{studentId}) f,(SELECT mockid,memberid,researchsubjectid AS koreahistoryid,researchsubjectoriginalscore AS koreahistoryoriginalscore,researchsubjectstandardscore AS koreahistorystandardscore, researchsubjectpercentile AS koreahistorypercentile 
 													FROM researchsubjectscore
 													WHERE mockid=(select MAX(mockid) from mocktest where memberid=#{studentId})
 													AND memberid=#{studentId}

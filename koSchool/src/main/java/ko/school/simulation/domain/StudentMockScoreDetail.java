@@ -26,7 +26,8 @@ public class StudentMockScoreDetail {
 	//한국사
 	private String koreaHistoryId;
 	private int koreaHistoryOriginalScore;
-	private int KoreaHistroyStandardScore;
+	private int koreaHistroyStandardScore;
+	private double koreaHistoryPercentile;
 	//탐구
 	private String researchSubjectId1;
 	private int researchSubjectOriginalScore1;
@@ -150,12 +151,7 @@ public class StudentMockScoreDetail {
 	public void setKoreaHistoryOriginalScore(int koreaHistoryOriginalScore) {
 		this.koreaHistoryOriginalScore = koreaHistoryOriginalScore;
 	}
-	public int getKoreaHistroyStandardScore() {
-		return KoreaHistroyStandardScore;
-	}
-	public void setKoreaHistroyStandardScore(int koreaHistroyStandardScore) {
-		KoreaHistroyStandardScore = koreaHistroyStandardScore;
-	}
+
 	public String getResearchSubjectId1() {
 		return researchSubjectId1;
 	}
@@ -204,25 +200,17 @@ public class StudentMockScoreDetail {
 	public void setResearchSubjectPercentile2(double researchSubjectPercentile2) {
 		this.researchSubjectPercentile2 = researchSubjectPercentile2;
 	}
-	@Override
-	public String toString() {
-		return "StudentMockScoreDetail [mockId=" + mockId + ", memberId=" + memberId + ", languageType=" + languageType
-				+ ", languageOriginalScore=" + languageOriginalScore + ", languageStandardScore="
-				+ languageStandardScore + ", languagePercentile=" + languagePercentile + ", mathType=" + mathType
-				+ ", mathOriginalScore=" + mathOriginalScore + ", mathStandardScore=" + mathStandardScore
-				+ ", mathpercentile=" + mathpercentile + ", englishOriginalScore=" + englishOriginalScore
-				+ ", englishStandardScore=" + englishStandardScore + ", englishpercentile=" + englishpercentile
-				+ ", languageId=" + languageId + ", secondLanguageOriginalScore=" + secondLanguageOriginalScore
-				+ ", secondLanguageStandardScore=" + secondLanguageStandardScore + ", secondLanguagePercentile="
-				+ secondLanguagePercentile + ", koreaHistoryId=" + koreaHistoryId + ", koreaHistoryOriginalScore="
-				+ koreaHistoryOriginalScore + ", KoreaHistroyStandardScore=" + KoreaHistroyStandardScore
-				+ ", researchSubjectId1=" + researchSubjectId1 + ", researchSubjectOriginalScore1="
-				+ researchSubjectOriginalScore1 + ", researchSubjectStandardScore1=" + researchSubjectStandardScore1
-				+ ", researchSubjectPercentile1=" + researchSubjectPercentile1 + ", researchSubjectId2="
-				+ researchSubjectId2 + ", researchSubjectOriginalScore2=" + researchSubjectOriginalScore2
-				+ ", researchSubjectStandardScore2=" + researchSubjectStandardScore2 + ", researchSubjectPercentile2="
-				+ researchSubjectPercentile2 + "]";
+
+	public int getKoreaHistroyStandardScore() {
+		return koreaHistroyStandardScore;
 	}
-	
-	
+	public void setKoreaHistroyStandardScore(int koreaHistroyStandardScore) {
+		this.koreaHistroyStandardScore = koreaHistroyStandardScore;
+	}
+	public double getKoreaHistoryPercentile() {
+		return koreaHistoryPercentile;
+	}
+	public void setKoreaHistoryPercentile(double koreaHistoryPercentile) {
+		this.koreaHistoryPercentile = koreaHistoryPercentile;
+	}
 }

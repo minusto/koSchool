@@ -34,6 +34,15 @@
 			});
 		});
 		
+		window.onload=function(){
+			$(".clickTitle").on("click", function(){
+				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").html());
+				$("#formMajorId").val($(this).find("#TmajorId").html());
+				$("#formUniversityId").val($(this).find("#TuniversityId").html());
+				$("#formSubmit").trigger('click');
+			})
+		}
+		
 	</script>
 	<style type="text/css">
 		#selectUniversity {
@@ -198,14 +207,17 @@
 				                    					</tfoot>
 				                    					<tbody>
 					                    					<c:forEach var="allEntranceInfoList" items="${allMockList }">
-					                    						<tr>
+					                    						<tr class="clickTitle">
 						                    						<td>
 						                    							<img class="tableUniversityMark" alt="${allEntranceInfoList.universityName }마크" src="${allEntranceInfoList.universityMark }">
-						                    							<a id="hopeUniversityName" href="/universityDetail">${allEntranceInfoList.universityName }</a>
+						                    							<a id="hopeUniversityName">${allEntranceInfoList.universityName }</a>
 						                    						</td>
-						                    						<td><a id="hopeUniversityMajor" href="/universityDetail">${allEntranceInfoList.majorName }</a></td>
+						                    						<td><a id="hopeUniversityMajor">${allEntranceInfoList.majorName }</a></td>
 						                    						<td>${allEntranceInfoList.standardScoreCutline }</td>
 						                    						<td>${allEntranceInfoList.recruitNum }</td>
+						                    						<td id="TuniversityId" style="display: none">${allEntranceInfoList.universityId }</td>
+						                    						<td id="TmajorId" style="display: none">${allEntranceInfoList.majorId }</td>
+						                    						<td id="TrecruitSeparate" style="display: none">${allEntranceInfoList.recruitSeparate }</td>
 						                    					</tr>
 					                    					</c:forEach>
 				                    					</tbody>
@@ -219,6 +231,7 @@
                     	</div>
                     </div>
                 </div>
+ 
             </div>
             <!-- 메인컨텐츠 끝 -->
             
@@ -229,8 +242,13 @@
             
         </div>
    	</div>
-   	
+	<form action="/universityDetail" style="display: none" method="POST">
+		<input type="hidden" id="formMemberId" name="memberId" value="${ControllerStudentId}">
+		<input type="hidden" id="formRecruitSeparate" name="recruitSeparate">
+		<input type="hidden" id="formMajorId" name="majorId">
+		<input type="hidden" id="formUniversityId" name="universityId">
+		<input type="submit" id="formSubmit">
+	</form>
 </body>
 
 </html>
-​​

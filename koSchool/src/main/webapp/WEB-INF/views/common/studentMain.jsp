@@ -180,6 +180,7 @@
                                                         <li>교내 공지사항</li>
                                                         <li>학급 게시판</li>
                                                         <li>일정</li>
+                                                        <li>&nbsp;</li>
                                                     </ul>
                                                 </div>
                                                 <div class="pt-footer">
