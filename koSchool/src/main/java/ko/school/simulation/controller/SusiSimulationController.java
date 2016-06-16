@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ko.school.common.domain.ParentVO;
 import ko.school.common.domain.StudentVO;
+import ko.school.simulation.domain.SusiDetailDTO;
 import ko.school.simulation.domain.SusiInfoVO;
 import ko.school.simulation.domain.SusiRatingDTO;
 import ko.school.simulation.domain.SusiTableDTO;
@@ -26,64 +27,81 @@ import ko.school.simulation.service.SusiSimulationService;
 public class SusiSimulationController {
 	@Inject
 	private SusiSimulationService service;
-	
-	@RequestMapping(value="/susiSimulation", method=RequestMethod.GET)
-	public String susiSimulation(HttpSession session, Model model)throws Exception {
+
+	@RequestMapping(value = "/susiSimulation", method = RequestMethod.GET)
+	public String susiSimulation(HttpSession session, Model model) throws Exception {
+		model.addAttribute("path", "진학시뮬레이션 > 수시시뮬레이션");
 		String grade = (String) session.getAttribute("grade");
 		String id = null;
 		int studentGrade = 0;
-		if(grade.equals("teacher")){
-			//학생의 id
+		if (grade.equals("teacher")) {
+			// 학생의 id
 			id = (String) session.getAttribute("id");
-			//학생객체 구해서 학년 구하기
+			// 학생객체 구해서 학년 구하기
 			StudentVO studentVO = service.studentCheck(id);
 			studentGrade = studentVO.getStudentGrade();
-			
-		}else if(grade.equals("student")){
+
+		} else if (grade.equals("student")) {
 			StudentVO studentVO = (StudentVO) session.getAttribute("student");
 			id = studentVO.getMemberId();
-			//학년 구하기
+			// 학년 구하기
 			studentGrade = studentVO.getStudentGrade();
-		}else if(grade.equals("parent")){
+		} else if (grade.equals("parent")) {
 			ParentVO parentVO = (ParentVO) session.getAttribute("parent");
 			id = parentVO.getStudentMemberId();
-			//학생객체 구해서 학년 구하기
+			// 학생객체 구해서 학년 구하기
 			StudentVO studentVO = service.studentCheck(id);
 			studentGrade = studentVO.getStudentGrade();
 		}
 		SusiRatingDTO[] dto = new SusiRatingDTO[3];
-		if(studentGrade == 1){
-			// 1학년 1,2학기 
+		if (studentGrade == 1) {
+			// 1학년 1,2학기
 			dto[0] = service.grade1(studentGrade, id);
-		}else if(studentGrade == 2){
-			// 1학년 1,2학기 
+		} else if (studentGrade == 2) {
+			// 1학년 1,2학기
 			dto[0] = service.grade1(studentGrade, id);
-			// 2학년 1,2학기 
+			// 2학년 1,2학기
 			dto[1] = service.grade2(studentGrade, id);
-		}else if(studentGrade == 3){
-			// 1학년 1,2학기 
+		} else if (studentGrade == 3) {
+			// 1학년 1,2학기
 			dto[0] = service.grade1(studentGrade, id);
-			// 2학년 1,2학기 
+			// 2학년 1,2학기
 			dto[1] = service.grade2(studentGrade, id);
-			// 3학년 1,2학기 
+			// 3학년 1,2학기
 			dto[2] = service.grade3(studentGrade, id);
 		}
-		//1학년 전체교과 평균등급
-		model.addAttribute("first",dto[0]);
-		//2학년 전체교과 평균등급
-		model.addAttribute("second",dto[1]);
-		//3학년 전체교과 평균등급
-		model.addAttribute("third",dto[2]);
-		
-		session.setAttribute("first",dto[0]);
-		session.setAttribute("second",dto[1]);
-		session.setAttribute("third",dto[2]);
-		//차트에서 대학리스트 불러오기
+		// 1학년 전체교과 평균등급
+		model.addAttribute("first", dto[0]);
+		// 2학년 전체교과 평균등급
+		model.addAttribute("second", dto[1]);
+		// 3학년 전체교과 평균등급
+		model.addAttribute("third", dto[2]);
+
+		session.setAttribute("first", dto[0]);
+		session.setAttribute("second", dto[1]);
+		session.setAttribute("third", dto[2]);
+		// 차트에서 대학리스트 불러오기
 		List<UniversityVO> list = service.univerSityChartList();
 		model.addAttribute("list", list);
-				
+
 		return "/simulation/susiSimulation";
 	}
-	
-	
+
+	@RequestMapping(value = "/susiUniversityDetail", method = RequestMethod.GET)
+	public String universityDetail(@RequestParam("uniName") String uniName, 
+			@RequestParam("major") String major, Model model) throws Exception {
+		String ss = "수시";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("susi", ss);
+		map.put("uniName", uniName);
+		map.put("major", major);
+		SusiInfoVO susiInfoVO= service.susiUniversityDetail(map);
+		model.addAttribute("susiInfoVO", susiInfoVO);
+		
+		//반영비율
+		SusiDetailDTO susiDetailDTO = service.susiDetailDTO(map);
+		model.addAttribute("susiDetailDTO", susiDetailDTO);
+		return "/simulation/susiUniversityDetail";
+	}
+
 }

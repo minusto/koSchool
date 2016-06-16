@@ -7,6 +7,7 @@ import ko.school.common.domain.StudentVO;
 import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
 import ko.school.score.domain.Subject;
+import ko.school.simulation.domain.SusiDetailDTO;
 import ko.school.simulation.domain.SusiInfoVO;
 import ko.school.simulation.domain.SusiSubjectDTO;
 import ko.school.simulation.domain.UniversityVO;
@@ -27,4 +28,6 @@ public interface SusiSimulationDAO {
 	public List<SusiInfoVO> selectLocationList2(Map<String, String> map)throws Exception; //선택지역, 계열 대학교 정보 목록
 
 	public List<SusiInfoVO> searchUniName(Map<String, String> map)throws Exception; //대학명검색 
+	public SusiInfoVO susiUniversityDetail(Map<String, String> map)throws Exception;// 학과 세부정보
+	public SusiDetailDTO susiDetailDTO(Map<String, String> map)throws Exception;// 반영비율정보
 }

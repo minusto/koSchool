@@ -97,8 +97,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	s.grade1ReflectionRate, s.grade2ReflectionRate, s.grade3ReflectionRate, s.reflectionSubjects, s.pointperGradeId,
 	p.pointPerGrade1, p.pointPerGrade2, p.pointPerGrade3, p.pointPerGrade4, p.pointPerGrade5, p.pointPerGrade6,
 	p.pointPerGrade7, p.pointPerGrade8, p.pointPerGrade9, ss.averScore, m.majorName, m.kind, m.college,
-	u.universityName, u.universityLocal
-	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u
+	u.universityName, u.universityLocal, r.schoolreportreflectionrate
+	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u, reflectionRate r
 	WHERE e.schoolReportReflectionRateId = s.schoolReportReflectionRateId
 	AND s.pointPerGradeId = p.pointPerGradeId 
 	AND e.majorId = ss.majorId 
@@ -107,6 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND e.recruitSeparate = ss.recruitSeparate
 	AND e.majorId = m.majorId
 	AND e.universityId = u.universityId
+	AND e.ReflectionRateId = r.ReflectionRateId
 	AND u.universityLocal LIKE #{region}
 	AND e.recruitSeparate = #{susi} 
    </select>
@@ -118,8 +119,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	s.grade1ReflectionRate, s.grade2ReflectionRate, s.grade3ReflectionRate, s.reflectionSubjects, s.pointperGradeId,
 	p.pointPerGrade1, p.pointPerGrade2, p.pointPerGrade3, p.pointPerGrade4, p.pointPerGrade5, p.pointPerGrade6,
 	p.pointPerGrade7, p.pointPerGrade8, p.pointPerGrade9, ss.averScore, m.majorName, m.kind, m.college,
-	u.universityName, u.universityLocal
-	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u
+	u.universityName, u.universityLocal, r.schoolreportreflectionrate
+	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u, reflectionRate r
 	WHERE e.schoolReportReflectionRateId = s.schoolReportReflectionRateId
 	AND s.pointPerGradeId = p.pointPerGradeId 
 	AND e.majorId = ss.majorId 
@@ -128,9 +129,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND e.recruitSeparate = ss.recruitSeparate
 	AND e.majorId = m.majorId
 	AND e.universityId = u.universityId
+	AND e.ReflectionRateId = r.ReflectionRateId
 	AND m.kind = #{kind}
 	AND u.universityLocal LIKE #{region}
-	AND e.recruitSeparate = #{susi} 
+	AND e.recruitSeparate = #{susi}
    </select>
 	
 	
@@ -141,8 +143,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	s.grade1ReflectionRate, s.grade2ReflectionRate, s.grade3ReflectionRate, s.reflectionSubjects, s.pointperGradeId,
 	p.pointPerGrade1, p.pointPerGrade2, p.pointPerGrade3, p.pointPerGrade4, p.pointPerGrade5, p.pointPerGrade6,
 	p.pointPerGrade7, p.pointPerGrade8, p.pointPerGrade9, ss.averScore, m.majorName, m.kind, m.college,
-	u.universityName, u.universityLocal
-	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u
+	u.universityName, u.universityLocal, r.schoolreportreflectionrate
+	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u, reflectionRate r
 	WHERE e.schoolReportReflectionRateId = s.schoolReportReflectionRateId
 	AND s.pointPerGradeId = p.pointPerGradeId 
 	AND e.majorId = ss.majorId 
@@ -151,11 +153,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND e.recruitSeparate = ss.recruitSeparate
 	AND e.majorId = m.majorId
 	AND e.universityId = u.universityId
+	AND e.ReflectionRateId = r.ReflectionRateId
 	AND u.universityName LIKE #{uniName}
 	AND e.recruitSeparate = #{susi}
    </select>
+	<!-- 학과 세부정보 페이지 -->
+	<select id="susiUniversityDetail" resultType="SusiInfoVO">
+	SELECT e.majorId, e.universityId, e.recruitSeparate ,e.recruitModelType, e.reflectionRateId, 
+  	e.recruitNum, s.schoolReportReflectionRateId,
+   	s.grade1ReflectionRate, s.grade2ReflectionRate, s.grade3ReflectionRate, s.reflectionSubjects, s.pointperGradeId,
+   	p.pointPerGrade1, p.pointPerGrade2, p.pointPerGrade3, p.pointPerGrade4, p.pointPerGrade5, p.pointPerGrade6,
+   	p.pointPerGrade7, p.pointPerGrade8, p.pointPerGrade9, ss.averScore, m.majorName, m.kind, m.college,
+   	u.universityName, u.universityLocal
+   	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u
+   	WHERE e.schoolReportReflectionRateId = s.schoolReportReflectionRateId
+   	AND s.pointPerGradeId = p.pointPerGradeId 
+   	AND e.majorId = ss.majorId 
+   	AND e.universityId = ss.universityId
+   	AND e.entranceYear = ss.entranceYear
+   	AND e.recruitSeparate = ss.recruitSeparate
+   	AND e.majorId = m.majorId
+   	AND e.universityId = u.universityId
+   	AND m.majorName = #{major}
+   	AND u.universityName = #{uniName}
+   	AND e.recruitSeparate = #{susi}
+	</select>
 	
 	
+	<!-- 학과 세부정보 반영비율 -->
+	<select id="susiDetailDTO" resultType="SusiDetailDTO">
+	SELECT r.schoolreportreflectionrate, r.practicereflectionrate, r.interviewreflectionrate, 
+				r.essayreflectionrate, r.aptitudereflectionrate, r.etcreflectionrate
+	FROM entranceInfo e, schoolReport s, pointPerGrade p, susiScore ss, major m, university u, reflectionRate r
+	WHERE e.schoolReportReflectionRateId = s.schoolReportReflectionRateId
+	AND s.pointPerGradeId = p.pointPerGradeId 
+	AND e.majorId = ss.majorId 
+	AND e.universityId = ss.universityId
+	AND e.entranceYear = ss.entranceYear
+	AND e.recruitSeparate = ss.recruitSeparate
+	AND e.majorId = m.majorId
+	AND e.universityId = u.universityId
+	AND e.ReflectionRateId = r.ReflectionRateId
+	AND m.majorName = #{major}
+   	AND u.universityName = #{uniName}
+   	AND e.recruitSeparate = #{susi}
+	</select>
 	
 	
 	

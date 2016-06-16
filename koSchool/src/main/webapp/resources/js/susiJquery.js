@@ -17,7 +17,7 @@ $(function() {
 			var html = '<tr>';
 			html += '<td id="center">' + list.location + '</td>';
 			html += '<td id="center">' + list.university + '</td>';
-			html += '<td id="center">' + list.major + '</td>';
+			html += '<td id="center"><a href="susiUniversityDetail?uniName='+list.university+'&major='+list.major+'">' + list.major + '</a></td>';
 			html += '<td id="center">' + list.recruitModelType + '</td>';
 			html += '<td id="center">' + list.kind+ '<br>'+ list.recruitNum + '</td>';
 			html += '<td id="center">' + list.averScore + '</td>';
@@ -52,7 +52,7 @@ $(function() {
 			var html = '<tr>';
 			html += '<td id="center">' + list.location + '</td>';
 			html += '<td id="center">' + list.university + '</td>';
-			html += '<td id="center">' + list.major + '</td>';
+			html += '<td id="center"><a href="susiUniversityDetail?uniName='+list.university+'&major='+list.major+'">' + list.major + '</a></td>';
 			html += '<td id="center">' + list.recruitModelType + '</td>';
 			html += '<td id="center">' + list.kind+ '<br>'+ list.recruitNum + '</td>';
 			html += '<td id="center">' + list.averScore + '</td>';
@@ -86,7 +86,7 @@ $(function() {
 			var html = '<tr>';
 			html += '<td id="center">' + list.location + '</td>';
 			html += '<td id="center">' + list.university + '</td>';
-			html += '<td id="center">' + list.major + '</td>';
+			html += '<td id="center"><a href="susiUniversityDetail?uniName='+list.university+'&major='+list.major+'">' + list.major + '</a></td>';
 			html += '<td id="center">' + list.recruitModelType + '</td>';
 			html += '<td id="center">' + list.kind+ '<br>'+ list.recruitNum + '</td>';
 			html += '<td id="center">' + list.averScore + '</td>';

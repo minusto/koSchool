@@ -12,6 +12,7 @@ import ko.school.common.domain.StudentVO;
 import ko.school.score.domain.AllRankingScoreList;
 import ko.school.score.domain.AllStudentNum;
 import ko.school.score.domain.Subject;
+import ko.school.simulation.domain.SusiDetailDTO;
 import ko.school.simulation.domain.SusiInfoVO;
 import ko.school.simulation.domain.SusiSubjectDTO;
 import ko.school.simulation.domain.UniversityVO;
@@ -71,6 +72,16 @@ public class SusiSimulationDAOImpl implements SusiSimulationDAO {
 	@Override
 	public List<SusiInfoVO> searchUniName(Map<String, String> map) throws Exception {
 		return session.selectList(namespace+".searchUniName", map);
+	}
+
+	@Override
+	public SusiInfoVO susiUniversityDetail(Map<String, String> map) throws Exception {
+		return session.selectOne(namespace+".susiUniversityDetail", map);
+	}
+
+	@Override
+	public SusiDetailDTO susiDetailDTO(Map<String, String> map) throws Exception {
+		return session.selectOne(namespace+".susiDetailDTO", map);
 	}
 	
 	

@@ -28,6 +28,7 @@ public class SusiInfoVO {
 	private String college;
 	private String universityName; 
 	private String universityLocal;
+	private double schoolreportreflectionrate;
 	
 	
 	@Override
@@ -46,6 +47,19 @@ public class SusiInfoVO {
 				+ ", universityLocal=" + universityLocal + "]";
 	}
 	
+	
+
+
+
+
+	public double getSchoolreportreflectionrate() {
+		return schoolreportreflectionrate;
+	}
+
+	public void setSchoolreportreflectionrate(double schoolreportreflectionrate) {
+		this.schoolreportreflectionrate = schoolreportreflectionrate;
+	}
+
 	public String getMajorId() {
 		return majorId;
 	}

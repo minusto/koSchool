@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	request.setAttribute("path", "진학시뮬레이션 > 수시시뮬레이션");
-%>
 <!DOCTYPE html>
 <html>
 
@@ -58,6 +55,13 @@
 	function removeLine() {
 		$("rect[fill='#3366cc']").remove();
 	}
+	
+	/* 상완 */
+$(function() {
+	$(document).on('click', 'g text', function() {
+		alert('asdf');
+	})
+})
 </script>
 
 <body class="flat-blue">

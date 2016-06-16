@@ -82,6 +82,7 @@ public class SusiAjaxController {
 			// 수시 진단결과 계산 -> 대학명, 배점, 각 학년별 등급 및 단위수
 			resultScore = service.getResultScore(list.get(i).getUniversityName(), pointPerGrade, first, second, third,
 					gradeReflectionRate, reflectionSubjects);
+			resultScore = resultScore*(list.get(i).getSchoolreportreflectionrate()/100.0);
 			//소수 둘째 자리반올림
 			resultScore=Math.round(resultScore*100)/100.0;
 			susiTable.setResultScore(resultScore);
@@ -173,6 +174,7 @@ public class SusiAjaxController {
 			// 수시 진단결과 계산 -> 대학명, 배점, 각 학년별 등급 및 단위수
 			resultScore = service.getResultScore(list.get(i).getUniversityName(), pointPerGrade, first, second, third,
 					gradeReflectionRate, reflectionSubjects);
+			resultScore = resultScore*(list.get(i).getSchoolreportreflectionrate()/100.0);
 			//소수 둘째 자리반올림
 			resultScore=Math.round(resultScore*100)/100.0;
 			susiTable.setResultScore(resultScore);
@@ -262,6 +264,8 @@ public class SusiAjaxController {
 			// 수시 진단결과 계산 -> 대학명, 배점, 각 학년별 등급 및 단위수
 			resultScore = service.getResultScore(list.get(i).getUniversityName(), pointPerGrade, first, second, third,
 					gradeReflectionRate, reflectionSubjects);
+			//결과 * 학생부비율
+			resultScore = resultScore*(list.get(i).getSchoolreportreflectionrate()/100.0);
 			//소수 둘째 자리반올림
 			resultScore=Math.round(resultScore*100)/100.0;
 			susiTable.setResultScore(resultScore);
