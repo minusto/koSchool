@@ -15,7 +15,7 @@
 <script type="text/javascript" src="/resources/js/susiChart.js"></script>
 <script src="/resources/js/jquery.js" type="text/javascript"></script>
 <script src="/resources/js/susiJquery.js" type="text/javascript"></script>
-  <script type="text/javascript">/* 
+  <script type="text/javascript">
 google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -23,7 +23,7 @@ google.charts.load('current', {'packages':['corechart']});
         var data = google.visualization.arrayToDataTable([
            
 		<c:forEach var="i" items="${list}" varStatus="status">
-			["${i.universityName}", 10, "${i.minAverscore}", "${i.maxAverscore}", 0],
+			["${i.universityName}", 10, eval("${i.minAverscore}"), eval("${i.maxAverscore}"), 0],
 		</c:forEach>
         ], true);
 
@@ -45,7 +45,7 @@ google.charts.load('current', {'packages':['corechart']});
       
       function removeLine() {
     	  $("rect[fill='#3366cc']").remove();
-      } */
+      } 
 </script>
 
 <body class="flat-blue">
@@ -125,7 +125,12 @@ google.charts.load('current', {'packages':['corechart']});
                     	</div>
 					</div>
 					<h3>진학 가능 대학</h3>
+<<<<<<< HEAD
 					<!-- <div id="chart_div"></div> -->
+=======
+					 <div id="chart_div"></div>
+                    <jsp:include page="../simulation/susiSimulationTable.jsp"/>
+>>>>>>> branch 'master' of https://github.com/minusto/koSchool.git
 					<div class="row">
                     	<div class="col-md-12 ">
                     	<h3>대학 검색</h3>

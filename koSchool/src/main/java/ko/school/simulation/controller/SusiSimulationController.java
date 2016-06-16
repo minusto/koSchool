@@ -79,8 +79,8 @@ public class SusiSimulationController {
 		session.setAttribute("second",dto[1]);
 		session.setAttribute("third",dto[2]);
 		//차트에서 대학리스트 불러오기
-		/*List<UniversityVO> list = service.univerSityChartList();
-		model.addAttribute("list", list);*/
+		List<UniversityVO> list = service.univerSityChartList();
+		model.addAttribute("list", list);
 				
 		return "/simulation/susiSimulation";
 	}

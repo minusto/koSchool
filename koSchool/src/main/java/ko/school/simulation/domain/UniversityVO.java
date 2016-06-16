@@ -8,19 +8,19 @@ public class UniversityVO {
 	private String universityURL;
 	private String universityMark;
 	
-	private String minAverscore;
-	private String maxAverscore;
+	private double minAverscore;
+	private double maxAverscore;
 	
-	public String getMinAverscore() {
+	public double getMinAverscore() {
 		return minAverscore;
 	}
-	public void setMinAverscore(String minAverscore) {
+	public void setMinAverscore(double minAverscore) {
 		this.minAverscore = minAverscore;
 	}
-	public String getMaxAverscore() {
+	public double getMaxAverscore() {
 		return maxAverscore;
 	}
-	public void setMaxAverscore(String maxAverscore) {
+	public void setMaxAverscore(double maxAverscore) {
 		this.maxAverscore = maxAverscore;
 	}
 	public String getUniversityId() {

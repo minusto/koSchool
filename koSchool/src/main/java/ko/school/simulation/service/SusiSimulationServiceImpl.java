@@ -534,10 +534,10 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 	}
 
 	//차트에서 대학교 리스트 불러오기
-	/*@Override
+	@Override
 	public List<UniversityVO> univerSityChartList()throws Exception {
 		return dao.univerSityChartList();
-	}*/
+	}
 	
 	//수시 대학교 정보 목록
 	@Override

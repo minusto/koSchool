@@ -10,6 +10,7 @@ public class ReflectionRateVO {
 	private double aptitudeReflectionRate;
 	private double etcReflectionRate;
 	private String etcContent;
+	private int modelSum;
 	
 	
 	public String getReflectionRateId() {
@@ -65,6 +66,12 @@ public class ReflectionRateVO {
 	}
 	public void setEtcContent(String etcContent) {
 		this.etcContent = etcContent;
+	}
+	public int getModelSum() {
+		return modelSum;
+	}
+	public void setModelSum(int modelSum) {
+		this.modelSum = modelSum;
 	}
 	
 }

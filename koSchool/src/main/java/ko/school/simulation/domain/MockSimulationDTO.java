@@ -25,6 +25,7 @@ public class MockSimulationDTO {
 	private double aptitudeReflectionRate;
 	private double etcReflectionRate;
 	private String etcContent;
+	private int modelSum;
 	
 	//ExtraPoint
 	private String extraPointId;
@@ -42,7 +43,6 @@ public class MockSimulationDTO {
 	private double socialReflectionRate;
 	private double scienceReflectionRate;
 	private String selectCombination;
-	private int selectNum;
 	private int researchSubjectNum;
 	
 	//EntranceInfo
@@ -184,6 +184,12 @@ public class MockSimulationDTO {
 	public void setEtcContent(String etcContent) {
 		this.etcContent = etcContent;
 	}
+	public int getModelSum() {
+		return modelSum;
+	}
+	public void setModelSum(int modelSum) {
+		this.modelSum = modelSum;
+	}
 	public String getExtraPointId() {
 		return extraPointId;
 	}
@@ -261,12 +267,6 @@ public class MockSimulationDTO {
 	}
 	public void setSelectCombination(String selectCombination) {
 		this.selectCombination = selectCombination;
-	}
-	public int getSelectNum() {
-		return selectNum;
-	}
-	public void setSelectNum(int selectNum) {
-		this.selectNum = selectNum;
 	}
 	public int getResearchSubjectNum() {
 		return researchSubjectNum;

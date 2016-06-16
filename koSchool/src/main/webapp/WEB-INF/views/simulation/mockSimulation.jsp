@@ -98,47 +98,6 @@
 					}
 				});
 			});
-			
-			$("#insertHopeUniversityForm").submit(function(e) {
-				e.preventDefault();
-				$.ajax({
-					url : '/ajaxInsertHopeUniversity',
-					type : 'get',
-					data : $(this).serialize(),
-					async : false,
-					success : function(data) {
-						$("#hopeUniversityContainer").empty();
-						var html = '';
-						html += '<table id="hopeUniversityTable" class="table table-bordered">';
-						html += '<tr>';
-						html += '<th>모의고사 총합</th>';
-						html += '<th>목표대학</th>';
-						html += '<th>목표학과</th>';
-						html += '<th>정시 커트라인</th>';
-						html += '<th>점수 차이</th>';
-						html += '</tr><tr>';
-						if(data.selectNum != 0) {
-							html += '<td id="hopeUniversityCol1">' + data.selectNum + '</td>';//표준점수의 총합을 selectNum에 담아 같이 가져옴
-						} else {
-							html += '<td id="hopeUniversityCol1">모의고사 점수 없음</td>';
-						}
-						html += '<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">' + data.universityName + '</a></td>';
-						html += '<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">' + data.majorName + '${hopeUniversity.majorName }</a></td>';
-						html += '<td id="hopeUniversityCol4">' + data.standardScoreCutline + '</td>';
-						if(data.selectNum != 0) {
-							html += '<td id="hopeUniversityCol5">' + (data.selectNum - data.standardScoreCutline) + '</td>';
-						} else {
-							html += '<td id="hopeUniversityCol5">-</td>';
-						}
-						html += '</tr></table>';
-						
-						$("#hopeUniversityContainer").append(html);
-						
-					}, error : function(xhr, status, error) {
-						alert ('xhr : ' + xhr.status + ', status : ' + status + ', error : ' + error);
-					}
-				});
-			});
 		});
 		
 	</script>
@@ -209,7 +168,7 @@
 		                    		<c:otherwise><!-- 목표대학이 설정되어있지 않을 경우 -->
 		                    			<c:choose>
 		                    				<c:when test="${ grade eq 'student' }">
-		                    					<form id="insertHopeUniversityForm" method="post">
+		                    					<form id="insertHopeUniversityForm" action="InsertHopeUniversity" method="post">
 	                    							<h4>희망대학 설정하기</h4>
 		                    						대학교 : <select id="selectUniversity" name="universityId">
 			                    						<option>-- 대학 선택 --</option>

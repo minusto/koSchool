@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 수시 시뮬레이션 차트 (대학리스트) -->
-   <!-- <select id="univerSityChartList" resultType="UniversityVO">
+    <select id="univerSityChartList" resultType="UniversityVO">
    	select
 	    a.universityName
 	    , a.universityId
@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    , (select max(b.averscore) from susiScore b where a.universityId = b.universityId) maxAverscore
 	from
 	    university a
-   </select> -->
+   </select> 
 	
 	
 		<!-- 과목단위수 구하기 -->
