@@ -33,9 +33,7 @@
 										<table class="table table-striped">
 											<thead>
 												<tr class="headings">
-													<th></th>
 													<th style="text-align: center">가정통신문</th>
-													<th></th>
 												</tr>
 											</thead>
 											<tbody>
