@@ -58,7 +58,7 @@ public class MockSimulationDAOImpl implements MockSimulationDAO {
 		session.insert(namespace + ".insertHopeUniversity", hopeUniversityVo);
 	}
 	
-	
+	//희망대학 출력
 	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인
 	@Override
 	public Integer selectStandardScoreSum(String memberId) throws Exception {
@@ -82,6 +82,20 @@ public class MockSimulationDAOImpl implements MockSimulationDAO {
 	public SATScoreVO selectSATScore(HopeUniversityVO hopeUniversityVo) throws Exception {
 		return session.selectOne(namespace + ".selectSATScore", hopeUniversityVo);
 	}
+	
+	//추천대학
+	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 모의고사 점수로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인
+	@Override
+	public List<MockSimulationDTO> recommandUniversityListByMock(HopeUniversityVO hopeUniversityVo) throws Exception {
+		return session.selectList(namespace + ".recommandUniversityListByMock", hopeUniversityVo);
+	}
+	
+	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 희망대학 커트라인으로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인
+	@Override
+	public List<MockSimulationDTO> recommandUniversityListByHope(HopeUniversityVO hopeUniversityVo) throws Exception {
+		return session.selectList(namespace + ".recommandUniversityListByHope", hopeUniversityVo);
+	}
+		
 	
 }
 
