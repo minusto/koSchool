@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="/resources/css/ghi.css">
 <style type="text/css">
-#center{
-	text-align:center; 
-	vertical-align:middle;
+#center {
+	text-align: center;
+	vertical-align: middle;
 }
 </style>
 </head>
@@ -127,11 +127,20 @@
 								<tbody align="center">
 									<tr>
 										<td>재학생</td>
-										<td rowspan="2" id="center">20%</td>
-										<td rowspan="2" id="center">40%</td>
-										<td rowspan="2" id="center">40%</td>
-										<td rowspan="2" id="center">-</td>
-										<td rowspan="2" id="center">${susiInfoVO.reflectionSubjects }</td>
+										<c:choose>
+											<c:when test="${susiInfoVO.grade1ReflectionRate == 1.0}">
+												<td colspan="3" rowspan="2" id="center">1,2,3학년 100%</td>
+												<td rowspan="2" id="center">-</td>
+												<td rowspan="2" id="center">${susiInfoVO.reflectionSubjects }</td>
+											</c:when>
+											<c:otherwise>
+												<td rowspan="2" id="center">${susiInfoVO.grade1ReflectionRate}</td>
+												<td rowspan="2" id="center">${susiInfoVO.grade2ReflectionRate}</td>
+												<td rowspan="2" id="center">${susiInfoVO.grade3ReflectionRate}</td>
+												<td rowspan="2" id="center">-</td>
+												<td rowspan="2" id="center">${susiInfoVO.reflectionSubjects }</td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 									<tr>
 										<td>졸업생</td>

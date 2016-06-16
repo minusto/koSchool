@@ -57,18 +57,18 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<table id="center nesinTable" class="table table-bordered" >
+						<table id="center nesinTable" class="table table-striped" >
 							<thead>
 								<tr>
-									<td id="center">지역명</td>
-									<td id="center">대학명</td>
-									<td id="center">학과</td>
-									<td id="center">전형유형</td>
-									<td id="center">계열<br>모집인원</td>
-									<td id="center">평균등급</td>
-									<td id="center">수시진단결과</td>
-									<td id="center">최저학력기준</td>
-									<td id="center">진단결과</td>
+									<th id="center">지역명</th>
+									<th id="center">대학명</th>
+									<th id="center">학과</th>
+									<th id="center">전형유형</th>
+									<th id="center">계열<br>모집인원</th>
+									<th id="center">평균등급</th>
+									<th id="center">수시진단결과</th>
+									<th id="center">최저학력기준</th>
+									<th id="center">진단결과</th>
 								</tr>
 							</thead>
 							<tbody id="susiTable1">

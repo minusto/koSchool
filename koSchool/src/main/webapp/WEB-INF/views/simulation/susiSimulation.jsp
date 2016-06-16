@@ -14,7 +14,6 @@
 <script type="text/javascript" src="/resources/js/susiChart.js"></script>
 <script src="/resources/js/jquery.js" type="text/javascript"></script>
 <script src="/resources/js/susiJquery.js" type="text/javascript"></script>
-<script src="/resources/js/susiRecomJquery.js" type="text/javascript"></script>
 <script type="text/javascript">
 	google.charts.load('current', {
 		'packages' : [ 'corechart' ]
@@ -57,7 +56,12 @@
 		$("rect[fill='#3366cc']").remove();
 	}
 	
-
+	/* 상완 */
+$(function() {
+	$(document).on('click', 'g text', function() {
+		alert('asdf');
+	})
+})
 </script>
 
 <body class="flat-blue">
@@ -112,10 +116,10 @@
 						</div>
 					</div>
 
-<!-- 					<div id="recommendContainer" class="row"> -->
-<!-- 						<div class="col-md-12 "> -->
-<!-- 							<h3>추천 대학</h3> -->
-<!-- 							<button id="testId">국민대학교</button> -->
+					<div id="recommendContainer" class="row">
+						<div class="col-md-12 ">
+							<h3>추천 대학</h3>
+							<button id="testId">국민대학교</button>
 							<!-- <div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
                     				<li id="firstRecommend"><a href="/universityDetail">
@@ -135,14 +139,13 @@
                     				</a></li>
                     			</ul>
                     		</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+						</div>
+					</div>
 					<h3>진학 가능 대학</h3>
 					<!-- <div id="chart_div"></div> -->
 					<div id="chart_div"></div>
-					<div class="col-md-12"><br><br><br><br><br><br></div>
-					<h3>추천 대학교 목록</h3>
-					<jsp:include page="../simulation/susiRecommendTable.jsp"/>
+
+
 					<div id="searchUniversityResult" class="row">
 						<div class="col-md-12 ">
 							<h3>대학 검색</h3>
