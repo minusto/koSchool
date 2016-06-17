@@ -52,11 +52,7 @@ public class UniversityContorller {
 	@RequestMapping(value="/universityManage",method=RequestMethod.POST)
 	public String universityInsert(Model model,ReflectionRateVO reflectRateVO,ReflectionRatePerSATAreaVO rrp,ExtraPointVO extraPointVO
 			,EntranceInfoVO entranceInfoVO,SATScoreVO satScoreVO){
-					
-		System.out.println(entranceInfoVO.getMajorId());
-		System.out.println(entranceInfoVO.getUniversityId());
-		System.out.println(entranceInfoVO.getEntranceYear());
-		System.out.println(entranceInfoVO.getRecruitSeparate());
+
 		//가산점 LIST
 		List<ExtraPointVO> extraPointList=service.extraPointList();
 		model.addAttribute("extraPointList", extraPointList);
