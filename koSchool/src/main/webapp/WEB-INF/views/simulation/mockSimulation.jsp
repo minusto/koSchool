@@ -45,7 +45,6 @@
 			
 			//추천대학 클릭시 디테일로 넘어감
 			$(".clickTitle2").on("click", function(){
-				alert("zzzz");
 				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
 				$("#formMajorId").val($(this).find("#TmajorId").val());
 				$("#formUniversityId").val($(this).find("#TuniversityId").val());
@@ -54,7 +53,6 @@
 			
 			//목표대학 클릭시 디테일로 넘어감
 			$(".clickTitle3").on("click", function(){
-				alert("ㄴㅁㅇ?");
 				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
 				$("#formMajorId").val($(this).find("#TmajorId").val());
 				$("#formUniversityId").val($(this).find("#TuniversityId").val());
