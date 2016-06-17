@@ -71,6 +71,12 @@
 		#disNoneTd{
 			display: none;
 		}
+		.dataSaveColumn {
+			display : none;
+		}
+		#searchResultTable_info {
+			display : none;
+		}
 	</style>
 </head>
 
@@ -223,6 +229,9 @@
 					                    						<th>학과 이름</th>
 					                    						<th>정시 커트라인</th>
 					                    						<th>모집인원</th>
+					                    						<th class="dataSaveColumn">TuniversityId</th>
+					                    						<th class="dataSaveColumn">TmajorId</th>
+					                    						<th class="dataSaveColumn">TrecruitSeparate</th>
 					                    					</tr>
 				                    					</thead>
 				                    					<tfoot>
@@ -231,6 +240,9 @@
 					                    						<th>학과 이름</th>
 					                    						<th>정시 커트라인</th>
 					                    						<th>모집인원</th>
+					                    						<th class="dataSaveColumn">TuniversityId</th>
+					                    						<th class="dataSaveColumn">TmajorId</th>
+					                    						<th class="dataSaveColumn">TrecruitSeparate</th>
 					                    					</tr>
 				                    					</tfoot>
 				                    					<tbody>
@@ -243,9 +255,9 @@
 						                    						<td><a id="hopeUniversityMajor">${allEntranceInfoList.majorName }</a></td>
 						                    						<td>${allEntranceInfoList.standardScoreCutline }</td>
 						                    						<td>${allEntranceInfoList.recruitNum }</td>
-						                    						<td id="TuniversityId" style="display: none">${allEntranceInfoList.universityId }</td>
-						                    						<td id="TmajorId" style="display: none">${allEntranceInfoList.majorId }</td>
-						                    						<td id="TrecruitSeparate" style="display: none">${allEntranceInfoList.recruitSeparate }</td>
+						                    						<td id="TuniversityId" class="dataSaveColumn">${allEntranceInfoList.universityId }</td>
+						                    						<td id="TmajorId" class="dataSaveColumn">${allEntranceInfoList.majorId }</td>
+						                    						<td id="TrecruitSeparate" class="dataSaveColumn">${allEntranceInfoList.recruitSeparate }</td>
 						                    					</tr>
 					                    					</c:forEach>
 				                    					</tbody>
