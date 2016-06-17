@@ -35,10 +35,29 @@
 		});
 		
 		window.onload=function(){
+			//대학리스트 클릭시 디테일로 넘어감
 			$(".clickTitle").on("click", function(){
 				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").html());
 				$("#formMajorId").val($(this).find("#TmajorId").html());
 				$("#formUniversityId").val($(this).find("#TuniversityId").html());
+				$("#formSubmit").trigger('click');
+			})
+			
+			//추천대학 클릭시 디테일로 넘어감
+			$(".clickTitle2").on("click", function(){
+				alert("zzzz");
+				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
+				$("#formMajorId").val($(this).find("#TmajorId").val());
+				$("#formUniversityId").val($(this).find("#TuniversityId").val());
+				$("#formSubmit").trigger('click');
+			})
+			
+			//목표대학 클릭시 디테일로 넘어감
+			$(".clickTitle3").on("click", function(){
+				alert("ㄴㅁㅇ?");
+				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
+				$("#formMajorId").val($(this).find("#TmajorId").val());
+				$("#formUniversityId").val($(this).find("#TuniversityId").val());
 				$("#formSubmit").trigger('click');
 			})
 		}
@@ -50,6 +69,9 @@
 		}
 		#selectMajor {
 			width : 150px;
+		}
+		#disNoneTd{
+			display: none;
 		}
 	</style>
 </head>
@@ -89,15 +111,15 @@
 				                    			<th>정시 커트라인</th>
 				                    			<th>점수 차이</th>
 				                    		</tr>
-				                    		<tr>
+				                    		<tr class="clickTitle3">
 				                    			<c:if test="${standardScoreSum != 0 }">
 					                    			<td id="hopeUniversityCol1">${standardScoreSum }</td>
 				                    			</c:if>
 				                    			<c:if test="${standardScoreSum == 0 }">
 					                    			<td id="hopeUniversityCol1">모의고사 점수 없음</td>
 				                    			</c:if>
-				                    			<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">${hopeUniversity.universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
-				                    			<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">${hopeUniversity.majorName }</a></td>
+				                    			<td id="hopeUniversityCol2"><a id="hopeUniversityName">${hopeUniversity.universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
+				                    			<td id="hopeUniversityCol3"><a id="hopeUniversityMajor">${hopeUniversity.majorName }</a></td>
 				                    			<td id="hopeUniversityCol4">${hopeUniversity.standardScoreCutline}</td>
 				                    			<c:if test="${standardScoreSum != 0 }">
 					                    			<td id="hopeUniversityCol5">${standardScoreSum - hopeUniversity.standardScoreCutline}</td>
@@ -105,6 +127,11 @@
 				                    			<c:if test="${standardScoreSum == 0 }">
 					                    			<td id="hopeUniversityCol5">-</td>
 				                    			</c:if>
+				                    			<td id="disNoneTd">
+				                    				<input type="hidden" id="TmajorId" value="${hopeUniversity.majorId}">
+				                    				<input type="hidden" id="TuniversityId" value="${hopeUniversity.universityId}">
+				                    				<input type="hidden" id="TrecruitSeparate" value="${hopeUniversity.recruitSeparate}">
+				                    			</td>
 				                    		</tr>
 	                   					</table>
 		                    		</c:when>
@@ -165,11 +192,14 @@
 										
 										<c:otherwise>
 											<c:forEach var="re" items="${recommandList}">
-		                    					<li ><a href="universityEntranceInfo.jsp">
-		                    					<img id="SeoulUniversityMark" alt="${re.universityName }마크" src="${re.universityMark }">
-		                    					<span id="firstRecommendUniversityName" class="recommendUniversityName">${re.universityName }</span>
-		                    					<span id="firstRecommendMajorName" class="recommendMajorName">${re.majorName }</span>
-		                    				</a></li>
+		                    					<li class="clickTitle2">
+		                    						<img id="SeoulUniversityMark" alt="${re.universityName }마크" src="${re.universityMark }">
+		                    						<span id="firstRecommendUniversityName" class="recommendUniversityName">${re.universityName }</span>
+		                    						<span id="firstRecommendMajorName" class="recommendMajorName">${re.majorName }</span>
+		                    						<input type="hidden" id="TrecruitSeparate" value="${re.recruitSeparate }">
+		                    						<input type="hidden" id="TuniversityId" value="${re.universityId }">
+		                    						<input type="hidden" id="TmajorId" value="${re.majorId }">
+		                    					</li>
 											</c:forEach>
 										</c:otherwise>
 									</c:choose>
