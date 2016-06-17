@@ -24,7 +24,7 @@
 		$("#totalConvertMaxScore").html(totalConvertMaxScore);
 		
 		var sumConvertSocre=eval($("#korConvertScore").html())+eval($("#matConvertScore").html())+eval($("#engConvertScore").html())+eval($("#researchConvertScore").html())
-		$("#sumConvertScore").html(sumConvertSocre);
+		$("#sumConvertScore").html(sumConvertSocre.toFixed(2));
 	}
 
 </script>
