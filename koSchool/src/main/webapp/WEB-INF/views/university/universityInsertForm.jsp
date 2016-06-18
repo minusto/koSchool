@@ -115,13 +115,14 @@ $(function() {
 			url : "getMajor"+universityId,
 			dataType : "json",
 			success : function(data) {
-				$("#majorAjax").html("");
+				$("#majorAjax").empty();
 				$.each(data, function(index, major) {
-					$('#majorAjax').append("<tr id='clickMajor' style='cursor: pointer'>");
-					$('#majorAjax').append("<td>"+(index+1)+"</td>");
-					$('#majorAjax').append("<td id='modalMajorName'>"+major.majorName+"</td>");
-					$('#majorAjax').append("<td id='modalMajorId'>"+major.majorId+"</td>");
-					$('#majorAjax').append("</tr>");
+					majorHtml+="<tr id='clickMajor' style='cursor: pointer'>";
+ 					majorHtml+="<td>"+(index+1)+"</td>";
+					majorHtml+="<td id='modalMajorName'>"+major.majorName+"</td>";
+					majorHtml+="<td id='modalMajorId'>"+major.majorId+"</td>";
+ 					majorHtml+="</tr>";
+					$('#majorAjax').append(majorHtml);
 				})
 			}
 		});
@@ -597,6 +598,8 @@ $(function() {
 			</div>
 		</div>
 	</div>
+	</div>
+	
 
 
 	<!-- 수능 영역별 반영비율 찾기 모달 -->
@@ -636,7 +639,7 @@ $(function() {
 											<td id="modalsatReflectionRateId">${list.satReflectionRateId}</td>
 											<td id="modalkoreanReflectionRate">${list.koreanReflectionRate}</td>
 											<td id="modalmathBTypeReflectionRate">${list.mathBTypeReflectionRate}</td>
-											<td id="modalmathATypeReflectionRate">${list.mathATypeReflectionRate}</td>
+											<td id="modalmathATypeReflectionRate">${list.mathBTypeReflectionRate}</td>
 											<td id="modalenglishReflectionRate">${list.englishReflectionRate}</td>
 											<td id="modalsocialReflectionRate">${list.socialReflectionRate}</td>
 											<td id="modalscienceReflectionRate">${list.scienceReflectionRate}</td>

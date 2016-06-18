@@ -31,10 +31,6 @@ public class UniversityContorller {
 		List<UniversityVO> universityList=service.universityListService();
 		model.addAttribute("universityList", universityList);
 		
-		//학과 LIST
-//		List<MajorVO> majorList=service.majorListService();
-//		model.addAttribute("majorList", majorList);
-		
 		//가산점 LIST
 		List<ExtraPointVO> extraPointList=service.extraPointList();
 		model.addAttribute("extraPointList", extraPointList);
@@ -42,7 +38,7 @@ public class UniversityContorller {
 		//수능 영역별 반영비율 LIST
 		List<ReflectionRatePerSATAreaVO> reflectionRatePerSATAreaList=service.reflectionRatePerSATAreaList();	
 		model.addAttribute("rrsList", reflectionRatePerSATAreaList);
-	
+		
 		//반영비율 LISt
 		List<ReflectionRateVO> reflectionRateList=service.reflectionRateList();		
 		model.addAttribute("reflectionRateList", reflectionRateList);
@@ -65,9 +61,6 @@ public class UniversityContorller {
 		//대학 LIST
 		List<UniversityVO> list=service.universityListService();
 		model.addAttribute("universityList", list);
-		//학과 LIST
-	//	List<MajorVO> majorList=service.majorListService();
-	//	model.addAttribute("majorList", majorList);
 		
 		//이미 등록된 반영비율을 선택했다면 insert시키지 않는다
 		int count=0;
