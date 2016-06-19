@@ -669,10 +669,10 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			(korUnit[1]+engUnit[1]+mathUnit[1]+solUnit[1]+sciUnit[1]+etcUnit[1]) +
 			(korUnit[2]+engUnit[2]+mathUnit[2]+solUnit[2]+sciUnit[2]+etcUnit[2])); 
 			System.out.println("resultScore: "+resultScore);
-		if(uniName.equals("국민대학교")||uniName.equals("한양대학교")){
+		//if(uniName.equals("국민대학교")||uniName.equals("한양대학교")){
 			//전체점수 곱하기 10
 			resultScore = resultScore * 10;
-		}
+		//}
 	
 		return resultScore;
 	}
