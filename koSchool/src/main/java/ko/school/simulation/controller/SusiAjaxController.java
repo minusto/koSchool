@@ -119,9 +119,9 @@ public class SusiAjaxController {
 			} else{
 				susiTable.setSfMessage("지원불가");
 			}
-
 			resultList.add(susiTable);
 		}
+		
 		return resultList;
 	}
 
@@ -183,11 +183,10 @@ public class SusiAjaxController {
 			resultScore=Math.round(resultScore*100)/100.0;
 			susiTable.setResultScore(resultScore);
 			// 지원 가능 여부
-			/*
-			 * resultAver = service.getResultAver(first, second, third,
-			 * gradeReflectionRate, reflectionSubjects);
-			 */
-			resultAver = 2.4; //실제 데이터값 평균등급이 너무 낮아 2.4라 가정함 
+			
+			resultAver = service.getResultAver(first, second, third,
+			gradeReflectionRate, reflectionSubjects);
+			
 			if (resultAver <= (list.get(i).getAverScore() - 0.2)) { // 2.5일때
 																	// 2.3이하면 안전
 				susiTable.setSfMessage("합격안정");
@@ -214,6 +213,7 @@ public class SusiAjaxController {
 
 			resultList.add(susiTable);
 		}
+		
 		return resultList;
 	}
 	
@@ -275,11 +275,10 @@ public class SusiAjaxController {
 			susiTable.setResultScore(resultScore);
 			
 			// 지원 가능 여부
-			/*
-			 resultAver = service.getResultAver(first, second, third,
-			 gradeReflectionRate, reflectionSubjects);
-			 */
-			resultAver = 2.4; //실제 데이터값 평균등급이 너무 낮아 2.4라 가정함 
+			
+			resultAver = service.getResultAver(first, second, third,
+			gradeReflectionRate, reflectionSubjects);
+			 
 			if (resultAver <= (list.get(i).getAverScore() - 0.2)) { // 2.5일때
 																	// 2.3이하면 안전
 				susiTable.setSfMessage("합격안정");
@@ -428,7 +427,7 @@ public class SusiAjaxController {
 			//수시 진단결과 계산 -> 대학명, 배점, 각 학년별 등급 및 단위수
 			resultScore = service.getResultScore(uniName,pointPerGrade,
 					first, second, third,gradeReflectionRate, reflectionSubjects);
-			
+			resultScore=Math.round(resultScore*100)/100.0;
 			susiTable.setResultScore(resultScore);
 			resultList.add(susiTable);
 		}

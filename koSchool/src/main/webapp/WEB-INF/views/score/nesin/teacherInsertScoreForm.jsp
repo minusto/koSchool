@@ -15,6 +15,10 @@
 	position: fixed;
 	top: 70px;
 }
+#center{
+	text-align:center; 
+	vertical-align:middle;
+}
 </style>
 <!-- jQuery-->
 <script src="/resources/js/jquery.js" type="text/javascript"></script>
@@ -81,17 +85,17 @@
 																</div>
 																<div class="modal-body"> 
 																	<div class="row" >
-																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																		<div id="center" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 																			<a href="#" id="firstSave">
 																			<h3>1학년</h3>
 																			</a>
 																		</div>
-																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																		<div id="center" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 																			<a href="#" id="sencondSave">
 																			<h3>2학년</h3>
 																			</a>
 																		</div>
-																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																		<div id="center" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 																			<a href="#" id="thirdSave">
 																			<h3>3학년</h3>
 																			</a>
@@ -116,17 +120,17 @@
 																</div>
 																<div class="modal-body"> 
 																	<div class="row" >
-																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																		<div id="center" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 																			<a href="#" id="firstLoad">
 																			<h3>1학년</h3>
 																			</a>
 																		</div>
-																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																		<div id="center" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 																			<a href="#" id="sencondLoad">
 																			<h3>2학년</h3>
 																			</a>
 																		</div>
-																		<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+																		<div id="center" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 																			<a href="#" id="thirdLoad">
 																			<h3>3학년</h3>
 																			</a>
