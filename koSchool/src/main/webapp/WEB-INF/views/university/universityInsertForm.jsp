@@ -122,8 +122,8 @@ $(function() {
 					majorHtml+="<td id='modalMajorName'>"+major.majorName+"</td>";
 					majorHtml+="<td id='modalMajorId'>"+major.majorId+"</td>";
  					majorHtml+="</tr>";
-					$('#majorAjax').append(majorHtml);
 				})
+				$('#majorAjax').append(majorHtml);
 			}
 		});
 	});

@@ -56,7 +56,9 @@ public class UniversityContorller {
 			model.addAttribute("extraPointList", extraPointList);
 		}
 		// 수능 영역별 반영비율 LIST
+		System.out.println("per호출전");
 		List<ReflectionRatePerSATAreaVO> reflectionRatePerSATAreaList = service.reflectionRatePerSATAreaList();
+		System.out.println("per호출후");
 		if (reflectionRatePerSATAreaList != null) {
 			model.addAttribute("rrsList", reflectionRatePerSATAreaList);
 		}

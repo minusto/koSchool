@@ -85,10 +85,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertReflectionRatePerSATArea">
 		INSERT INTO ReflectionRatePerSATArea(
 			SATReflectionRateId,KoreanReflectionRate,MathBTypeReflectionRate,MathATypeReflectionRate,EnglishReflectionRate,
-			ResearchSubjectReflectionRate,SelectCombination,ResearchSubjectNum
+			socialReflectionRate,scienceReflectionRate,SelectCombination,ResearchSubjectNum
 		)values(
 			#{satReflectionRateId},#{koreanReflectionRate},#{mathBTypeReflectionRate},#{mathATypeReflectionRate},#{englishReflectionRate},
-			#{researchSubjectReflectionRate},#{selectCombination},#{researchSubjectNum}
+			#{socialReflectionRate},#{scienceReflectionRate},#{selectCombination},#{researchSubjectNum}
 		)
 	</insert>
 	<!-- 정시점수 INSERT -->
