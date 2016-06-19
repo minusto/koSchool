@@ -26,7 +26,7 @@ $(function(){
 					var arrStdev = new Array();
 					var arrAllStudentSubjectId = new Array();
 					var arrAllStudentNum = new Array();
-					var arrAllStudentNum2 = 0;//등급 구하기 위한 전체 명수
+					var arrAllStudentNum2 = new Array();//등급 구하기 위한 전체 명수
 					var arrAllStdevSubjectId = new Array();
 					for (var i=1; i<=size; i++){
 						arrSubjectId[i]= $('#subjectId'+i).html();
@@ -48,17 +48,17 @@ $(function(){
 						for (var j=1; j<=size3; j++){
 							if(arrSubjectId[i]==arrAllStudentSubjectId[j]){
 								$('#allStudent'+i).html(arrAllStudentNum[j]);
-								if(j==1){
-									arrAllStudentNum2 = arrAllStudentNum[j];
-								}
+									arrAllStudentNum2[i] = arrAllStudentNum[j];
+								
 							}
 						}
 					}
+					//석차등급
 					for (var i=1; i<=size; i++){
 						for (var j=1; j<=size2; j++){
 							if(arrSubjectId[i]==arrRankSubjectId[j]){
 								$('#ranking'+i).html(arrRankSend[j]);
-								arrRating[j] = (arrRankSend[j]/arrAllStudentNum2)*100;
+								arrRating[j] = (arrRankSend[j]/arrAllStudentNum2[i])*100;
 								if((0<arrRating[j])&&(arrRating[j]<=4)){
 									$('#rating'+i).html('1');
 								}else if((4<arrRating[j])&&(arrRating[j]<=11)){
@@ -88,7 +88,9 @@ $(function(){
 					for (var i=1; i<=size; i++){
 						for (var j=1; j<=size4; j++){
 							if(arrSubjectId[i]==arrAllStdevSubjectId[j]){
-								result = result+Math.pow(parseFloat(arrStdev[j])-parseFloat($('#avg'+i).html()),2)/parseFloat($('#allStudent'+i).html());
+								result = result+
+								Math.pow(parseFloat(arrStdev[j])-parseFloat($('#avg'+i).html()),2)/
+								parseFloat($('#allStudent'+i).html());
 							}
 						}
 						$('#stdevResult'+i).html(Math.sqrt(result).toFixed(2));

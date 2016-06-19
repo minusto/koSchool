@@ -102,7 +102,7 @@
 									<tr>
 										<th rowspan="2" style="text-align:center; vertical-align:middle; width:10%" >교과</th>
 										<th rowspan="2" style="text-align:center; vertical-align:middle; width:10%">과목</th>
-										<th colspan="6" style="text-align:center" ><b id="chartGrade">${subjectGrade }</b>학년 ${semester }학기</th>
+										<th colspan="7" style="text-align:center" ><b id="chartGrade">${subjectGrade }</b>학년 ${semester }학기</th>
 									</tr>
 									<tr>
 										<td>단위수</td>

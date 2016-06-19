@@ -56,7 +56,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 		}
 
 		// 해당하는 학생의 학교석차 구한 후 석차등급 변환 (주요 교과목)
-		System.out.println("주요과목 구하기----------");
 		if (allStudentNum != 0) { // 수강과목의 전체명수가 0이 아닐때
 			int sum = 0;
 			int cnt = 0;
@@ -70,19 +69,13 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 									sum = ratingMethod(rankList.get(j).getRank(), allStudentNum) + sum;
 									subject = dao.selectSubject(rankList.get(j).getSubjectId());
 									cnt++; // 과목 개수
-									System.out.println("sum= " + sum);
-									System.out.println("cnt= " + cnt);
 								}
 							}
 						}
 					}
 				}
 				
-				System.out.println(mainType[k]);
-				System.out.println("Unit="+subject.getSubjectUnit());
-				System.out.println("mainSubject= " + sum);
-				System.out.println("mainCnt=" + cnt);
-				System.out.println();
+				
 				// 각 교과목의 등급과 개수를 map 담는다.
 				resultMap.put(mainType[k]+"단위수", subject.getSubjectUnit());
 				resultMap.put(mainType[k], sum);
@@ -91,7 +84,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 				cnt = 0;
 			} // for End
 				// 해당하는 학생의 학교석차 구한 후 석차등급 변환 (비교과목)
-			System.out.println("기타과목 구하기----------");
 			int sum2 = 0;
 			int cnt2 = 0;
 			for (int k = 0; k < subType.length; k++) {
@@ -103,8 +95,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 								if (rankList.get(j).getMemberId().equals(id)) {
 									sum2 = ratingMethod(rankList.get(j).getRank(), allStudentNum) + sum2;
 									cnt2++; // 과목 개수
-									System.out.println("sum= " + sum2);
-									System.out.println("cnt= " + cnt2);
 								}
 							}
 						}
@@ -112,10 +102,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 				}
 			} // for End
 
-			System.out.println("기타과목");
-			System.out.println("subSubject= " + sum2);
-			System.out.println("subCnt=" + cnt2);
-			System.out.println();
 			// 기타과목의 등급과 개수를 map 담는다.
 			resultMap.put("기타단위수", 2);
 			resultMap.put("기타", sum2);
@@ -181,13 +167,11 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			map.put("id", id);
 			map.put("semester", 1);
 			map.put("nesinYear", 2016);
-			System.out.println("1학기==========================");
 			resultMap = mainMethod(map);
 			// 3학년 2학기
 			map.put("id", id);
 			map.put("semester", 2);
 			map.put("nesinYear", 2016);
-			System.out.println("2학기==========================");
 			resultMap2 = mainMethod(map);
 			// 1학년 1,2학기 각 교과등급의 합
 			subject[0] = (double) ((int) resultMap.get("국어") + (int) resultMap2.get("국어"));
@@ -204,7 +188,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			cnt[4] = (int) resultMap.get("과학개수") + (int) resultMap2.get("과학개수");
 			cnt[5] = (int) resultMap.get("기타개수") + (int) resultMap2.get("기타개수");
 
-			System.out.println("기타" + subject[5] + "기타개수" + cnt[5]);
 			// 각 교과등급 평균 set
 			for (int i = 0; i < subject.length; i++) {
 				if (cnt[i] != 0) {
@@ -229,7 +212,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 					}
 				}
 			}
-			System.out.println("결과값= " + r_dto.toString());
 			
 		} else if (studentGrade == 2) {
 			double subject[] = new double[6];
@@ -259,7 +241,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			cnt[4] = (int) resultMap.get("과학개수") + (int) resultMap2.get("과학개수");
 			cnt[5] = (int) resultMap.get("기타개수") + (int) resultMap2.get("기타개수");
 
-			System.out.println("기타" + subject[5] + "기타개수" + cnt[5]);
 			// 각 교과등급 평균 set
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
@@ -284,22 +265,18 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 								}
 							}
 						}
-			System.out.println("결과값= " + r_dto.toString());
 		} else if (studentGrade == 3) {
-			System.out.println("1학년 과목==========================");
 			double subject[] = new double[6];
 			int cnt[] = new int[6];
 			// 3학년 1학기
 			map.put("id", id);
 			map.put("semester", 1);
 			map.put("nesinYear", 2014);
-			System.out.println("1학기==========================");
 			resultMap = mainMethod(map);
 			// 3학년 2학기
 			map.put("id", id);
 			map.put("semester", 2);
-			map.put("nesinYear", 2014);
-			System.out.println("2학기==========================");
+			map.put("nesinYear", 2014);			
 			resultMap2 = mainMethod(map);
 			// 1학년 1,2학기 각 교과등급의 합
 			subject[0] = (double) ((int) resultMap.get("국어") + (int) resultMap2.get("국어"));
@@ -316,7 +293,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			cnt[4] = (int) resultMap.get("과학개수") + (int) resultMap2.get("과학개수");
 			cnt[5] = (int) resultMap.get("기타개수") + (int) resultMap2.get("기타개수");
 
-			System.out.println("기타" + subject[5] + "기타개수" + cnt[5]);
 			// 각 교과등급 평균 set
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
@@ -341,7 +317,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 								}
 							}
 						}
-			System.out.println("결과값= " + r_dto.toString());
 		}
 		return r_dto;
 	}
@@ -380,7 +355,7 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			cnt[4] = (int) resultMap.get("과학개수") + (int) resultMap2.get("과학개수");
 			cnt[5] = (int) resultMap.get("기타개수") + (int) resultMap2.get("기타개수");
 
-			System.out.println("기타" + subject[5] + "기타개수" + cnt[5]);
+			
 			// 각 교과등급 평균 set
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
@@ -405,22 +380,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 								}
 							}
 						}
-			System.out.println("결과값= " + r_dto.toString());
+			
 		} else if (studentGrade == 3) {
-			System.out.println("2학년 과목 시작==========================");
+			
 			double subject[] = new double[6];
 			int cnt[] = new int[6];
 			// 3학년 1학기
 			map.put("id", id);
 			map.put("semester", 1);
 			map.put("nesinYear", 2015);
-			System.out.println("1학기==========================");
+			
 			resultMap = mainMethod(map);
 			// 3학년 2학기
 			map.put("id", id);
 			map.put("semester", 2);
 			map.put("nesinYear", 2015);
-			System.out.println("2학기==========================");
+			
 			resultMap2 = mainMethod(map);
 			// 1학년 1,2학기 각 교과등급의 합
 			subject[0] = (double) ((int) resultMap.get("국어") + (int) resultMap2.get("국어"));
@@ -437,7 +412,7 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			cnt[4] = (int) resultMap.get("과학개수") + (int) resultMap2.get("과학개수");
 			cnt[5] = (int) resultMap.get("기타개수") + (int) resultMap2.get("기타개수");
 
-			System.out.println("기타" + subject[5] + "기타개수" + cnt[5]);
+			
 			// 각 교과등급 평균 set
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
@@ -462,7 +437,7 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 								}
 							}
 						}
-			System.out.println("결과값= " + r_dto.toString());
+			
 		}
 		return r_dto;
 	}
@@ -474,20 +449,18 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap2 = new HashMap<String, Object>();
 		if (studentGrade == 3) {
-			System.out.println("3학년 과목==========================");
+			
 			double subject[] = new double[6];
 			int cnt[] = new int[6];
 			// 3학년 1학기
 			map.put("id", id);
 			map.put("semester", 1);
 			map.put("nesinYear", 2016);
-			System.out.println("1학기==========================");
 			resultMap = mainMethod(map);
 			// 3학년 2학기
 			map.put("id", id);
 			map.put("semester", 2);
 			map.put("nesinYear", 2016);
-			System.out.println("2학기==========================");
 			resultMap2 = mainMethod(map);
 			// 1학년 1,2학기 각 교과등급의 합
 			subject[0] = (double) ((int) resultMap.get("국어") + (int) resultMap2.get("국어"));
@@ -504,7 +477,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			cnt[4] = (int) resultMap.get("과학개수") + (int) resultMap2.get("과학개수");
 			cnt[5] = (int) resultMap.get("기타개수") + (int) resultMap2.get("기타개수");
 
-			System.out.println("기타" + subject[5] + "기타개수" + cnt[5]);
 			// 각 교과등급 평균 set
 						for (int i = 0; i < subject.length; i++) {
 							if (cnt[i] != 0) {
@@ -529,7 +501,7 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 								}
 							}
 						}
-			System.out.println("결과값= " + r_dto.toString());
+			
 		}
 		return r_dto;
 	}
@@ -586,7 +558,7 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 		double etc[] = new double[3];
 		int etcUnit[] = new int[3];
 		if(reflectionSubjects.matches(".*국.*")) { // 반영 과목 검사
-			System.out.println("국어 배점 변환");
+			
 			kor[0] = pointPer(first.getKor(), pointPerGrade);  // 1학년
 			korUnit[0] = first.getKorUnit();
 			kor[1] = pointPer(second.getKor(), pointPerGrade);  // 2학년
@@ -595,7 +567,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			korUnit[2] = third.getKorUnit();
 		}
 		if(reflectionSubjects.matches(".*영.*")){
-			System.out.println("영어 배점 변환");
 			eng[0] = pointPer(first.getEng(), pointPerGrade);  // 1학년
 			engUnit[0] = first.getEngUnit();
 			eng[1] = pointPer(second.getEng(), pointPerGrade);  // 2학년
@@ -604,7 +575,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			engUnit[2] = third.getEngUnit();
 		}
 		if(reflectionSubjects.matches(".*수.*")){
-			System.out.println("수학 배점 변환");
 			math[0] = pointPer(first.getMath(), pointPerGrade);  // 1학년
 			mathUnit[0] = first.getMathUnit();
 			math[1] = pointPer(second.getMath(), pointPerGrade);  // 2학년
@@ -613,7 +583,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			mathUnit[2] = third.getMathUnit();
 		}
 		if(reflectionSubjects.matches(".*사.*")){
-			System.out.println("사회 배점 변환");
 			sol[0] = pointPer(first.getSol(), pointPerGrade);  // 1학년
 			solUnit[0] = first.getSolUnit();
 			sol[1] = pointPer(second.getSol(), pointPerGrade);  // 2학년
@@ -622,7 +591,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			solUnit[2] = third.getSolUnit();
 		}
 		if(reflectionSubjects.matches(".*과.*")){
-			System.out.println("과학 배점 변환");
 			sci[0] = pointPer(first.getSci(), pointPerGrade);  // 1학년
 			sciUnit[0] = first.getSciUnit();
 			sci[1] = pointPer(second.getSci(), pointPerGrade);  // 2학년
@@ -631,7 +599,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			sciUnit[2] = third.getSciUnit();
 		}
 		if(reflectionSubjects.matches(".*기.*")){
-			System.out.println("기타 배점 변환");
 			etc[0] = pointPer(first.getEtc(), pointPerGrade);  // 1학년
 			etcUnit[0] = first.getEtcUnit();
 			etc[1] = pointPer(second.getEtc(), pointPerGrade);  // 2학년
@@ -668,11 +635,15 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			((korUnit[0]+engUnit[0]+mathUnit[0]+solUnit[0]+sciUnit[0]+etcUnit[0]) +
 			(korUnit[1]+engUnit[1]+mathUnit[1]+solUnit[1]+sciUnit[1]+etcUnit[1]) +
 			(korUnit[2]+engUnit[2]+mathUnit[2]+solUnit[2]+sciUnit[2]+etcUnit[2])); 
+		if(uniName.equals("국민대학교")||uniName.equals("한양대학교")){
+
 			System.out.println("resultScore: "+resultScore);
 		//if(uniName.equals("국민대학교")||uniName.equals("한양대학교")){
+			//github.com/minusto/koSchool.git
 			//전체점수 곱하기 10
 			resultScore = resultScore * 10;
 		//}
+		}
 	
 		return resultScore;
 	}
@@ -680,31 +651,22 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 	//각 등급별 배점
 	public double pointPer(double rate, double[] pointPerGrade){
 		if((rate>=1)&&(rate<2)){
-			System.out.println("1등급 변환");
 			return pointPerGrade[0];
 		}else if((rate>=2)&&(rate<3)){
-			System.out.println("2등급 변환");
 			return pointPerGrade[1];
 		}else if((rate>=3)&&(rate<4)){
-			System.out.println("3등급 변환");
 			return pointPerGrade[2];
 		}else if((rate>=4)&&(rate<5)){
-			System.out.println("4등급 변환");
 			return pointPerGrade[3];
 		}else if((rate>=5)&&(rate<6)){
-			System.out.println("5등급 변환");
 			return pointPerGrade[4];
 		}else if((rate>=6)&&(rate<7)){
-			System.out.println("6등급 변환");
 			return pointPerGrade[5];
 		}else if((rate>=7)&&(rate<8)){
-			System.out.println("7등급 변환");
 			return pointPerGrade[6];
 		}else if((rate>=8)&&(rate<9)){
-			System.out.println("8등급 변환");
 			return pointPerGrade[7];
 		}else {
-			System.out.println("9등급 변환");
 			return pointPerGrade[8];
 		}
 		
@@ -731,7 +693,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 		double etc[] = new double[3];
 		int etcUnit[] = new int[3];
 		if(reflectionSubjects.matches(".*국.*")) { // 반영 과목 검사
-			System.out.println("국어 배점 변환");
 			kor[0] = first.getKor(); // 1학년
 			korUnit[0] = first.getKorUnit();
 			kor[1] = second.getKor(); // 2학년
@@ -740,7 +701,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			korUnit[2] = third.getKorUnit();
 		}
 		if(reflectionSubjects.matches(".*영.*")){
-			System.out.println("영어 배점 변환");
 			eng[0] = first.getEng();  // 1학년
 			engUnit[0] = first.getEngUnit();
 			eng[1] = second.getEng(); // 2학년
@@ -749,7 +709,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			engUnit[2] = third.getEngUnit();
 		}
 		if(reflectionSubjects.matches(".*수.*")){
-			System.out.println("수학 배점 변환");
 			math[0] = first.getMath();// 1학년
 			mathUnit[0] = first.getMathUnit();
 			math[1] = second.getMath();  // 2학년
@@ -758,7 +717,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			mathUnit[2] = third.getMathUnit();
 		}
 		if(reflectionSubjects.matches(".*사.*")){
-			System.out.println("사회 배점 변환");
 			sol[0] = first.getSol();  // 1학년
 			solUnit[0] = first.getSolUnit();
 			sol[1] = second.getSol(); // 2학년
@@ -767,7 +725,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			solUnit[2] = third.getSolUnit();
 		}
 		if(reflectionSubjects.matches(".*과.*")){
-			System.out.println("과학 배점 변환");
 			sci[0] = first.getSci();  // 1학년
 			sciUnit[0] = first.getSciUnit();
 			sci[1] = second.getSci();// 2학년
@@ -776,7 +733,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 			sciUnit[2] = third.getSciUnit();
 		}
 		if(reflectionSubjects.matches(".*기.*")){
-			System.out.println("기타 배점 변환");
 			etc[0] = first.getEtc(); // 1학년
 			etcUnit[0] = first.getEtcUnit();
 			etc[1] = second.getEtc(); // 2학년
@@ -807,7 +763,6 @@ public class SusiSimulationServiceImpl implements SusiSimulationService {
 								+ (korUnit[1] + engUnit[1] + mathUnit[1] + solUnit[1] + sciUnit[1] + etcUnit[1])
 								+ (korUnit[2] + engUnit[2] + mathUnit[2] + solUnit[2] + sciUnit[2] + etcUnit[2])
 				);
-			System.out.println("resultAver: "+resultAver);
 			
 			return resultAver;
 	}
