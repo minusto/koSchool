@@ -24,11 +24,10 @@
     					</div>
     					<div class="row">
     						<div >
-    							<div class="card">
-    							<div class="col-lg-2"></div>
-                                <div class="card-body col-lg-10">
+    							<div class="card col-lg-10 col-lg-offset-1">
+                                <div class="card-body col-lg-10 col-lg-offset-1">
                                     <div class="row no-margin no-gap">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="pricing-table green">
                                                 <div class="pt-header">
                                                     <div class="plan-pricing">
@@ -87,7 +86,7 @@
                                           	  	</div>
                                         	</div>
 										</div>
-                                        <div class="col-sm-3">   
+                                        <div class="col-sm-4">   
                                             <div class="pricing-table blue">
                                                 <div class="pt-header">
                                                     <div class="plan-pricing">
@@ -135,7 +134,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <div class="pricing-table yellow">
                                                 <div class="pt-header">
                                                     <div class="plan-pricing">
@@ -146,7 +145,8 @@
                                                     <ul class="plan-detail">
                                                         <li>공지사항</li>
                                                         <li>학사일정</li>
-                                                        <li>학급 게시판</li>
+                                                        <!-- <li>학급 게시판</li> -->
+                                                        <li>&nbsp;</li>
                                                         <li>&nbsp;</li>
                                                     </ul>
                                                 </div>

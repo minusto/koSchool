@@ -32,33 +32,32 @@
 					}
 				});
 			});
-		});
-		
-		window.onload=function(){
+			
 			//대학리스트 클릭시 디테일로 넘어감
-			$(".clickTitle").on("click", function(){
+			$(document).on('click', '.clickTitle', function() {
 				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").html());
 				$("#formMajorId").val($(this).find("#TmajorId").html());
 				$("#formUniversityId").val($(this).find("#TuniversityId").html());
 				$("#formSubmit").trigger('click');
-			})
+			});
 			
 			//추천대학 클릭시 디테일로 넘어감
-			$(".clickTitle2").on("click", function(){
+			$(document).on('click', '.clickTitle2', function() {
 				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
 				$("#formMajorId").val($(this).find("#TmajorId").val());
 				$("#formUniversityId").val($(this).find("#TuniversityId").val());
 				$("#formSubmit").trigger('click');
-			})
+			});
 			
 			//목표대학 클릭시 디테일로 넘어감
-			$(".clickTitle3").on("click", function(){
+			$(document).on('click', '.clickTitle3', function() {
 				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
 				$("#formMajorId").val($(this).find("#TmajorId").val());
 				$("#formUniversityId").val($(this).find("#TuniversityId").val());
 				$("#formSubmit").trigger('click');
-			})
-		}
+			});
+			
+		});
 		
 	</script>
 	<style type="text/css">
@@ -143,7 +142,7 @@
 		                    			<c:choose>
 		                    				<c:when test="${ grade eq 'student' }">
 		                    					<form id="insertHopeUniversityForm" action="InsertHopeUniversity" method="post">
-	                    							<h4>희망대학 설정하기</h4>
+	                    							<h4>목표대학 설정하기</h4>
 		                    						대학교 : <select id="selectUniversity" name="universityId">
 			                    						<option>-- 대학 선택 --</option>
 			                    						<c:forEach var="universityList" items="${universityList }">
@@ -158,13 +157,13 @@
 		                    				<c:when test="${ grade eq 'parent' }">
 		                    					<table id="hopeUniversityTable" class="table table-bordered">
 					                    			<tr><th colspan="4">안녕하세요 학부모님</th></tr>
-					                    			<tr><td colspan="4">자녀의 희망대학이 설정되어있지 않습니다</td></tr>
+					                    			<tr><td colspan="4">자녀의 목표대학이 설정되어있지 않습니다</td></tr>
 				                    			</table>
 		                    				</c:when>
 		                    				<c:when test="${ grade eq 'teacher' }">
 		                    					<table id="hopeUniversityTable" class="table table-bordered">
 					                    			<tr><th colspan="4">안녕하세요 선생님</th></tr>
-					                    			<tr><td colspan="4">학생의 희망대학이 설정되어있지 않습니다</td></tr>
+					                    			<tr><td colspan="4">학생의 목표대학이 설정되어있지 않습니다</td></tr>
 				                    			</table>
 		                    				</c:when>
 		                    				<c:otherwise>
@@ -181,16 +180,20 @@
                     <div id="recommendContainer" class="row">
                     	<div class="col-md-8 col-md-offset-2">
                     		<h3>추천 대학</h3>
-                    		<c:if test="${hopeUniversity == null && standardScoreSum > 0 }">
+                    		<c:if test="${standardScoreSum > 0 }">
                     			<label>(모의고사 총합 : ${standardScoreSum } )</label>
                     		</c:if>
                     		<div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
-                   
                     			<c:choose>
-										<c:when test="${empty recommandList}">
+										<c:when test="${empty recommandList && standardScoreSum == 0}">
 											<br><br>
-											<p>모의고사 점수가 없습니다. 희망대학을 설정해주세요</p>
+											<p>모의고사 점수가 없습니다. 목표대학을 설정하면 설정한 학과와 근접한 다른 학과를 추천해줍니다.</p>
+											<br><br>
+										</c:when>
+										<c:when test="${empty recommandList && standardScoreSum > 0}">
+											<br><br>
+											<p>추천할 수 있는 대학이 없습니다.</p>
 											<br><br>
 										</c:when>
 										
@@ -206,7 +209,7 @@
 		                    					</li>
 											</c:forEach>
 										</c:otherwise>
-									</c:choose>
+								</c:choose>
                     			</ul>
                     		</div>
                     		<P>* 추천대학은 표준점수의 단순 합산으로 도출한 결과입니다.</P>

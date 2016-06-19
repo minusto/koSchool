@@ -27,7 +27,7 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 		return dao.selectAllMockUniversityList();
 	}
 	
-	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생의 아이디로 입력되어있는 희망 대학을 반환 / 작성자 : 구혜인
+	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생의 아이디로 입력되어있는 목표 대학을 반환 / 작성자 : 구혜인
 	@Override
 	public HopeUniversityVO selectExistHopeUniversityService(String memberId) throws Exception {
 		return dao.selectExistHopeUniversity(memberId);
@@ -45,7 +45,7 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 		return dao.selectMajorList(universityId);
 	}
 	
-	//액터 ==> 학생 / 작업 내용 : 학생이 선택한 희망 대학 학과를 가지고 EntranceInfo에서 조회하여 HopeUniversity에 입력 / 작성자 : 구혜인
+	//액터 ==> 학생 / 작업 내용 : 학생이 선택한 목표 대학 학과를 가지고 EntranceInfo에서 조회하여 HopeUniversity에 입력 / 작성자 : 구혜인
 	@Override
 	public HopeUniversityVO insertHopeUniversityService(Map<String, String> map) throws Exception {
 		EntranceInfoVO entranceInfoVo = dao.selectEIforHopeUniversity(map);
@@ -60,14 +60,14 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 		return hopeUniversityVo;
 	}
 	
-	//희망대학 출력
+	//목표대학 출력
 	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생이 최근 본 모의고사의 표준점수 총합을 구하기 / 작성자 : 구혜인
 	@Override
 	public Integer selectStandardScoreSumService(String memberId) throws Exception {
 		return dao.selectStandardScoreSum(memberId);
 	}
 	
-	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 희망대학에 대한 부분을 출력하기 위한 데이터를 가져간다 / 작성자 : 구혜인
+	//액터 ==> 학생, 학부모, 교사 / 작업 내용 : 목표대학에 대한 부분을 출력하기 위한 데이터를 가져간다 / 작성자 : 구혜인
 	@Override
 	public MockSimulationDTO hopeUniversityPrintService(HopeUniversityVO hopeUniversityVo) throws Exception {
 		MockSimulationDTO mockSimulationDTO = new MockSimulationDTO();
@@ -94,15 +94,15 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 		Integer mockScore = dao.selectStandardScoreSum(hopeUniversityVo.getMemberId());
 		if(mockScore != null) { //모의고사 점수가 있는 경우 모의고사 점수를 이용하여 대학 추천
 			recommandAllList = dao.recommandUniversityListByMock(hopeUniversityVo);
-			
 		} else {
-			if(hopeUniversityVo.getUniversityId() != null) { //모의고사 점수가 없는 경우 희망대학이 있을 때만 추천
+			if(hopeUniversityVo.getUniversityId() != null) { //모의고사 점수가 없는 경우 목표대학이 있을 때만 추천
 				recommandAllList = dao.recommandUniversityListByHope(hopeUniversityVo);
 			}
 		}
 		
 		if(!recommandAllList.isEmpty()) { //제일 점수차가 적은 3개만 반환해줌
 			recommandList.add(recommandAllList.get(0));
+			System.out.println(recommandList.get(0).getUniversityName());
 			if(recommandAllList.size() >= 2) {
 				recommandList.add(recommandAllList.get(1));
 			}
@@ -111,6 +111,7 @@ public class MockSimulationServiceImpl implements MockSimulationService {
 			}
 		} else {
 			recommandList = null;
+			System.out.println("list is null");
 		}
 		
 		return recommandList;
