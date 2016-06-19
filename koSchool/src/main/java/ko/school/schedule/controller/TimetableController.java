@@ -47,10 +47,8 @@ public class TimetableController {
 			StudentVO sVO = (StudentVO)session.getAttribute("student");
 			
 			if(sVO!=null){
-				System.out.println("학생");
 				String data = service.getStudentTimetable(sVO);
 				if(data==null){
-					System.out.println("초기 시간표 디비에 없음");
 					data="empty";
 					
 				}
@@ -60,7 +58,6 @@ public class TimetableController {
 				StudentVO stVO = loginService.studentCheckService(pVO.getStudentMemberId());			
 				String data = service.getStudentTimetable(stVO);
 				if(data==null){
-					System.out.println("초기 시간표 디비에 없음");
 					data="empty";
 					
 				}
@@ -90,10 +87,6 @@ public class TimetableController {
 				int teacherclass = Integer.parseInt(gc.substring(1,3));
 			
 				
-				System.out.println("---------------------------------------------------");
-				System.out.println("인트1  "+teachergrade);
-				System.out.println("인트2  "+teacherclass);
-				
 				timeVO.setTeachergrade(teachergrade);
 				timeVO.setTeacherclass(teacherclass);
 				service.deleteTimetable(timeVO);
@@ -116,7 +109,6 @@ public class TimetableController {
 				
 				String data = service.getTimetable(timeVO);
 				if(data==null){
-					System.out.println("초기 시간표 디비에 없음");
 					data="empty";
 				}
 				return new  ResponseEntity<>(data,HttpStatus.OK);
