@@ -10,7 +10,7 @@ public class ReflectionRatePerSATAreaVO {
 	private double scienceReflectionRate;
 	private String selectCombination;
 	private int researchSubjectNum;
-	private int selectNum;
+	private int selectNum;//DB에서 지워진 컬럼
 	
 	public int getSelectNum() {
 		return selectNum;
