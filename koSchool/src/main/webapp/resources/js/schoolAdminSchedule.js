@@ -11,13 +11,14 @@
 
 			
 		
-	
+			
 
 			//현재 날짜 구하기
 			var now = new Date();
 			var year = now.getFullYear();
 			var getMonth = now.getMonth() + 1;
 			var getDay = now.getDate();
+
 			var month="";
 			var day="";
 			if(getMonth<10){
@@ -27,9 +28,12 @@
 			if(getDay<10){
 				day+=0;
 				day+=getDay;
+			}else{
+				day+=getDay;
 			}
-
+			
 			var today = year + '-' + month + '-' + day;
+
 			
 			$('#calendar').fullCalendar(
 					{
@@ -51,9 +55,9 @@
 								type : 'post',
 								url : '/scheduleList',
 								headers : {
-									"Accept" : "application/json",
-									"Content-Type" : "application/json"
-								/*,"X-HTTP-Method-Override": "POST" */},
+											"Accept" : "application/json",
+											"Content-Type" : "application/json"
+										  },
 								dataType : 'text',
 								data : JSON.stringify({
 									scheduleId : id,
@@ -64,7 +68,7 @@
 								success : function(result) {
 									console.log("result: " + result);
 									if (result == 'SUCCESS') {
-										alert("일정이 등록 되었습니다.");
+										alert("일정등록 완료");
 									} else {
 										alert("일정등록 실패")
 									}

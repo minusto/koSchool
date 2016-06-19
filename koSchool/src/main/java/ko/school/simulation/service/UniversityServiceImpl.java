@@ -165,7 +165,14 @@ public class UniversityServiceImpl implements UniversityService {
 		return result;
 	}
 	
-	
+	/*
+	언+수+외+탐(2)
+	언+수+외+탐(1)
+	언+수+외[택2]+탐(2)
+	언+수+외[택2]+탐(1)
+	언+수+외[택1]+탐(2)
+	언+수+외[택1]+탐(1)
+	*/
 	
 	//---------------------------시뮬레이션  연산-------------------------
 	public StudentConvertDTO simulationCalculation(ChooseDetailCommand chooseDetail){
@@ -173,40 +180,33 @@ public class UniversityServiceImpl implements UniversityService {
 		map.put("universityId", chooseDetail.getUniversityId());
 		map.put("majorId", chooseDetail.getMajorId());
 		map.put("recruitSeparate", chooseDetail.getRecruitSeparate());
-		StudentConvertDTO studentConvert=new StudentConvertDTO();
-		
+		map.put("studentId", chooseDetail.getMemberId());
+		map.put("mockId", dao.recentMockId(chooseDetail.getMemberId()));
+
 		UniversitySATDetail satDetail=dao.universitySATDetail(map);
 		
-		map.put("studentId", chooseDetail.getMemberId());
 		StudentMockScoreDetail smsd=dao.studentMockScoreDetail(map);
-
-		map.put("mockId", dao.recentMockId(chooseDetail.getMemberId()));
+		
 		MockTestMaxStandardScore maxScore=dao.mockTestMaxStandardScore(map);
 		
-		double myConvertingScore = 0; // 내 변환점수가 들어갈 변수
-		String wjatnwlvy = satDetail.getSatScoreUseIndex(); // 삭제
-		switch (wjatnwlvy) {// 학과정보가 다 담겨있는 큰~객체에서 수능점수산출활용지표를 get메소드로 불러와서 쓰면 됨
+		//대학 입시요강과 비교한 연산결과가 담기는 객체
+		StudentConvertDTO studentConvert=new StudentConvertDTO();
+		String scoreUseIndex = satDetail.getSatScoreUseIndex();
+		switch (scoreUseIndex) {
+		// 메소드호출(파라미터에 최신점수 객체를 던짐)
 		case "단순합계":
-			// 메소드호출(파라미터에 최신점수 객체 들어감)
 			studentConvert = simpleSum(smsd,studentConvert);
 			break;
-
 		case "표준점수":
-			// 메소드호출(파라미터에 내 최신점수 객체 들어감)
 			studentConvert = universitySum(smsd,satDetail,maxScore,studentConvert);
 			break;
-
 		case "변환표준점수":
-			// 메소드호출(파라미터에 내 최신점수 객체 들어감)
 			studentConvert = universityConvertSum(smsd,satDetail,maxScore,studentConvert);
 			break;
-		
 		case "백분위":
 			studentConvert = universityPercentileSum(smsd,satDetail,maxScore,studentConvert);
 			break;
 		}
-		// 학과의 산출법으로 계산한 내점수와 학과의 커트라인을 비교
-		// if(내 변환점수 > 학과커트라인){} .. else if(내 변환점수 < 학과커트라인){}
 		return studentConvert;
 	}
 
@@ -245,14 +245,7 @@ public class UniversityServiceImpl implements UniversityService {
 		double engStandard=0;
 		double research1Standard=0;
 		double research2Standard=0;
-/*
-언+수+외+탐(2)
-언+수+외+탐(1)
-언+수+외[택2]+탐(2)
-언+수+외[택2]+탐(1)
-언+수+외[택1]+탐(2)
-언+수+외[택1]+탐(1)
-*/
+
 		String whgkq = satDetail.getSelectCombination(); // 삭제
 		double result = 0;
 		switch (whgkq) { // 학과정보가 다 담겨있는 큰~객체에서 선택조합 get
@@ -281,8 +274,7 @@ public class UniversityServiceImpl implements UniversityService {
 			result=korStandard+matStandard+engStandard+research1Standard+research2Standard;
 			result=socreList(korStandard, matStandard, engStandard, research1Standard, research2Standard, result);
 
-			studentConvert.setMathType(smsd.getMathType());
-			
+			studentConvert.setMathType(smsd.getMathType());			
 			studentConvert.setResearch1Name(dao.researchSubjectName(smsd.getResearchSubjectId1()));
 			studentConvert.setResearch2Name(dao.researchSubjectName(smsd.getResearchSubjectId2()));
 			studentConvert.setKorConverScore(korStandard);
@@ -789,7 +781,6 @@ public class UniversityServiceImpl implements UniversityService {
 			studentConvert.setResearch1ConverScore(research1Standard);		
 			studentConvert.setTotalConverScore(result);
 			
-			
 			break;
 			
 		case "언+수+외[택1]+탐(2)":
@@ -917,11 +908,11 @@ public class UniversityServiceImpl implements UniversityService {
 		return studentConvert;
 	}
 
-	//표준점수 + 변환표준점수 계산 메소드
+/*	//표준점수 + 변환표준점수 계산 메소드
 	private double calculation(int score, double rate, double convertScoreMax, int standardMaxScore) {
 		double result=((score*rate)*convertScoreMax)/standardMaxScore;
 		return result;
-	}
+	}*/
 	
 	
 /*	// 점수 계산 메소드(파라미터 4개 필요)
@@ -1244,19 +1235,25 @@ public class UniversityServiceImpl implements UniversityService {
 			studentConvert.setResearch1ConverScore(research1Standard);			
 			studentConvert.setTotalConverScore(result);
 			
-			
-			
 			break;
 		}
 		return studentConvert;
 	}
 	
+	
+	//나의 점수, 해당 과목 반영비율, 변환점수만점, score의 만점
 	//백분위 합산 메소드
-	//나의 점수 / 해당 과목 반영비율/ 변환점수만점 / 백분위최대치
 	private double calculation(double score, double rate, double convertScoreMax, int standardMaxScore) {
 		double result=((score*rate)*convertScoreMax)/standardMaxScore;
 		return result;
 	}
+	
+	//표준점수 + 변환표준점수 계산 메소드
+	private double calculation(int score, double rate, double convertScoreMax, int standardMaxScore) {
+		double result=((score*rate)*convertScoreMax)/standardMaxScore;
+		return result;
+	}
+	
 	
 	//영역별 최종값중 0이 있으면 환산불가
 	private double socreList(double korStandard,double matStandard,double engStandard,double research1Standard,double research2Standard,double result){

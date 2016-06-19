@@ -1,44 +1,43 @@
 //언어 차트 START
+
 $(function() {
 	if(($("#selectNowMock").html())!= null){
 		var selectNowMock = $("#selectNowMock").html().substr(7,7);
-	}
-		
+	}	
 	var myKorScore = new Array("0","0","0","0","0","0","0","0","0","0");
 	for(var i in myKorScore){	
 		if(typeof $("#myKorScore"+i).val() !== 'undefined'){
 			myKorScore[i] = $("#myKorScore"+i).val();
 		}
 	}
-	
 	var mockKorAvg=new Array("0","0","0","0","0","0","0","0","0","0");
 	for(var i in mockKorAvg){
 		if(typeof $("#mockKorAvg"+i).val() !== 'undefined'){
 			mockKorAvg[i] = $("#mockKorAvg"+i).val();
 		}		
 	}
-	
 	var mockName=new Array("미응시","미응시","미응시","미응시","미응시","미응시","미응시","미응시","미응시");
 	for(var i = 0 ; i < mockName.length; i++){
 		if(typeof $("#mockName"+i).html() !== 'undefined'){
 		mockName[i] = ($("#mockName"+i).html()).substr(7,7);
-		}
-		
+		}	
 	}
 	var studentName=$("#studentName").val();
 	var result=0;
 	
-
 	for(var i = 0 ; i < mockName.length; i++){
 		if((mockName[i] !== '미응시')&&(mockName[i]==selectNowMock)){
 			if(Number(myKorScore[i])<Number(mockKorAvg[i])){
 				result=Number(mockKorAvg[i])-Number(myKorScore[i]);
-				$("#mockKorScore"+i).append(mockName[i]+'- 언어평균점수 :'+mockKorAvg[i]+"점,   "+studentName+'학생의 언어점수:'+myKorScore[i]+'점  '+'<br>평균보다 '+result+'점 낮습니다');			
+				$("#mockKorScore"+i).append(mockName[i]+'- 언어평균점수 :'+mockKorAvg[i]+"점,   "
+						+studentName+'학생의 언어점수:'+myKorScore[i]+'점  '+'<br>평균보다 '+result+'점 낮습니다');			
 			}else if(Number(mockKorAvg[i])<Number(myKorScore[i])){
 				result=Number(myKorScore[i])-Number(mockKorAvg[i]);
-				$("#mockKorScore"+i).append(mockName[i]+'- 언어평균점수 :'+mockKorAvg[i]+"점,   "+studentName+'학생의 언어점수:'+myKorScore[i]+'점  '+'<br>평균보다 '+result+'점 높습니다');			
+				$("#mockKorScore"+i).append(mockName[i]+'- 언어평균점수 :'+mockKorAvg[i]+"점,   "
+						+studentName+'학생의 언어점수:'+myKorScore[i]+'점  '+'<br>평균보다 '+result+'점 높습니다');			
 			}else{
-				$("#mockKorScore"+i).append(mockName[i]+'- 언어평균점수 :'+mockKorAvg[i]+"점,   "+studentName+'학생의 언어점수:'+myKorScore[i]+'점  '+'<br>평균점수와 동일합니다');			
+				$("#mockKorScore"+i).append(mockName[i]+'- 언어평균점수 :'+mockKorAvg[i]+"점,   "
+						+studentName+'학생의 언어점수:'+myKorScore[i]+'점  '+'<br>평균점수와 동일합니다');			
 			}
 		}
 	}
@@ -68,8 +67,11 @@ $(function() {
     datasetStrokeWidth: 2,
     datasetFill: true,
     multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>",
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++)" +
+    		"{%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label)" +
+    		"{%><%=datasets[i].label%><%}%></li><%}%></ul>"
   };
+  
   data = {
     labels: [mockName[0],mockName[1],mockName[2],mockName[3],mockName[4],mockName[5],mockName[6],mockName[7],mockName[8]],
     datasets: [
@@ -81,7 +83,8 @@ $(function() {
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "#1ABC9C",
-        data: [Number(myKorScore[0]), Number(myKorScore[1]), Number(myKorScore[2]) ,Number(myKorScore[3]),Number(myKorScore[4]),Number(myKorScore[5]),Number(myKorScore[6]),Number(myKorScore[7]),Number(myKorScore[8])]
+        data: [Number(myKorScore[0]), Number(myKorScore[1]), Number(myKorScore[2]) ,Number(myKorScore[3]),
+               Number(myKorScore[4]),Number(myKorScore[5]),Number(myKorScore[6]),Number(myKorScore[7]),Number(myKorScore[8])]
       }, {
         label: "평균점수",
         fillColor: "rgba(34, 167, 240,0.2)",
@@ -90,7 +93,8 @@ $(function() {
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "#22A7F0",
-        data: [Number(mockKorAvg[0]),Number(mockKorAvg[1]),Number(mockKorAvg[2]),Number(mockKorAvg[3]),Number(mockKorAvg[4]),Number(mockKorAvg[5]),Number(mockKorAvg[6]),Number(mockKorAvg[7]),Number(mockKorAvg[8])]
+        data: [Number(mockKorAvg[0]),Number(mockKorAvg[1]),Number(mockKorAvg[2]),Number(mockKorAvg[3]),
+               Number(mockKorAvg[4]),Number(mockKorAvg[5]),Number(mockKorAvg[6]),Number(mockKorAvg[7]),Number(mockKorAvg[8])]
       }
     ]
   };

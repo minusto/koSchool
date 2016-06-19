@@ -13,6 +13,8 @@
 			if(getDay<10){
 				day+=0;
 				day+=getDay;
+			}else{
+				day+=getDay;
 			}
 
 			var today = year + '-' + month + '-' + day;

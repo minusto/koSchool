@@ -24,95 +24,110 @@ import ko.school.simulation.service.UniversityService;
 public class UniversityContorller {
 	@Inject
 	private UniversityService service;
-	
-	@RequestMapping(value="/universityManage",method=RequestMethod.GET)
-	public String universityManageForm(Model model){
-		//대학 LIST
-		List<UniversityVO> universityList=service.universityListService();
+
+	@RequestMapping(value = "/universityManage", method = RequestMethod.GET)
+	public String universityManageForm(Model model) {
+		// 대학 LIST
+		List<UniversityVO> universityList = service.universityListService();
 		model.addAttribute("universityList", universityList);
-		
-		//가산점 LIST
-		List<ExtraPointVO> extraPointList=service.extraPointList();
+
+		// 가산점 LIST
+		List<ExtraPointVO> extraPointList = service.extraPointList();
 		model.addAttribute("extraPointList", extraPointList);
-		
-		//수능 영역별 반영비율 LIST
-		List<ReflectionRatePerSATAreaVO> reflectionRatePerSATAreaList=service.reflectionRatePerSATAreaList();	
+
+		// 수능 영역별 반영비율 LIST
+		List<ReflectionRatePerSATAreaVO> reflectionRatePerSATAreaList = service.reflectionRatePerSATAreaList();
 		model.addAttribute("rrsList", reflectionRatePerSATAreaList);
-		
-		//반영비율 LISt
-		List<ReflectionRateVO> reflectionRateList=service.reflectionRateList();		
+
+		// 반영비율 LISt
+		List<ReflectionRateVO> reflectionRateList = service.reflectionRateList();
 		model.addAttribute("reflectionRateList", reflectionRateList);
-		
+
 		return "/university/universityInsertForm";
 	}
-	@RequestMapping(value="/universityManage",method=RequestMethod.POST)
-	public String universityInsert(Model model,ReflectionRateVO reflectRateVO,ReflectionRatePerSATAreaVO rrp,ExtraPointVO extraPointVO
-			,EntranceInfoVO entranceInfoVO,SATScoreVO satScoreVO){
 
-		//가산점 LIST
-		List<ExtraPointVO> extraPointList=service.extraPointList();
-		model.addAttribute("extraPointList", extraPointList);
-		//수능 영역별 반영비율 LIST
-		List<ReflectionRatePerSATAreaVO> reflectionRatePerSATAreaList=service.reflectionRatePerSATAreaList();	
-		model.addAttribute("rrsList", reflectionRatePerSATAreaList);
-		//반영비율 LISt
-		List<ReflectionRateVO> reflectionRateList=service.reflectionRateList();		
-		model.addAttribute("reflectionRateList", reflectionRateList);
-		//대학 LIST
-		List<UniversityVO> list=service.universityListService();
-		model.addAttribute("universityList", list);
-		
-		//이미 등록된 반영비율을 선택했다면 insert시키지 않는다
-		int count=0;
-		for(int i=0;i<reflectionRateList.size();i++){
-			if((reflectionRateList.get(i).getReflectionRateId().equals(reflectRateVO.getReflectionRateId()))){
-				count++;
+	@RequestMapping(value = "/universityManage", method = RequestMethod.POST)
+	public String universityInsert(Model model, ReflectionRateVO reflectRateVO, ReflectionRatePerSATAreaVO rrp,
+			ExtraPointVO extraPointVO, EntranceInfoVO entranceInfoVO, SATScoreVO satScoreVO) {
+
+		// 가산점 LIST
+		List<ExtraPointVO> extraPointList = service.extraPointList();
+		if (extraPointList != null) {
+			model.addAttribute("extraPointList", extraPointList);
+		}
+		// 수능 영역별 반영비율 LIST
+		List<ReflectionRatePerSATAreaVO> reflectionRatePerSATAreaList = service.reflectionRatePerSATAreaList();
+		if (reflectionRatePerSATAreaList != null) {
+			model.addAttribute("rrsList", reflectionRatePerSATAreaList);
+		}
+		// 반영비율 LISt
+		List<ReflectionRateVO> reflectionRateList = service.reflectionRateList();
+		if (reflectionRateList != null) {
+			model.addAttribute("reflectionRateList", reflectionRateList);
+		}
+		// 대학 LIST
+		List<UniversityVO> list = service.universityListService();
+		if (list != null) {
+
+			model.addAttribute("universityList", list);
+		}
+
+		// 이미 등록된 반영비율을 선택했다면 insert시키지 않는다
+		int count = 0;
+		if (reflectionRateList != null) {
+			for (int i = 0; i < reflectionRateList.size(); i++) {
+				if ((reflectionRateList.get(i).getReflectionRateId().equals(reflectRateVO.getReflectionRateId()))) {
+					count++;
+				}
 			}
 		}
-		if(count==0){
-			//반영비율 Insert
+		if (count == 0) {
+			// 반영비율 Insert
 			service.insertReflectionRate(reflectRateVO);
 		}
-		count=0;
-		
-		//이미 등록된 영역별 반영비율을 선택했다면 insert시키지 않는다.
-		for(int i=0;i<reflectionRatePerSATAreaList.size();i++){
-			//파라미터로 넘어온 id값과 list의 id값이 일치하는 것이 없다면 insert시킨다.
-			if((reflectionRatePerSATAreaList.get(i).getSatReflectionRateId().equals(rrp.getSatReflectionRateId()))){
-				count++;
+		count = 0;
+
+		// 이미 등록된 영역별 반영비율을 선택했다면 insert시키지 않는다.
+		if (reflectionRatePerSATAreaList != null) {
+			for (int i = 0; i < reflectionRatePerSATAreaList.size(); i++) {
+				// 파라미터로 넘어온 id값과 list의 id값이 일치하는 것이 없다면 insert시킨다.
+				if ((reflectionRatePerSATAreaList.get(i).getSatReflectionRateId()
+						.equals(rrp.getSatReflectionRateId()))) {
+					count++;
+				}
 			}
 		}
-		if(count==0){
-			//수능 영역별 반영비율 INSERT
-			service.insertReflectionRatePerSATArea(rrp);			
+		if (count == 0) {
+			// 수능 영역별 반영비율 INSERT
+			service.insertReflectionRatePerSATArea(rrp);
 		}
-		count=0;
-		//이미 등록된 가산점 비율을 선택했다면 insert시키지 않는다.
-		for(int i=0;i<extraPointList.size();i++){
-			if((extraPointList.get(i).getExtraPointId().equals(extraPointVO.getExtraPointId()))){
-				count++;
+		count = 0;
+		// 이미 등록된 가산점 비율을 선택했다면 insert시키지 않는다.
+		if (extraPointList != null) {
+			for (int i = 0; i < extraPointList.size(); i++) {
+				if ((extraPointList.get(i).getExtraPointId().equals(extraPointVO.getExtraPointId()))) {
+					count++;
+				}
 			}
 		}
-		if(count==0){
-			//가산점 INSERT
-			service.insertExtraPoint(extraPointVO);			
+		if (count == 0) {
+			// 가산점 INSERT
+			service.insertExtraPoint(extraPointVO);
 		}
 
-		
-		//대학학과별 입시정보 INSERT
+		// 대학학과별 입시정보 INSERT
 		service.insertEntranceInfo(entranceInfoVO);
-		
-		//정시점수 INSERT
+
+		// 정시점수 INSERT
 		service.insertSATScore(satScoreVO);
 
 		return "/university/universityInsertForm";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping("/getMajor{universityId}")//$
-	public List<MajorVO> getMajor(@PathVariable("universityId") String universityId){
+	@RequestMapping("/getMajor{universityId}") // $
+	public List<MajorVO> getMajor(@PathVariable("universityId") String universityId) {
 		return service.universityMajorList(universityId);
 	}
-	
-	
+
 }

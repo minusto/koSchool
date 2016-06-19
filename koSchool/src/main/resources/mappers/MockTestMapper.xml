@@ -93,9 +93,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 해당 모의고사를 치룬 학생의  탐구과목 정보(점수)를 가져온다 -->
+	
 	<select id="studentMockResearchSocreList" resultType="MockResearchScoreDetailList">
-		SELECT a.memberId , a.MockId, a.researchsubjectid AS researchSubjectid1, a.researchsubjectoriginalscore AS researchsubjectoriginalscore1, a.researchsubjectstandardscore AS researchsubjectstandardscore1 ,a.researchsubjectpercentile AS researchsubjectpercentile1
-		 ,b.researchsubjectid AS researchSubjectid2, b.researchsubjectoriginalscore AS researchSubjectOriginalScore2, b.researchsubjectstandardscore AS researchSubjectStandardScore2,b.researchsubjectpercentile AS researchSubjectPercentile2
+		SELECT a.memberId , a.MockId, a.researchsubjectid AS researchSubjectid1, a.researchsubjectoriginalscore AS researchsubjectoriginalscore1,
+		 a.researchsubjectstandardscore AS researchsubjectstandardscore1 ,a.researchsubjectpercentile AS researchsubjectpercentile1,
+		 b.researchsubjectid AS researchSubjectid2, b.researchsubjectoriginalscore AS researchSubjectOriginalScore2, 
+		 b.researchsubjectstandardscore AS researchSubjectStandardScore2,b.researchsubjectpercentile AS researchSubjectPercentile2
   		FROM researchSubjectScore a, researchSubjectScore b
  		WHERE a.memberid = b.memberid
 		AND a.mockid = b.mockid
@@ -105,11 +108,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND a.researchsubjectid <![CDATA[<]]> b.researchsubjectid
 	</select>
 	
-		<!-- 학생이 치룬 모의고사의 탐구과목을 제외한 나머지 과목의 정보를 가져온다-->
+	<!-- 학생이 치룬 모의고사의 탐구과목을 제외한 나머지 과목의 정보를 가져온다-->
+
 	<select id="studentMockScorePlusSecondLangList" resultType="MockScoreDetailList">
-		SELECT DISTINCT m.mockid,m.memberid,m.languagetype,m.languageoriginalscore,m.languagestandardscore,m.languagepercentile
-		,m.mathtype,m.mathoriginalscore,m.mathstandardscore,m.mathpercentile,m.englishoriginalscore,m.englishstandardscore,m.englishpercentile
-		,sl.languagesubjectname,sl.languageId,sls.secondlanguageoriginalscore,sls.secondlanguagestandardscore,sls.secondlanguagepercentile
+		SELECT DISTINCT m.mockid,m.memberid,m.languagetype,m.languageoriginalscore,m.languagestandardscore,
+		m.languagepercentile,m.mathtype,m.mathoriginalscore,m.mathstandardscore,m.mathpercentile,
+		m.englishoriginalscore,m.englishstandardscore,m.englishpercentile,sl.languagesubjectname,
+		sl.languageId,sls.secondlanguageoriginalscore,sls.secondlanguagestandardscore,sls.secondlanguagepercentile
 		FROM mocktest m,secondlanguagescore sls,secondlanguage sl
 		WHERE m.languageid=sl.languageid(+)
 		AND sls.mockid(+)=m.mockid
@@ -134,13 +139,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 과목별 학년석차 START -->
 	
 	<!-- 언어영역 학교석차 뽑기 -->
+	
 	<select id="languageRankList" resultType="LanguageRankList">
-		SELECT RANK() OVER (ORDER BY m.languagestandardscore DESC) AS rank, m.languagestandardscore AS standardScore , m.memberid AS studentId
-		FROM (SELECT NVL(languagetype,'국어') AS languagetype,memberid,mockid,languagestandardscore FROM mocktest)m,student s, member mm
+		SELECT RANK() OVER (ORDER BY m.languagestandardscore DESC) AS rank,
+		 m.languagestandardscore AS standardScore , m.memberid AS studentId
+		FROM (SELECT NVL(languagetype,'국어') AS languagetype,memberid,mockid,languagestandardscore 
+			  FROM mocktest)m,student s, member mm
 		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
-		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND mm.schoolid=(SELECT schoolid 
+						 FROM member 
+						 WHERE memberid=#{studentId})
 		AND mockid=#{mockId}
-		AND m.languagetype =(SELECT NVL(languagetype,'국어') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
+		AND m.languagetype =(SELECT NVL(languagetype,'국어') 
+							 FROM mocktest 
+							 WHERE memberid=#{studentId} AND mockid=#{mockId})
 	</select>
 	
 	<!-- 수리영역 학교석차 뽑기 -->
@@ -164,7 +176,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 탐구영역 학교석차 뽑기 -->
 	<select id="researchSubjectRankList" resultType="LanguageRankList">
-		SELECT RANK() OVER (ORDER BY rss.researchsubjectstandardscore DESC) AS rank, rss.researchsubjectstandardscore AS standardscore , m.memberid AS studentId
+		SELECT RANK() OVER (ORDER BY rss.researchsubjectstandardscore DESC) AS rank,
+		rss.researchsubjectstandardscore AS standardscore , m.memberid AS studentId
 		FROM mocktest m,student s, member mm , researchsubjectscore rss
 		WHERE m.memberid=s.memberid 
 		AND mm.memberid=s.memberid
@@ -211,7 +224,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 언어영역 학급석차 -->
 	<select id="languageClassRankList" resultType="LanguageRankList">
-	SELECT RANK() OVER (ORDER BY m.languagestandardscore DESC) AS rank, m.languagestandardscore AS standardScore , m.memberid AS studentId
+		SELECT RANK() OVER (ORDER BY m.languagestandardscore DESC) AS rank, m.languagestandardscore AS standardScore, m.memberid AS studentId
 		FROM (SELECT NVL(languagetype,'국어') AS languagetype,memberid,mockid,languagestandardscore FROM mocktest)m,student s, member mm
 		WHERE m.memberid=s.memberid AND mm.memberid=s.memberid
 		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
@@ -260,9 +273,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 제2외국어 학급석차 뽑기 -->
+	
 	<select id="secondLanguageClassRankList" resultType="LanguageRankList">
-		SELECT RANK() OVER (ORDER BY sls.secondlanguagestandardscore DESC) AS rank, sls.secondlanguagestandardscore AS standardscore
-		,m.memberid AS studentId
+		SELECT RANK() OVER (ORDER BY sls.secondlanguagestandardscore DESC) AS rank, sls.secondlanguagestandardscore AS standardscore,m.memberid AS studentId
 		FROM secondlanguagescore sls , (SELECT mockid,memberid,NVL(languageid,'secondLang00') AS languageid FROM mocktest)m, secondlanguage sl,student s,member mm
 		WHERE sls.memberid=m.memberid
 		AND sl.languageid=m.languageid
@@ -270,8 +283,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND s.memberid=m.memberid
 		AND mm.memberid=s.memberid
 		AND m.mockid=#{mockId}
-		AND m.languageid=(SELECT NVL(languageid,'secondLang00') FROM mocktest WHERE memberid=#{studentId} AND mockid=#{mockId})
-		AND mm.schoolid=(SELECT schoolid FROM member WHERE memberid=#{studentId})
+		AND m.languageid=(SELECT NVL(languageid,'secondLang00') 
+						  FROM mocktest 
+						  WHERE memberid=#{studentId} AND mockid=#{mockId})
+		AND mm.schoolid=(SELECT schoolid 
+						 FROM member 
+						 WHERE memberid=#{studentId})
 		AND s.studentgrade=#{studentGrade}
 		AND s.studentclass=#{studentClass}
 	</select>
