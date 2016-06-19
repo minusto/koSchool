@@ -30,6 +30,9 @@
 		border-top: 1px solid rgba(38, 185, 154, 0.40);
 		border-bottom: 1px solid rgba(38, 185, 154, 0.40);
 	}
+	.dataTables_info {
+		display : none;
+	}
 </style>
 <script src="/resources/js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">

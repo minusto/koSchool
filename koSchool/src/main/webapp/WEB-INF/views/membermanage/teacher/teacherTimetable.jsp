@@ -99,10 +99,17 @@
 
     </script>
     
-    <style type="text/css">
-
+<style type="text/css">
 	#timemod{
 	display: none;
+	}
+	#buttonDiv {
+		text-align: center;
+	}
+	.timeTableButton {
+		margin : 10px;
+		width : 80px;
+		height : 40px;
 	}
 </style>
 
@@ -122,25 +129,22 @@
 									</div>
 								</div>
 								<div></div>
-								<div class="col-sm-2" ></div>
-								<div class="card-body table-responsive col-sm-8">
-
+								<div class="card-body table-responsive col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 									<div class="timeview">
 
 			
 									</div>
-									
-									
-									
-									</div>
-									<div class="col-md-3"></div>
-									<div class="col-md-9">
-									<button class="save">저장</button>
-									<button class="del">삭제</button>
-									</div>
-									<div class="col-md-12">
+								</div>
+								<div class="col-sm-1 col-md-2"></div>
+								<div id="buttonDiv" class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+									<button class="save btn btn-primary timeTableButton">저장</button>
+									<button class="del btn  timeTableButton">삭제</button>
 									<br><br><br>
-									</div>
+								</div>
+								<div class="col-md-12">
+									<br><br><br>
+								</div>
+								<div class="col-md-2" ></div>
 							</div>
 						</div>
 					</div>

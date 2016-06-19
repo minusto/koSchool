@@ -70,6 +70,8 @@ $(function() {
 		$('#aptitudeReflectionRate').val($(this).find('#modalaptitudeReflectionRate').html());
 		$('#etcReflectionRate').val($(this).find('#modaletcReflectionRate').html());
 		$('#etcContent').val($(this).find('#modaletcContent').html());
+		$('#modelSum').val($(this).find('#modalmodelSum').html());
+		
 		$('button[class=close]').trigger('click');
 	})
 
@@ -84,9 +86,9 @@ $(function() {
 		$('#mathBTypeReflectionRate').val($(this).find('#modalmathBTypeReflectionRate').html());
 		$('#mathATypeReflectionRate').val($(this).find('#modalmathATypeReflectionRate').html());
 		$('#englishReflectionRate').val($(this).find('#modalenglishReflectionRate').html());
-		$('#researchSubjectReflectionRate').val($(this).find('#modalresearchSubjectReflectionRate').html());
+		$('#socialReflectionRate').val($(this).find('#modalsocialReflectionRate').html());
+		$('#scienceReflectionRate').val($(this).find('#modalscienceReflectionRate').html());
 		$('#selectCombination').val($(this).find('#modalselectCombination').html());
-		$('#selectNum').val($(this).find('#modalselectNum').html());
 		$('#researchSubjectNum').val($(this).find('#modalresearchSubjectNum').html());
 		$('button[class=close]').trigger('click');
 	})
@@ -113,13 +115,14 @@ $(function() {
 			url : "getMajor"+universityId,
 			dataType : "json",
 			success : function(data) {
-				$("#majorAjax").html("");
+				$("#majorAjax").empty();
 				$.each(data, function(index, major) {
-					$('#majorAjax').append("<tr id='clickMajor' style='cursor: pointer'>");
-					$('#majorAjax').append("<td>"+(index+1)+"</td>");
-					$('#majorAjax').append("<td id='modalMajorName'>"+major.majorName+"</td>");
-					$('#majorAjax').append("<td id='modalMajorId'>"+major.majorId+"</td>");
-					$('#majorAjax').append("</tr>");
+					majorHtml+="<tr id='clickMajor' style='cursor: pointer'>";
+ 					majorHtml+="<td>"+(index+1)+"</td>";
+					majorHtml+="<td id='modalMajorName'>"+major.majorName+"</td>";
+					majorHtml+="<td id='modalMajorId'>"+major.majorId+"</td>";
+ 					majorHtml+="</tr>";
+					$('#majorAjax').append(majorHtml);
 				})
 			}
 		});
@@ -269,6 +272,7 @@ $(function() {
 												<td>적인성 반영비율</td>
 												<td>기타 반영비율</td>
 												<td>기타내용</td>
+												<td>전형합계</td>
 											</tr>
 											<tr>
 												<td><input type="text" class="form-control"
@@ -299,6 +303,9 @@ $(function() {
 												<td><input type="text" class="form-control"
 													id="etcContent" name="etcContent" placeholder="String">
 												</td>
+												<td><input type="text" class="form-control"
+													id="modelSum" name="modelSum" placeholder="int">
+												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -321,9 +328,9 @@ $(function() {
 												<td>수리 가형</td>
 												<td>수리 나형</td>
 												<td>영어</td>
-												<td>탐구</td>
+												<td>사회탐구</td>
+												<td>과학탐구</td>
 												<td>선택조합</td>
-												<td>선택갯수</td>
 												<td>탐구갯수</td>
 											</tr>
 											<tr>
@@ -343,15 +350,16 @@ $(function() {
 													id="englishReflectionRate" name="englishReflectionRate"
 													placeholder="외국어"></td>
 												<td><input type="text" class="form-control"
-													id="researchSubjectReflectionRate"
-													name="researchSubjectReflectionRate" placeholder="탐구">
+													id="socialReflectionRate"
+													name="socialReflectionRate" placeholder="사회탐구">
+												</td>
+												<td><input type="text" class="form-control"
+													id="scienceReflectionRate"
+													name="scienceReflectionRate" placeholder="과학탐구">
 												</td>
 												<td><input type="text" class="form-control"
 													id="selectCombination" name="selectCombination"
 													placeholder="선택조합"></td>
-												<td><input type="text" class="form-control"
-													id="selectNum" name="selectNum" placeholder="선택갯수">
-												</td>
 												<td><input type="text" class="form-control"
 													id="researchSubjectNum" name="researchSubjectNum"
 													placeholder="탐구갯수"></td>
@@ -535,7 +543,7 @@ $(function() {
 	<div class="modal fade modal-primary" id="reflectionRateModal"
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 		aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -547,8 +555,8 @@ $(function() {
 				<div class="modal-body">
 					<div class="row" style="width: 100%; height: 200px; overflow: auto">
 						<!-- Table -->
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
 							<table class="table table-striped">
 								<thead>
 									<tr class="headings">
@@ -561,6 +569,7 @@ $(function() {
 										<th>적인성반영비율</th>
 										<th>기타바영비율</th>
 										<th>기타내용</th>
+										<th>전형합계</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -576,23 +585,27 @@ $(function() {
 											<td id="modalaptitudeReflectionRate">${list.aptitudeReflectionRate }</td>
 											<td id="modaletcReflectionRate">${list.etcReflectionRate }</td>
 											<td id="modaletcContent">${list.etcContent }</td>
+											<td id="modalmodelSum">${list.modelSum }</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 
 						</div>
+						<div class="col-md-1">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
+	
 
 
 	<!-- 수능 영역별 반영비율 찾기 모달 -->
 	<div class="modal fade modal-primary" id="rrpModal" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -604,8 +617,8 @@ $(function() {
 				<div class="modal-body">
 					<div class="row" style="width: 100%; height: 200px; overflow: auto">
 						<!-- Table -->
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
 							<table class="table table-striped">
 								<thead>
 									<tr class="headings">
@@ -614,9 +627,9 @@ $(function() {
 										<th>수리 가형</th>
 										<th>수리 나형</th>
 										<th>영어</th>
-										<th>탐구</th>
+										<th>사회탐구</th>
+										<th>과학탐구</th>
 										<th>선택조합</th>
-										<th>선택갯수</th>
 										<th>탐구갯수</th>
 									</tr>
 								</thead>
@@ -626,18 +639,18 @@ $(function() {
 											<td id="modalsatReflectionRateId">${list.satReflectionRateId}</td>
 											<td id="modalkoreanReflectionRate">${list.koreanReflectionRate}</td>
 											<td id="modalmathBTypeReflectionRate">${list.mathBTypeReflectionRate}</td>
-											<td id="modalmathATypeReflectionRate">${list.mathATypeReflectionRate}</td>
+											<td id="modalmathATypeReflectionRate">${list.mathBTypeReflectionRate}</td>
 											<td id="modalenglishReflectionRate">${list.englishReflectionRate}</td>
-											<td id="modalresearchSubjectReflectionRate">${list.researchSubjectReflectionRate}</td>
+											<td id="modalsocialReflectionRate">${list.socialReflectionRate}</td>
+											<td id="modalscienceReflectionRate">${list.scienceReflectionRate}</td>
 											<td id="modalselectCombination">${list.selectCombination}</td>
-											<td id="modalselectNum">${list.selectNum}</td>
 											<td id="modalresearchSubjectNum">${list.researchSubjectNum}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-
 						</div>
+						<div class="col-md-1"></div>
 					</div>
 				</div>
 			</div>
@@ -648,7 +661,7 @@ $(function() {
 	<div class="modal fade modal-primary" id="extraPointModal"
 		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 		aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
@@ -660,8 +673,8 @@ $(function() {
 				<div class="modal-body">
 					<div class="row" style="width: 100%; height: 200px; overflow: auto">
 						<!-- Table -->
-						<div class="col-md-2"></div>
-						<div class="col-md-8">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
 							<table class="table table-striped">
 								<thead>
 									<tr class="headings">
@@ -685,8 +698,8 @@ $(function() {
 									</c:forEach>
 								</tbody>
 							</table>
-
 						</div>
+						<div class="col-md-1"></div>
 					</div>
 				</div>
 			</div>

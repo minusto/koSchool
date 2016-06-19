@@ -39,7 +39,7 @@
 			<script type="text/javascript" src="/resources/lib/js/ace/theme-github.js"></script>
 			<!-- Javascript -->
 			<script type="text/javascript" src="/resources/js/app.js"></script>
-			<script type="text/javascript" src="/resources/js/index.js"></script>
+
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-top">
 

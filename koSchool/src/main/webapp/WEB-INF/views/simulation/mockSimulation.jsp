@@ -32,16 +32,32 @@
 					}
 				});
 			});
-		});
-		
-		window.onload=function(){
-			$(".clickTitle").on("click", function(){
+			
+			//대학리스트 클릭시 디테일로 넘어감
+			$(document).on('click', '.clickTitle', function() {
 				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").html());
 				$("#formMajorId").val($(this).find("#TmajorId").html());
 				$("#formUniversityId").val($(this).find("#TuniversityId").html());
 				$("#formSubmit").trigger('click');
-			})
-		}
+			});
+			
+			//추천대학 클릭시 디테일로 넘어감
+			$(document).on('click', '.clickTitle2', function() {
+				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
+				$("#formMajorId").val($(this).find("#TmajorId").val());
+				$("#formUniversityId").val($(this).find("#TuniversityId").val());
+				$("#formSubmit").trigger('click');
+			});
+			
+			//목표대학 클릭시 디테일로 넘어감
+			$(document).on('click', '.clickTitle3', function() {
+				$("#formRecruitSeparate").val($(this).find("#TrecruitSeparate").val());
+				$("#formMajorId").val($(this).find("#TmajorId").val());
+				$("#formUniversityId").val($(this).find("#TuniversityId").val());
+				$("#formSubmit").trigger('click');
+			});
+			
+		});
 		
 	</script>
 	<style type="text/css">
@@ -50,6 +66,15 @@
 		}
 		#selectMajor {
 			width : 150px;
+		}
+		#disNoneTd{
+			display: none;
+		}
+		.dataSaveColumn {
+			display : none;
+		}
+		#searchResultTable_info {
+			display : none;
 		}
 	</style>
 </head>
@@ -89,15 +114,15 @@
 				                    			<th>정시 커트라인</th>
 				                    			<th>점수 차이</th>
 				                    		</tr>
-				                    		<tr>
+				                    		<tr class="clickTitle3">
 				                    			<c:if test="${standardScoreSum != 0 }">
 					                    			<td id="hopeUniversityCol1">${standardScoreSum }</td>
 				                    			</c:if>
 				                    			<c:if test="${standardScoreSum == 0 }">
 					                    			<td id="hopeUniversityCol1">모의고사 점수 없음</td>
 				                    			</c:if>
-				                    			<td id="hopeUniversityCol2"><a id="hopeUniversityName" href="/universityDetail">${hopeUniversity.universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
-				                    			<td id="hopeUniversityCol3"><a id="hopeUniversityMajor" href="/universityDetail">${hopeUniversity.majorName }</a></td>
+				                    			<td id="hopeUniversityCol2"><a id="hopeUniversityName">${hopeUniversity.universityName }</a></td><!-- 목표대학 목표학과의 상세 페이지를 보여준다. -->
+				                    			<td id="hopeUniversityCol3"><a id="hopeUniversityMajor">${hopeUniversity.majorName }</a></td>
 				                    			<td id="hopeUniversityCol4">${hopeUniversity.standardScoreCutline}</td>
 				                    			<c:if test="${standardScoreSum != 0 }">
 					                    			<td id="hopeUniversityCol5">${standardScoreSum - hopeUniversity.standardScoreCutline}</td>
@@ -105,6 +130,11 @@
 				                    			<c:if test="${standardScoreSum == 0 }">
 					                    			<td id="hopeUniversityCol5">-</td>
 				                    			</c:if>
+				                    			<td id="disNoneTd">
+				                    				<input type="hidden" id="TmajorId" value="${hopeUniversity.majorId}">
+				                    				<input type="hidden" id="TuniversityId" value="${hopeUniversity.universityId}">
+				                    				<input type="hidden" id="TrecruitSeparate" value="${hopeUniversity.recruitSeparate}">
+				                    			</td>
 				                    		</tr>
 	                   					</table>
 		                    		</c:when>
@@ -112,7 +142,7 @@
 		                    			<c:choose>
 		                    				<c:when test="${ grade eq 'student' }">
 		                    					<form id="insertHopeUniversityForm" action="InsertHopeUniversity" method="post">
-	                    							<h4>희망대학 설정하기</h4>
+	                    							<h4>목표대학 설정하기</h4>
 		                    						대학교 : <select id="selectUniversity" name="universityId">
 			                    						<option>-- 대학 선택 --</option>
 			                    						<c:forEach var="universityList" items="${universityList }">
@@ -127,13 +157,13 @@
 		                    				<c:when test="${ grade eq 'parent' }">
 		                    					<table id="hopeUniversityTable" class="table table-bordered">
 					                    			<tr><th colspan="4">안녕하세요 학부모님</th></tr>
-					                    			<tr><td colspan="4">자녀의 희망대학이 설정되어있지 않습니다</td></tr>
+					                    			<tr><td colspan="4">자녀의 목표대학이 설정되어있지 않습니다</td></tr>
 				                    			</table>
 		                    				</c:when>
 		                    				<c:when test="${ grade eq 'teacher' }">
 		                    					<table id="hopeUniversityTable" class="table table-bordered">
 					                    			<tr><th colspan="4">안녕하세요 선생님</th></tr>
-					                    			<tr><td colspan="4">학생의 희망대학이 설정되어있지 않습니다</td></tr>
+					                    			<tr><td colspan="4">학생의 목표대학이 설정되어있지 않습니다</td></tr>
 				                    			</table>
 		                    				</c:when>
 		                    				<c:otherwise>
@@ -150,29 +180,36 @@
                     <div id="recommendContainer" class="row">
                     	<div class="col-md-8 col-md-offset-2">
                     		<h3>추천 대학</h3>
-                    		<c:if test="${hopeUniversity == null && standardScoreSum > 0 }">
+                    		<c:if test="${standardScoreSum > 0 }">
                     			<label>(모의고사 총합 : ${standardScoreSum } )</label>
                     		</c:if>
                     		<div id="recommendUniversityDiv">
                     			<ul class="list-unstyled list-inline">
-                   
                     			<c:choose>
-										<c:when test="${empty recommandList}">
+										<c:when test="${empty recommandList && standardScoreSum == 0}">
 											<br><br>
-											<p>모의고사 점수가 없습니다. 희망대학을 설정해주세요</p>
+											<p>모의고사 점수가 없습니다. 목표대학을 설정하면 설정한 학과와 근접한 다른 학과를 추천해줍니다.</p>
+											<br><br>
+										</c:when>
+										<c:when test="${empty recommandList && standardScoreSum > 0}">
+											<br><br>
+											<p>추천할 수 있는 대학이 없습니다.</p>
 											<br><br>
 										</c:when>
 										
 										<c:otherwise>
 											<c:forEach var="re" items="${recommandList}">
-		                    					<li ><a href="universityEntranceInfo.jsp">
-		                    					<img id="SeoulUniversityMark" alt="${re.universityName }마크" src="${re.universityMark }">
-		                    					<span id="firstRecommendUniversityName" class="recommendUniversityName">${re.universityName }</span>
-		                    					<span id="firstRecommendMajorName" class="recommendMajorName">${re.majorName }</span>
-		                    				</a></li>
+		                    					<li class="clickTitle2">
+		                    						<img id="SeoulUniversityMark" alt="${re.universityName }마크" src="${re.universityMark }">
+		                    						<span id="firstRecommendUniversityName" class="recommendUniversityName">${re.universityName }</span>
+		                    						<span id="firstRecommendMajorName" class="recommendMajorName">${re.majorName }</span>
+		                    						<input type="hidden" id="TrecruitSeparate" value="${re.recruitSeparate }">
+		                    						<input type="hidden" id="TuniversityId" value="${re.universityId }">
+		                    						<input type="hidden" id="TmajorId" value="${re.majorId }">
+		                    					</li>
 											</c:forEach>
 										</c:otherwise>
-									</c:choose>
+								</c:choose>
                     			</ul>
                     		</div>
                     		<P>* 추천대학은 표준점수의 단순 합산으로 도출한 결과입니다.</P>
@@ -195,6 +232,9 @@
 					                    						<th>학과 이름</th>
 					                    						<th>정시 커트라인</th>
 					                    						<th>모집인원</th>
+					                    						<th class="dataSaveColumn">TuniversityId</th>
+					                    						<th class="dataSaveColumn">TmajorId</th>
+					                    						<th class="dataSaveColumn">TrecruitSeparate</th>
 					                    					</tr>
 				                    					</thead>
 				                    					<tfoot>
@@ -203,6 +243,9 @@
 					                    						<th>학과 이름</th>
 					                    						<th>정시 커트라인</th>
 					                    						<th>모집인원</th>
+					                    						<th class="dataSaveColumn">TuniversityId</th>
+					                    						<th class="dataSaveColumn">TmajorId</th>
+					                    						<th class="dataSaveColumn">TrecruitSeparate</th>
 					                    					</tr>
 				                    					</tfoot>
 				                    					<tbody>
@@ -215,9 +258,9 @@
 						                    						<td><a id="hopeUniversityMajor">${allEntranceInfoList.majorName }</a></td>
 						                    						<td>${allEntranceInfoList.standardScoreCutline }</td>
 						                    						<td>${allEntranceInfoList.recruitNum }</td>
-						                    						<td id="TuniversityId" style="display: none">${allEntranceInfoList.universityId }</td>
-						                    						<td id="TmajorId" style="display: none">${allEntranceInfoList.majorId }</td>
-						                    						<td id="TrecruitSeparate" style="display: none">${allEntranceInfoList.recruitSeparate }</td>
+						                    						<td id="TuniversityId" class="dataSaveColumn">${allEntranceInfoList.universityId }</td>
+						                    						<td id="TmajorId" class="dataSaveColumn">${allEntranceInfoList.majorId }</td>
+						                    						<td id="TrecruitSeparate" class="dataSaveColumn">${allEntranceInfoList.recruitSeparate }</td>
 						                    					</tr>
 					                    					</c:forEach>
 				                    					</tbody>

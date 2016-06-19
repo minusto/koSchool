@@ -24,7 +24,7 @@
 		$("#totalConvertMaxScore").html(totalConvertMaxScore);
 		
 		var sumConvertSocre=eval($("#korConvertScore").html())+eval($("#matConvertScore").html())+eval($("#engConvertScore").html())+eval($("#researchConvertScore").html())
-		$("#sumConvertScore").html(sumConvertSocre);
+		$("#sumConvertScore").html(sumConvertSocre.toFixed(2));
 	}
 
 </script>
@@ -75,7 +75,7 @@
 									<ul class="list-unstyled list-inline">
 										<li class="entranceInfoUniversityName">${universitySATInfo.universityName }</li>
 										<li class="entranceInfoUniversityMajor">${universitySATInfo.majorName }</li>
-										<li id="entrancInfoDetail"><a href="${universitySATInfo.universityURL }">홈페이지</a></li>
+										<li id="entrancInfoDetail"><a href="${universitySATInfo.universityURL }" target="_blank">홈페이지</a></li>
 										<li>${universitySATInfo.recruitSeparate }</li>
 									</ul>
 								</div>

@@ -19,6 +19,11 @@
 		})
 	})
 </script>
+<style type="text/css">
+	#studentNameLabel {
+		margin-right : 7px;
+	}
+</style>
 </head>
 
 <body class="flat-blue">
@@ -65,7 +70,7 @@
 		
 		<div class="col-md-12">
 			<h3>모의고사성적</h3>
-			<label>${studentDetail.studentGrade}학년
+			<label id="studentNameLabel">${studentDetail.studentGrade}학년
 				${studentDetail.studentClass }반 ${studentDetail.memberName }</label> <select
 				style="width: 250px" id="selectMock">
 				<c:forEach var="list" items="${mockList }">

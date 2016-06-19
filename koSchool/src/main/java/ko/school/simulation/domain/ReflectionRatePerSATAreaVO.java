@@ -10,8 +10,14 @@ public class ReflectionRatePerSATAreaVO {
 	private double scienceReflectionRate;
 	private String selectCombination;
 	private int researchSubjectNum;
+	private int selectNum;
 	
-	
+	public int getSelectNum() {
+		return selectNum;
+	}
+	public void setSelectNum(int selectNum) {
+		this.selectNum = selectNum;
+	}
 	public String getSatReflectionRateId() {
 		return satReflectionRateId;
 	}

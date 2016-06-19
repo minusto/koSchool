@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND NOT e.recruitseparate = '수시'
 	</select>
 	
-	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생의 아이디로 입력되어있는 희망 대학을 반환 / 작성자 : 구혜인 -->
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 학생의 아이디로 입력되어있는 목표 대학을 반환 / 작성자 : 구혜인 -->
 	<select id="selectExistHopeUniversity" resultType="HopeUniversityVO">
 		SELECT * FROM hopeUniversity WHERE memberId = #{memberId}
 	</select>
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE majorId IN (SELECT DISTINCT majorId FROM entranceInfo WHERE universityId = #{universityId})
 	</select>
 	
-	<!-- 액터 ==> 학생 / 작업 내용 : 학생이 선택한 희망 대학 학과를 가지고 EntranceInfo에 있는 최신 정보 조회 / 작성자 : 구혜인 -->
+	<!-- 액터 ==> 학생 / 작업 내용 : 학생이 선택한 목표 대학 학과를 가지고 EntranceInfo에 있는 최신 정보 조회 / 작성자 : 구혜인 -->
 	<select id="selectEIforHopeUniversity" resultType="EntranceInfoVO">
 		SELECT * FROM entranceInfo
 		WHERE universityId = #{universityId}
@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND NOT recruitSeparate = '수시')
 	</select>
 	
-	<!-- 액터 ==> 학생 / 작업 내용 : 학생이 선택한 희망 대학 학과를 가지고 hopuUniversity에 입력 / 작성자 : 구혜인 -->
+	<!-- 액터 ==> 학생 / 작업 내용 : 학생이 선택한 목표 대학 학과를 가지고 hopuUniversity에 입력 / 작성자 : 구혜인 -->
 	<insert id="insertHopeUniversity">
 		INSERT INTO hopeUniversity (
 			memberId, entranceYear, recruitSeparate, universityId, majorId
@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND recruitSeparate = #{recruitSeparate}
 	</select>
 	
-		<!-- 희망대학이 있다면 희망대학에 의한 조건 추가 - 같은 계열, 같은 학과이름, 같은 단대 / 작성자 : 구혜인 -->
+		<!-- 목표대학이 있다면 목표대학에 의한 조건 추가 - 같은 계열, 같은 학과이름, 같은 단대 / 작성자 : 구혜인 -->
 	<sql id="attachByHope">
 		AND e.majorID IN (SELECT majorId FROM major 
 			WHERE kind = (SELECT kind FROM major WHERE majorId = #{majorId}))
@@ -107,8 +107,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND NOT (e.universityId = #{universityId} AND NOT e.majorId = #{majorId})
 	</sql>
 	
-		<!-- 모의고사가 없는 경우 희망대학으로 비교 - 희망대학의 표준점수 커트라인 / 작성자 : 구혜인 -->
-	<sql id="standardScoreCutlineOfHope"><!-- 희망대학이 있을 경우 -->
+		<!-- 모의고사가 없는 경우 목표대학으로 비교 - 목표대학의 표준점수 커트라인 / 작성자 : 구혜인 -->
+	<sql id="standardScoreCutlineOfHope"><!-- 목표대학이 있을 경우 -->
 		SELECT standardScoreCutline FROM satScore
 			WHERE universityId = #{universityId} AND majorId = #{majorId}
 			AND entranceYear = (SELECT MAX(entranceYear) FROM entranceINfo 
@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 모의고사 점수로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인 -->
-	<!-- 모의고사 O, 희망대학 O/X -->
+	<!-- 모의고사 O, 목표대학 O/X -->
 	<select id="recommandUniversityListByMock" resultType="MockSimulationDTO">
 		SELECT e.universityId, u.universityName, u.campusName, u.universityLocal, u.universityURL, u.universityMark,
 			e.majorId, m.majorName, m.kind, m.college,
@@ -136,15 +136,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND s.entranceYear = e.entranceYear
 		AND s.recruitSeparate = e.recruitSeparate)
 		WHERE NOT e.recruitSeparate = '수시'
-		AND ABS(standardScoreCutline - ( <include refid="recentMockStandardScoreSum"/> ) ) <![CDATA[<]]> 200
+		AND ABS(standardScoreCutline - ( <include refid="recentMockStandardScoreSum"/> ) ) <![CDATA[<]]> 30
 		<if test="universityId != null">
 			<include refid="attachByHope"/>
 		</if>
 		ORDER BY GAP
 	</select>
 	
-	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 희망대학 커트라인으로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인 -->
-	<!-- 모의고사 X, 희망대학 O -->
+	<!-- 액터 ==> 학생, 학부모, 교사 / 작업 내용 : 목표대학 커트라인으로 추천대학 후보 리스트 반환 (major, university, entranceInto, satScore) / 작성자 : 구혜인 -->
+	<!-- 모의고사 X, 목표대학 O -->
 	<select id="recommandUniversityListByHope" resultType="MockSimulationDTO">
 		SELECT e.universityId, u.universityName, u.campusName, u.universityLocal, u.universityURL, u.universityMark,
 			e.majorId, m.majorName, m.kind, m.college,
@@ -163,7 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND s.entranceYear = e.entranceYear
 		AND s.recruitSeparate = e.recruitSeparate)
 		WHERE NOT e.recruitSeparate = '수시'
-		AND ABS( standardScoreCutline - ( <include refid="standardScoreCutlineOfHope"/> ) ) <![CDATA[<]]> 200
+		AND ABS( standardScoreCutline - ( <include refid="standardScoreCutlineOfHope"/> ) ) <![CDATA[<]]> 30
 		<include refid="attachByHope"/>
 	</select>
 	

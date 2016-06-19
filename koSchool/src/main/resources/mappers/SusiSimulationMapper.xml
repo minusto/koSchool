@@ -219,8 +219,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND u.universityName = #{uniName}
 	AND e.recruitSeparate = #{susi} 
 	AND m.kind = #{kind}
-	AND ss.averScore<![CDATA[>]]> #{averScore}-0.2 
-	AND ss.averScore<![CDATA[<=]]> #{averScore}+0.5 
+	AND ss.averScore<![CDATA[<]]>= #{averScore}+0.3 	AND ss.averScore<![CDATA[>]]>= #{averScore}-0.2 
 	order by ss.averScore
    </select>
 	
